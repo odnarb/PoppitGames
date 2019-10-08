@@ -60,3 +60,6 @@ buck-out/
 
 # Env file
 \.env
+
+# NPM Package-lock.json file
+package-lock.json

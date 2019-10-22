@@ -12,6 +12,7 @@
     "react-native": "0.60.5",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-maps": "^0.25.0",
+    "react-native-permissions": "^2.0.2",
     "react-native-webview": "^7.0.4",
     "react-navigation": "^4.0.0",
     "react-navigation-stack": "^1.5.3"

@@ -102,16 +102,14 @@ class MapsScreen extends React.Component {
   };
 
   _onPressMapButton = (index) => {
-    // console.log( "CURRENT INDEX: ", index );
-    // console.log( "CURRENT MARKER: ", this.state.markers[index] );
     this.props.navigation.navigate('LocationFullView', { current_marker: this.state.markers[index] });
   }
 
     watchID: ?number = null;
 
     state = {
-      initialPosition: 'unknown',
-      lastPosition: 'unknown',
+      // initialPosition: 'unknown',
+      // lastPosition: 'unknown',
       markers: [{
         title: "Quick Trip #1",
         description: "Test description #1",
@@ -143,9 +141,7 @@ class MapsScreen extends React.Component {
         latitude: 33.4486,
         longitude: -112.077,
         latitudeDelta: 1,
-        longitudeDelta: 0.0421,
-        // latitudeDelta: 0.04864195044303443,
-        // longitudeDelta: 0.040142817690068
+        longitudeDelta: 0.0421
       }
     };
 
@@ -161,27 +157,32 @@ class MapsScreen extends React.Component {
     componentDidMount() {
       Geolocation.getCurrentPosition(
         position => {
-          // const initialPosition = JSON.stringify(position);
-          // this.setState({initialPosition});
+        // const initialPosition = JSON.stringify(position);
+        // this.setState({initialPosition});
 
-          console.log("---CURRENT STATE BEFORE: ", this.state);
+          // console.log("---CURRENT STATE BEFORE: ", this.state.region);
 
-          this.setState({
-            region: {
-              latitude: position.latitude,
-              longitude: position.longitude,
-              latitudeDelta: 1,
-              longitudeDelta: 0.0421
-            }
-          });
-          console.log("---CURRENT STATE AFTER: ", this.state);
+          //update state
+          this.setState({ region: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              latitudeDelta: 0.05,
+              longitudeDelta: 0.05
+          } });
+
+          //goto the location
+          this.map.animateToRegion(this.state.region, 350);
+
+          // console.log("---NEW COORDS: ", position);
+          // console.log("---CURRENT STATE AFTER: ", this.state.region);
+
         },
         error => Alert.alert('Error', JSON.stringify(error)),
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
       );
       this.watchID = Geolocation.watchPosition(position => {
-        const lastPosition = JSON.stringify(position);
-        this.setState({lastPosition});
+        // const lastPosition = JSON.stringify(position);
+        // this.setState({lastPosition});
       });
 
       // We should detect when scrolling has stopped then animate
@@ -305,13 +306,6 @@ class MapsScreen extends React.Component {
       </View>
     );
   }
-
-  gotoMarker(marker){
-    console.log("Marker selected: ", marker);
-
-  }
 }
 
 export default MapsScreen
-
-// AppRegistry.registerComponent("mapfocus", () => MapsScreen);

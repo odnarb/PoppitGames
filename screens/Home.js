@@ -31,7 +31,7 @@ class HomeScreen extends React.Component {
   };
 
   _showMoreApp = () => {
-    this.props.navigation.navigate('Other');
+    this.props.navigation.navigate('LocationFullView');
   };
 
   _signOutAsync = async () => {

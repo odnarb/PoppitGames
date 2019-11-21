@@ -17,13 +17,15 @@ import SignInScreen from './screens/SignIn';
 import HomeScreen from './screens/Home';
 import OtherScreen from './screens/Other';
 import PenaltyKicksGameScreen from './screens/PenaltyKicksGame';
+import LocationFullViewScreen from './screens/LocationFullView';
 import MapsScreen from './screens/Maps';
 
 const AppStack = createStackNavigator({
     Home: HomeScreen,
     Other: OtherScreen,
     PenaltyKicksGame: PenaltyKicksGameScreen,
-    Maps: MapsScreen
+    Maps: MapsScreen,
+    LocationFullView: LocationFullViewScreen
 });
 
 const AuthStack = createStackNavigator({

@@ -9,60 +9,25 @@ import {
   Animated,
   Image,
   Dimensions,
-  // TouchableOpacity,
+  TouchableHighlight
 } from 'react-native';
 
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
-import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
+import Geolocation from '@react-native-community/geolocation';
+
 
 const Images = [
   { uri: "https://i.imgur.com/sNam9iJ.jpg" },
   { uri: "https://i.imgur.com/N7rlQYt.jpg" },
   { uri: "https://i.imgur.com/UDrH0wm.jpg" },
   { uri: "https://i.imgur.com/Ka8kNST.jpg" }
-]
+];
 
 const { width, height } = Dimensions.get("window");
 
 const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
-
-
-// can be done in parallel
-Promise.all([
-  check(PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION),
-  check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
-]).then(([coarseLocationStatus, fineLocationStatus]) => {
-  console.log({coarseLocationStatus, fineLocationStatus});
-
-  // if( coarseLocationStatus == RESULTS.DENIED ){
-  //   alert("Location permission denied");
-  // }
-  // if( fineLocationStatus == RESULTS.DENIED ){
-  //   alert("Fine location permission denied");
-  // }
-});
-
-
-    // switch (result) {
-    //   case RESULTS.UNAVAILABLE:
-    //     console.log(
-    //       'This feature is not available (on this device / in this context)',
-    //     );
-    //     break;
-    //   case RESULTS.DENIED:
-    //     console.log(
-    //       'The permission has not been requested / is denied but requestable',
-    //     );
-    //     break;
-    //   case RESULTS.GRANTED:
-    //     console.log('The permission is granted');
-    //     break;
-    //   case RESULTS.BLOCKED:
-    //     console.log('The permission is denied and not requestable anymore');
-    //     break;
-    // }
 
 const styles = StyleSheet.create({
   container: {
@@ -132,11 +97,21 @@ const styles = StyleSheet.create({
 
 class MapsScreen extends React.Component {
 
-    static navigationOptions = {
-      title: 'Maps Screen'
-    };
+  static navigationOptions = {
+    title: 'Maps Screen'
+  };
+
+  _onPressMapButton = (index) => {
+    // console.log( "CURRENT INDEX: ", index );
+    // console.log( "CURRENT MARKER: ", this.state.markers[index] );
+    this.props.navigation.navigate('LocationFullView', { current_marker: this.state.markers[index] });
+  }
+
+    watchID: ?number = null;
 
     state = {
+      initialPosition: 'unknown',
+      lastPosition: 'unknown',
       markers: [{
         title: "Quick Trip #1",
         description: "Test description #1",
@@ -179,7 +154,36 @@ class MapsScreen extends React.Component {
       this.animation = new Animated.Value(0);
     }
 
+    componentWillUnmount() {
+      this.watchID != null && Geolocation.clearWatch(this.watchID);
+    }
+
     componentDidMount() {
+      Geolocation.getCurrentPosition(
+        position => {
+          // const initialPosition = JSON.stringify(position);
+          // this.setState({initialPosition});
+
+          console.log("---CURRENT STATE BEFORE: ", this.state);
+
+          this.setState({
+            region: {
+              latitude: position.latitude,
+              longitude: position.longitude,
+              latitudeDelta: 1,
+              longitudeDelta: 0.0421
+            }
+          });
+          console.log("---CURRENT STATE AFTER: ", this.state);
+        },
+        error => Alert.alert('Error', JSON.stringify(error)),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+      );
+      this.watchID = Geolocation.watchPosition(position => {
+        const lastPosition = JSON.stringify(position);
+        this.setState({lastPosition});
+      });
+
       // We should detect when scrolling has stopped then animate
       // We should just debounce the event listener here
       this.animation.addListener(({ value }) => {
@@ -282,11 +286,13 @@ class MapsScreen extends React.Component {
           {this.state.markers.map((marker, index) => (
             <View
               style={styles.card} key={index}>
-              <Image
-                source={marker.image}
-                style={styles.cardImage}
-                resizeMode="cover"
-              />
+              <TouchableHighlight onPress={() => this._onPressMapButton(index) } style={styles.cardImage}>
+                <Image
+                  source={marker.image}
+                  style={styles.cardImage}
+                  resizeMode="cover"
+                />
+              </TouchableHighlight>
               <View style={styles.textContent}>
                 <Text numberOfLines={1} style={styles.cardtitle}>{marker.title}</Text>
                 <Text numberOfLines={1} style={styles.cardDescription}>

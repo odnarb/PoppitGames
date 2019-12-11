@@ -5,7 +5,7 @@ import {
   AsyncStorage,
   StatusBar,
   StyleSheet,
-  View,
+  View
 } from 'react-native';
 
 class AuthLoadingScreen extends React.Component {

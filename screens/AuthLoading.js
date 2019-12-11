@@ -54,10 +54,10 @@ class AuthLoadingScreen extends React.Component {
 
   // Render any loading content that you like here
   render() {
-  // setTimeout(() => {
-  //     const userToken = AsyncStorage.getItem('userToken');
-  //     this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-  // }, 20000)
+  setTimeout(() => {
+      const userToken = AsyncStorage.getItem('userToken');
+      this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+  }, 3000)
 
     return (
 

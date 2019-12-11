@@ -11,18 +11,26 @@ import {
 } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+  baseContainer: {
+    flex: 1
+  },
+  logoContainer: {
+    // backgroundColor: 'yellow',
     justifyContent: 'center',
     alignItems: 'center',
+    flex: 4
   },
+  contentContainer: {
+    // backgroundColor: 'green',
+    flex: 2
+  },
+
   logo: {
     width: 364,
-    height: 118,
-    marginTop: 84,
-    textAlign: 'center'
+    height: 118
   },
   spinner: {
-    marginTop: 84
+    // marginTop: 84
   },
   text: {
     textAlign: 'center'
@@ -46,20 +54,27 @@ class AuthLoadingScreen extends React.Component {
 
   // Render any loading content that you like here
   render() {
-  setTimeout(() => {
-      const userToken = AsyncStorage.getItem('userToken');
-      this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-  }, 20000)
+  // setTimeout(() => {
+  //     const userToken = AsyncStorage.getItem('userToken');
+  //     this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+  // }, 20000)
 
     return (
-      <View style={styles.container}>
-        <Image
-          source={require("../assets/images/poppit-logo.png")}
-          style={styles.logo}
+
+     <View style={styles.baseContainer}>
+        <View style={styles.logoContainer}>
+          <Image
+            source={require("../assets/images/poppit-logo.png")}
+            style={styles.logo}
         ></Image>
-        <ActivityIndicator style={styles.spinner} />
-        <Text style={styles.text}>Loading</Text>
+        </View>
+
+        <View style={styles.contentContainer}>
+          <ActivityIndicator style={styles.spinner} />
+          <Text style={styles.text}>Loading</Text>
+        </View>
       </View>
+
     );
   }
 }

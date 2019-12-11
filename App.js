@@ -13,19 +13,11 @@ import {
 } from 'react-native';
 
 import AuthLoadingScreen from './screens/AuthLoading';
-import SignInScreen from './screens/SignIn';
 import HomeScreen from './screens/Home';
-import OtherScreen from './screens/Other';
-import PenaltyKicksGameScreen from './screens/PenaltyKicksGame';
-import LocationFullViewScreen from './screens/LocationFullView';
-import MapsScreen from './screens/Maps';
+import SignInScreen from './screens/SignIn';
 
 const AppStack = createStackNavigator({
-    Home: HomeScreen,
-    Other: OtherScreen,
-    PenaltyKicksGame: PenaltyKicksGameScreen,
-    Maps: MapsScreen,
-    LocationFullView: LocationFullViewScreen
+    Home: HomeScreen
 });
 
 const AuthStack = createStackNavigator({

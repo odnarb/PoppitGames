@@ -14,26 +14,26 @@ const styles = StyleSheet.create({
   baseContainer: {
     flex: 1
   },
+
+  marginContainer: {
+    flex: 1
+  },
+
   logoContainer: {
     // backgroundColor: 'yellow',
-    justifyContent: 'center',
     alignItems: 'center',
-    flex: 4
+    flex: 5
   },
+
   contentContainer: {
     // backgroundColor: 'green',
-    flex: 2
+    flex: 2,
+    alignItems: 'center'
   },
 
   logo: {
     width: 364,
     height: 118
-  },
-  spinner: {
-    // marginTop: 84
-  },
-  text: {
-    textAlign: 'center'
   }
 });
 
@@ -62,15 +62,17 @@ class AuthLoadingScreen extends React.Component {
     return (
 
      <View style={styles.baseContainer}>
+        <View style={styles.marginContainer} />
+
         <View style={styles.logoContainer}>
-          <Image
-            source={require("../assets/images/poppit-logo.png")}
-            style={styles.logo}
-        ></Image>
+            <Image
+              source={require("../assets/images/poppit-logo.png")}
+              style={styles.logo}
+          ></Image>
         </View>
 
         <View style={styles.contentContainer}>
-          <ActivityIndicator style={styles.spinner} />
+          <ActivityIndicator />
           <Text style={styles.text}>Loading</Text>
         </View>
       </View>

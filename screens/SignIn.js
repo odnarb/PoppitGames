@@ -16,6 +16,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View
 } from 'react-native';
 
@@ -24,26 +25,34 @@ const styles = StyleSheet.create({
     flex: 1
   },
 
-  marginContainer: {
-    flex: 1
-  },
-
   logoContainer: {
-    backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
+    backgroundColor: 'transparent',
     alignItems: 'center',
     flex: 1
   },
 
+marginContainer:{
+    flex: 0.2
+},
+
   contentContainer: {
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
+    backgroundColor: 'transparent',
     flex: 4,
+    alignItems: 'center',
+  },
+
+  btnContainer: {
+    width: "90%",
     alignItems: 'center'
   },
 
   separatorContainer:{
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10
+    marginTop: 30,
+    marginBottom: 30
   },
 
   logo: {
@@ -51,17 +60,53 @@ const styles = StyleSheet.create({
     height: 118
   },
 
+  button:{
+    width: "100%"
+  },
+
   btnFB:{
-    color: '#3b5998',
-    width: "80%",
-    height: 64
+    color: '#000000',
+    marginTop: 30,
+    backgroundColor: '#dcdcdc',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 4,
+    fontSize: 18,
+    fontWeight: 'bold',
+    overflow: 'hidden',
+    padding: 16,
+    height: 64,
+    textAlign:'center',
   },
 
   btnGoogle:{
-    color: '#4285F4',
+    color: '#000000',
     marginTop: 30,
-    width: "80%",
-    height: 64
+    backgroundColor: '#dcdcdc',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 4,
+    fontSize: 18,
+    fontWeight: 'bold',
+    overflow: 'hidden',
+    padding: 16,
+    height: 64,
+    textAlign:'center',
+  },
+
+  btnEmail:{
+    color: '#000000',
+    marginTop: 30,
+    backgroundColor: '#dcdcdc',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 4,
+    fontSize: 18,
+    fontWeight: 'bold',
+    overflow: 'hidden',
+    padding: 16,
+    height: 64,
+    textAlign:'center',
   },
 
   hr: {
@@ -72,14 +117,15 @@ const styles = StyleSheet.create({
 
   loginSeparatorText: {
     fontFamily: 'AvenirNext-Bold',
-    fontSize: 14,
+    fontSize: 18,
     paddingHorizontal: 5,
     alignSelf: 'center',
     color: '#A2A2A2'
   },
 
   inputEmail: {
-    width: "80%"
+    fontSize: 18,
+    width: "100%"
   }
 });
 
@@ -125,34 +171,38 @@ class SignInScreen extends React.Component {
         </View>
 
         <View style={styles.contentContainer}>
-          <Button title="Signup with Facebook"
-            style={styles.btnFB}
-            onPress={this._signInAsync} />
-          <Button title="Signup with Google"
-            style={styles.btnGoogle}
-            onPress={this._signInAsync} />
 
-          <View style={styles.separatorContainer}>
-            <View style={styles.hr} />
-            <Text style={styles.loginSeparatorText}>OR</Text>
-            <View style={styles.hr} />
-          </View>
+          <View style={styles.btnContainer}>
 
-          <View>
-            <TextInput
-                placeholder="Enter your email"
-                selectionColor="#428AF8"
-                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-                onChangeText={(text) => this.setState({text})}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur}
-                style={styles.inputEmail}
-                {...otherProps}
-                //value={this.state.text}
-            />
-          <Button title="Signup with Email"
-            style={styles.btnEmail}
-            onPress={this._signInAsync} />
+            <TouchableOpacity style={styles.button} onPress={this._signInAsync}>
+              <Text style={styles.btnFB}>Signup with Facebook</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.button} onPress={this._signInAsync}>
+              <Text style={styles.btnGoogle}>Signup with Google</Text>
+            </TouchableOpacity>
+
+            <View style={styles.separatorContainer}>
+              <View style={styles.hr} />
+              <Text style={styles.loginSeparatorText}> OR </Text>
+              <View style={styles.hr} />
+            </View>
+
+              <TextInput
+                  placeholder="Enter your email"
+                  selectionColor="#428AF8"
+                  underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+                  onChangeText={(text) => this.setState({text})}
+                  onFocus={this.handleFocus}
+                  onBlur={this.handleBlur}
+                  style={styles.inputEmail}
+                  {...otherProps}
+                  //value={this.state.text}
+              />
+            <TouchableOpacity style={styles.button} onPress={this._signInAsync}>
+              <Text style={styles.btnEmail}>Signup with Email</Text>
+            </TouchableOpacity>
+
           </View>
         </View>
       </View>

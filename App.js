@@ -13,31 +13,35 @@ import {
 } from 'react-native';
 
 import AuthLoadingScreen from './screens/AuthLoading';
-import HomeScreen from './screens/Home';
+
 import SignInScreen from './screens/SignIn';
+import EmailSignupScreen from './screens/EmailSignup';
+import RecoverPasswordScreen from './screens/RecoverPassword';
+import LearnMoreScreen from './screens/LearnMore';
+
+//Home screen is just a landing page to show links to the different screens for now..
+import HomeScreen from './screens/Home';
+import MapsScreen from './screens/Maps';
+import GameScreen from './screens/Game';
+import ProfileScreen from './screens/Profile';
+import SettingsScreen from './screens/Settings';
+import NotificationsScreen from './screens/Notifications';
 
 const AppStack = createStackNavigator({
-    Home: HomeScreen
+    Home: HomeScreen,
+    Maps: MapsScreen,
+    Game: GameScreen,
+    Profile: ProfileScreen,
+    Settings: SettingsScreen,
+    Notifications: NotificationsScreen
 });
 
 const AuthStack = createStackNavigator({
-    SignIn: SignInScreen
+    SignIn: SignInScreen,
+    EmailSignUp: EmailSignupScreen,
+    RecoverPassword: RecoverPasswordScreen,
+    LearnMore: LearnMoreScreen
 });
-
-// export default createAppContainer(
-//   createSwitchNavigator(
-//     {
-//       AuthLoading: AuthLoadingScreen,
-//       App: AppStack,
-//       Auth: AuthStack,
-//     },
-//     {
-//       initialRouteName: 'AuthLoading',
-//     }
-//   )
-// );
-
-//////////////
 
 const MainStack = createSwitchNavigator(
     {
@@ -53,15 +57,6 @@ const MainStack = createSwitchNavigator(
 const AppContainer  = createAppContainer(MainStack);
 
 export default class App extends React.Component {
-
-  // login = async() => {
-  //   //Force user to login
-  //   try{
-  //     let user = await auth.signInWithEmailAndPassword('xyz@test.com', 'XXXXX');
-  //   }catch(error){
-  //     console.log(error);
-  //   }
-  // }
 
   render() {
     return (

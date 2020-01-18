@@ -33,9 +33,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  mapContainer: {
+    flex: 6,
+  },
   scrollView: {
     position: "absolute",
-    bottom: 30,
+    bottom: 110,
     left: 0,
     right: 0,
     paddingVertical: 10,
@@ -98,7 +101,9 @@ const styles = StyleSheet.create({
 class MapsScreen extends React.Component {
 
   static navigationOptions = {
-    title: 'Maps Screen'
+    //in newer versions this is the correct way to hide the title
+    // headerShown: false
+    header: null
   };
 
   _onPressMapButton = (index) => {
@@ -239,21 +244,13 @@ class MapsScreen extends React.Component {
         <MapView
           ref={map => this.map = map}
           initialRegion={this.state.region}
-          style={styles.container}
+          style={styles.mapContainer}
           loadingEnabled={true}
           showsUserLocation={true}
         >
           {this.state.markers.map((marker, index) => {
-            const scaleStyle = {
-              transform: [
-                {
-                  scale: interpolations[index].scale,
-                },
-              ],
-            };
-            const opacityStyle = {
-              opacity: interpolations[index].opacity,
-            };
+            const scaleStyle = { transform: [{scale: interpolations[index].scale}] };
+            const opacityStyle = { opacity: interpolations[index].opacity };
             return (
               <MapView.Marker key={index} coordinate={marker.coordinate}>
                 <Animated.View style={[styles.markerWrap, opacityStyle]}>
@@ -264,6 +261,21 @@ class MapsScreen extends React.Component {
             );
           })}
         </MapView>
+
+          <View style={{
+              position: "absolute",
+              top: 10,
+              left: 0,
+              right: 0
+          }}>
+            <Image
+              style={{
+                height: 50
+              }}
+              source={require('../assets/images/poppit-logo.png')}
+              resizeMode='contain' />
+          </View>
+
         <Animated.ScrollView
           horizontal
           scrollEventThrottle={1}
@@ -303,9 +315,34 @@ class MapsScreen extends React.Component {
             </View>
           ))}
         </Animated.ScrollView>
+
+          <View style={{
+                flex: 1.25,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'stretch'
+              }}>
+             <TouchableHighlight onPress={() => this._navTo('Profile')} style={{ flex: 1, backgroundColor: '#fff' }}>
+                  <Image style={{ flex: 1,height: undefined, width: undefined }} source={require('../assets/wireframes/button_profile.png')} resizeMode="contain" />
+              </TouchableHighlight>
+
+             <TouchableHighlight onPress={() => this._navTo('Maps')} style={{ flex: 1, backgroundColor: '#fff' }}>
+                  <Image style={{ flex: 1,height: undefined, width: undefined }} source={require('../assets/wireframes/button_search.png')} resizeMode="contain" />
+              </TouchableHighlight>
+
+             <TouchableHighlight onPress={() => this._navTo('Settings')} style={{ flex: 1, backgroundColor: '#fff' }}>
+                  <Image style={{ flex: 1,height: undefined, width: undefined }} source={require('../assets/wireframes/button_settings.png')} resizeMode="contain" />
+              </TouchableHighlight>
+          </View>
       </View>
     );
   }
+
+  _navTo = (screen) => {
+    console.log("Navigating to :: " + screen);
+
+    this.props.navigation.navigate(screen);
+  };
 }
 
 export default MapsScreen

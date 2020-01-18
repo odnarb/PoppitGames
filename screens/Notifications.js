@@ -1,20 +1,48 @@
 import React from 'react';
 
 import {
-  View,
-  Text
+  Image,
+  Text,
+  View
 } from 'react-native';
 
 
 class NotificationsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Notifications Screen',
+    title: 'Notifications',
   };
 
   render() {
     return (
-      <View>
-        <Text>This is the NOTIFICATIONS screen..</Text>
+      <View style={{
+        flex: 1,
+        backgroundColor: '#666'
+      }}>
+        <Image
+          style={{
+            marginTop: 5,
+            alignItems: "center",
+            height: 60
+          }}
+          source={require('../assets/images/poppit-logo.png')}
+          resizeMode='contain' />
+        <View style={{
+          marginLeft: 20,
+        }}>
+        <Text style={{
+            marginTop: 20,
+            fontSize: 20,
+            fontWeight: 'bold',
+            color: '#fff'
+        }}>Notifications</Text>
+        </View>
+        <Image
+          style={{
+            marginTop: 20,
+          }}
+          source={require('../assets/wireframes/notifications_screen.png')}
+          resizeMode='contain' 
+          />
       </View>
     );
   }

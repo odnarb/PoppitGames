@@ -22,6 +22,7 @@ class HomeScreen extends React.Component {
         <Button title="Profile Screen" onPress={() => this._navTo('Profile')} />
         <Button title="Settings Screen" onPress={() => this._navTo('Settings')} />
         <Button title="Notifications Screen" onPress={() => this._navTo('Notifications')} />
+        <Button title="Learn More Screen" onPress={() => this._navTo('LearnMore')} />
 
         <Button title="Sign Out" onPress={this._signOutAsync} />
       </View>

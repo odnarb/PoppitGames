@@ -2,47 +2,117 @@ import React from 'react';
 
 import {
   Image,
+  StyleSheet,
+  Switch,
   Text,
   View
 } from 'react-native';
 
+const styles = StyleSheet.create({
+  topMargin: {
+    marginTop: 20
+  },
+
+  optionRow: {
+    marginTop: 20,
+    paddingLeft: 20,
+    paddingRight: 20
+  },
+
+  optionSwitchContainer: {
+    flexDirection: 'row',
+    alignItems: 'stretch'
+  },
+
+  optionContainer: {
+    flexDirection: 'row'
+  },
+
+  optionHeader: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff'
+  },
+
+  optionSubHeader: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginTop: 10
+  },
+
+  optionDescription: {
+    fontSize: 15,
+    color: '#dcdc',
+    marginTop: 10
+  }
+});
 
 class NotificationsScreen extends React.Component {
   static navigationOptions = {
     title: 'Notifications',
   };
 
+  state = {
+    switchValue1:false,
+    switchValue2:false,
+    switchValue3:false
+  };
+
+  toggleSwitch = (event) => {
+      //onValueChange of the switch this function will be called
+      this.setState({ [event.target.id]: event.target.value });
+
+      //state changes according to switch
+      //which will result in re-render the text
+  };
+
   render() {
     return (
+
       <View style={{
         flex: 1,
         backgroundColor: '#666'
       }}>
-        <Image
-          style={{
-            marginTop: 5,
-            alignItems: "center",
-            height: 60
-          }}
-          source={require('../assets/images/poppit-logo.png')}
-          resizeMode='contain' />
-        <View style={{
-          marginLeft: 20,
-        }}>
-        <Text style={{
-            marginTop: 20,
-            fontSize: 20,
-            fontWeight: 'bold',
-            color: '#fff'
-        }}>Notifications</Text>
+        <View style={styles.topMargin}></View>
+        <View style={styles.optionRow}>
+          <View style={styles.optionSwitchContainer}>
+            <Text style={styles.optionHeader}>App Features & Updates</Text>
+            <Switch style={{ marginLeft: 'auto'}}
+              onChange={(e) => this.toggleSwitch(e)}
+              value = {this.state.switchValue1} />
+          </View>
+          <Text style={styles.optionDescription}>Get notified whenever new features are available.</Text>
         </View>
-        <Image
-          style={{
-            marginTop: 20,
-          }}
-          source={require('../assets/wireframes/notifications_screen.png')}
-          resizeMode='contain' 
-          />
+
+        <View style={styles.optionRow}>
+          <View style={styles.optionSwitchContainer}>
+            <Text style={styles.optionHeader}>Nearby Deals</Text>
+            <Switch style={{ marginLeft: 'auto'}}
+              onChange={(e) => this.toggleSwitch(e)}
+              value = {this.state.switchValue2} />
+          </View>
+          <Text style={styles.optionDescription}>Get notified whenever you are near participating locations.</Text>
+        </View>
+
+        <View style={styles.optionRow}>
+          <View style={styles.optionSwitchContainer}>
+            <Text style={styles.optionHeader}>Recommended Deals</Text>
+            <Switch style={{ marginLeft: 'auto'}}
+              onChange={(e) => this.toggleSwitch(e)}
+              value = {this.state.switchValue3} />
+          </View>
+          <Text style={styles.optionDescription}>Get notified whenever we have a new recommended deal for you.</Text>
+        </View>
+
+
+        <View style={styles.optionRow}>
+          <View style={styles.optionContainer}>
+            <Text style={styles.optionHeader}>Email Subscriptions</Text>
+          </View>
+          <Text style={styles.optionSubHeader}>Need help unsubcribing to email?</Text>
+          <Text style={styles.optionDescription}>Every email sent by Poppit has an unsubscribe link at the bottom of the email. You can also unsubscribe on our website. Find out how by visiting our <Text style={{ textDecorationLine: 'underline' }}>Help Center.</Text></Text>
+        </View>
       </View>
     );
   }

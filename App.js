@@ -15,11 +15,16 @@ import {
 import AuthLoadingScreen from './screens/AuthLoading';
 
 import SignInScreen from './screens/SignIn';
+import EmailSignInScreen from './screens/EmailSignIn';
 import EmailSignupScreen from './screens/EmailSignup';
 import RecoverPasswordScreen from './screens/RecoverPassword';
+import RecoverPasswordConfirmScreen from './screens/RecoverPasswordConfirm';
+
 import LearnMoreScreen from './screens/LearnMore';
 import LearnMore2Screen from './screens/LearnMore2';
 import LearnMore3Screen from './screens/LearnMore3';
+import EmailSignInErrorScreen from './screens/EmailSignInError';
+
 
 //Home screen is just a landing page to show links to the different screens for now..
 import HomeScreen from './screens/Home';
@@ -39,12 +44,20 @@ const AppStack = createStackNavigator({
     LearnMore: LearnMoreScreen,
     LearnMore2: LearnMore2Screen,
     LearnMore3: LearnMore3Screen,
+    EmailSignUp: EmailSignupScreen,
+    EmailSignIn: EmailSignInScreen,
+    EmailSignInError: EmailSignInErrorScreen,
+    RecoverPassword: RecoverPasswordScreen,
+    RecoverPasswordConfirm: RecoverPasswordConfirmScreen
 });
 
 const AuthStack = createStackNavigator({
     SignIn: SignInScreen,
-    EmailSignUp: EmailSignupScreen,
-    RecoverPassword: RecoverPasswordScreen,
+    // EmailSignUp: EmailSignupScreen,
+    // EmailSignIn: EmailSignInScreen,
+    // EmailSignInError: EmailSignInErrorScreen,
+    // RecoverPassword: RecoverPasswordScreen,
+    // RecoverPasswordConfirmScreen: RecoverPasswordConfirm
     //This will need to be part of the auth stack, since you don't have to sin in to see this content
     // LearnMore: LearnMoreScreen
 });

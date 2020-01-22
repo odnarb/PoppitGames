@@ -23,6 +23,12 @@ class HomeScreen extends React.Component {
         <Button title="Settings Screen" onPress={() => this._navTo('Settings')} />
         <Button title="Notifications Screen" onPress={() => this._navTo('Notifications')} />
         <Button title="Learn More Screen" onPress={() => this._navTo('LearnMore')} />
+        <Button title="Email SignUp Screen" onPress={() => this._navTo('EmailSignUp')} />
+        <Button title="Email Sign In Screen" onPress={() => this._navTo('EmailSignIn')} />
+        <Button title="Email Sign In Error Screen" onPress={() => this._navTo('EmailSignInError')} />
+
+        <Button title="Recover Password Screen" onPress={() => this._navTo('RecoverPassword')} />
+        <Button title="Recover Password Confirm Screen" onPress={() => this._navTo('RecoverPasswordConfirm')} />
 
         <Button title="Sign Out" onPress={this._signOutAsync} />
       </View>

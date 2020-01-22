@@ -25,19 +25,24 @@ const styles = StyleSheet.create({
     flex: 1
   },
 
-  logoContainer: {
-    // backgroundColor: 'yellow',
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    flex: 1
+  marginContainer:{
+      flex: 0.2
   },
 
-marginContainer:{
-    flex: 0.2
-},
+  logoContainer: {
+    flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20
+  },
+
+  logo: {
+    flex: 1,
+    alignItems: "center",
+    height: undefined,
+    width: undefined
+  },
 
   contentContainer: {
-    // backgroundColor: 'green',
     backgroundColor: 'transparent',
     flex: 4,
     alignItems: 'center',
@@ -53,11 +58,6 @@ marginContainer:{
     alignItems: 'center',
     marginTop: 30,
     marginBottom: 30
-  },
-
-  logo: {
-    width: 364,
-    height: 118
   },
 
   button:{
@@ -167,6 +167,7 @@ class SignInScreen extends React.Component {
             <Image
               source={require("../assets/images/poppit-logo.png")}
               style={styles.logo}
+              resizeMode="contain"
           ></Image>
         </View>
 

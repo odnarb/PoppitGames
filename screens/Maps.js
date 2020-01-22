@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  Alert,
   AppRegistry,
   StyleSheet,
   Text,
@@ -16,6 +17,7 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import Geolocation from '@react-native-community/geolocation';
 
+import BottomNavigation from '../components/BottomNavigation';
 
 const Images = [
   { uri: "https://i.imgur.com/sNam9iJ.jpg" },
@@ -316,24 +318,8 @@ class MapsScreen extends React.Component {
           ))}
         </Animated.ScrollView>
 
-          <View style={{
-                flex: 1.25,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'stretch'
-              }}>
-             <TouchableHighlight onPress={() => this._navTo('Profile')} style={{ flex: 1, backgroundColor: '#fff' }}>
-                  <Image style={{ flex: 1,height: undefined, width: undefined }} source={require('../assets/wireframes/button_profile.png')} resizeMode="contain" />
-              </TouchableHighlight>
+        <BottomNavigation />
 
-             <TouchableHighlight onPress={() => this._navTo('Maps')} style={{ flex: 1, backgroundColor: '#fff' }}>
-                  <Image style={{ flex: 1,height: undefined, width: undefined }} source={require('../assets/wireframes/button_search.png')} resizeMode="contain" />
-              </TouchableHighlight>
-
-             <TouchableHighlight onPress={() => this._navTo('Settings')} style={{ flex: 1, backgroundColor: '#fff' }}>
-                  <Image style={{ flex: 1,height: undefined, width: undefined }} source={require('../assets/wireframes/button_settings.png')} resizeMode="contain" />
-              </TouchableHighlight>
-          </View>
       </View>
     );
   }

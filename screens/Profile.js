@@ -7,6 +7,9 @@ import {
   View,
 } from 'react-native';
 
+import { Icon } from 'react-native-elements';
+
+import BottomNavigation from '../components/BottomNavigation';
 
 class ProfileScreen extends React.Component {
   static navigationOptions = {
@@ -35,16 +38,27 @@ class ProfileScreen extends React.Component {
           <View style={{
             flex: 6
           }}>
+
+            <View style={{ flexDirection: 'row'}}>
             <Text style={{
                 paddingLeft: 10,
                 fontSize: 25,
                 fontWeight: 'bold',
-                color: '#fff'
-            }}>My Profile</Text>
+                color: '#fff',
+                marginRight: 20
+            }}>My Profile
+            </Text>
+
+              <Icon
+                name='pencil'
+                type='material-community'
+                size={28}
+                color='#777' />
+            </View>
 
             <View style={{
               flexDirection: 'row',
-              paddingLeft: 10,
+              marginLeft: 20,
               marginTop: 20,
              }}>
               <Image source={require('../assets/wireframes/profile_placeholder.png')} />
@@ -52,61 +66,13 @@ class ProfileScreen extends React.Component {
                   paddingLeft: 20,
                   fontSize: 20,
                   color: '#fff'
-              }}>John Smith{'\n'} <Text style={{ fontSize: 16 }}>john.smith@gmail.com</Text></Text>
+              }}>John Smith{'\n'}<Text style={{ fontSize: 16, marginTop: 10 }}>john.smith@gmail.com</Text></Text>
             </View>
 
-            <View style={{
-              flexDirection: 'row',
-              paddingLeft: 10,
-              marginTop: 20,
-             }}>
-
-              <Image source={require('../assets/wireframes/icon_placeholder.png')} />
-              <Text style={{
-                  marginTop: 5,
-                  paddingLeft: 12,
-                  fontSize: 16,
-                  fontWeight: 'bold',
-                  color: '#fff'
-              }}>My Prizes</Text>
-
-            </View>
-
-            <View style={{
-              flexDirection: 'row',
-              paddingLeft: 12,
-              marginTop: 20,
-             }}>
-
-              <Image source={require('../assets/wireframes/icon_placeholder.png')} />
-              <Text style={{
-                  marginTop: 5,
-                  paddingLeft: 10,
-                  fontSize: 16,
-                  fontWeight: 'bold',
-                  color: '#fff'
-              }}>Logout</Text>
-            </View>
           </View>
 
-        <View style={{
-              flex: 1.25,
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'stretch'
-            }}>
-           <TouchableHighlight onPress={() => this._navTo('Profile')} style={{ flex: 1, backgroundColor: '#fff' }}>
-                <Image style={{ flex: 1,height: undefined, width: undefined }} source={require('../assets/wireframes/button_profile.png')} resizeMode="contain" />
-            </TouchableHighlight>
+          <BottomNavigation />
 
-           <TouchableHighlight onPress={() => this._navTo('Maps')} style={{ flex: 1, backgroundColor: '#fff' }}>
-                <Image style={{ flex: 1,height: undefined, width: undefined }} source={require('../assets/wireframes/button_search.png')} resizeMode="contain" />
-            </TouchableHighlight>
-
-           <TouchableHighlight onPress={() => this._navTo('Settings')} style={{ flex: 1, backgroundColor: '#fff' }}>
-                <Image style={{ flex: 1,height: undefined, width: undefined }} source={require('../assets/wireframes/button_settings.png')} resizeMode="contain" />
-            </TouchableHighlight>
-        </View>
       </View>
     );
   }

@@ -4,7 +4,6 @@ import {
   Image,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -58,23 +57,6 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
 
-  textInput: {
-    fontSize: 18,
-    marginTop: 6,
-    width: "100%"
-  },
-
-  buttonLight: {
-    width: "100%",
-    height: 64,
-    borderColor: '#dcdcdc',
-    backgroundColor: "#dcdcdc",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
-  },
-
   buttonDark: {
     width: "100%",
     height: 64,
@@ -86,13 +68,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 
-  btnLight: {
-    color: '#777',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign:'center'
-  },
-
   btnDark: {
     color: '#ccc',
     fontWeight: 'bold',
@@ -102,7 +77,7 @@ const styles = StyleSheet.create({
 
 });
 
-class RecoverPasswordScreen extends React.Component {
+class RecoverPasswordConfirmScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -151,28 +126,13 @@ class RecoverPasswordScreen extends React.Component {
         <View style={styles.contentContainer}>
           <Text style={styles.textHeader}>Recover Password</Text>
 
-          <Text style={styles.text}>Please enter the email address you used to register with us and we'll send you a link for recovering your password with.</Text>
+          <Text style={styles.text}>We've sent you an email with a link to reset your password.</Text>
 
-            <TextInput
-                placeholder="Enter Email"
-                keyboardType='email-address'
-                style={styles.textInput}
-                selectionColor="#428AF8"
-                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-                onChangeText={(text) => this.setState({text})}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur} />
-        </View>
-
-        <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.buttonLight}>
-            <Text style={styles.btnLight}>{'Cancel'.toUpperCase()}</Text>
-          </TouchableOpacity>
         </View>
 
         <View style={styles.btnContainer}>
           <TouchableOpacity style={styles.buttonDark}>
-            <Text style={styles.btnDark}>{'Reset Password'.toUpperCase()}</Text>
+            <Text style={styles.btnDark}>{'Back to Sign in'.toUpperCase()}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -180,4 +140,4 @@ class RecoverPasswordScreen extends React.Component {
   }
 }
 
-export default RecoverPasswordScreen
+export default RecoverPasswordConfirmScreen

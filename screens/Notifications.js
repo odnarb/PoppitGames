@@ -59,14 +59,6 @@ class NotificationsScreen extends React.Component {
     switchValue3:false
   };
 
-  toggleSwitch = (event) => {
-      //onValueChange of the switch this function will be called
-      this.setState({ [event.target.id]: event.target.value });
-
-      //state changes according to switch
-      //which will result in re-render the text
-  };
-
   render() {
     return (
 
@@ -79,7 +71,7 @@ class NotificationsScreen extends React.Component {
           <View style={styles.optionSwitchContainer}>
             <Text style={styles.optionHeader}>App Features & Updates</Text>
             <Switch style={{ marginLeft: 'auto'}}
-              onChange={(e) => this.toggleSwitch(e)}
+              onValueChange = {(value) => this.setState({switchValue1: value})}
               value = {this.state.switchValue1} />
           </View>
           <Text style={styles.optionDescription}>Get notified whenever new features are available.</Text>
@@ -89,7 +81,7 @@ class NotificationsScreen extends React.Component {
           <View style={styles.optionSwitchContainer}>
             <Text style={styles.optionHeader}>Nearby Deals</Text>
             <Switch style={{ marginLeft: 'auto'}}
-              onChange={(e) => this.toggleSwitch(e)}
+              onValueChange = {(value) => this.setState({switchValue2: value})}
               value = {this.state.switchValue2} />
           </View>
           <Text style={styles.optionDescription}>Get notified whenever you are near participating locations.</Text>
@@ -99,7 +91,7 @@ class NotificationsScreen extends React.Component {
           <View style={styles.optionSwitchContainer}>
             <Text style={styles.optionHeader}>Recommended Deals</Text>
             <Switch style={{ marginLeft: 'auto'}}
-              onChange={(e) => this.toggleSwitch(e)}
+              onValueChange = {(value) => this.setState({switchValue3: value})}
               value = {this.state.switchValue3} />
           </View>
           <Text style={styles.optionDescription}>Get notified whenever we have a new recommended deal for you.</Text>

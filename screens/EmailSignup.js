@@ -10,6 +10,8 @@ import {
   View
 } from 'react-native';
 
+import { Icon } from 'react-native-elements';
+
 import PasswordInputText from '../components/PasswordInputText';
 
 const styles = StyleSheet.create({
@@ -188,6 +190,7 @@ class EmailSignupScreen extends React.Component {
               onBlur={this.handleBlur} />
 
           <PasswordInputText
+              label=""
               placeholder="Password"
               style={styles.textInput}
               getRef={input => this.input = input}
@@ -195,6 +198,7 @@ class EmailSignupScreen extends React.Component {
               onChangeText={(password) => this.setState({ password })} />
 
           <PasswordInputText
+              label=""
               placeholder="Confirm Password"
               style={styles.textInput}
               getRef={input => this.input = input}
@@ -211,19 +215,31 @@ class EmailSignupScreen extends React.Component {
           </View>
 
             <View style={styles.btnContainer}>
-              <TouchableOpacity style={styles.buttonCancel}>
+              <TouchableOpacity style={styles.buttonCancel} onPress={() => this._navTo('Home')}>
                 <Text style={styles.btnCancel}>{'Cancel'.toUpperCase()}</Text>
               </TouchableOpacity>
             </View>
 
             <View style={styles.btnContainer}>
-              <TouchableOpacity style={styles.buttonSignup}>
-                <Text style={styles.btnSignup}>{'Sign Up'.toUpperCase()}</Text>
+              <TouchableOpacity style={styles.buttonSignup} onPress={() => this._navTo('Home')}>
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                  <Text style={styles.btnSignup}>{'Sign Up'.toUpperCase()}</Text>
+                  <Icon
+                    name='chevron-right'
+                    type='material-community'
+                    size={32}
+                    color="#bbb" />
+                </View>
               </TouchableOpacity>
             </View>
       </View>
     );
   }
+  _navTo = (screen) => {
+    console.log("Navigating to :: " + screen);
+
+    this.props.navigation.navigate(screen);
+  };
 }
 
 export default EmailSignupScreen

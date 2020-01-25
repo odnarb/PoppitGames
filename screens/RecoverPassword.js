@@ -9,6 +9,8 @@ import {
   View
 } from 'react-native';
 
+import { Icon } from 'react-native-elements';
+
 const styles = StyleSheet.create({
 
   baseContainer: {
@@ -165,19 +167,32 @@ class RecoverPasswordScreen extends React.Component {
         </View>
 
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.buttonLight}>
+          <TouchableOpacity style={styles.buttonLight} onPress={() => this._navTo('Home')}>
             <Text style={styles.btnLight}>{'Cancel'.toUpperCase()}</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.buttonDark}>
-            <Text style={styles.btnDark}>{'Reset Password'.toUpperCase()}</Text>
+          <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('Home')}>
+
+            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+              <Text style={styles.btnDark}>{'Reset Password'.toUpperCase()}</Text>
+              <Icon
+                name='chevron-right'
+                type='material-community'
+                size={32}
+                color="#bbb" />
+            </View>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
+  _navTo = (screen) => {
+    console.log("Navigating to :: " + screen);
+
+    this.props.navigation.navigate(screen);
+  };
 }
 
 export default RecoverPasswordScreen

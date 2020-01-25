@@ -2,12 +2,57 @@ import React from 'react';
 
 import {
   Image,
+  StyleSheet,
   Text,
-  TouchableHighlight,
   View
 } from 'react-native';
 
 import { Icon } from 'react-native-elements';
+
+import LearnMoreNav from '../components/LearnMoreNav';
+
+const styles = StyleSheet.create({
+  baseContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingRight: 20,
+    paddingLeft: 20
+  },
+  logoContainer: {
+    paddingTop: 10
+  },
+  logo: {
+    alignItems: "center",
+    height: 50
+  },
+  tutoralHeader: {
+    marginTop: 22,
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#000'
+  },
+  tutorialContentContainer: {
+    flex: 1,
+    marginLeft: 15,
+    paddingRight: 15
+  },
+  tutorialText: {
+    marginTop: 22,
+    fontSize: 17,
+    color: '#555'
+  },
+  tutorialImageContainer: {
+    flex: 6,
+    marginTop: 20
+  },
+  tutorialImage: {
+    flex: 1,
+    alignItems: "center",
+    height: undefined,
+    width: undefined,
+    // backgroundColor: "green"
+  }
+});
 
 class LearnMoreScreen extends React.Component {
   static navigationOptions = {
@@ -18,85 +63,28 @@ class LearnMoreScreen extends React.Component {
 
   render() {
     return (
-      <View style={{
-        flex: 1,
-        backgroundColor: '#fff',
-      }}>
-          <View style={{
-            paddingTop: 10
-          }}>
+      <View style={styles.baseContainer}>
+          <View style={styles.logoContainer}>
             <Image
-              style={{
-                alignItems: "center",
-                height: 50
-              }}
+              style={styles.logo}
               source={require('../assets/images/poppit-logo.png')}
               resizeMode='contain' />
           </View>
 
-          <View style={{
-              marginLeft: 15,
-              paddingRight: 15
-          }}>
-            <Text style={{
-                marginTop: 22,
-                fontSize: 32,
-                fontWeight: 'bold',
-                color: '#000'
-            }}>Poppit Tutorial Slide 1</Text>
-
-            <Text style={{
-                marginTop: 22,
-                fontSize: 17,
-                color: '#555'
-              }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
+          <View style={styles.tutorialContentContainer}>
+            <Text style={styles.tutoralHeader}>Poppit Tutorial Slide 1</Text>
+            <Text style={styles.tutorialText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
           </View>
 
-        <View style={{
-          flex: 6,
-          paddingLeft: 20,
-          paddingRight: 20,
-          marginTop: 20
-        }}>
+        <View style={styles.tutorialImageContainer}>
           <Image
-            style={{
-              flex: 1,
-              alignItems: "center",
-              height: undefined,
-              width: undefined
-            }}
-            source={require('../assets/wireframes/tutorial_image_placeholder.png')}
+            style={styles.tutorialImage}
+            source={require('../assets/images/stock-photos/photo-game-1.jpg')}
             resizeMode='contain' />
         </View>
-        <View style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            marginRight: 20
-        }}>
 
-          <TouchableHighlight onPress={() => this._navTo('Home')}>
-            <Text style={{
-              color: '#444',
-              marginTop: 3,
-              fontSize: 18,
-              marginRight: 20
-            }}>Skip</Text>
-          </TouchableHighlight>
+          <LearnMoreNav nextNavText="Next" navTo="LearnMore2" navToFn={() => this._navTo('LearnMore2')} />
 
-          <Text style={{
-              fontSize: 18,
-              marginTop: 3,
-              marginRight: 20
-            }}>Next</Text>
-
-          <TouchableHighlight onPress={() => this._navTo('LearnMore2')}>
-            <Icon
-              name='arrow-right'
-              type='material-community'
-              size={28} />
-          </TouchableHighlight>
-        </View>
       </View>
     );
   }

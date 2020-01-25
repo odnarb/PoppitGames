@@ -3,7 +3,6 @@ import React from 'react';
 import {
   Image,
   Text,
-  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -66,7 +65,7 @@ class ProfileScreen extends React.Component {
                   paddingLeft: 20,
                   fontSize: 20,
                   color: '#fff'
-              }}>John Smith{'\n'}<Text style={{ fontSize: 16, marginTop: 10 }}>john.smith@gmail.com</Text></Text>
+              }}>Jimmy Dean{'\n'}<Text style={{ fontSize: 16, marginTop: 10 }}>john.smith@gmail.com</Text></Text>
             </View>
 
           </View>

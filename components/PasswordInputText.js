@@ -31,7 +31,7 @@ class PasswordInputText extends React.Component {
     };
 
     render() {
-        const { iconSize, iconColor, label, style } = this.props;
+        const { iconSize, iconColor, label, style, textColor } = this.props;
         const { icEye, isPassword } = this.state;
 
         return (
@@ -39,6 +39,7 @@ class PasswordInputText extends React.Component {
                 <TextField
                     {...this.props}
                     ref={this.getRef}
+                    textColor={textColor}
                     secureTextEntry={isPassword}
                     label={label} />
                 <Icon style={styles.icon}

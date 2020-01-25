@@ -10,6 +10,8 @@ import {
   View
 } from 'react-native';
 
+import { Icon } from 'react-native-elements';
+
 import PasswordInputText from '../components/PasswordInputText';
 
 const styles = StyleSheet.create({
@@ -138,6 +140,7 @@ class EmailSignInScreen extends React.Component {
                   onBlur={this.handleBlur} />
 
               <PasswordInputText
+                  label=""
                   placeholder="Password"
                   style={styles.textInput}
                   getRef={input => this.input = input}
@@ -145,7 +148,14 @@ class EmailSignInScreen extends React.Component {
                   onChangeText={(password) => this.setState({ password })} />
 
               <TouchableOpacity style={styles.buttonSignIn} onPress={() => this._navTo('Home')}>
-                <Text style={styles.btnSignIn}>{'Sign In'.toUpperCase()}</Text>
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                  <Text style={styles.btnSignIn}>{'Sign In'.toUpperCase()}</Text>
+                  <Icon
+                    name='chevron-right'
+                    type='material-community'
+                    size={32}
+                    color="#bbb" />
+                </View>
               </TouchableOpacity>
             </View>
       </View>

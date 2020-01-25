@@ -8,6 +8,8 @@ import {
   View
 } from 'react-native';
 
+import { Icon } from 'react-native-elements';
+
 const styles = StyleSheet.create({
 
   baseContainer: {
@@ -131,13 +133,25 @@ class RecoverPasswordConfirmScreen extends React.Component {
         </View>
 
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.buttonDark}>
-            <Text style={styles.btnDark}>{'Back to Sign in'.toUpperCase()}</Text>
+          <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('Home')}>
+            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+              <Icon
+                name='chevron-left'
+                type='material-community'
+                size={32}
+                color="#bbb" />
+              <Text style={styles.btnDark}>{'Back to Sign in'.toUpperCase()}</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
+  _navTo = (screen) => {
+    console.log("Navigating to :: " + screen);
+
+    this.props.navigation.navigate(screen);
+  };
 }
 
 export default RecoverPasswordConfirmScreen

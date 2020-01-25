@@ -8,6 +8,8 @@ import {
   View
 } from 'react-native';
 
+import { Icon } from 'react-native-elements';
+
 const styles = StyleSheet.create({
 
   baseContainer: {
@@ -105,7 +107,14 @@ class EmailSignInErrorScreen extends React.Component {
 
         <View style={styles.btnContainer}>
           <TouchableOpacity style={styles.buttonTryAgain} onPress={() => this._navTo('Home')}>
-            <Text style={styles.btnTryAgain}>{'Try Again'.toUpperCase()}</Text>
+            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+              <Icon
+                name='chevron-left'
+                type='material-community'
+                size={32}
+                color="#bbb" />
+              <Text style={styles.btnTryAgain}>{'Try Again'.toUpperCase()}</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>

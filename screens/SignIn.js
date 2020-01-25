@@ -10,7 +10,6 @@ import React from 'react';
 //   disabled={this.state.isSigninInProgress} />
 
 import {
-  AsyncStorage,
   Button,
   Image,
   StyleSheet,
@@ -19,6 +18,8 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 const styles = StyleSheet.create({
   baseContainer: {

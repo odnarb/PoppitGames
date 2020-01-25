@@ -38,11 +38,12 @@ const styles = StyleSheet.create({
   btnContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: 20
   },
 
   textContainer: {
-    flex: 5,
+    flex: 6,
     paddingLeft: 10,
     paddingRight: 10,
     marginTop: 20
@@ -170,11 +171,8 @@ class RecoverPasswordScreen extends React.Component {
           <TouchableOpacity style={styles.buttonLight} onPress={() => this._navTo('Home')}>
             <Text style={styles.btnLight}>{'Cancel'.toUpperCase()}</Text>
           </TouchableOpacity>
-        </View>
 
-        <View style={styles.btnContainer}>
           <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('Home')}>
-
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <Text style={styles.btnDark}>{'Reset Password'.toUpperCase()}</Text>
               <Icon

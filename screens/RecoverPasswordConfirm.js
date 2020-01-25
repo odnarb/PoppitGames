@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   btnContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: 10
   },
 
   textContainer: {

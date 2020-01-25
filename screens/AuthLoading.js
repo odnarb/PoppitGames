@@ -2,13 +2,14 @@ import React from 'react';
 
 import {
   ActivityIndicator,
-  AsyncStorage,
   Image,
   StatusBar,
   StyleSheet,
   Text,
   View
 } from 'react-native';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 const styles = StyleSheet.create({
   baseContainer: {

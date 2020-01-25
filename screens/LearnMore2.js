@@ -19,11 +19,9 @@ const styles = StyleSheet.create({
     paddingLeft: 20
   },
   logoContainer: {
+    flex: 1,
+    alignItems: 'center',
     paddingTop: 10
-  },
-  logo: {
-    alignItems: "center",
-    height: 50
   },
   tutoralHeader: {
     marginTop: 22,
@@ -65,7 +63,6 @@ class LearnMoreScreen extends React.Component {
       <View style={styles.baseContainer}>
           <View style={styles.logoContainer}>
             <Image
-              style={styles.logo}
               source={require('../assets/images/poppit-logo.png')}
               resizeMode='contain' />
           </View>

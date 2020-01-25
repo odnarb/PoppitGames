@@ -1,11 +1,12 @@
 import React from 'react';
 
 import {
-  AsyncStorage,
   Text,
   View,
   Button
 } from 'react-native';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -26,6 +27,7 @@ class HomeScreen extends React.Component {
         <Button title="Profile Edit Screen" onPress={() => this._navTo('ProfileEdit')} />
         <Button title="Settings Screen" onPress={() => this._navTo('Settings')} />
         <Button title="Notifications Screen" onPress={() => this._navTo('Notifications')} />
+        <Button title="About Screen" onPress={() => this._navTo('About')} />
         <Button title="Learn More Screen" onPress={() => this._navTo('LearnMore')} />
         <Button title="Email SignUp Screen" onPress={() => this._navTo('EmailSignUp')} />
         <Button title="Email Sign In Screen" onPress={() => this._navTo('EmailSignIn')} />

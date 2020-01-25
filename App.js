@@ -10,12 +10,6 @@ import {
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import AsyncStorage from '@react-native-community/async-storage';
-
-//Suppress the async storage warning.. we've already taken care of its suggestion
-import {YellowBox} from 'react-native';
-YellowBox.ignoreWarnings(['Warning: Async Storage has been extracted from react-native core']);
-
 
 import AuthLoadingScreen from './screens/AuthLoading';
 
@@ -29,7 +23,7 @@ import LearnMore2Screen from './screens/LearnMore2';
 import LearnMore3Screen from './screens/LearnMore3';
 import EmailSignInErrorScreen from './screens/EmailSignInError';
 import PrizesScreen from './screens/Prizes';
-
+import AboutScreen from './screens/About';
 
 //Home screen is just a landing page to show links to the different screens for now..
 import HomeScreen from './screens/Home';
@@ -49,6 +43,7 @@ const AppStack = createStackNavigator({
     ProfileEdit: ProfileEditScreen,
     Settings: SettingsScreen,
     Notifications: NotificationsScreen,
+    About: AboutScreen,
     LearnMore: LearnMoreScreen,
     LearnMore2: LearnMore2Screen,
     LearnMore3: LearnMore3Screen,

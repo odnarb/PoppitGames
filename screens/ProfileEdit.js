@@ -63,7 +63,19 @@ const styles = StyleSheet.create({
   btnContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: 20
+  },
+
+  buttonLight: {
+    width: "100%",
+    height: 64,
+    borderColor: '#dcdcdc',
+    backgroundColor: "#dcdcdc",
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: 20,
+    marginTop: 20,
   },
 
   buttonDark: {
@@ -80,6 +92,13 @@ const styles = StyleSheet.create({
   textLink: {
     fontWeight: 'bold',
     textDecorationLine: 'underline'
+  },
+
+  btnLight: {
+    color: '#777',
+    fontWeight: 'bold',
+    fontSize: 16,
+    textAlign:'center'
   },
 
   btnDark: {
@@ -195,6 +214,10 @@ class ProfileEditScreen extends React.Component {
         </View>
 
         <View style={styles.btnContainer}>
+          <TouchableOpacity style={styles.buttonLight} onPress={() => this._navTo('Home')}>
+            <Text style={styles.btnDark}>{'Cancel'.toUpperCase()}</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('Home')}>
             <Text style={styles.btnDark}>{'Save Changes'.toUpperCase()}</Text>
           </TouchableOpacity>

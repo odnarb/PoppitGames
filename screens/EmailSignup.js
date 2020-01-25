@@ -218,9 +218,7 @@ class EmailSignupScreen extends React.Component {
               <TouchableOpacity style={styles.buttonCancel} onPress={() => this._navTo('Home')}>
                 <Text style={styles.btnCancel}>{'Cancel'.toUpperCase()}</Text>
               </TouchableOpacity>
-            </View>
 
-            <View style={styles.btnContainer}>
               <TouchableOpacity style={styles.buttonSignup} onPress={() => this._navTo('Home')}>
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                   <Text style={styles.btnSignup}>{'Sign Up'.toUpperCase()}</Text>

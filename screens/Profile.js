@@ -22,7 +22,8 @@ class ProfileScreen extends React.Component {
         backgroundColor: '#666',
       }}>
           <View style={{
-            paddingTop: 10
+            paddingTop: 10,
+            alignItems: 'center'
           }}>
             <Image
               style={{

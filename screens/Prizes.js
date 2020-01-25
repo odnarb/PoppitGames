@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
   logoContainer: {
     flex: 1,
     paddingTop: 10,
+    alignItems: 'center'
   },
   logo: {
-    alignItems: "center",
     height: 50
   },
   contentContainer: {

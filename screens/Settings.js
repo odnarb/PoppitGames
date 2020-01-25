@@ -9,21 +9,53 @@ import {
   View
 } from 'react-native';
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 import { Icon } from 'react-native-elements';
 
 import BottomNavigation from '../components/BottomNavigation';
 
 const styles = StyleSheet.create({
+
+  baseContainer: {
+        flex: 1,
+        backgroundColor: '#666'
+  },
+
+  logoContainer: {
+    flex:2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 40
+  },
+
+  logo: {
+    flex: 1,
+    alignItems: "center",
+    height: undefined,
+    width: undefined
+  },
+
   pageTitle: {
     paddingLeft: 10,
     fontSize: 25,
     fontWeight: 'bold',
     color: '#fff'
   },
-  innerPageLogo: {
-    alignItems: "center",
-    height: 50
+
+  optionBtn: {
+//      flex: 1,
+    // flexDirection: 'row',
   },
+
+  optionBtnView: {
+    flexDirection: 'row'
+  },
+
+  optionView: {
+    flexDirection: 'row'
+  },
+
   settingsText: {
     marginTop: 5,
     paddingLeft: 15,
@@ -37,7 +69,7 @@ const styles = StyleSheet.create({
     color: '#ccc'
   },
   settingsRow: {
-    flexDirection: 'row',
+      // flexDirection: 'row',
     paddingLeft: 12,
     marginTop: 20,
   },
@@ -70,13 +102,13 @@ class SettingsScreen extends React.Component {
 
   render() {
     return (
-      <View style={{
-        flex: 1,
-        backgroundColor: '#666'
-      }}>
-          <View style={{ paddingTop: 10 }}>
-            <Image style={styles.innerPageLogo} source={require('../assets/images/poppit-logo.png')} resizeMode='contain' />
-          </View>
+      <View style={styles.baseContainer}>
+        <View style={styles.logoContainer}>
+            <Image
+              source={require("../assets/images/poppit-logo.png")}
+              style={styles.logo}
+              resizeMode="contain" />
+        </View>
 
           <View style={{
             flex: 6
@@ -85,78 +117,80 @@ class SettingsScreen extends React.Component {
 
             <View style={styles.settingsRow}>
 
-              <Icon
-                name='account'
-                type='material-community'
-                size={28}
-                color='#fff' />
-
-              <Text style={styles.settingsText}>My Profile</Text>
-            </View>
-
-            <View style={styles.settingsRow}>
-              <Icon
-                name='bell'
-                type='material-community'
-                size={28}
-                color='#fff' />
-
-              <Text style={styles.settingsText}>Notifications</Text>
-            </View>
-
-            <View style={styles.settingsRow}>
-
-              <Icon
-                name='earth'
-                type='material-community'
-                size={28}
-                color='#fff' />
-              <Text style={styles.settingsText}>Language:</Text>
-
-              <Picker
-                selectedValue={this.state.language}
-                style={styles.picker}
-                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})
-                }>
-                <Picker.Item label="English" value="english" />
-                <Picker.Item label="Spanish" value="spanish" />
-                <Picker.Item label="French" value="french" />
-                <Picker.Item label="Dutch" value="dutch" />
-              </Picker>
+              <TouchableHighlight onPress={() => this._navTo('Profile')} style={styles.optionBtn}>
+                <View style={styles.optionBtnView}>
+                    <Icon
+                      name='account'
+                      type='material-community'
+                      size={28}
+                      color='#fff' />
+                    <Text style={styles.settingsText}>My Profile</Text>
+                </View>
+              </TouchableHighlight>
 
             </View>
 
             <View style={styles.settingsRow}>
-
-              <Icon
-                name='information'
-                type='material-community'
-                size={28}
-                color='#fff' />
-
-              <Text style={styles.settingsText}>About</Text>
+              <TouchableHighlight onPress={() => this._navTo('Notifications')} style={styles.optionBtn}>
+                <View style={styles.optionBtnView}>
+                  <Icon
+                    name='bell'
+                    type='material-community'
+                    size={28}
+                    color='#fff' />
+                  <Text style={styles.settingsText}>Notifications</Text>
+                </View>
+              </TouchableHighlight>
             </View>
 
             <View style={styles.settingsRow}>
-              <Icon
-                name='logout'
-                type='material-community'
-                size={28}
-                color='#fff' />
+                <View style={styles.optionView}>
+                  <Icon
+                    name='earth'
+                    type='material-community'
+                    size={28}
+                    color='#fff' />
+                  <Text style={styles.settingsText}>Language:</Text>
 
-              <Text style={styles.settingsText}>Logout</Text>
+                  <Picker
+                    selectedValue={this.state.language}
+                    style={styles.picker}
+                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})
+                    }>
+                    <Picker.Item label="English" value="english" />
+                    <Picker.Item label="Spanish" value="spanish" />
+                    <Picker.Item label="French" value="french" />
+                    <Picker.Item label="Dutch" value="dutch" />
+                  </Picker>
+                </View>
             </View>
 
             <View style={styles.settingsRow}>
-              <Text style={styles.settingsText}>Poppit version 1.3.2 (0bdd85b1)</Text>
+              <TouchableHighlight onPress={() => this._navTo('About')} style={styles.optionBtn}>
+                <View style={styles.optionBtnView}>
+                  <Icon
+                    name='information'
+                    type='material-community'
+                    size={28}
+                    color='#fff' />
+
+                  <Text style={styles.settingsText}>About</Text>
+                </View>
+              </TouchableHighlight>
             </View>
 
             <View style={styles.settingsRow}>
-              <Text style={styles.settingsText}>Terms of Use</Text>
-            </View>
+              <TouchableHighlight onPress={this._signOutAsync} style={styles.optionBtn}>
+                <View style={styles.optionBtnView}>
+                  <Icon
+                    name='logout'
+                    type='material-community'
+                    size={28}
+                    color='#fff' />
 
-            <View style={styles.settingsRow}>
-              <Text style={styles.settingsText}>Privacy Policy</Text>
+                  <Text style={styles.settingsText}>Logout</Text>
+                </View>
+              </TouchableHighlight>
             </View>
 
             <View style={styles.hr}>
@@ -169,6 +203,17 @@ class SettingsScreen extends React.Component {
       </View>
     );
   }
+
+  _navTo = (screen) => {
+        console.log("Navigating to :: " + screen);
+
+        this.props.navigation.navigate(screen);
+  };
+
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  };
 }
 
 export default SettingsScreen

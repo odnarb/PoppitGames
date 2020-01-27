@@ -25,6 +25,10 @@ import EmailSignInErrorScreen from './screens/EmailSignInError';
 import PrizesScreen from './screens/Prizes';
 import AboutScreen from './screens/About';
 
+import TermsScreen from './screens/Terms';
+import PrivacyPolicyScreen from './screens/PrivacyPolicy';
+
+
 //Home screen is just a landing page to show links to the different screens for now..
 import HomeScreen from './screens/Home';
 import MapsScreen from './screens/Maps';
@@ -44,6 +48,8 @@ const AppStack = createStackNavigator({
     Settings: SettingsScreen,
     Notifications: NotificationsScreen,
     About: AboutScreen,
+    Terms: TermsScreen,
+    PrivacyPolicy: PrivacyPolicyScreen,
     LearnMore: LearnMoreScreen,
     LearnMore2: LearnMore2Screen,
     LearnMore3: LearnMore3Screen,

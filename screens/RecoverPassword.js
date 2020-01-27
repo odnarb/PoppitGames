@@ -42,13 +42,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   },
 
-  textContainer: {
-    flex: 6,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 20
-  },
-
   textHeader: {
     fontSize: 20,
     color: '#000',

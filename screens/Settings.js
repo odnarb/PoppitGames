@@ -124,7 +124,7 @@ class SettingsScreen extends React.Component {
                       type='material-community'
                       size={28}
                       color='#fff' />
-                    <Text style={styles.settingsText}>My Profile</Text>
+                    <Text style={styles.settingsText}>My Account</Text>
                 </View>
               </TouchableHighlight>
 

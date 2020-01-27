@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -10,34 +9,29 @@ import {
 } from 'react-native';
 
 import PasswordInputText from '../components/PasswordInputText';
-
 import DatePicker from 'react-native-date-picker'
+import BottomNavigation from '../components/BottomNavigation';
 
 const styles = StyleSheet.create({
 
   baseContainer: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
     backgroundColor: '#666'
   },
 
-  inputGroupContainer: {
-    flex: 6
+  contentContainer: {
+    flex: 6,
+    marginTop: 10,
+    marginBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20
   },
 
-  image: {
-    marginTop: 10
-  },
 
   inputContainer: {
     flexDirection: "row",
     alignItems: "stretch",
     marginTop: 10
-  },
-
-  otherContainer: {
-    flexDirection: "column"
   },
 
   passwordContainer:{
@@ -56,12 +50,15 @@ const styles = StyleSheet.create({
 
   inputLabel: {
     fontSize: 18,
+    fontWeight: "bold",
     color: "#fff",
     marginTop: 10
   },
 
   btnContainer: {
-    flex: 1,
+    flex: 2,
+    paddingLeft: 20,
+    paddingRight: 20,
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 20
@@ -120,12 +117,13 @@ class ProfileEditScreen extends React.Component {
       confirm_password: '',
       fullname: "John Smith",
       email: "john.smith@gmail.com",
-      birthday: new Date("3/7/1980")
+      birthday: new Date("3/7/1980"),
+      location: "Tucson, AZ"
     };
   }
 
   static navigationOptions = {
-    title: 'Edit My Profile',
+    title: 'Edit My Account',
   };
 
   handleFocus = event => {
@@ -143,14 +141,14 @@ class ProfileEditScreen extends React.Component {
   };
 
   render() {
-    const { isFocused,password,confirm_password, fullname, email, birthday } = this.state;
+    const { isFocused,password,confirm_password, fullname, email, birthday, location } = this.state;
     const { onFocus, onBlur, ...otherProps } = this.props;
 
     return (
       <View style={styles.baseContainer}>
-        <View style={styles.inputGroupContainer}>
+        <View style={styles.contentContainer}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Full Name</Text>
+            <Text style={styles.inputLabel}>Full Name:</Text>
             <TextInput
                 value={fullname}
                 style={styles.textInput}
@@ -162,7 +160,7 @@ class ProfileEditScreen extends React.Component {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Email Address</Text>
+            <Text style={styles.inputLabel}>Email Address:</Text>
             <TextInput
                 value={email}
                 keyboardType='email-address'
@@ -175,7 +173,7 @@ class ProfileEditScreen extends React.Component {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Birthdate</Text>
+            <Text style={styles.inputLabel}>Birthdate:</Text>
 
             <DatePicker
               style={styles.dateInput}
@@ -186,10 +184,16 @@ class ProfileEditScreen extends React.Component {
               onDateChange={date => this.setState({ birthday: date })} />
           </View>
 
-          <View style={styles.otherContainer}>
-            <Text style={styles.inputLabel}>Profile Image</Text>
-            <Image style={styles.image}
-              source={require('../assets/wireframes/profile_placeholder.png')} />
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Location:</Text>
+            <TextInput
+                value={location}
+                style={styles.textInput}
+                selectionColor="#428AF8"
+                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+                onChangeText={(text) => this.setState({location: text})}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur} />
           </View>
 
           <View style={styles.passwordContainer}>
@@ -214,14 +218,17 @@ class ProfileEditScreen extends React.Component {
         </View>
 
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.buttonLight} onPress={() => this._navTo('Home')}>
-            <Text style={styles.btnDark}>{'Cancel'.toUpperCase()}</Text>
+          <TouchableOpacity style={styles.buttonLight} onPress={() => this._navTo('Profile')}>
+            <Text style={styles.btnLight}>{'Cancel'.toUpperCase()}</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('Home')}>
+          <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('Profile')}>
             <Text style={styles.btnDark}>{'Save Changes'.toUpperCase()}</Text>
           </TouchableOpacity>
         </View>
+
+        <BottomNavigation />
+
       </View>
     );
   }

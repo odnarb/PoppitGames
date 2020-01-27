@@ -6,7 +6,7 @@ import {
   Switch,
   Text,
   TextInput,
-  TouchableOpacity,
+  TouchableHighlight,
   View
 } from 'react-native';
 
@@ -44,6 +44,19 @@ const styles = StyleSheet.create({
     color: '#444',
     fontSize: 16,
     marginLeft: 10
+  },
+
+  termsText: {
+    color: '#444',
+    fontSize: 16,
+    marginLeft: 10
+  },
+
+  textLink: {
+    fontSize: 16,
+    color: '#444',
+    fontWeight: 'bold',
+    textDecorationLine: 'underline'
   },
 
   btnContainer: {
@@ -87,11 +100,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 20,
     marginTop: 20,
-  },
-
-  textLink: {
-    fontWeight: 'bold',
-    textDecorationLine: 'underline'
   },
 
   btnCancel: {
@@ -209,17 +217,23 @@ class EmailSignupScreen extends React.Component {
               <Switch
                 onValueChange = {this.toggleSwitch}
                 value = {this.state.switchValue} />
-              <Text style={styles.termsText}>I agree to the <Text style={styles.textLink}>terms and conditions.</Text></Text>
+              <Text style={styles.termsText}>I agree to the </Text>
+
+              <TouchableHighlight style={{marginLeft: 10, marginTop: 5}} onPress={() => this._navTo('Terms')} style={styles.optionBtn}>
+                <View style={styles.optionBtnView}>
+                  <Text style={styles.textLink}>terms and conditions.</Text>
+                </View>
+              </TouchableHighlight>
             </View>
 
           </View>
 
             <View style={styles.btnContainer}>
-              <TouchableOpacity style={styles.buttonCancel} onPress={() => this._navTo('Home')}>
+              <TouchableHighlight style={styles.buttonCancel} onPress={() => this._navTo('Home')}>
                 <Text style={styles.btnCancel}>{'Cancel'.toUpperCase()}</Text>
-              </TouchableOpacity>
+              </TouchableHighlight>
 
-              <TouchableOpacity style={styles.buttonSignup} onPress={() => this._navTo('Home')}>
+              <TouchableHighlight style={styles.buttonSignup} onPress={() => this._navTo('Home')}>
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                   <Text style={styles.btnSignup}>{'Sign Up'.toUpperCase()}</Text>
                   <Icon
@@ -228,7 +242,7 @@ class EmailSignupScreen extends React.Component {
                     size={32}
                     color="#bbb" />
                 </View>
-              </TouchableOpacity>
+              </TouchableHighlight>
             </View>
       </View>
     );

@@ -26,14 +26,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
 
-  marginContainer:{
-      flex: 0.2
-  },
-
   logoContainer: {
-    flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
+    flex: 2
   },
 
   logo: {
@@ -50,7 +44,7 @@ const styles = StyleSheet.create({
   },
 
   btnContainer: {
-    width: "90%",
+    width: "95%",
     alignItems: 'center'
   },
 
@@ -162,8 +156,6 @@ class SignInScreen extends React.Component {
     return (
 
      <View style={styles.baseContainer}>
-        <View style={styles.marginContainer} />
-
         <View style={styles.logoContainer}>
             <Image
               source={require("../assets/images/poppit-logo.png")}

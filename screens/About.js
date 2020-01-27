@@ -9,8 +9,6 @@ import {
   View
 } from 'react-native';
 
-import AsyncStorage from '@react-native-community/async-storage';
-
 import { Icon } from 'react-native-elements';
 
 import BottomNavigation from '../components/BottomNavigation';
@@ -84,7 +82,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class SettingsScreen extends React.Component {
+class AboutScreen extends React.Component {
     constructor(props) {
     super(props);
     this.state = {
@@ -115,12 +113,22 @@ class SettingsScreen extends React.Component {
             flex: 6
           }}>
 
+
+
             <View style={styles.settingsRow}>
-              <Text style={styles.settingsText}>Terms of Use</Text>
+              <TouchableHighlight onPress={() => this._navTo('Terms')} style={styles.optionBtn}>
+                <View style={styles.optionBtnView}>
+                  <Text style={styles.settingsText}>Terms of Use</Text>
+                </View>
+              </TouchableHighlight>
             </View>
 
             <View style={styles.settingsRow}>
-              <Text style={styles.settingsText}>Privacy Policy</Text>
+              <TouchableHighlight onPress={() => this._navTo('PrivacyPolicy')} style={styles.optionBtn}>
+                <View style={styles.optionBtnView}>
+                  <Text style={styles.settingsText}>Privacy Policy</Text>
+                </View>
+              </TouchableHighlight>
             </View>
 
             <View style={styles.hr}>
@@ -137,11 +145,6 @@ class SettingsScreen extends React.Component {
 
         this.props.navigation.navigate(screen);
   };
-
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
-  };
 }
 
-export default SettingsScreen
+export default AboutScreen

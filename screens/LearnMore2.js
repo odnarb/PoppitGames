@@ -79,7 +79,7 @@ class LearnMoreScreen extends React.Component {
           <Text style={styles.tutorialText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
         </View>
 
-        <LearnMoreNav nextNavText="Next" navTo="LearnMore3" navToFn={() => this._navTo('LearnMore3')} />
+        <LearnMoreNav slideNum={2} nextNavText="Next" navTo="LearnMore3" navToFn={() => this._navTo('LearnMore3')} />
 
       </View>
     );

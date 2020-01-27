@@ -79,7 +79,7 @@ class LearnMoreScreen extends React.Component {
             resizeMode='contain' />
         </View>
 
-          <LearnMoreNav nextNavText="Finish" navTo="LearnMore3" navToFn={() => this._navTo('Home')} />
+          <LearnMoreNav slideNum={3} nextNavText="Finish" navTo="LearnMore3" navToFn={() => this._navTo('Home')} />
 
       </View>
     );

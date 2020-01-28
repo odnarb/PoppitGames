@@ -27,7 +27,9 @@ const styles = StyleSheet.create({
   },
 
   logoContainer: {
-    flex: 2
+    flex: 2,
+    paddingLeft: 20,
+    paddingRight: 20
   },
 
   logo: {

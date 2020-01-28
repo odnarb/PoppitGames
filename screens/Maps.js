@@ -13,6 +13,8 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import {SearchBar} from 'react-native-elements'
+
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import Geolocation from '@react-native-community/geolocation';
@@ -34,6 +36,20 @@ const CARD_WIDTH = CARD_HEIGHT - 50;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  logoContainer: {
+    position: 'absolute',
+    top: 10,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: 'center'
+  },
+  logo: {
+    height: 50
+  },
+  searchBarContainer: {
+    top: -100
   },
   mapContainer: {
     flex: 6,
@@ -110,13 +126,18 @@ class MapsScreen extends React.Component {
 
   _onPressMapButton = (index) => {
     this.props.navigation.navigate('LocationFullView', { current_marker: this.state.markers[index] });
-  }
+  };
+
+  _updateSearch = (search) => {
+    this.setState({ search });
+  };
 
     watchID: ?number = null;
 
     state = {
       // initialPosition: 'unknown',
       // lastPosition: 'unknown',
+      search: '',
       markers: [{
         title: "Quick Trip #1",
         description: "Test description #1",
@@ -222,6 +243,8 @@ class MapsScreen extends React.Component {
     }
 
   render() {
+    const { search } = this.state;
+
     const interpolations = this.state.markers.map((marker, index) => {
       const inputRange = [
         (index - 1) * CARD_WIDTH,
@@ -248,8 +271,8 @@ class MapsScreen extends React.Component {
           initialRegion={this.state.region}
           style={styles.mapContainer}
           loadingEnabled={true}
-          showsUserLocation={true}
-        >
+          showsUserLocation={true}>
+
           {this.state.markers.map((marker, index) => {
             const scaleStyle = { transform: [{scale: interpolations[index].scale}] };
             const opacityStyle = { opacity: interpolations[index].opacity };
@@ -264,22 +287,28 @@ class MapsScreen extends React.Component {
           })}
         </MapView>
 
-          <View style={{
-            position: 'absolute',
-            top: 10,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            alignItems: 'center'
-          }}>
-            <Image
-              style={{
-                height: 50
-              }}
-              source={require('../assets/images/poppit-logo.png')}
-              resizeMode='contain' />
-          </View>
+        <View style={styles.logoContainer}>
+          <Image style={styles.logo} source={require('../assets/images/poppit-logo.png')} resizeMode='contain' />
+        </View>
 
+        <View style={styles.searchBarContainer}>
+          <SearchBar
+            placeholder="Search for coupons near you..."
+            onChangeText={this._updateSearch}
+            value={search}
+            inputStyle={{backgroundColor: 'white'}}
+            inputContainerStyle={{backgroundColor: 'white'}}
+            containerStyle={{backgroundColor: 'white', borderWidth: 1}}
+            placeholderTextColor='#g5g5g5' />
+        </View>
+
+        <BottomNavigation />
+
+      </View>
+    );
+  }
+
+/*
         <Animated.ScrollView
           horizontal
           scrollEventThrottle={1}
@@ -319,18 +348,7 @@ class MapsScreen extends React.Component {
             </View>
           ))}
         </Animated.ScrollView>
-
-        <BottomNavigation />
-
-      </View>
-    );
-  }
-
-  _navTo = (screen) => {
-    console.log("Navigating to :: " + screen);
-
-    this.props.navigation.navigate(screen);
-  };
+*/
 }
 
 export default MapsScreen

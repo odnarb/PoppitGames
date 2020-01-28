@@ -21,6 +21,8 @@ import {
 
 import AsyncStorage from '@react-native-community/async-storage';
 
+import { Icon } from 'react-native-elements';
+
 const styles = StyleSheet.create({
   baseContainer: {
     flex: 1
@@ -40,89 +42,69 @@ const styles = StyleSheet.create({
   },
 
   contentContainer: {
-    backgroundColor: 'transparent',
     flex: 4,
     alignItems: 'center',
+    padding: 20
   },
 
-  btnContainer: {
-    width: "95%",
-    alignItems: 'center'
+  btnTouch:{
+    // flex: 1,
+    flexDirection: "row",
+    backgroundColor: '#000',
+    borderColor: '#000',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 20,
+    justifyContent: 'center',
+    marginTop: 20
   },
 
-  separatorContainer:{
+  btnView:{
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
+    // textAlign:'center',
+  },
+
+  btnIcon: {
+    marginLeft: 20,
+    marginRight: 50
+  },
+
+  btnText: {
+      color: '#dcdcdc',
+      fontSize: 22,
+      textAlign: "center",
+      marginLeft: 50,
+      marginRight: 50
+  },
+
+  separatorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 30,
     marginBottom: 30
   },
 
-  button:{
-    width: "100%"
-  },
-
-  btnFB:{
-    color: '#000000',
-    marginTop: 30,
-    backgroundColor: '#dcdcdc',
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 4,
-    fontSize: 18,
-    fontWeight: 'bold',
-    overflow: 'hidden',
-    padding: 16,
-    height: 64,
-    textAlign:'center',
-  },
-
-  btnGoogle:{
-    color: '#000000',
-    marginTop: 30,
-    backgroundColor: '#dcdcdc',
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 4,
-    fontSize: 18,
-    fontWeight: 'bold',
-    overflow: 'hidden',
-    padding: 16,
-    height: 64,
-    textAlign:'center',
-  },
-
-  btnEmail:{
-    color: '#000000',
-    marginTop: 30,
-    backgroundColor: '#dcdcdc',
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 4,
-    fontSize: 18,
-    fontWeight: 'bold',
-    overflow: 'hidden',
-    padding: 16,
-    height: 64,
-    textAlign:'center',
-  },
-
   hr: {
+    flex: 1,
     backgroundColor: '#A2A2A2',
-    height: 2,
-    width: "30%"
+    height: 2
   },
 
   loginSeparatorText: {
     fontFamily: 'AvenirNext-Bold',
-    fontSize: 18,
+    fontSize: 20,
     paddingHorizontal: 5,
     alignSelf: 'center',
     color: '#A2A2A2'
   },
 
   inputEmail: {
-    fontSize: 18,
-    width: "100%"
+    width: "100%",
+    fontSize: 24,
+    height: 64,
   }
 });
 
@@ -162,20 +144,33 @@ class SignInScreen extends React.Component {
             <Image
               source={require("../assets/images/poppit-logo.png")}
               style={styles.logo}
-              resizeMode="contain"
-          ></Image>
+              resizeMode="contain" />
         </View>
 
         <View style={styles.contentContainer}>
 
-          <View style={styles.btnContainer}>
-
-            <TouchableOpacity style={styles.button} onPress={this._signInAsync}>
-              <Text style={styles.btnFB}>Signup with Facebook</Text>
+            <TouchableOpacity style={styles.btnTouch} onPress={this._signInAsync}>
+              <View style={styles.btnView}>
+                <Icon
+                  name='facebook'
+                  type='material-community'
+                  size={56}
+                  color='#dcdcdc'
+                  style={styles.btnIcon} />
+                <Text style={styles.btnText}>Signup with Facebook</Text>
+              </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={this._signInAsync}>
-              <Text style={styles.btnGoogle}>Signup with Google</Text>
+            <TouchableOpacity style={styles.btnTouch} onPress={this._signInAsync}>
+              <View style={styles.btnView}>
+                <Icon
+                  name='google'
+                  type='material-community'
+                  size={56}
+                  color='#dcdcdc'
+                  style={styles.btnIcon} />
+                <Text style={styles.btnText}>Signup with Google</Text>
+              </View>
             </TouchableOpacity>
 
             <View style={styles.separatorContainer}>
@@ -184,22 +179,27 @@ class SignInScreen extends React.Component {
               <View style={styles.hr} />
             </View>
 
-              <TextInput
-                  placeholder="Enter your email"
-                  selectionColor="#428AF8"
-                  underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-                  onChangeText={(text) => this.setState({text})}
-                  onFocus={this.handleFocus}
-                  onBlur={this.handleBlur}
-                  style={styles.inputEmail}
-                  {...otherProps}
-                  //value={this.state.text}
-              />
-            <TouchableOpacity style={styles.button} onPress={this._signInAsync}>
-              <Text style={styles.btnEmail}>Signup with Email</Text>
-            </TouchableOpacity>
+            <TextInput
+                placeholder="Enter your email"
+                selectionColor="#428AF8"
+                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+                onChangeText={(text) => this.setState({text})}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
+                style={styles.inputEmail}
+                {...otherProps} />
 
-          </View>
+            <TouchableOpacity style={styles.btnTouch} onPress={this._signInAsync}>
+              <View style={styles.btnView}>
+                <Icon
+                  name='email'
+                  type='material-community'
+                  size={56}
+                  color='#dcdcdc'
+                  style={styles.btnIcon} />
+              <Text style={styles.btnText}>Signup with Email</Text>
+              </View>
+            </TouchableOpacity>
         </View>
       </View>
 

@@ -49,7 +49,11 @@ const styles = StyleSheet.create({
     height: 50
   },
   searchBarContainer: {
-    top: -100
+    position: 'absolute',
+    top: 70,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   mapContainer: {
     flex: 6,

@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
 
   separatorContainer: {
     flexDirection: 'row',
+    width: "70%",
     alignItems: 'center',
     marginTop: 30,
     marginBottom: 30

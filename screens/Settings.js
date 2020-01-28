@@ -23,24 +23,24 @@ const styles = StyleSheet.create({
   },
 
   logoContainer: {
-    flex:2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 40
-  },
-
-  logo: {
     flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
+    paddingTop: 10,
+    alignItems: 'center'
+  },
+  logo: {
+    height: 50
   },
 
-  pageTitle: {
-    paddingLeft: 10,
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: '#fff'
+  contentContainer: {
+    flex: 7
+  },
+
+  headerText: {
+    fontSize: 30,
+    color: "#fff",
+    fontWeight: "bold",
+    paddingLeft: 20,
+    marginBottom: 20
   },
 
   optionBtn: {
@@ -110,10 +110,9 @@ class SettingsScreen extends React.Component {
               resizeMode="contain" />
         </View>
 
-          <View style={{
-            flex: 6
-          }}>
-            <Text style={styles.pageTitle}>Settings</Text>
+          <View style={styles.contentContainer}>
+
+            <Text style={styles.headerText}>Settings</Text>
 
             <View style={styles.settingsRow}>
 

@@ -56,11 +56,11 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   mapContainer: {
-    flex: 6,
+    flex: 8,
   },
   scrollView: {
     position: "absolute",
-    bottom: 110,
+    bottom: 140,
     left: 0,
     right: 0,
     paddingVertical: 10,
@@ -295,24 +295,6 @@ class MapsScreen extends React.Component {
           <Image style={styles.logo} source={require('../assets/images/poppit-logo.png')} resizeMode='contain' />
         </View>
 
-        <View style={styles.searchBarContainer}>
-          <SearchBar
-            placeholder="Search for coupons near you..."
-            onChangeText={this._updateSearch}
-            value={search}
-            inputStyle={{backgroundColor: 'white'}}
-            inputContainerStyle={{backgroundColor: 'white'}}
-            containerStyle={{backgroundColor: 'white', borderWidth: 1}}
-            placeholderTextColor='#g5g5g5' />
-        </View>
-
-        <BottomNavigation />
-
-      </View>
-    );
-  }
-
-/*
         <Animated.ScrollView
           horizontal
           scrollEventThrottle={1}
@@ -340,8 +322,7 @@ class MapsScreen extends React.Component {
                 <Image
                   source={marker.image}
                   style={styles.cardImage}
-                  resizeMode="cover"
-                />
+                  resizeMode="cover" />
               </TouchableHighlight>
               <View style={styles.textContent}>
                 <Text numberOfLines={1} style={styles.cardtitle}>{marker.title}</Text>
@@ -352,7 +333,23 @@ class MapsScreen extends React.Component {
             </View>
           ))}
         </Animated.ScrollView>
-*/
+
+        <View style={styles.searchBarContainer}>
+          <SearchBar
+            placeholder="Search for coupons near you..."
+            onChangeText={this._updateSearch}
+            value={search}
+            inputStyle={{backgroundColor: 'white'}}
+            inputContainerStyle={{backgroundColor: 'white'}}
+            containerStyle={{backgroundColor: 'white', borderWidth: 1}}
+            placeholderTextColor='#g5g5g5' />
+        </View>
+
+        <BottomNavigation />
+
+      </View>
+    );
+  }
 }
 
 export default MapsScreen

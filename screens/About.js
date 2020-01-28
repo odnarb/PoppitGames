@@ -11,8 +11,6 @@ import {
 
 import { Icon } from 'react-native-elements';
 
-import BottomNavigation from '../components/BottomNavigation';
-
 const styles = StyleSheet.create({
 
   baseContainer: {
@@ -91,10 +89,9 @@ class AboutScreen extends React.Component {
   }
 
   static navigationOptions = {
-    //in newer versions this is the correct way to hide the title
-    // headerShown: false
-    header: null
+    title: 'About',
   };
+
 
   render() {
     return (
@@ -136,14 +133,13 @@ class AboutScreen extends React.Component {
             </View>
           </View>
 
-          <BottomNavigation />
       </View>
     );
   }
-    _navTo = (screen) => {
-        console.log("Navigating to :: " + screen);
+  _navTo = (screen) => {
+    console.log("Navigating to :: " + screen);
 
-        this.props.navigation.navigate(screen);
+    this.props.navigation.navigate(screen);
   };
 }
 

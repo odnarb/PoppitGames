@@ -47,11 +47,43 @@ const styles = StyleSheet.create({
     padding: 20
   },
 
-  btnTouch:{
-    // flex: 1,
+  // btnTouch:{
+  //   flexDirection: "row",
+  //   backgroundColor: '#000',
+  //   borderColor: '#000',
+  //   borderWidth: 1,
+  //   borderRadius: 5,
+  //   padding: 20,
+  //   justifyContent: 'center',
+  //   marginTop: 20
+  // },
+
+  btnGoogle:{
     flexDirection: "row",
-    backgroundColor: '#000',
-    borderColor: '#000',
+    backgroundColor: '#4285F4',
+    borderColor: '#4285F4',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 20,
+    justifyContent: 'center',
+    marginTop: 20
+  },
+
+  btnFB:{
+    flexDirection: "row",
+    backgroundColor: '#3b5998',
+    borderColor: '#3b5998',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 20,
+    justifyContent: 'center',
+    marginTop: 20
+  },
+
+  btnEmail:{
+    flexDirection: "row",
+    backgroundColor: '#777',
+    borderColor: '#777',
     borderWidth: 1,
     borderRadius: 5,
     padding: 20,
@@ -73,7 +105,7 @@ const styles = StyleSheet.create({
   },
 
   btnText: {
-      color: '#dcdcdc',
+      color: '#fff',
       fontSize: 22,
       textAlign: "center",
       marginLeft: 50,
@@ -150,25 +182,25 @@ class SignInScreen extends React.Component {
 
         <View style={styles.contentContainer}>
 
-            <TouchableOpacity style={styles.btnTouch} onPress={this._signInAsync}>
+            <TouchableOpacity style={styles.btnFB} onPress={this._signInAsync}>
               <View style={styles.btnView}>
                 <Icon
                   name='facebook'
                   type='material-community'
                   size={56}
-                  color='#dcdcdc'
+                  color='#fff'
                   style={styles.btnIcon} />
                 <Text style={styles.btnText}>Signup with Facebook</Text>
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.btnTouch} onPress={this._signInAsync}>
+            <TouchableOpacity style={styles.btnGoogle} onPress={this._signInAsync}>
               <View style={styles.btnView}>
                 <Icon
                   name='google'
                   type='material-community'
                   size={56}
-                  color='#dcdcdc'
+                  color='#fff'
                   style={styles.btnIcon} />
                 <Text style={styles.btnText}>Signup with Google</Text>
               </View>
@@ -190,13 +222,13 @@ class SignInScreen extends React.Component {
                 style={styles.inputEmail}
                 {...otherProps} />
 
-            <TouchableOpacity style={styles.btnTouch} onPress={this._signInAsync}>
+            <TouchableOpacity style={styles.btnEmail} onPress={this._signInAsync}>
               <View style={styles.btnView}>
                 <Icon
                   name='email'
                   type='material-community'
                   size={56}
-                  color='#dcdcdc'
+                  color='#fff'
                   style={styles.btnIcon} />
               <Text style={styles.btnText}>Signup with Email</Text>
               </View>

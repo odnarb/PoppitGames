@@ -58,10 +58,6 @@ class TermsScreen extends React.Component {
     return (
      <View style={styles.baseContainer}>
 
-        <Text style={styles.h1Text}>Heading 1 Text</Text>
-        <Text style={styles.h2Text}>Heading 2 Text</Text>
-        <Text style={styles.h3Text}>Heading 3 Text</Text>
-        <Text style={styles.h4Text}>Heading 4 Text</Text>
         <Text style={styles.ptext}>1. Agreement
 By using the information, tools, software, features, and functionality, including content, updates and new releases located on www.poppitgames.com (together the “Service”), you agree to be bound by this Agreement, whether you are a visitor to our website or you are a registered “Member” or “Plus Member.” The term “you” or “User” refers to both Members and Users. The term “we” or “us” refers to The Yeppers Group, Inc., and its affiliates, parents, and licensors. You must read this Agreement and indicate your acceptance during the registration process.
 

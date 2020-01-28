@@ -58,10 +58,6 @@ class PrivacyScreen extends React.Component {
     return (
      <View style={styles.baseContainer}>
 
-        <Text style={styles.h1Text}>Heading 1 Text</Text>
-        <Text style={styles.h2Text}>Heading 2 Text</Text>
-        <Text style={styles.h3Text}>Heading 3 Text</Text>
-        <Text style={styles.h4Text}>Heading 4 Text</Text>
         <Text style={styles.ptext}>Date Last Revised: January 27, 2020
 
 The Yeppers Group (we, Yeppers) care deeply about our relationship with you and are committed to maintaining the confidentiality, integrity, and security of personal information you provide when using our services and products. This Privacy and Security Policy explains how we protect personal information provided through www.poppitgames.com (the “Site”) and how we use that information in connection with our service (the “Service”) offered through the Site. “Personal Information” for purposes of this Policy is defined as information that identifies you, such as your name, address, phone number, photo, or email address. We regularly re-evaluate our Privacy and Security policies and adapt them to address new challenges.

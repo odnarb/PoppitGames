@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     height: 50
   },
   contentContainer: {
-    flex: 5,
+    flex: 7,
     marginTop: 10,
     marginBottom: 20
   },

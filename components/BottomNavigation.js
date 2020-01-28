@@ -13,7 +13,7 @@ import { withNavigation } from 'react-navigation';
 
 const styles = StyleSheet.create({
   navContainer: {
-      flex: 1.25,
+      flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'stretch'

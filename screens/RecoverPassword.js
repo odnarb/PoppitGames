@@ -20,11 +20,6 @@ const styles = StyleSheet.create({
   },
 
   logoContainer: {
-    flex:2,
-    marginTop: 40
-  },
-
-  contentContainer: {
     flex: 2
   },
 
@@ -35,16 +30,21 @@ const styles = StyleSheet.create({
     width: undefined
   },
 
+  contentContainer: {
+    flex: 6
+  },
+
   btnContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 20
+    marginBottom: 10,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
 
   textHeader: {
     fontSize: 20,
-    color: '#000',
+    fontWeight: 'bold',
+    marginTop: 6,
     marginBottom: 30
   },
 

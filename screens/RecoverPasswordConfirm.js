@@ -19,11 +19,6 @@ const styles = StyleSheet.create({
   },
 
   logoContainer: {
-    flex:2,
-    marginTop: 40
-  },
-
-  contentContainer: {
     flex: 2
   },
 
@@ -34,23 +29,21 @@ const styles = StyleSheet.create({
     width: undefined
   },
 
-  btnContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 10
+  contentContainer: {
+    flex: 6
   },
 
-  textContainer: {
-    flex: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 20
+  btnContainer: {
+    flex: 1,
+    marginBottom: 10,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
 
   textHeader: {
     fontSize: 20,
-    color: '#000',
+    fontWeight: 'bold',
+    marginTop: 6,
     marginBottom: 30
   },
 
@@ -122,8 +115,7 @@ class RecoverPasswordConfirmScreen extends React.Component {
             <Image
               source={require("../assets/images/poppit-logo.png")}
               style={styles.logo}
-              resizeMode="contain"
-          ></Image>
+              resizeMode="contain" />
         </View>
 
         <View style={styles.contentContainer}>
@@ -131,19 +123,19 @@ class RecoverPasswordConfirmScreen extends React.Component {
 
           <Text style={styles.text}>We've sent you an email with a link to reset your password.</Text>
 
-        </View>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('Home')}>
+              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                <Icon
+                  name='chevron-left'
+                  type='material-community'
+                  size={32}
+                  color="#bbb" />
+                <Text style={styles.btnDark}>{'Back to Sign in'.toUpperCase()}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
 
-        <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('Home')}>
-            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-              <Icon
-                name='chevron-left'
-                type='material-community'
-                size={32}
-                color="#bbb" />
-              <Text style={styles.btnDark}>{'Back to Sign in'.toUpperCase()}</Text>
-            </View>
-          </TouchableOpacity>
         </View>
       </View>
     );

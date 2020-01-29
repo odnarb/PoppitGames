@@ -8,19 +8,22 @@ import {
   View
 } from 'react-native';
 
+
+
+
+
 import { Icon } from 'react-native-elements';
 
 const styles = StyleSheet.create({
 
   baseContainer: {
-    flex: 6,
+    flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20
   },
 
   logoContainer: {
-    flex:2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 40
+    flex: 2
   },
 
   logo: {
@@ -30,18 +33,22 @@ const styles = StyleSheet.create({
     width: undefined
   },
 
-  textContainer: {
-    flex: 3,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 20
+  contentContainer: {
+    flex: 6
+  },
+
+  btnContainer: {
+    flex: 1,
+    marginBottom: 10,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
 
   textHeader: {
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 6,
-    width: "100%"
+    marginBottom: 30
   },
 
   text: {
@@ -49,14 +56,6 @@ const styles = StyleSheet.create({
     marginTop: 6,
     width: "100%",
     color: "#777"
-  },
-
-  btnContainer: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
 
   buttonTryAgain: {
@@ -96,26 +95,26 @@ class EmailSignInErrorScreen extends React.Component {
             <Image
               source={require("../assets/images/poppit-logo.png")}
               style={styles.logo}
-              resizeMode="contain"
-          ></Image>
+              resizeMode="contain" />
         </View>
 
-        <View style={styles.textContainer}>
+        <View style={styles.contentContainer}>
           <Text style={styles.textHeader}>Oops! Couldn't sign in..</Text>
           <Text style={styles.text}>Your username and password don't match.{'\n'}Please try again.</Text>
-        </View>
 
-        <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.buttonTryAgain} onPress={() => this._navTo('Home')}>
-            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-              <Icon
-                name='chevron-left'
-                type='material-community'
-                size={32}
-                color="#bbb" />
-              <Text style={styles.btnTryAgain}>{'Try Again'.toUpperCase()}</Text>
-            </View>
-          </TouchableOpacity>
+          <View style={styles.btnContainer}>
+            <TouchableOpacity style={styles.buttonTryAgain} onPress={() => this._navTo('Home')}>
+              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                <Icon
+                  name='chevron-left'
+                  type='material-community'
+                  size={32}
+                  color="#bbb" />
+                <Text style={styles.btnTryAgain}>{'Try Again'.toUpperCase()}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+
         </View>
       </View>
     );

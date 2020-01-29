@@ -17,14 +17,13 @@ import PasswordInputText from '../components/PasswordInputText';
 const styles = StyleSheet.create({
 
   baseContainer: {
-    flex: 6,
+    flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20
   },
 
   logoContainer: {
-    flex:2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 40
+    flex:2
   },
 
   logo: {
@@ -34,11 +33,8 @@ const styles = StyleSheet.create({
     width: undefined
   },
 
-  textContainer: {
-    flex: 1,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 20
+  contentContainer: {
+    flex: 6
   },
 
   textInput: {
@@ -48,10 +44,9 @@ const styles = StyleSheet.create({
   },
 
   btnContainer: {
-    flex: 5,
-    paddingLeft: 15,
-    paddingRight: 15,
-    justifyContent: 'center',
+    flex: 1,
+    marginBottom: 10,
+    justifyContent: 'flex-end',
     alignItems: 'center'
   },
 
@@ -123,41 +118,38 @@ class EmailSignInScreen extends React.Component {
               resizeMode="contain" />
         </View>
 
-        <View style={styles.textContainer}>
+        <View style={styles.contentContainer}>
+          <TextInput
+              placeholder="Email"
+              keyboardType='email-address'
+              style={styles.textInput}
+              selectionColor="#428AF8"
+              underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+              onChangeText={(text) => this.setState({text})}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur} />
 
+          <PasswordInputText
+              label=""
+              placeholder="Password"
+              style={styles.textInput}
+              getRef={input => this.input = input}
+              value={password}
+              onChangeText={(password) => this.setState({ password })} />
+
+          <View style={styles.btnContainer}>
+            <TouchableOpacity style={styles.buttonSignIn} onPress={() => this._navTo('Home')}>
+              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                <Text style={styles.btnSignIn}>{'Sign In'.toUpperCase()}</Text>
+                <Icon
+                  name='chevron-right'
+                  type='material-community'
+                  size={32}
+                  color="#bbb" />
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-
-            <View style={styles.btnContainer}>
-
-              <TextInput
-                  placeholder="Email"
-                  keyboardType='email-address'
-                  style={styles.textInput}
-                  selectionColor="#428AF8"
-                  underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-                  onChangeText={(text) => this.setState({text})}
-                  onFocus={this.handleFocus}
-                  onBlur={this.handleBlur} />
-
-              <PasswordInputText
-                  label=""
-                  placeholder="Password"
-                  style={styles.textInput}
-                  getRef={input => this.input = input}
-                  value={password}
-                  onChangeText={(password) => this.setState({ password })} />
-
-              <TouchableOpacity style={styles.buttonSignIn} onPress={() => this._navTo('Home')}>
-                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                  <Text style={styles.btnSignIn}>{'Sign In'.toUpperCase()}</Text>
-                  <Icon
-                    name='chevron-right'
-                    type='material-community'
-                    size={32}
-                    color="#bbb" />
-                </View>
-              </TouchableOpacity>
-            </View>
       </View>
     );
   }

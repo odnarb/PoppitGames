@@ -18,13 +18,12 @@ const styles = StyleSheet.create({
 
   baseContainer: {
     flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20
   },
 
   logoContainer: {
-    flex:2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 40
+    flex: 2
   },
 
   logo: {
@@ -32,6 +31,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: undefined,
     width: undefined
+  },
+
+  contentContainer: {
+    flex: 6
+  },
+
+  btnContainer: {
+    flex: 1,
+    marginBottom: 10,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+
+  textLink: {
+    fontSize: 16,
+    color: '#444',
+    fontWeight: 'bold',
+    textDecorationLine: 'underline'
+  },
+
+  textInput: {
+    fontSize: 18,
+    marginTop: 10,
+    width: "100%"
   },
 
   termsContainer: {
@@ -50,34 +73,6 @@ const styles = StyleSheet.create({
     color: '#444',
     fontSize: 16,
     marginLeft: 10
-  },
-
-  textLink: {
-    fontSize: 16,
-    color: '#444',
-    fontWeight: 'bold',
-    textDecorationLine: 'underline'
-  },
-
-  btnContainer: {
-    flex: 1.5,
-    paddingLeft: 15,
-    paddingRight: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  textContainer: {
-    flex: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 20
-  },
-
-  textInput: {
-    fontSize: 18,
-    marginTop: 6,
-    width: "100%"
   },
 
   buttonCancel: {
@@ -176,7 +171,7 @@ class EmailSignupScreen extends React.Component {
           ></Image>
         </View>
 
-        <View style={styles.textContainer}>
+        <View style={styles.contentContainer}>
           <TextInput
               autoFocus={true}
               placeholder="Full Name"
@@ -213,37 +208,36 @@ class EmailSignupScreen extends React.Component {
               value={confirm_password}
               onChangeText={(confirm_password) => this.setState({ confirm_password })} />
 
-            <View style={styles.termsContainer}>
-              <Switch
-                onValueChange = {this.toggleSwitch}
-                value = {this.state.switchValue} />
-              <Text style={styles.termsText}>I agree to the </Text>
+          <View style={styles.termsContainer}>
+            <Switch
+              onValueChange = {this.toggleSwitch}
+              value = {this.state.switchValue} />
+            <Text style={styles.termsText}>I agree to the </Text>
 
-              <TouchableHighlight style={{marginLeft: 10, marginTop: 5}} onPress={() => this._navTo('Terms')} style={styles.optionBtn}>
-                <View style={styles.optionBtnView}>
-                  <Text style={styles.textLink}>terms and conditions.</Text>
-                </View>
-              </TouchableHighlight>
-            </View>
-
+            <TouchableHighlight style={{marginLeft: 10, marginTop: 5}} onPress={() => this._navTo('Terms')} style={styles.optionBtn}>
+              <View style={styles.optionBtnView}>
+                <Text style={styles.textLink}>terms and conditions.</Text>
+              </View>
+            </TouchableHighlight>
           </View>
 
-            <View style={styles.btnContainer}>
-              <TouchableHighlight style={styles.buttonCancel} onPress={() => this._navTo('Home')}>
-                <Text style={styles.btnCancel}>{'Cancel'.toUpperCase()}</Text>
-              </TouchableHighlight>
+          <View style={styles.btnContainer}>
+            <TouchableHighlight style={styles.buttonCancel} onPress={() => this._navTo('Home')}>
+              <Text style={styles.btnCancel}>{'Cancel'.toUpperCase()}</Text>
+            </TouchableHighlight>
 
-              <TouchableHighlight style={styles.buttonSignup} onPress={() => this._navTo('Home')}>
-                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                  <Text style={styles.btnSignup}>{'Sign Up'.toUpperCase()}</Text>
-                  <Icon
-                    name='chevron-right'
-                    type='material-community'
-                    size={32}
-                    color="#bbb" />
-                </View>
-              </TouchableHighlight>
-            </View>
+            <TouchableHighlight style={styles.buttonSignup} onPress={() => this._navTo('Home')}>
+              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                <Text style={styles.btnSignup}>{'Sign Up'.toUpperCase()}</Text>
+                <Icon
+                  name='chevron-right'
+                  type='material-community'
+                  size={32}
+                  color="#bbb" />
+              </View>
+            </TouchableHighlight>
+          </View>
+        </View>
       </View>
     );
   }

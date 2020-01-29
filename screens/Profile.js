@@ -9,23 +9,12 @@ import {
 } from 'react-native';
 
 import { Icon } from 'react-native-elements';
-import BottomNavigation from '../components/BottomNavigation';
 
 const styles = StyleSheet.create({
 
   baseContainer: {
     flex: 1,
     backgroundColor: '#666'
-  },
-
-  logoContainer: {
-    flex: 1,
-    paddingTop: 10,
-    alignItems: 'center'
-  },
-
-  logo: {
-    height: 50
   },
 
   contentContainer: {
@@ -60,7 +49,6 @@ const styles = StyleSheet.create({
   },
 
   btnContainer: {
-    flex: 2,
     paddingLeft: 20,
     paddingRight: 20,
     justifyContent: 'center',
@@ -95,39 +83,29 @@ class ProfileScreen extends React.Component {
   render() {
     return (
       <View style={styles.baseContainer}>
-          <View style={styles.logoContainer}>
-            <Image style={styles.logo}
-              source={require('../assets/images/poppit-logo.png')}
-              resizeMode='contain' />
-          </View>
 
           <View style={styles.contentContainer}>
 
             <Text style={styles.headerText}>My Account</Text>
 
-            <View style={{
-              marginLeft: 20,
-             }}>
+            <View style={styles.settingRow}>
+              <Text style={styles.settingLabel}>Full Name: </Text>
+              <Text style={styles.settingValue}>Jimmy Dean</Text>
+            </View>
 
-              <View style={styles.settingRow}>
-                <Text style={styles.settingLabel}>Full Name: </Text>
-                <Text style={styles.settingValue}>Jimmy Dean</Text>
-              </View>
+            <View style={styles.settingRow}>
+              <Text style={styles.settingLabel}>Email Address: </Text>
+              <Text style={styles.settingValue}>john.smith@gmail.com</Text>
+            </View>
 
-              <View style={styles.settingRow}>
-                <Text style={styles.settingLabel}>Email Address: </Text>
-                <Text style={styles.settingValue}>john.smith@gmail.com</Text>
-              </View>
+            <View style={styles.settingRow}>
+              <Text style={styles.settingLabel}>Birthdate: </Text>
+              <Text style={styles.settingValue}>3/7/1980</Text>
+            </View>
 
-              <View style={styles.settingRow}>
-                <Text style={styles.settingLabel}>Birthdate: </Text>
-                <Text style={styles.settingValue}>3/7/1980</Text>
-              </View>
-
-              <View style={styles.settingRow}>
-                <Text style={styles.settingLabel}>Location: </Text>
-                <Text style={styles.settingValue}>Tucson, AZ</Text>
-              </View>
+            <View style={styles.settingRow}>
+              <Text style={styles.settingLabel}>Location: </Text>
+              <Text style={styles.settingValue}>Tucson, AZ</Text>
             </View>
           </View>
 
@@ -138,8 +116,6 @@ class ProfileScreen extends React.Component {
               </View>
             </TouchableOpacity>
           </View>
-
-         <BottomNavigation />
       </View>
     );
   }

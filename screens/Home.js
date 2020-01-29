@@ -22,6 +22,10 @@ class HomeScreen extends React.Component {
         <Button title="Map Screen" onPress={() => this._navTo('Maps')} />
         <Button title="Prizes Screen" onPress={() => this._navTo('Prizes')} />
         <Button title="Settings Screen" onPress={() => this._navTo('Settings')} />
+
+        <Button title="PROFILE EDIT SCREEN" onPress={() => this._navTo('ProfileEdit')} />
+
+
         <Button title="About Screen" onPress={() => this._navTo('About')} />
 
         <Button title="Learn More Screens" onPress={() => this._navTo('LearnMore')} />

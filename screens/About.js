@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
   },
 
   logoContainer: {
-    flex:2,
+    flex:3,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingTop: 40,
+    paddingTop: 10,
 
     shadowColor: "#000",
     shadowOffset: {
@@ -43,10 +43,14 @@ const styles = StyleSheet.create({
     width: undefined
   },
 
+  contentContainer: {
+    flex: 6
+  },
+
   versionText: {
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: "bold"
   },
 
@@ -97,21 +101,16 @@ class AboutScreen extends React.Component {
     return (
      <View style={styles.baseContainer}>
         <View style={styles.logoContainer}>
-            <Image
-              source={require("../assets/images/poppit-logo.png")}
-              style={styles.logo}
-              resizeMode="contain" />
+          <Image
+            source={require("../assets/images/poppit-logo.png")}
+            style={styles.logo}
+            resizeMode="contain" />
           <View style={styles.versionRow}>
             <Text style={styles.versionText}>version 1.3.2 (0bdd85b1)</Text>
           </View>
         </View>
 
-          <View style={{
-            flex: 6
-          }}>
-
-
-
+          <View style={styles.contentContainer}>
             <View style={styles.settingsRow}>
               <TouchableHighlight onPress={() => this._navTo('Terms')} style={styles.optionBtn}>
                 <View style={styles.optionBtnView}>
@@ -132,7 +131,6 @@ class AboutScreen extends React.Component {
               <Text style={styles.copyrightText}>© Copyright Poppit Games LLC</Text>
             </View>
           </View>
-
       </View>
     );
   }

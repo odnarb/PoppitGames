@@ -10,7 +10,6 @@ import {
 
 import PasswordInputText from '../components/PasswordInputText';
 import DatePicker from 'react-native-date-picker'
-import BottomNavigation from '../components/BottomNavigation';
 
 const styles = StyleSheet.create({
 
@@ -27,7 +26,6 @@ const styles = StyleSheet.create({
     paddingRight: 20
   },
 
-
   inputContainer: {
     flexDirection: "row",
     alignItems: "stretch",
@@ -39,13 +37,15 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
+    flex: 1,
     fontSize: 18,
     color: "#fff",
-    marginLeft: "auto"
+    alignSelf: "flex-end",
   },
 
   dateInput: {
-      marginLeft: "auto"
+    flex: 1,
+    alignSelf: "flex-end"
   },
 
   inputLabel: {
@@ -226,8 +226,6 @@ class ProfileEditScreen extends React.Component {
             <Text style={styles.btnDark}>{'Save Changes'.toUpperCase()}</Text>
           </TouchableOpacity>
         </View>
-
-        <BottomNavigation />
 
       </View>
     );

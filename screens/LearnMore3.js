@@ -12,37 +12,46 @@ import { Icon } from 'react-native-elements';
 import LearnMoreNav from '../components/LearnMoreNav';
 
 const styles = StyleSheet.create({
+
   baseContainer: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingRight: 20,
-    paddingLeft: 20
+    paddingLeft: 20,
+    paddingRight: 20
   },
+
   logoContainer: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: 10
+    flex: 2
   },
+
+  logo: {
+    flex: 1,
+    alignItems: "center",
+    height: undefined,
+    width: undefined
+  },
+
+  contentContainer: {
+    flex: 6,
+    paddingBottom: 10
+  },
+
   tutoralHeader: {
-    marginTop: 22,
     fontSize: 32,
     fontWeight: 'bold',
     color: '#000'
   },
-  tutorialContentContainer: {
-    flex: 1,
-    marginLeft: 15,
-    paddingRight: 15
-  },
+
   tutorialText: {
-    marginTop: 22,
+    marginTop: 10,
     fontSize: 17,
     color: '#555'
   },
-  tutorialImageContainer: {
+
+  imageContainer: {
     flex: 6,
     marginTop: 20
   },
+
   tutorialImage: {
     flex: 1,
     alignItems: "center",
@@ -61,26 +70,26 @@ class LearnMoreScreen extends React.Component {
   render() {
     return (
       <View style={styles.baseContainer}>
-          <View style={styles.logoContainer}>
+        <View style={styles.logoContainer}>
             <Image
-              source={require('../assets/images/poppit-logo.png')}
-              resizeMode='contain' />
-          </View>
-
-          <View style={styles.tutorialContentContainer}>
-            <Text style={styles.tutoralHeader}>Poppit Tutorial Slide 3</Text>
-            <Text style={styles.tutorialText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
-          </View>
-
-        <View style={styles.tutorialImageContainer}>
-          <Image
-            style={styles.tutorialImage}
-            source={require('../assets/images/stock-photos/photo-game-3.jpg')}
-            resizeMode='contain' />
+              source={require("../assets/images/poppit-logo.png")}
+              style={styles.logo}
+              resizeMode="contain" />
         </View>
 
-          <LearnMoreNav slideNum={3} nextNavText="Finish" navTo="LearnMore3" navToFn={() => this._navTo('Home')} />
+        <View style={styles.contentContainer}>
+          <Text style={styles.tutoralHeader}>Poppit Tutorial Slide 3</Text>
+          <Text style={styles.tutorialText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
 
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.tutorialImage}
+              source={require('../assets/images/stock-photos/photo-game-3.jpg')}
+              resizeMode='contain' />
+          </View>
+        </View>
+
+        <LearnMoreNav slideNum={3} nextNavText="Finish" navToFn={() => this._navTo('Home')} />
       </View>
     );
   }

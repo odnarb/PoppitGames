@@ -140,8 +140,7 @@ class RecoverPasswordScreen extends React.Component {
             <Image
               source={require("../assets/images/poppit-logo.png")}
               style={styles.logo}
-              resizeMode="contain"
-          ></Image>
+              resizeMode="contain" />
         </View>
 
         <View style={styles.contentContainer}>

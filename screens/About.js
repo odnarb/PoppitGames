@@ -2,87 +2,12 @@ import React from 'react';
 
 import {
   Image,
-  Picker,
-  StyleSheet,
   Text,
   TouchableHighlight,
   View
 } from 'react-native';
 
-import { Icon } from 'react-native-elements';
-
-const styles = StyleSheet.create({
-
-  baseContainer: {
-    flex: 1,
-    backgroundColor: "#666"
-  },
-
-  logoContainer: {
-    flex:3,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 10,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2.84,
-
-    elevation: 5,
-    backgroundColor: "#888"
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  },
-
-  contentContainer: {
-    flex: 6
-  },
-
-  versionText: {
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: 24,
-    fontWeight: "bold"
-  },
-
-  settingsText: {
-    marginTop: 5,
-    paddingLeft: 15,
-    fontSize: 17,
-    color: '#fff'
-  },
-  copyrightText :{
-    paddingLeft: 10,
-    marginTop: 10,
-    fontSize: 14,
-    color: '#ccc'
-  },
-
-  versionRow: {
-    alignItems: "center",
-    marginTop: 20,
-    marginBottom: 20
-  },
-
-  settingsRow: {
-    paddingLeft: 12,
-    marginTop: 20
-  },
-  hr: {
-    marginTop: 20,
-    borderTopColor: '#fff',
-    borderTopWidth: StyleSheet.hairlineWidth,
-  }
-});
+import { aboutStyleSheet as styles } from '../components/globalstyles';
 
 class AboutScreen extends React.Component {
     constructor(props) {
@@ -93,9 +18,8 @@ class AboutScreen extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'About',
+    title: 'About'
   };
-
 
   render() {
     return (

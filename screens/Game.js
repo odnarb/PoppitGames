@@ -11,9 +11,7 @@ class GameScreen extends React.Component {
 
   render() {
     return (
-      <WebView
-        source={{uri: 'http://bchambers.io/games/penalty-kicks/index.html'}}
-      />
+      <WebView source={{uri: 'http://bchambers.io/games/penalty-kicks/index.html'}} />
     );
   }
 }

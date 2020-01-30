@@ -1,79 +1,12 @@
 import React from 'react';
 
 import {
-  Image,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-import { Icon } from 'react-native-elements';
-
-const styles = StyleSheet.create({
-
-  baseContainer: {
-    flex: 1,
-    backgroundColor: '#666'
-  },
-
-  contentContainer: {
-    flex: 6,
-    marginTop: 10,
-    marginBottom: 20,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-
-  headerText: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: '#fff'
-  },
-
-  settingRow: {
-    flexDirection: "row",
-    marginTop: 20,
-  },
-
-  settingLabel: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: '#fff'
-  },
-
-  settingValue: {
-    fontSize: 20,
-    color: '#fff',
-    marginLeft: "auto"
-  },
-
-  btnContainer: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 20
-  },
-
-  buttonDark: {
-    width: "100%",
-    height: 64,
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
-  },
-
-  btnDark: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign:'center'
-  },
-});
+import { profileStyleSheet as styles } from '../components/globalstyles';
 
 class ProfileScreen extends React.Component {
   static navigationOptions = {

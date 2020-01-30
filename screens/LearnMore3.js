@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
   Image,
-  StyleSheet,
   Text,
   View
 } from 'react-native';
@@ -11,54 +10,7 @@ import { Icon } from 'react-native-elements';
 
 import LearnMoreNav from '../components/LearnMoreNav';
 
-const styles = StyleSheet.create({
-
-  baseContainer: {
-    flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-
-  logoContainer: {
-    flex: 2
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  },
-
-  contentContainer: {
-    flex: 6,
-    paddingBottom: 10
-  },
-
-  tutoralHeader: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#000'
-  },
-
-  tutorialText: {
-    marginTop: 10,
-    fontSize: 17,
-    color: '#555'
-  },
-
-  imageContainer: {
-    flex: 6,
-    marginTop: 20
-  },
-
-  tutorialImage: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  }
-});
+import { learnMoreStyleSheet as styles } from '../components/globalstyles';
 
 class LearnMoreScreen extends React.Component {
   static navigationOptions = {

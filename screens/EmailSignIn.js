@@ -2,8 +2,6 @@ import React from 'react';
 
 import {
   Image,
-  StyleSheet,
-  Switch,
   Text,
   TextInput,
   TouchableOpacity,
@@ -14,62 +12,7 @@ import { Icon } from 'react-native-elements';
 
 import PasswordInputText from '../components/PasswordInputText';
 
-const styles = StyleSheet.create({
-
-  baseContainer: {
-    flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-
-  logoContainer: {
-    flex:2
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  },
-
-  contentContainer: {
-    flex: 6
-  },
-
-  textInput: {
-    fontSize: 18,
-    marginTop: 6,
-    width: "100%"
-  },
-
-  btnContainer: {
-    flex: 1,
-    marginBottom: 10,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  },
-
-  buttonSignIn: {
-    width: "100%",
-    height: 64,
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
-  },
-
-  btnSignIn: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign:'center'
-  },
-
-});
-
+import { emailSignInStyleSheet as styles } from '../components/globalstyles';
 
 class EmailSignInScreen extends React.Component {
   constructor(props) {

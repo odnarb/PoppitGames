@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
   Image,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View
@@ -10,39 +9,7 @@ import {
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-import { moderateScale } from 'react-native-size-matters';
-
-const styles = StyleSheet.create({
-
-  baseContainer: {
-        flex: 1
-  },
-
-  logoContainer: {
-    flex: 1,
-    paddingTop: moderateScale(10, 0.4),
-    alignItems: 'center'
-  },
-
-  logo: {
-    height: moderateScale(50, 0.4)
-  },
-
-  contentContainer: {
-    flex: 7
-  },
-
-  btnContainer: {
-    backgroundColor: "#58d5ff",
-    marginTop: 3,
-    alignItems: "center"
-  },
-
-  btnTitle: {
-    fontSize: moderateScale(14, 0.4),
-    color: "#fff"
-  }
-});
+import { homeStyleSheet as styles } from '../components/globalstyles';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -63,7 +30,7 @@ class HomeScreen extends React.Component {
 
         <View style={styles.contentContainer}>
 
-          <Text style={{ fontSize: moderateScale(16, 0.4),padding: 20 }}>Click around to check the static layouts (much like static HTML)</Text>
+          <Text style={styles.introText}>Click around to check the static layouts (much like static HTML)</Text>
 
           <TouchableOpacity style={styles.btnContainer} onPress={() => this._navTo('Game')}><Text style={styles.btnTitle}>Play Penalty Kicks!</Text></TouchableOpacity>
           <TouchableOpacity style={styles.btnContainer} onPress={() => this._navTo('Maps')}><Text style={styles.btnTitle}>Map Screen</Text></TouchableOpacity>

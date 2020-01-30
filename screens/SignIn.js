@@ -12,7 +12,6 @@ import React from 'react';
 import {
   Button,
   Image,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -23,123 +22,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import { Icon } from 'react-native-elements';
 
-const styles = StyleSheet.create({
-  baseContainer: {
-    flex: 1
-  },
-
-  logoContainer: {
-    flex: 2,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  },
-
-  contentContainer: {
-    flex: 4,
-    alignItems: 'center',
-    padding: 20
-  },
-
-  // btnTouch:{
-  //   flexDirection: "row",
-  //   backgroundColor: '#000',
-  //   borderColor: '#000',
-  //   borderWidth: 1,
-  //   borderRadius: 5,
-  //   padding: 20,
-  //   justifyContent: 'center',
-  //   marginTop: 20
-  // },
-
-  btnGoogle:{
-    flexDirection: "row",
-    backgroundColor: '#4285F4',
-    borderColor: '#4285F4',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 20,
-    justifyContent: 'center',
-    marginTop: 20
-  },
-
-  btnFB:{
-    flexDirection: "row",
-    backgroundColor: '#3b5998',
-    borderColor: '#3b5998',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 20,
-    justifyContent: 'center',
-    marginTop: 20
-  },
-
-  btnEmail:{
-    flexDirection: "row",
-    backgroundColor: '#777',
-    borderColor: '#777',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 20,
-    justifyContent: 'center',
-    marginTop: 20
-  },
-
-  btnView:{
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
-    // textAlign:'center',
-  },
-
-  btnIcon: {
-    marginLeft: 20,
-    marginRight: 50
-  },
-
-  btnText: {
-      color: '#fff',
-      fontSize: 22,
-      textAlign: "center",
-      marginLeft: 50,
-      marginRight: 50
-  },
-
-  separatorContainer: {
-    flexDirection: 'row',
-    width: "70%",
-    alignItems: 'center',
-    marginTop: 30,
-    marginBottom: 30
-  },
-
-  hr: {
-    flex: 1,
-    backgroundColor: '#A2A2A2',
-    height: 2
-  },
-
-  loginSeparatorText: {
-    fontFamily: 'AvenirNext-Bold',
-    fontSize: 20,
-    paddingHorizontal: 5,
-    alignSelf: 'center',
-    color: '#A2A2A2'
-  },
-
-  inputEmail: {
-    width: "100%",
-    fontSize: 24,
-    height: 64,
-  }
-});
+import { signInStyleSheet as styles } from '../components/globalstyles';
 
 class SignInScreen extends React.Component {
 

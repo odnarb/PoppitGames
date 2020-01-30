@@ -2,51 +2,12 @@ import React from 'react';
 
 import {
   Image,
-  StyleSheet,
   Switch,
   Text,
   View
 } from 'react-native';
 
-const styles = StyleSheet.create({
-  topMargin: {
-    marginTop: 20
-  },
-
-  optionRow: {
-    marginTop: 20,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-
-  optionSwitchContainer: {
-    flexDirection: 'row',
-    alignItems: 'stretch'
-  },
-
-  optionContainer: {
-    flexDirection: 'row'
-  },
-
-  optionHeader: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff'
-  },
-
-  optionSubHeader: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginTop: 10
-  },
-
-  optionDescription: {
-    fontSize: 15,
-    color: '#dcdc',
-    marginTop: 10
-  }
-});
+import { notificationsStyleSheet as styles } from '../components/globalstyles';
 
 class NotificationsScreen extends React.Component {
   static navigationOptions = {

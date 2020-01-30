@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
   Image,
-  StyleSheet,
   Switch,
   Text,
   TextInput,
@@ -14,105 +13,7 @@ import { Icon } from 'react-native-elements';
 
 import PasswordInputText from '../components/PasswordInputText';
 
-const styles = StyleSheet.create({
-
-  baseContainer: {
-    flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-
-  logoContainer: {
-    flex: 2
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  },
-
-  contentContainer: {
-    flex: 6
-  },
-
-  btnContainer: {
-    flex: 1,
-    marginBottom: 10,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  },
-
-  textLink: {
-    fontSize: 16,
-    color: '#444',
-    fontWeight: 'bold',
-    textDecorationLine: 'underline'
-  },
-
-  textInput: {
-    fontSize: 18,
-    marginTop: 10,
-    width: "100%"
-  },
-
-  termsContainer: {
-    flexDirection: 'row',
-    paddingLeft: 10,
-    marginTop: 20
-  },
-
-  termsText: {
-    color: '#444',
-    fontSize: 16,
-    marginLeft: 10
-  },
-
-  termsText: {
-    color: '#444',
-    fontSize: 16,
-    marginLeft: 10
-  },
-
-  buttonCancel: {
-    width: "100%",
-    height: 64,
-    borderColor: '#dcdcdc',
-    backgroundColor: "#dcdcdc",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
-  },
-
-  buttonSignup: {
-    width: "100%",
-    height: 64,
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
-  },
-
-  btnCancel: {
-    color: '#777',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign:'center'
-  },
-
-  btnSignup: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign:'center'
-  },
-
-});
-
+import { emailSignUpStyleSheet as styles } from '../components/globalstyles';
 
 class EmailSignupScreen extends React.Component {
   constructor(props) {

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -11,102 +10,7 @@ import {
 import PasswordInputText from '../components/PasswordInputText';
 import DatePicker from 'react-native-date-picker'
 
-const styles = StyleSheet.create({
-
-  baseContainer: {
-    flex: 1,
-    backgroundColor: '#666'
-  },
-
-  contentContainer: {
-    flex: 6,
-    marginTop: 10,
-    marginBottom: 20,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "stretch",
-    marginTop: 10
-  },
-
-  passwordContainer:{
-    marginTop: 10
-  },
-
-  textInput: {
-    flex: 1,
-    fontSize: 18,
-    color: "#fff",
-    alignSelf: "flex-end",
-  },
-
-  dateInput: {
-    flex: 1,
-    alignSelf: "flex-end"
-  },
-
-  inputLabel: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#fff",
-    marginTop: 10
-  },
-
-  btnContainer: {
-    flex: 2,
-    paddingLeft: 20,
-    paddingRight: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 20
-  },
-
-  buttonLight: {
-    width: "100%",
-    height: 64,
-    borderColor: '#dcdcdc',
-    backgroundColor: "#dcdcdc",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
-  },
-
-  buttonDark: {
-    width: "100%",
-    height: 64,
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
-  },
-
-  textLink: {
-    fontWeight: 'bold',
-    textDecorationLine: 'underline'
-  },
-
-  btnLight: {
-    color: '#777',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign:'center'
-  },
-
-  btnDark: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign:'center'
-  },
-
-});
-
+import { profileEditStyleSheet as styles } from '../components/globalstyles';
 
 class ProfileEditScreen extends React.Component {
   constructor(props) {

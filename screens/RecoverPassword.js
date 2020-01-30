@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
   Image,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -11,92 +10,7 @@ import {
 
 import { Icon } from 'react-native-elements';
 
-const styles = StyleSheet.create({
-
-  baseContainer: {
-    flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
-  },
-
-  logoContainer: {
-    flex: 2
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  },
-
-  contentContainer: {
-    flex: 6
-  },
-
-  btnContainer: {
-    flex: 1,
-    marginBottom: 10,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  },
-
-  textHeader: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 6,
-    marginBottom: 30
-  },
-
-  text: {
-    fontSize: 18,
-    color: '#777',
-    marginBottom: 10
-  },
-
-  textInput: {
-    fontSize: 18,
-    marginTop: 6,
-    width: "100%"
-  },
-
-  buttonLight: {
-    width: "100%",
-    height: 64,
-    borderColor: '#dcdcdc',
-    backgroundColor: "#dcdcdc",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
-  },
-
-  buttonDark: {
-    width: "100%",
-    height: 64,
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
-  },
-
-  btnLight: {
-    color: '#777',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign:'center'
-  },
-
-  btnDark: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign:'center'
-  },
-
-});
+import { recoverPasswordStyleSheet as styles } from '../components/globalstyles';
 
 class RecoverPasswordScreen extends React.Component {
   constructor(props) {

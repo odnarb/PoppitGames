@@ -3,40 +3,13 @@ import React from 'react';
 import {
   ActivityIndicator,
   Image,
-  StatusBar,
-  StyleSheet,
   Text,
   View
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-const styles = StyleSheet.create({
-  baseContainer: {
-    flex: 1
-  },
-
-  marginContainer: {
-    flex: 1
-  },
-
-  logoContainer: {
-    // backgroundColor: 'yellow',
-    alignItems: 'center',
-    flex: 5
-  },
-
-  contentContainer: {
-    // backgroundColor: 'green',
-    flex: 2,
-    alignItems: 'center'
-  },
-
-  logo: {
-    width: 364,
-    height: 118
-  }
-});
+import { authLoadingStyleSheet as styles } from '../components/globalstyles';
 
 class AuthLoadingScreen extends React.Component {
   componentDidMount() {
@@ -50,30 +23,28 @@ class AuthLoadingScreen extends React.Component {
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
 
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+    // this.props.navigation.navigate(userToken ? 'App' : 'Auth');
   };
 
   // Render any loading content that you like here
   render() {
-    // setTimeout(() => {
-    //     const userToken = AsyncStorage.getItem('userToken');
-    //     this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-    // }, 3000)
+    setTimeout(() => {
+        const userToken = AsyncStorage.getItem('userToken');
+        this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+    }, 5000)
 
     return (
 
      <View style={styles.baseContainer}>
-        <View style={styles.marginContainer} />
-
         <View style={styles.logoContainer}>
             <Image
               source={require("../assets/images/poppit-logo.png")}
               style={styles.logo}
-          ></Image>
+              resizeMode="contain" />
         </View>
 
         <View style={styles.contentContainer}>
-          <ActivityIndicator />
+          <ActivityIndicator size="large" />
           <Text style={styles.text}>Loading</Text>
         </View>
       </View>

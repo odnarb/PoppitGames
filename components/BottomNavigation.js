@@ -11,6 +11,8 @@ import { Icon } from 'react-native-elements';
 
 import { withNavigation } from 'react-navigation';
 
+import { moderateScale } from 'react-native-size-matters';
+
 const styles = StyleSheet.create({
   navContainer: {
       flex: 1,
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
   },
 
   navText: {
-    fontSize: 16,
+    fontSize: moderateScale(14),
     color: "#777",
   }
 });
@@ -39,7 +41,7 @@ class BottomNavigation extends React.Component {
 
     render() {
         const iconSet = "material-community";
-        const iconSize = 54;
+        const iconSize = moderateScale(50);
         const iconColor = "#777";
 
         const prizeIcon = "trophy";

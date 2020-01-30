@@ -15,6 +15,8 @@ import { Icon } from 'react-native-elements';
 
 import BottomNavigation from '../components/BottomNavigation';
 
+import { scale, moderateScale, verticalScale } from 'react-native-size-matters';
+
 const styles = StyleSheet.create({
 
   baseContainer: {
@@ -24,11 +26,11 @@ const styles = StyleSheet.create({
 
   logoContainer: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: scale(10),
     alignItems: 'center'
   },
   logo: {
-    height: 50
+    height: verticalScale(50)
   },
 
   contentContainer: {
@@ -36,11 +38,11 @@ const styles = StyleSheet.create({
   },
 
   headerText: {
-    fontSize: 30,
+    fontSize: moderateScale(30),
     color: "#fff",
     fontWeight: "bold",
-    paddingLeft: 20,
-    marginBottom: 20
+    paddingLeft: scale(20),
+    marginBottom: scale(20)
   },
 
   optionBtn: {
@@ -57,30 +59,29 @@ const styles = StyleSheet.create({
   },
 
   settingsText: {
-    marginTop: 5,
-    paddingLeft: 15,
-    fontSize: 17,
+    marginTop: scale(5),
+    paddingLeft: scale(15),
+    fontSize: moderateScale(17),
     color: '#fff'
   },
   copyrightText :{
-    paddingLeft: 10,
-    marginTop: 10,
-    fontSize: 14,
+    paddingLeft: scale(10),
+    marginTop: scale(10),
+    fontSize: moderateScale(14),
     color: '#ccc'
   },
   settingsRow: {
-      // flexDirection: 'row',
-    paddingLeft: 12,
-    marginTop: 20,
+    paddingLeft:  scale(10),
+    marginTop: scale(20)
   },
   picker: {
     color:"#111",
-    marginLeft: 20,
-    height: 40,
+    marginLeft: moderateScale(20),
+    height: verticalScale(30),
     width: "80%"
   },
   hr: {
-    marginTop: 20,
+    marginTop: scale(20),
     borderTopColor: '#fff',
     borderTopWidth: StyleSheet.hairlineWidth,
   }
@@ -101,6 +102,7 @@ class SettingsScreen extends React.Component {
   };
 
   render() {
+    const iconSize = moderateScale(28);
     return (
       <View style={styles.baseContainer}>
         <View style={styles.logoContainer}>
@@ -121,7 +123,7 @@ class SettingsScreen extends React.Component {
                     <Icon
                       name='account'
                       type='material-community'
-                      size={28}
+                      size={iconSize}
                       color='#fff' />
                     <Text style={styles.settingsText}>My Account</Text>
                 </View>
@@ -135,7 +137,7 @@ class SettingsScreen extends React.Component {
                   <Icon
                     name='bell'
                     type='material-community'
-                    size={28}
+                    size={iconSize}
                     color='#fff' />
                   <Text style={styles.settingsText}>Notifications</Text>
                 </View>
@@ -147,7 +149,7 @@ class SettingsScreen extends React.Component {
                   <Icon
                     name='earth'
                     type='material-community'
-                    size={28}
+                    size={iconSize}
                     color='#fff' />
                   <Text style={styles.settingsText}>Language:</Text>
 
@@ -170,7 +172,7 @@ class SettingsScreen extends React.Component {
                   <Icon
                     name='information'
                     type='material-community'
-                    size={28}
+                    size={iconSize}
                     color='#fff' />
 
                   <Text style={styles.settingsText}>About</Text>
@@ -184,7 +186,7 @@ class SettingsScreen extends React.Component {
                   <Icon
                     name='logout'
                     type='material-community'
-                    size={28}
+                    size={iconSize}
                     color='#fff' />
 
                   <Text style={styles.settingsText}>Logout</Text>

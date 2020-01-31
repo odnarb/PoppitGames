@@ -10,7 +10,11 @@ const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
 
-const settingsIconSize = moderateScale(28);
+const iconMediumSize = moderateScale(32);
+
+const settingsIconSize = iconMediumSize;
+const navDotSize = iconMediumSize;
+const navIconSize = iconMediumSize;
 
 const globalStyles = {
   baseContainer: {
@@ -20,7 +24,7 @@ const globalStyles = {
 
   logoContainer: {
     flex: 1,
-    paddingTop: scale(10),
+    paddingTop: moderateScale(10),
     alignItems: 'center'
   },
 
@@ -36,8 +40,8 @@ const globalStyles = {
     fontSize: moderateScale(30),
     color: "#fff",
     fontWeight: "bold",
-    paddingLeft: scale(20),
-    marginBottom: scale(20)
+    paddingLeft: moderateScale(20),
+    marginBottom: moderateScale(20)
   },
   optionBtn: {
   },
@@ -51,20 +55,20 @@ const globalStyles = {
   },
 
   settingsText: {
-    marginTop: scale(5),
-    paddingLeft: scale(15),
+    marginTop: moderateScale(5),
+    paddingLeft: moderateScale(15),
     fontSize: moderateScale(17),
     color: '#fff'
   },
   copyrightText :{
-    paddingLeft: scale(10),
-    marginTop: scale(10),
+    paddingLeft: moderateScale(10),
+    marginTop: moderateScale(10),
     fontSize: moderateScale(14),
     color: '#ccc'
   },
   settingsRow: {
-    paddingLeft:  scale(10),
-    marginTop: scale(20)
+    paddingLeft:  moderateScale(10),
+    marginTop: moderateScale(20)
   },
   picker: {
     color:"#111",
@@ -73,7 +77,7 @@ const globalStyles = {
     width: "80%"
   },
   hr: {
-    marginTop: scale(20),
+    marginTop: moderateScale(20),
     borderTopColor: '#fff',
     borderTopWidth: StyleSheet.hairlineWidth,
   }
@@ -1091,6 +1095,50 @@ const homeStyles = {
   }
 };
 
+const learnMoreNavStyles = {
+  navContainer: {
+    flex: 0.4,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: moderateScale(20)
+  },
+  navDotGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  dot2: {
+    marginLeft: moderateScale(5),
+    marginRight: moderateScale(5)
+  },
+  navSkip: {
+    color: '#777',
+    padding: moderateScale(10),
+    fontSize: moderateScale(18),
+    marginRight: moderateScale(20)
+  },
+  navNext: {
+    padding: moderateScale(10),
+    fontSize: moderateScale(18),
+  },
+  navBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  navBtnGroup: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: "center"
+  },
+  highLightBtn: {
+    alignSelf: 'stretch'
+  }
+};
+
+const learnMoreNavStyleSheet = StyleSheet.create(learnMoreNavStyles);
+
 const homeStyleSheet = StyleSheet.create({ ...globalStyles, ...homeStyles });
 
 const aboutStyleSheet = StyleSheet.create({ ...globalStyles, ...aboutStyles });
@@ -1114,6 +1162,9 @@ const styles = StyleSheet.create(globalStyles);
 
 export {
   styles,
+  learnMoreNavStyleSheet,
+  navDotSize,
+  navIconSize,
   homeStyleSheet,
   aboutStyleSheet,
   authLoadingStyleSheet,

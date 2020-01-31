@@ -11,47 +11,7 @@ import { Icon } from 'react-native-elements';
 
 import { withNavigation } from 'react-navigation';
 
-const styles = StyleSheet.create({
-  navContainer: {
-    flex: 0.4,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20
-  },
-  navDotGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  dot2: {
-    marginLeft: 5,
-    marginRight: 5
-  },
-  navSkip: {
-    color: '#777',
-    padding: 10,
-    fontSize: 18,
-    marginRight: 20
-  },
-  navNext: {
-    padding: 10,
-    fontSize: 18,
-  },
-  navBtn: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  navBtnGroup: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: "center"
-  },
-  highLightBtn: {
-    alignSelf: 'stretch'
-  }
-});
+import { learnMoreNavStyleSheet as styles, navDotSize, navIconSize } from '../components/globalstyles';
 
 class LearnMoreNav extends React.Component {
 
@@ -60,11 +20,9 @@ class LearnMoreNav extends React.Component {
         const darkColor = "#000";
         const lightColor = "#dcdc";
 
-        const navDotSize = 32;
         const navDotIcon = 'circle-small';
         const iconColor = darkColor;
 
-        const iconSize = 32;
 
         let nav1Color = darkColor;
         let nav2Color = lightColor;
@@ -103,7 +61,7 @@ class LearnMoreNav extends React.Component {
                   name='chevron-right'
                   type='material-community'
                   color={iconColor}
-                  size={iconSize} />
+                  size={navIconSize} />
               </View>
             </TouchableHighlight>
           </View>

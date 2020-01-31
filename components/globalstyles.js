@@ -942,7 +942,7 @@ const mapsStyles = {
   },
   logoContainer: {
     position: 'absolute',
-    top: 10,
+    top: verticalScale(10),
     left: 0,
     right: 0,
     bottom: 0,
@@ -953,7 +953,7 @@ const mapsStyles = {
   },
   searchBarContainer: {
     position: 'absolute',
-    top: 70,
+    top: verticalScale(70),
     left: 0,
     right: 0,
     bottom: 0,
@@ -966,7 +966,7 @@ const mapsStyles = {
     bottom: 140,
     left: 0,
     right: 0,
-    paddingVertical: 10,
+    paddingVertical: verticalScale(10),
   },
   endPadding: {
     paddingRight: width - CARD_WIDTH,

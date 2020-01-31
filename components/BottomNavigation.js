@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-    StyleSheet,
     Text,
     TouchableHighlight,
     View
@@ -11,50 +10,22 @@ import { Icon } from 'react-native-elements';
 
 import { withNavigation } from 'react-navigation';
 
-import { moderateScale } from 'react-native-size-matters';
-
-const styles = StyleSheet.create({
-  navContainer: {
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'stretch'
-  },
-  navBtn: {
-      flex: 1,
-      justifyContent: 'center',
-      backgroundColor: '#fff'
-  },
-
-  navBtnView: {
-        alignItems: "center",
-        justifyContent: "center"
-  },
-
-  navText: {
-    fontSize: moderateScale(14),
-    color: "#777",
-  }
-});
+import {
+  bottomNavStyleSheet as styles,
+  bottomNavIconSize as iconSize,
+  bottomNavIconColor as iconColor
+} from '../components/globalstyles';
 
 class BottomNavigation extends React.Component {
 
     render() {
-        const iconSet = "material-community";
-        const iconSize = moderateScale(50);
-        const iconColor = "#777";
-
-        const prizeIcon = "trophy";
-        const searchIcon = "magnify";
-        const settingsIcon = "settings";
-
         return (
           <View style={styles.navContainer}>
             <TouchableHighlight onPress={() => this._navTo('Prizes')} style={styles.navBtn}>
               <View style={styles.navBtnView}>
               <Icon
-                name={prizeIcon}
-                type={iconSet}
+                name="trophy"
+                type="material-community"
                 size={iconSize}
                 color={iconColor} />
                 <Text style={styles.navText}>Prizes</Text>
@@ -64,8 +35,8 @@ class BottomNavigation extends React.Component {
             <TouchableHighlight onPress={() => this._navTo('Maps')} style={styles.navBtn}>
               <View style={styles.navBtnView}>
               <Icon
-                name={searchIcon}
-                type={iconSet}
+                name="magnify"
+                type="material-community"
                 size={iconSize}
                 color={iconColor} />
                 <Text style={styles.navText}>Search</Text>
@@ -75,8 +46,8 @@ class BottomNavigation extends React.Component {
             <TouchableHighlight onPress={() => this._navTo('Settings')} style={styles.navBtn}>
               <View style={styles.navBtnView}>
               <Icon
-                name={settingsIcon}
-                type={iconSet}
+                name="settings"
+                type="material-community"
                 size={iconSize}
                 color={iconColor} />
                 <Text style={styles.navText}>Settings</Text>

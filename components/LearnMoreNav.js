@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-    StyleSheet,
     Text,
     TouchableHighlight,
     View
@@ -11,18 +10,19 @@ import { Icon } from 'react-native-elements';
 
 import { withNavigation } from 'react-navigation';
 
-import { learnMoreNavStyleSheet as styles, navDotSize, navIconSize } from '../components/globalstyles';
+import {
+  learnMoreNavStyleSheet as styles,
+  learnMoreNavDotSize as navDotSize,
+  learnMoreNavIconSize as navIconSize,
+  learnMoreNavIconLightColor as lightColor,
+  learnMoreNavIconDarkColor as darkColor
+} from '../components/globalstyles';
 
 class LearnMoreNav extends React.Component {
-
     render() {
         const { navToFn, nextNavText, slideNum} = this.props;
-        const darkColor = "#000";
-        const lightColor = "#dcdc";
 
-        const navDotIcon = 'circle-small';
         const iconColor = darkColor;
-
 
         let nav1Color = darkColor;
         let nav2Color = lightColor;
@@ -42,9 +42,9 @@ class LearnMoreNav extends React.Component {
         <View style={styles.navContainer}>
 
           <View style={styles.navDotGroup}>
-            <Icon name={navDotIcon} type='material-community' color={nav1Color} size={navDotSize} />
-            <Icon style={styles.dot2} name={navDotIcon} type='material-community' color={nav2Color} size={navDotSize} />
-            <Icon name={navDotIcon} type='material-community' color={nav3Color} size={navDotSize} />
+            <Icon name='circle-small' type='material-community' color={nav1Color} size={navDotSize} />
+            <Icon name='circle-small' type='material-community' color={nav2Color} size={navDotSize} style={styles.dot2} />
+            <Icon name='circle-small' type='material-community' color={nav3Color} size={navDotSize} />
           </View>
 
           <View style={styles.navBtnGroup}>

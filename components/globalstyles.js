@@ -13,8 +13,13 @@ const CARD_WIDTH = CARD_HEIGHT - 50;
 const iconMediumSize = moderateScale(32);
 
 const settingsIconSize = iconMediumSize;
-const navDotSize = iconMediumSize;
-const navIconSize = iconMediumSize;
+const learnMoreNavDotSize = iconMediumSize;
+const learnMoreNavIconSize = iconMediumSize;
+const learnMoreNavIconLightColor = "#dcdcdc"
+const learnMoreNavIconDarkColor = "#000";
+
+const bottomNavIconSize = moderateScale(54);
+const bottomNavIconColor = "#777";
 
 const globalStyles = {
   baseContainer: {
@@ -1137,9 +1142,35 @@ const learnMoreNavStyles = {
   }
 };
 
-const learnMoreNavStyleSheet = StyleSheet.create(learnMoreNavStyles);
+const bottomNavStyles = {
+  navContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'stretch'
+  },
+  navBtn: {
+      flex: 1,
+      justifyContent: 'center',
+      backgroundColor: '#fff'
+  },
 
+  navBtnView: {
+        alignItems: "center",
+        justifyContent: "center"
+  },
+
+  navText: {
+    fontSize: moderateScale(14),
+    color: "#777",
+  }
+};
+
+//this will be removed eventually..
 const homeStyleSheet = StyleSheet.create({ ...globalStyles, ...homeStyles });
+
+const learnMoreNavStyleSheet = StyleSheet.create(learnMoreNavStyles);
+const bottomNavStyleSheet = StyleSheet.create(bottomNavStyles);
 
 const aboutStyleSheet = StyleSheet.create({ ...globalStyles, ...aboutStyles });
 const authLoadingStyleSheet = StyleSheet.create({ ...globalStyles, ...authLoadingStyles });
@@ -1163,8 +1194,13 @@ const styles = StyleSheet.create(globalStyles);
 export {
   styles,
   learnMoreNavStyleSheet,
-  navDotSize,
-  navIconSize,
+  learnMoreNavDotSize,
+  learnMoreNavIconSize,
+  learnMoreNavIconLightColor,
+  learnMoreNavIconDarkColor,
+  bottomNavStyleSheet,
+  bottomNavIconSize,
+  bottomNavIconColor,
   homeStyleSheet,
   aboutStyleSheet,
   authLoadingStyleSheet,

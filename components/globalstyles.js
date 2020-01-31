@@ -100,9 +100,9 @@ const aboutStyles = {
 
   logoContainer: {
     flex:3,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 10,
+    paddingLeft: moderateScale(10),
+    paddingRight: moderateScale(10),
+    paddingTop: moderateScale(10),
 
     shadowColor: "#000",
     shadowOffset: {
@@ -130,22 +130,22 @@ const aboutStyles = {
   versionText: {
     alignItems: "center",
     justifyContent: "center",
-    fontSize: 24,
+    fontSize: moderateScale(24),
     fontWeight: "bold"
   },
 
   versionRow: {
     alignItems: "center",
-    marginTop: 20,
-    marginBottom: 20
+    marginTop: moderateScale(20),
+    marginBottom: moderateScale(20)
   }
 };
 
 const emailSignInStyles = {
   baseContainer: {
     flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   logoContainer: {
@@ -164,33 +164,33 @@ const emailSignInStyles = {
   },
 
   textInput: {
-    fontSize: 18,
-    marginTop: 6,
+    fontSize: moderateScale(18),
+    marginTop: moderateScale(6),
     width: "100%"
   },
 
   btnContainer: {
     flex: 1,
-    marginBottom: 10,
+    marginBottom: moderateScale(10),
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
 
   buttonSignIn: {
     width: "100%",
-    height: 64,
+    height: verticalScale(64),
     borderColor: '#000',
     backgroundColor: "#000",
     borderWidth: 1,
     borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
   },
 
   btnSignIn: {
     color: '#ccc',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     textAlign:'center'
   }
 };
@@ -198,8 +198,8 @@ const emailSignInStyles = {
 const emailSignInErrorStyles = {
   baseContainer: {
     flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   logoContainer: {
@@ -219,40 +219,40 @@ const emailSignInErrorStyles = {
 
   btnContainer: {
     flex: 1,
-    marginBottom: 10,
+    marginBottom: moderateScale(10),
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
 
   textHeader: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     fontWeight: 'bold',
-    marginTop: 6,
-    marginBottom: 30
+    marginTop: moderateScale(6),
+    marginBottom: moderateScale(30)
   },
 
   text: {
-    fontSize: 18,
-    marginTop: 6,
+    fontSize: moderateScale(18),
+    marginTop: moderateScale(6),
     width: "100%",
     color: "#777"
   },
 
   buttonTryAgain: {
     width: "100%",
-    height: 64,
+    height: verticalScale(64),
     borderColor: '#000',
     backgroundColor: "#000",
     borderWidth: 1,
     borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
   },
 
   btnTryAgain: {
     color: '#ccc',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     textAlign:'center'
   },
 };
@@ -260,8 +260,8 @@ const emailSignInErrorStyles = {
 const emailSignUpStyles = {
   baseContainer: {
     flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   logoContainer: {
@@ -281,75 +281,75 @@ const emailSignUpStyles = {
 
   btnContainer: {
     flex: 1,
-    marginBottom: 10,
+    marginBottom: moderateScale(10),
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
 
   textLink: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: '#444',
     fontWeight: 'bold',
     textDecorationLine: 'underline'
   },
 
   textInput: {
-    fontSize: 18,
-    marginTop: 10,
+    fontSize: moderateScale(18),
+    marginTop: moderateScale(10),
     width: "100%"
   },
 
   termsContainer: {
     flexDirection: 'row',
-    paddingLeft: 10,
-    marginTop: 20
+    paddingLeft: moderateScale(10),
+    marginTop: moderateScale(20)
   },
 
   termsText: {
     color: '#444',
-    fontSize: 16,
-    marginLeft: 10
+    fontSize: moderateScale(16),
+    marginLeft: moderateScale(10)
   },
 
   termsText: {
     color: '#444',
-    fontSize: 16,
-    marginLeft: 10
+    fontSize: moderateScale(16),
+    marginLeft: moderateScale(10)
   },
 
   buttonCancel: {
     width: "100%",
-    height: 64,
+    height: verticalScale(64),
     borderColor: '#dcdcdc',
     backgroundColor: "#dcdcdc",
     borderWidth: 1,
     borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
   },
 
   buttonSignup: {
     width: "100%",
-    height: 64,
+    height: verticalScale(64),
     borderColor: '#000',
     backgroundColor: "#000",
     borderWidth: 1,
     borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
   },
 
   btnCancel: {
     color: '#777',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     textAlign:'center'
   },
 
   btnSignup: {
     color: '#ccc',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     textAlign:'center'
   },
 
@@ -358,8 +358,8 @@ const emailSignUpStyles = {
 const learnMoreStyles = {
   baseContainer: {
     flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   logoContainer: {
@@ -375,24 +375,24 @@ const learnMoreStyles = {
 
   contentContainer: {
     flex: 6,
-    paddingBottom: 10
+    paddingBottom: moderateScale(10)
   },
 
   tutoralHeader: {
-    fontSize: 32,
+    fontSize: moderateScale(32),
     fontWeight: 'bold',
     color: '#000'
   },
 
   tutorialText: {
-    marginTop: 10,
-    fontSize: 17,
+    marginTop: moderateScale(10),
+    fontSize: moderateScale(17),
     color: '#555'
   },
 
   imageContainer: {
     flex: 6,
-    marginTop: 20
+    marginTop: moderateScale(20)
   },
 
   tutorialImage: {
@@ -406,13 +406,13 @@ const learnMoreStyles = {
 
 const notificationsStyles = {
   topMargin: {
-    marginTop: 20
+    marginTop: moderateScale(20)
   },
 
   optionRow: {
-    marginTop: 20,
-    paddingLeft: 20,
-    paddingRight: 20
+    marginTop: moderateScale(20),
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   optionSwitchContainer: {
@@ -425,22 +425,22 @@ const notificationsStyles = {
   },
 
   optionHeader: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
     fontWeight: 'bold',
     color: '#fff'
   },
 
   optionSubHeader: {
-    fontSize: 15,
+    fontSize: moderateScale(15),
     fontWeight: 'bold',
     color: '#fff',
-    marginTop: 10
+    marginTop: moderateScale(10)
   },
 
   optionDescription: {
-    fontSize: 15,
+    fontSize: moderateScale(15),
     color: '#dcdc',
-    marginTop: 10
+    marginTop: moderateScale(10)
   }
 };
 
@@ -451,29 +451,29 @@ const prizesStyles = {
   },
   logoContainer: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: moderateScale(10),
     alignItems: 'center'
   },
   logo: {
-    height: 50
+    height: verticalScale(50)
   },
   contentContainer: {
     flex: 7,
-    marginTop: 10,
-    marginBottom: 20
+    marginTop: moderateScale(10),
+    marginBottom: moderateScale(20)
   },
   headerText: {
-    fontSize: 30,
+    fontSize: moderateScale(30),
     color: "#fff",
     fontWeight: "bold",
-    paddingLeft: 20,
-    marginBottom: 20
+    paddingLeft: moderateScale(20),
+    marginBottom: moderateScale(20)
   },
   claimedPrizeContainer: {
     flex: 0.3,
     backgroundColor: "#666",
-    marginTop: 2,
-    marginBottom: 2,
+    marginTop: moderateScale(2),
+    marginBottom: moderateScale(2),
     flexDirection: "row",
     alignItems: "stretch",
     justifyContent: "center",
@@ -484,8 +484,8 @@ const prizesStyles = {
   prizeContainer: {
     flex: 0.3,
     backgroundColor: "#fff",
-    marginTop: 2,
-    marginBottom: 2,
+    marginTop: moderateScale(2),
+    marginBottom: moderateScale(2),
     flexDirection: "row",
     alignItems: "stretch",
     justifyContent: "center",
@@ -502,7 +502,7 @@ const prizesStyles = {
     justifyContent: "center"
   },
   prizeText: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
     color: "#777",
     textAlign: "center"
   }
@@ -517,58 +517,58 @@ const profileStyles = {
 
   contentContainer: {
     flex: 6,
-    marginTop: 10,
-    marginBottom: 20,
-    paddingLeft: 20,
-    paddingRight: 20
+    marginTop: moderateScale(10),
+    marginBottom: moderateScale(20),
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   headerText: {
-    fontSize: 25,
+    fontSize: moderateScale(25),
     fontWeight: 'bold',
     color: '#fff'
   },
 
   settingRow: {
     flexDirection: "row",
-    marginTop: 20,
+    marginTop: moderateScale(20),
   },
 
   settingLabel: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     fontWeight: "bold",
     color: '#fff'
   },
 
   settingValue: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     color: '#fff',
     marginLeft: "auto"
   },
 
   btnContainer: {
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20),
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 20
+    paddingBottom: moderateScale(20)
   },
 
   buttonDark: {
     width: "100%",
-    height: 64,
+    height: verticalScale(64),
     borderColor: '#000',
     backgroundColor: "#000",
     borderWidth: 1,
     borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
   },
 
   btnDark: {
     color: '#ccc',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     textAlign:'center'
   },
 };
@@ -582,25 +582,25 @@ const profileEditStyles = {
 
   contentContainer: {
     flex: 6,
-    marginTop: 10,
-    marginBottom: 20,
-    paddingLeft: 20,
-    paddingRight: 20
+    marginTop: moderateScale(10),
+    marginBottom: moderateScale(20),
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   inputContainer: {
     flexDirection: "row",
     alignItems: "stretch",
-    marginTop: 10
+    marginTop: moderateScale(10)
   },
 
   passwordContainer:{
-    marginTop: 10
+    marginTop: moderateScale(10)
   },
 
   textInput: {
     flex: 1,
-    fontSize: 18,
+    fontSize: moderateScale(18),
     color: "#fff",
     alignSelf: "flex-end",
   },
@@ -611,41 +611,41 @@ const profileEditStyles = {
   },
 
   inputLabel: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
     fontWeight: "bold",
     color: "#fff",
-    marginTop: 10
+    marginTop: moderateScale(10)
   },
 
   btnContainer: {
     flex: 2,
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20),
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 20
+    paddingBottom: moderateScale(20)
   },
 
   buttonLight: {
     width: "100%",
-    height: 64,
+    height: verticalScale(64),
     borderColor: '#dcdcdc',
     backgroundColor: "#dcdcdc",
     borderWidth: 1,
     borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
   },
 
   buttonDark: {
     width: "100%",
-    height: 64,
+    height: verticalScale(64),
     borderColor: '#000',
     backgroundColor: "#000",
     borderWidth: 1,
     borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
   },
 
   textLink: {
@@ -656,14 +656,14 @@ const profileEditStyles = {
   btnLight: {
     color: '#777',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     textAlign:'center'
   },
 
   btnDark: {
     color: '#ccc',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     textAlign:'center'
   },
 
@@ -673,8 +673,8 @@ const recoverPasswordStyles = {
 
   baseContainer: {
     flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   logoContainer: {
@@ -694,63 +694,63 @@ const recoverPasswordStyles = {
 
   btnContainer: {
     flex: 1,
-    marginBottom: 10,
+    marginBottom: moderateScale(10),
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
 
   textHeader: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     fontWeight: 'bold',
-    marginTop: 6,
-    marginBottom: 30
+    marginTop: moderateScale(6),
+    marginBottom: moderateScale(30)
   },
 
   text: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
     color: '#777',
-    marginBottom: 10
+    marginBottom: moderateScale(10)
   },
 
   textInput: {
-    fontSize: 18,
-    marginTop: 6,
+    fontSize: moderateScale(18),
+    marginTop: moderateScale(6),
     width: "100%"
   },
 
   buttonLight: {
     width: "100%",
-    height: 64,
+    height: verticalScale(64),
     borderColor: '#dcdcdc',
     backgroundColor: "#dcdcdc",
     borderWidth: 1,
     borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
   },
 
   buttonDark: {
     width: "100%",
-    height: 64,
+    height: verticalScale(64),
     borderColor: '#000',
     backgroundColor: "#000",
     borderWidth: 1,
     borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
   },
 
   btnLight: {
     color: '#777',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     textAlign:'center'
   },
 
   btnDark: {
     color: '#ccc',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     textAlign:'center'
   },
 
@@ -759,8 +759,8 @@ const recoverPasswordStyles = {
 const recoverPasswordConfirmStyles = {
   baseContainer: {
     flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   logoContainer: {
@@ -780,39 +780,39 @@ const recoverPasswordConfirmStyles = {
 
   btnContainer: {
     flex: 1,
-    marginBottom: 10,
+    marginBottom: moderateScale(10),
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
 
   textHeader: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     fontWeight: 'bold',
-    marginTop: 6,
-    marginBottom: 30
+    marginTop: moderateScale(6),
+    marginBottom: moderateScale(30)
   },
 
   text: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
     color: '#777',
-    marginBottom: 10
+    marginBottom: moderateScale(10)
   },
 
   buttonDark: {
     width: "100%",
-    height: 64,
+    height: verticalScale(64),
     borderColor: '#000',
     backgroundColor: "#000",
     borderWidth: 1,
     borderRadius: 4,
-    padding: 20,
-    marginTop: 20,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
   },
 
   btnDark: {
     color: '#ccc',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     textAlign:'center'
   },
 
@@ -825,8 +825,8 @@ const signInStyles = {
 
   logoContainer: {
     flex: 2,
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   logo: {
@@ -839,7 +839,7 @@ const signInStyles = {
   contentContainer: {
     flex: 4,
     alignItems: 'center',
-    padding: 20
+    padding: moderateScale(20)
   },
 
   // btnTouch:{
@@ -848,9 +848,9 @@ const signInStyles = {
   //   borderColor: '#000',
   //   borderWidth: 1,
   //   borderRadius: 5,
-  //   padding: 20,
+  //   padding: moderateScale(20),
   //   justifyContent: 'center',
-  //   marginTop: 20
+  //   marginTop: moderateScale(20)
   // },
 
   btnGoogle:{
@@ -859,9 +859,9 @@ const signInStyles = {
     borderColor: '#4285F4',
     borderWidth: 1,
     borderRadius: 5,
-    padding: 20,
+    padding: moderateScale(20),
     justifyContent: 'center',
-    marginTop: 20
+    marginTop: moderateScale(20)
   },
 
   btnFB:{
@@ -870,9 +870,9 @@ const signInStyles = {
     borderColor: '#3b5998',
     borderWidth: 1,
     borderRadius: 5,
-    padding: 20,
+    padding: moderateScale(20),
     justifyContent: 'center',
-    marginTop: 20
+    marginTop: moderateScale(20)
   },
 
   btnEmail:{
@@ -881,9 +881,9 @@ const signInStyles = {
     borderColor: '#777',
     borderWidth: 1,
     borderRadius: 5,
-    padding: 20,
+    padding: moderateScale(20),
     justifyContent: 'center',
-    marginTop: 20
+    marginTop: moderateScale(20)
   },
 
   btnView:{
@@ -895,24 +895,24 @@ const signInStyles = {
   },
 
   btnIcon: {
-    marginLeft: 20,
-    marginRight: 50
+    marginLeft: moderateScale(20),
+    marginRight: moderateScale(50)
   },
 
   btnText: {
       color: '#fff',
-      fontSize: 22,
+      fontSize: moderateScale(22),
       textAlign: "center",
-      marginLeft: 50,
-      marginRight: 50
+      marginLeft: moderateScale(50),
+      marginRight: moderateScale(50)
   },
 
   separatorContainer: {
     flexDirection: 'row',
     width: "70%",
     alignItems: 'center',
-    marginTop: 30,
-    marginBottom: 30
+    marginTop: moderateScale(30),
+    marginBottom: moderateScale(30)
   },
 
   hr: {
@@ -923,7 +923,7 @@ const signInStyles = {
 
   loginSeparatorText: {
     fontFamily: 'AvenirNext-Bold',
-    fontSize: 20,
+    fontSize: moderateScale(20),
     paddingHorizontal: 5,
     alignSelf: 'center',
     color: '#A2A2A2'
@@ -931,8 +931,8 @@ const signInStyles = {
 
   inputEmail: {
     width: "100%",
-    fontSize: 24,
-    height: 64,
+    fontSize: moderateScale(24),
+    height: verticalScale(64),
   }
 };
 
@@ -949,7 +949,7 @@ const mapsStyles = {
     alignItems: 'center'
   },
   logo: {
-    height: 50
+    height: verticalScale(50)
   },
   searchBarContainer: {
     position: 'absolute',
@@ -972,7 +972,7 @@ const mapsStyles = {
     paddingRight: width - CARD_WIDTH,
   },
   card: {
-    padding: 10,
+    padding: moderateScale(10),
     elevation: 2,
     backgroundColor: "#FFF",
     marginHorizontal: 10,
@@ -994,12 +994,12 @@ const mapsStyles = {
     flex: 1,
   },
   cardtitle: {
-    fontSize: 12,
-    marginTop: 5,
+    fontSize: moderateScale(12),
+    marginTop: moderateScale(5),
     fontWeight: "bold",
   },
   cardDescription: {
-    fontSize: 12,
+    fontSize: moderateScale(12),
     color: "#444",
   },
   markerWrap: {
@@ -1014,7 +1014,7 @@ const mapsStyles = {
   },
   ring: {
     width: 24,
-    height: 24,
+    height: verticalScale(24),
     borderRadius: 12,
     backgroundColor: "rgba(130,4,150, 0.3)",
     position: "absolute",
@@ -1037,13 +1037,13 @@ const authLoadingStyles = {
   // },
   // logo: {
   //   width: 364,
-  //   height: 118
+  //   height: verticalScale(11)8
   // },
 
   logoContainer: {
     flex: 2,
-    paddingLeft: 20,
-    paddingRight: 20
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   logo: {
@@ -1085,12 +1085,12 @@ const homeStyles = {
 
   introText: {
     fontSize: moderateScale(16, 0.4),
-    padding: 20
+    padding: moderateScale(20)
   },
 
   btnContainer: {
     backgroundColor: "#58d5ff",
-    marginTop: 3,
+    marginTop: moderateScale(3),
     alignItems: "center"
   },
 

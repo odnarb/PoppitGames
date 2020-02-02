@@ -10,7 +10,7 @@ import {
 
 import { Icon } from 'react-native-elements';
 
-import PasswordInputText from '../components/PasswordInputText';
+import BCPasswordInputText from '../components/BCPasswordInputText';
 
 import { emailSignInStyleSheet as styles } from '../components/globalstyles';
 
@@ -20,6 +20,7 @@ class EmailSignInScreen extends React.Component {
     this.state = {
       isFocused: false,
       password: '',
+      email: ''
     };
   }
 
@@ -30,7 +31,9 @@ class EmailSignInScreen extends React.Component {
   };
 
   state = {
-    isFocused: false
+    isFocused: false,
+    email: '',
+    password: ''
   };
 
   handleFocus = event => {
@@ -48,7 +51,7 @@ class EmailSignInScreen extends React.Component {
   };
 
   render() {
-    const { isFocused,password } = this.state;
+    const { isFocused, email, password } = this.state;
     const { onFocus, onBlur, ...otherProps } = this.props;
 
     return (
@@ -68,17 +71,19 @@ class EmailSignInScreen extends React.Component {
               style={styles.textInput}
               selectionColor="#428AF8"
               underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-              onChangeText={(text) => this.setState({text})}
+              onChangeText={(text) => this.setState({email: text})}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur} />
 
-          <PasswordInputText
-              label=""
+          <BCPasswordInputText
               placeholder="Password"
               style={styles.textInput}
-              getRef={input => this.input = input}
+              selectionColor="#428AF8"
+              underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
               value={password}
-              onChangeText={(password) => this.setState({ password })} />
+              onChangeText={(text) => this.setState({ password: text })}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur} />
 
           <View style={styles.btnContainer}>
             <TouchableOpacity style={styles.buttonSignIn} onPress={() => this._navTo('Home')}>

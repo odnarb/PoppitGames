@@ -31,7 +31,7 @@ class NotificationsScreen extends React.Component {
         <View style={styles.optionRow}>
           <View style={styles.optionSwitchContainer}>
             <Text style={styles.optionHeader}>App Features & Updates</Text>
-            <Switch style={{ marginLeft: 'auto'}}
+            <Switch style={styles.switchWithMargin}
               onValueChange = {(value) => this.setState({switchValue1: value})}
               value = {this.state.switchValue1} />
           </View>
@@ -41,7 +41,7 @@ class NotificationsScreen extends React.Component {
         <View style={styles.optionRow}>
           <View style={styles.optionSwitchContainer}>
             <Text style={styles.optionHeader}>Nearby Deals</Text>
-            <Switch style={{ marginLeft: 'auto'}}
+            <Switch style={styles.switchWithMargin}
               onValueChange = {(value) => this.setState({switchValue2: value})}
               value = {this.state.switchValue2} />
           </View>
@@ -51,7 +51,7 @@ class NotificationsScreen extends React.Component {
         <View style={styles.optionRow}>
           <View style={styles.optionSwitchContainer}>
             <Text style={styles.optionHeader}>Recommended Deals</Text>
-            <Switch style={{ marginLeft: 'auto'}}
+            <Switch style={styles.switchWithMargin}
               onValueChange = {(value) => this.setState({switchValue3: value})}
               value = {this.state.switchValue3} />
           </View>

@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 
-import PasswordInputText from '../components/PasswordInputText';
+import BCPasswordInputText from '../components/BCPasswordInputText';
 import DatePicker from 'react-native-date-picker'
 
 import { profileEditStyleSheet as styles } from '../components/globalstyles';
@@ -101,23 +101,29 @@ class ProfileEditScreen extends React.Component {
           </View>
 
           <View style={styles.passwordContainer}>
-            <PasswordInputText
-                label=""
+            <BCPasswordInputText
                 placeholder="Password"
+                style={styles.textInput}
+                selectionColor="#428AF8"
                 textColor="#fff"
-                getRef={input => this.input = input}
+                iconColor="#ccc"
+                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
                 value={password}
-                iconColor="#ccc"
-                onChangeText={(password) => this.setState({ password })} />
+                onChangeText={(text) => this.setState({ password: text })}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur} />
 
-            <PasswordInputText
-                label=""
+            <BCPasswordInputText
                 placeholder="Confirm Password"
+                style={styles.textInput}
+                selectionColor="#428AF8"
                 textColor="#fff"
-                getRef={input => this.input = input}
-                value={confirm_password}
                 iconColor="#ccc"
-                onChangeText={(confirm_password) => this.setState({ confirm_password })} />
+                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+                value={confirm_password}
+                onChangeText={(text) => this.setState({ confirm_password: text })}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur} />
           </View>
         </View>
 

@@ -114,7 +114,7 @@ class EmailSignupScreen extends React.Component {
               style={styles.textInput}
               selectionColor="#428AF8"
               underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-              value={password}
+              value={confirm_password}
               onChangeText={(text) => this.setState({ confirm_password: text })}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur} />

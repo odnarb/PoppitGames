@@ -1,12 +1,11 @@
 import React from 'react';
 import { TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import PropTypes from "prop-types";
 
 import {
     passwordStyleSheet as styles,
-    passwordInputIconSize as iconSize,
-    passwordInputIconColor as iconColor
+    passwordInputIconSize as defaultIconSize,
+    passwordInputIconColor as defaultIconColor
 } from '../components/globalstyles';
 
 class BCPasswordInputText extends React.Component {
@@ -31,21 +30,32 @@ class BCPasswordInputText extends React.Component {
     };
 
     render() {
-        const { placeholder, underlineColorAndroid } = this.props;
+        const { placeholder, underlineColorAndroid, textColor, iconColor, iconSize } = this.props;
         const { icEye, isPassword } = this.state;
+
+        let iconColorReal = defaultIconColor;
+        let iconSizeReal = defaultIconSize;
+
+        if(iconColor){
+           iconColorReal = iconColor;
+        }
+        if(iconSize){
+           iconSizeReal = iconSize;
+        }
 
         return (
             <View style={{ width: "100%" }}>
                 <TextInput
                     {...this.props}
                     placeholder={placeholder}
+                    placeholderTextColor={textColor}
                     style={styles.bcPassword}
                     secureTextEntry={isPassword}
                     underlineColorAndroid={underlineColorAndroid} />
                 <Icon style={{ position: 'absolute', top: 10, right: 0 }}
                     name={icEye}
-                    size={iconSize}
-                    color={iconColor}
+                    size={iconSizeReal}
+                    color={iconColorReal}
                     onPress={this.changePwdType} />
             </View>
         );

@@ -11,7 +11,7 @@ import {
 
 import { Icon } from 'react-native-elements';
 
-import PasswordInputText from '../components/PasswordInputText';
+import BCPasswordInputText from '../components/BCPasswordInputText';
 
 import { emailSignUpStyleSheet as styles } from '../components/globalstyles';
 
@@ -20,8 +20,11 @@ class EmailSignupScreen extends React.Component {
     super(props);
     this.state = {
       isFocused: false,
+      fullname: '',
+      email: '',
       password: '',
-      confirm_password: ''
+      confirm_password: '',
+      agreeToTerms:false
     };
   }
 
@@ -32,13 +35,17 @@ class EmailSignupScreen extends React.Component {
   };
 
   state = {
-    isFocused: false,
-    switchValue:false
+      isFocused: false,
+      fullname: '',
+      email: '',
+      password: '',
+      confirm_password: '',
+      agreeToTerms:false
   };
 
   toggleSwitch = (value) => {
       //onValueChange of the switch this function will be called
-      this.setState({switchValue: value})
+      this.setState({agreeToTerms: value})
       //state changes according to switch
       //which will result in re-render the text
   };
@@ -58,7 +65,7 @@ class EmailSignupScreen extends React.Component {
   };
 
   render() {
-    const { isFocused,password,confirm_password } = this.state;
+    const { isFocused,fullname,email,password,confirm_password,agreeToTerms } = this.state;
     const { onFocus, onBlur, ...otherProps } = this.props;
 
     return (
@@ -74,12 +81,11 @@ class EmailSignupScreen extends React.Component {
 
         <View style={styles.contentContainer}>
           <TextInput
-              autoFocus={true}
               placeholder="Full Name"
               style={styles.textInput}
               selectionColor="#428AF8"
               underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-              onChangeText={(text) => this.setState({text})}
+              onChangeText={(text) => this.setState({fullname: text})}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur} />
 
@@ -89,30 +95,35 @@ class EmailSignupScreen extends React.Component {
               style={styles.textInput}
               selectionColor="#428AF8"
               underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-              onChangeText={(text) => this.setState({text})}
+              onChangeText={(text) => this.setState({email: text})}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur} />
 
-          <PasswordInputText
-              label=""
+          <BCPasswordInputText
               placeholder="Password"
               style={styles.textInput}
-              getRef={input => this.input = input}
+              selectionColor="#428AF8"
+              underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
               value={password}
-              onChangeText={(password) => this.setState({ password })} />
+              onChangeText={(text) => this.setState({ password: text })}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur} />
 
-          <PasswordInputText
-              label=""
+          <BCPasswordInputText
               placeholder="Confirm Password"
               style={styles.textInput}
-              getRef={input => this.input = input}
-              value={confirm_password}
-              onChangeText={(confirm_password) => this.setState({ confirm_password })} />
+              selectionColor="#428AF8"
+              underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+              value={password}
+              onChangeText={(text) => this.setState({ confirm_password: text })}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur} />
 
           <View style={styles.termsContainer}>
             <Switch
               onValueChange = {this.toggleSwitch}
-              value = {this.state.switchValue} />
+              value = {agreeToTerms}
+              style={styles.switch} />
             <Text style={styles.termsText}>I agree to the </Text>
 
             <TouchableHighlight style={{marginLeft: 10, marginTop: 5}} onPress={() => this._navTo('Terms')} style={styles.optionBtn}>

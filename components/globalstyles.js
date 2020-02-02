@@ -355,7 +355,12 @@ const emailSignUpStyles = {
     fontSize: moderateScale(16),
     textAlign:'center'
   },
-
+  switch: {
+    transform: [
+      { scaleX: moderateScale(1, 0.2) },
+      { scaleY: moderateScale(1, 0.2) }
+    ]
+  }
 };
 
 const learnMoreStyles = {

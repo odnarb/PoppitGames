@@ -11,6 +11,9 @@ const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
 
 const iconMediumSize = moderateScale(32);
+// const iconLargeSize = moderateScale(54);
+const iconLargeSize = moderateScale(42);
+
 
 const settingsIconSize = iconMediumSize;
 const learnMoreNavDotSize = iconMediumSize;
@@ -18,11 +21,13 @@ const learnMoreNavIconSize = iconMediumSize;
 const learnMoreNavIconLightColor = "#dcdcdc"
 const learnMoreNavIconDarkColor = "#000";
 
-const bottomNavIconSize = moderateScale(54);
+const bottomNavIconSize = moderateScale(48);
 const bottomNavIconColor = "#777";
 
 const passwordInputIconSize = moderateScale(25);
 const passwordInputIconColor = moderateScale(25);
+
+const signInIconSize = iconLargeSize;
 
 const globalStyles = {
   baseContainer: {
@@ -88,7 +93,21 @@ const globalStyles = {
     marginTop: moderateScale(20),
     borderTopColor: '#fff',
     borderTopWidth: StyleSheet.hairlineWidth,
+  },
+  switchWithMargin: {
+    marginLeft: 'auto',
+    transform: [
+      { scaleX: moderateScale(1, 0.2) },
+      { scaleY: moderateScale(1, 0.2) }
+    ]
+  },
+  switch: {
+    transform: [
+      { scaleX: moderateScale(1, 0.2) },
+      { scaleY: moderateScale(1, 0.2) }
+    ]
   }
+
 };
 
 const settingsStyles = {
@@ -298,7 +317,7 @@ const emailSignUpStyles = {
 
   textInput: {
     fontSize: moderateScale(18),
-    marginTop: moderateScale(6),
+    marginTop: scale(10),
     width: "100%"
   },
 
@@ -354,12 +373,6 @@ const emailSignUpStyles = {
     fontWeight: 'bold',
     fontSize: moderateScale(16),
     textAlign:'center'
-  },
-  switch: {
-    transform: [
-      { scaleX: moderateScale(1, 0.2) },
-      { scaleY: moderateScale(1, 0.2) }
-    ]
   }
 };
 
@@ -856,9 +869,9 @@ const signInStyles = {
   //   borderColor: '#000',
   //   borderWidth: 1,
   //   borderRadius: 5,
-  //   padding: moderateScale(20),
+  //   padding: 20,
   //   justifyContent: 'center',
-  //   marginTop: moderateScale(20)
+  //   marginTop: 20
   // },
 
   btnGoogle:{
@@ -866,8 +879,8 @@ const signInStyles = {
     backgroundColor: '#4285F4',
     borderColor: '#4285F4',
     borderWidth: 1,
-    borderRadius: 5,
-    padding: moderateScale(20),
+    borderRadius: moderateScale(5),
+    padding: moderateScale(5),
     justifyContent: 'center',
     marginTop: moderateScale(20)
   },
@@ -877,8 +890,8 @@ const signInStyles = {
     backgroundColor: '#3b5998',
     borderColor: '#3b5998',
     borderWidth: 1,
-    borderRadius: 5,
-    padding: moderateScale(20),
+    borderRadius: moderateScale(5),
+    padding: moderateScale(5),
     justifyContent: 'center',
     marginTop: moderateScale(20)
   },
@@ -888,10 +901,10 @@ const signInStyles = {
     backgroundColor: '#777',
     borderColor: '#777',
     borderWidth: 1,
-    borderRadius: 5,
-    padding: moderateScale(20),
+    borderRadius: moderateScale(5),
+    padding: moderateScale(5),
     justifyContent: 'center',
-    marginTop: moderateScale(20)
+    marginTop: moderateScale(10)
   },
 
   btnView:{
@@ -899,7 +912,6 @@ const signInStyles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center"
-    // textAlign:'center',
   },
 
   btnIcon: {
@@ -909,7 +921,7 @@ const signInStyles = {
 
   btnText: {
       color: '#fff',
-      fontSize: moderateScale(22),
+      fontSize: moderateScale(18),
       textAlign: "center",
       marginLeft: moderateScale(50),
       marginRight: moderateScale(50)
@@ -919,19 +931,19 @@ const signInStyles = {
     flexDirection: 'row',
     width: "70%",
     alignItems: 'center',
-    marginTop: moderateScale(30),
-    marginBottom: moderateScale(30)
+    marginTop: 30,
+    marginBottom: 30
   },
 
   hr: {
     flex: 1,
     backgroundColor: '#A2A2A2',
-    height: 2
+    height: 1
   },
 
   loginSeparatorText: {
     fontFamily: 'AvenirNext-Bold',
-    fontSize: moderateScale(20),
+    fontSize: moderateScale(16),
     paddingHorizontal: 5,
     alignSelf: 'center',
     color: '#A2A2A2'
@@ -939,8 +951,8 @@ const signInStyles = {
 
   inputEmail: {
     width: "100%",
-    fontSize: moderateScale(24),
-    height: verticalScale(64),
+    fontSize: moderateScale(18),
+    // height: 64,
   }
 };
 
@@ -1244,5 +1256,6 @@ export {
   recoverPasswordConfirmStyleSheet,
   settingsStyleSheet,
   settingsIconSize,
-  signInStyleSheet
+  signInStyleSheet,
+  signInIconSize
 }

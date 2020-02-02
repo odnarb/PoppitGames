@@ -22,7 +22,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import { Icon } from 'react-native-elements';
 
-import { signInStyleSheet as styles } from '../components/globalstyles';
+import { signInStyleSheet as styles, signInIconSize as iconSize } from '../components/globalstyles';
 
 class SignInScreen extends React.Component {
 
@@ -70,7 +70,7 @@ class SignInScreen extends React.Component {
                 <Icon
                   name='facebook'
                   type='material-community'
-                  size={56}
+                  size={iconSize}
                   color='#fff'
                   style={styles.btnIcon} />
                 <Text style={styles.btnText}>Signup with Facebook</Text>
@@ -82,7 +82,7 @@ class SignInScreen extends React.Component {
                 <Icon
                   name='google'
                   type='material-community'
-                  size={56}
+                  size={iconSize}
                   color='#fff'
                   style={styles.btnIcon} />
                 <Text style={styles.btnText}>Signup with Google</Text>
@@ -110,7 +110,7 @@ class SignInScreen extends React.Component {
                 <Icon
                   name='email'
                   type='material-community'
-                  size={56}
+                  size={iconSize}
                   color='#fff'
                   style={styles.btnIcon} />
               <Text style={styles.btnText}>Signup with Email</Text>

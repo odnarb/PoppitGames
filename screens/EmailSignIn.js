@@ -12,7 +12,7 @@ import { Icon } from 'react-native-elements';
 
 import BCPasswordInputText from '../components/BCPasswordInputText';
 
-import { emailSignInStyleSheet as styles } from '../components/globalstyles';
+import { emailSignInStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
 
 class EmailSignInScreen extends React.Component {
   constructor(props) {
@@ -92,7 +92,7 @@ class EmailSignInScreen extends React.Component {
                 <Icon
                   name='chevron-right'
                   type='material-community'
-                  size={32}
+                  size={iconMediumSize}
                   color="#bbb" />
               </View>
             </TouchableOpacity>

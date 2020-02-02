@@ -10,7 +10,7 @@ import {
 
 import { Icon } from 'react-native-elements';
 
-import { recoverPasswordStyleSheet as styles } from '../components/globalstyles';
+import { recoverPasswordStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
 
 class RecoverPasswordScreen extends React.Component {
   constructor(props) {
@@ -84,7 +84,7 @@ class RecoverPasswordScreen extends React.Component {
               <Icon
                 name='chevron-right'
                 type='material-community'
-                size={32}
+                size={iconMediumSize}
                 color="#bbb" />
             </View>
           </TouchableOpacity>

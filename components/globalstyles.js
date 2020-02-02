@@ -11,7 +11,6 @@ const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
 
 const iconMediumSize = moderateScale(32);
-// const iconLargeSize = moderateScale(54);
 const iconLargeSize = moderateScale(42);
 
 
@@ -1226,6 +1225,10 @@ const styles = StyleSheet.create(globalStyles);
 
 export {
   styles,
+
+  // make a global icon size available
+  iconMediumSize,
+
   passwordStyleSheet,
   passwordInputIconSize,
   passwordInputIconColor,

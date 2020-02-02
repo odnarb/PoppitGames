@@ -9,7 +9,7 @@ import {
 
 import { Icon } from 'react-native-elements';
 
-import { recoverPasswordConfirmStyleSheet as styles } from '../components/globalstyles';
+import { recoverPasswordConfirmStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
 
 class RecoverPasswordConfirmScreen extends React.Component {
   constructor(props) {
@@ -67,7 +67,7 @@ class RecoverPasswordConfirmScreen extends React.Component {
                 <Icon
                   name='chevron-left'
                   type='material-community'
-                  size={32}
+                  size={iconMediumSize}
                   color="#bbb" />
                 <Text style={styles.btnDark}>{'Back to Sign in'.toUpperCase()}</Text>
               </View>

@@ -9,7 +9,7 @@ import {
 
 import { Icon } from 'react-native-elements';
 
-import { emailSignInErrorStyleSheet as styles } from '../components/globalstyles';
+import { emailSignInErrorStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
 
 class EmailSignInErrorScreen extends React.Component {
 
@@ -40,7 +40,7 @@ class EmailSignInErrorScreen extends React.Component {
                 <Icon
                   name='chevron-left'
                   type='material-community'
-                  size={32}
+                  size={iconMediumSize}
                   color="#bbb" />
                 <Text style={styles.btnTryAgain}>{'Try Again'.toUpperCase()}</Text>
               </View>

@@ -21,6 +21,9 @@ const learnMoreNavIconDarkColor = "#000";
 const bottomNavIconSize = moderateScale(54);
 const bottomNavIconColor = "#777";
 
+const passwordInputIconSize = moderateScale(25);
+const passwordInputIconColor = moderateScale(25);
+
 const globalStyles = {
   baseContainer: {
     flex: 1,
@@ -295,7 +298,7 @@ const emailSignUpStyles = {
 
   textInput: {
     fontSize: moderateScale(18),
-    marginTop: moderateScale(10),
+    marginTop: moderateScale(6),
     width: "100%"
   },
 
@@ -1166,9 +1169,22 @@ const bottomNavStyles = {
   }
 };
 
+const passwordStyles = {
+  icon: {
+    position: 'absolute',
+    top: 5,
+    right: 0
+  },
+  bcPassword: {
+    fontSize: moderateScale(18),
+    marginTop: moderateScale(6)
+  }
+};
+
 //this will be removed eventually..
 const homeStyleSheet = StyleSheet.create({ ...globalStyles, ...homeStyles });
 
+const passwordStyleSheet = StyleSheet.create(passwordStyles);
 const learnMoreNavStyleSheet = StyleSheet.create(learnMoreNavStyles);
 const bottomNavStyleSheet = StyleSheet.create(bottomNavStyles);
 
@@ -1193,14 +1209,20 @@ const styles = StyleSheet.create(globalStyles);
 
 export {
   styles,
+  passwordStyleSheet,
+  passwordInputIconSize,
+  passwordInputIconColor,
+
   learnMoreNavStyleSheet,
   learnMoreNavDotSize,
   learnMoreNavIconSize,
   learnMoreNavIconLightColor,
   learnMoreNavIconDarkColor,
+
   bottomNavStyleSheet,
   bottomNavIconSize,
   bottomNavIconColor,
+
   homeStyleSheet,
   aboutStyleSheet,
   authLoadingStyleSheet,

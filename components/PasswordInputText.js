@@ -1,8 +1,14 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from "prop-types";
 import { TextField } from 'react-native-material-textfield';
+
+import {
+    passwordStyleSheet as styles,
+    passwordInputIconSize as iconSize,
+    passwordInputIconColor as iconColor
+} from '../components/globalstyles';
 
 class PasswordInputText extends React.Component {
 
@@ -31,7 +37,7 @@ class PasswordInputText extends React.Component {
     };
 
     render() {
-        const { iconSize, iconColor, label, style, textColor } = this.props;
+        const { label, style, textColor } = this.props;
         const { icEye, isPassword } = this.state;
 
         return (
@@ -46,21 +52,11 @@ class PasswordInputText extends React.Component {
                     name={icEye}
                     size={iconSize}
                     color={iconColor}
-                    onPress={this.changePwdType}
-                />
+                    onPress={this.changePwdType} />
             </View>
         );
     }
 }
-
-
-const styles = StyleSheet.create({
-    icon: {
-        position: 'absolute',
-        top: 33,
-        right: 0
-    }
-});
 
 PasswordInputText.defaultProps = {
     iconSize: 25,

@@ -53,10 +53,10 @@ class ProfileEditScreen extends React.Component {
         <View style={styles.contentContainer}>
 
           <View style={styles.inputContainer}>
-            <View style={styles.inputContainerLeft}>
-              <Text style={styles.inputLabel}>Full Name:</Text>
+            <View>
+              <Text style={styles.inputLabel}>{'Full Name:'.toUpperCase()}</Text>
             </View>
-            <View style={styles.inputContainerRight}>
+            <View>
               <TextInput
                   value={fullname}
                   style={styles.textInput}
@@ -70,11 +70,11 @@ class ProfileEditScreen extends React.Component {
 
 
           <View style={styles.inputContainer}>
-            <View style={styles.inputContainerLeft}>
-              <Text style={styles.inputLabel}>Email Address:</Text>
+            <View>
+              <Text style={styles.inputLabel}>{'Email Address:'.toUpperCase()}</Text>
             </View>
 
-            <View style={styles.inputContainerRight}>
+            <View>
               <TextInput
                   value={email}
                   keyboardType='email-address'
@@ -88,25 +88,25 @@ class ProfileEditScreen extends React.Component {
           </View>
 
           <View style={styles.inputContainer}>
-            <View style={styles.inputContainerLeft}>
-              <Text style={styles.inputLabel}>Birthdate:</Text>
+            <View>
+              <Text style={styles.inputLabel}>{'Birthdate:'.toUpperCase()}</Text>
             </View>
-            <View style={styles.inputContainerRight}>
+            <View>
               <DatePicker
                 style={styles.dateInput}
                 textColor="#ffffff"
-                height={50}
                 mode="date"
+                height={50}
                 date={this.state.birthday}
                 onDateChange={date => this.setState({ birthday: date })} />
             </View>
           </View>
 
           <View style={styles.inputContainer}>
-            <View style={styles.inputContainerLeft}>
-              <Text style={styles.inputLabel}>Location:</Text>
+            <View>
+              <Text style={styles.inputLabel}>{'Location:'.toUpperCase()}</Text>
             </View>
-            <View style={styles.inputContainerRight}>
+            <View>
               <TextInput
                   value={location}
                   style={styles.textInput}
@@ -118,7 +118,7 @@ class ProfileEditScreen extends React.Component {
             </View>
           </View>
 
-          <View style={styles.passwordContainer}>
+          <View style={styles.inputContainer}>
             <BCPasswordInputText
                 placeholder="Password"
                 style={styles.textInput}
@@ -131,7 +131,7 @@ class ProfileEditScreen extends React.Component {
                 onFocus={this.handleFocus}
                 onBlur={this.handleBlur} />
           </View>
-          <View style={styles.passwordContainer}>
+          <View style={styles.inputContainer}>
             <BCPasswordInputText
                 placeholder="Confirm Password"
                 style={styles.textInput}
@@ -147,10 +147,6 @@ class ProfileEditScreen extends React.Component {
         </View>
 
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.buttonLight} onPress={() => this._navTo('Profile')}>
-            <Text style={styles.btnLight}>{'Cancel'.toUpperCase()}</Text>
-          </TouchableOpacity>
-
           <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('Profile')}>
             <Text style={styles.btnDark}>{'Save Changes'.toUpperCase()}</Text>
           </TouchableOpacity>

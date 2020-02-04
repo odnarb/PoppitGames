@@ -79,6 +79,7 @@ const globalStyles = {
     color: '#ccc'
   },
   settingsRow: {
+    flex: 1,
     borderTopColor: '#fff',
     borderTopWidth: StyleSheet.hairlineWidth,
     paddingLeft: moderateScale(10),
@@ -548,12 +549,6 @@ const profileStyles = {
     paddingRight: moderateScale(20)
   },
 
-  headerText: {
-    fontSize: moderateScale(25),
-    fontWeight: 'bold',
-    color: '#fff'
-  },
-
   settingLabel: {
     fontSize: moderateScale(20),
     fontWeight: "bold",
@@ -609,43 +604,20 @@ const profileEditStyles = {
   },
 
   inputContainer: {
+    // backgroundColor: "red",
     flex:1,
-    alignItems: "stretch",
-    marginBottom: moderateScale(10)
-  },
-
-  inputContainerLeft: {
-    flex:1,
-    alignItems: "flex-start"
-  },
-
-  inputContainerRight: {
-    flex:1,
-    alignItems: "flex-end"
-  },
-
-  passwordContainer:{
-    flex:1,
-    marginTop: moderateScale(10)
+    marginBottom: moderateScale(20)
   },
 
   textInput: {
-    flex: 1,
     fontSize: moderateScale(18),
     color: "#fff",
-    alignSelf: "flex-end",
-  },
-
-  dateInput: {
-    flex: 1,
-    alignSelf: "flex-end"
+    width: "100%"
   },
 
   inputLabel: {
-    fontSize: moderateScale(18),
-    fontWeight: "bold",
-    color: "#fff",
-    marginTop: moderateScale(10)
+    fontSize: moderateScale(12),
+    color: "#fff"
   },
 
   btnContainer: {

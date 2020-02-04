@@ -122,7 +122,7 @@ class SettingsScreen extends React.Component {
               </TouchableHighlight>
             </View>
 
-            <View style={styles.hr}>
+            <View style={styles.settingsRow}>
               <Text style={styles.copyrightText}>© Copyright Poppit Games LLC</Text>
             </View>
           </View>

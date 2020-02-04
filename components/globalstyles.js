@@ -20,7 +20,7 @@ const learnMoreNavIconSize = iconMediumSize;
 const learnMoreNavIconLightColor = "#dcdcdc"
 const learnMoreNavIconDarkColor = "#000";
 
-const bottomNavIconSize = moderateScale(48);
+const bottomNavIconSize = moderateScale(32);
 const bottomNavIconColor = "#777";
 
 const passwordInputIconSize = moderateScale(25);
@@ -79,19 +79,18 @@ const globalStyles = {
     color: '#ccc'
   },
   settingsRow: {
-    paddingLeft:  moderateScale(10),
-    marginTop: moderateScale(20)
+    borderTopColor: '#fff',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    paddingLeft: moderateScale(10),
+    paddingTop: moderateScale(10),
+    paddingBottom: moderateScale(10),
+    justifyContent: "center",
   },
   picker: {
     color:"#111",
     marginLeft: moderateScale(20),
-    height: verticalScale(30),
+    height: moderateScale(36),
     width: "80%"
-  },
-  hr: {
-    marginTop: moderateScale(20),
-    borderTopColor: '#fff',
-    borderTopWidth: StyleSheet.hairlineWidth,
   },
   switchWithMargin: {
     marginLeft: 'auto',
@@ -430,7 +429,13 @@ const notificationsStyles = {
   },
 
   optionRow: {
-    marginTop: moderateScale(20),
+    borderTopColor: '#fff',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    paddingLeft: moderateScale(10),
+    paddingTop: moderateScale(10),
+    paddingBottom: moderateScale(10),
+    justifyContent: "center",
+
     paddingLeft: moderateScale(20),
     paddingRight: moderateScale(20)
   },
@@ -549,11 +554,6 @@ const profileStyles = {
     color: '#fff'
   },
 
-  settingRow: {
-    flexDirection: "row",
-    marginTop: moderateScale(20),
-  },
-
   settingLabel: {
     fontSize: moderateScale(20),
     fontWeight: "bold",
@@ -609,12 +609,23 @@ const profileEditStyles = {
   },
 
   inputContainer: {
-    flexDirection: "row",
+    flex:1,
     alignItems: "stretch",
-    marginTop: moderateScale(10)
+    marginBottom: moderateScale(10)
+  },
+
+  inputContainerLeft: {
+    flex:1,
+    alignItems: "flex-start"
+  },
+
+  inputContainerRight: {
+    flex:1,
+    alignItems: "flex-end"
   },
 
   passwordContainer:{
+    flex:1,
     marginTop: moderateScale(10)
   },
 
@@ -1186,14 +1197,19 @@ const bottomNavStyles = {
 };
 
 const passwordStyles = {
+  passwordContainer: {
+    flex:1,
+    width: "100%"
+  },
   icon: {
     position: 'absolute',
-    top: 5,
+    top: verticalScale(5),
     right: 0
   },
   bcPassword: {
+    flex:1,
     fontSize: moderateScale(18),
-    marginTop: moderateScale(6)
+    // marginTop: moderateScale(6)
   }
 };
 

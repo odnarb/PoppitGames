@@ -44,7 +44,7 @@ class BCPasswordInputText extends React.Component {
         }
 
         return (
-            <View style={{ width: "100%" }}>
+            <View style={styles.passwordContainer}>
                 <TextInput
                     {...this.props}
                     placeholder={placeholder}
@@ -52,7 +52,7 @@ class BCPasswordInputText extends React.Component {
                     style={styles.bcPassword}
                     secureTextEntry={isPassword}
                     underlineColorAndroid={underlineColorAndroid} />
-                <Icon style={{ position: 'absolute', top: 10, right: 0 }}
+                <Icon style={styles.icon}
                     name={icEye}
                     size={iconSizeReal}
                     color={iconColorReal}

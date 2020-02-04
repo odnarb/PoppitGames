@@ -51,53 +51,71 @@ class ProfileEditScreen extends React.Component {
     return (
       <View style={styles.baseContainer}>
         <View style={styles.contentContainer}>
+
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Full Name:</Text>
-            <TextInput
-                value={fullname}
-                style={styles.textInput}
-                selectionColor="#428AF8"
-                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-                onChangeText={(text) => this.setState({fullname: text})}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur} />
+            <View style={styles.inputContainerLeft}>
+              <Text style={styles.inputLabel}>Full Name:</Text>
+            </View>
+            <View style={styles.inputContainerRight}>
+              <TextInput
+                  value={fullname}
+                  style={styles.textInput}
+                  selectionColor="#428AF8"
+                  underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+                  onChangeText={(text) => this.setState({fullname: text})}
+                  onFocus={this.handleFocus}
+                  onBlur={this.handleBlur} />
+            </View>
+          </View>
+
+
+          <View style={styles.inputContainer}>
+            <View style={styles.inputContainerLeft}>
+              <Text style={styles.inputLabel}>Email Address:</Text>
+            </View>
+
+            <View style={styles.inputContainerRight}>
+              <TextInput
+                  value={email}
+                  keyboardType='email-address'
+                  style={styles.textInput}
+                  selectionColor="#428AF8"
+                  underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+                  onChangeText={(text) => this.setState({email: text})}
+                  onFocus={this.handleFocus}
+                  onBlur={this.handleBlur} />
+            </View>
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Email Address:</Text>
-            <TextInput
-                value={email}
-                keyboardType='email-address'
-                style={styles.textInput}
-                selectionColor="#428AF8"
-                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-                onChangeText={(text) => this.setState({email: text})}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur} />
+            <View style={styles.inputContainerLeft}>
+              <Text style={styles.inputLabel}>Birthdate:</Text>
+            </View>
+            <View style={styles.inputContainerRight}>
+              <DatePicker
+                style={styles.dateInput}
+                textColor="#ffffff"
+                height={50}
+                mode="date"
+                date={this.state.birthday}
+                onDateChange={date => this.setState({ birthday: date })} />
+            </View>
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Birthdate:</Text>
-
-            <DatePicker
-              style={styles.dateInput}
-              textColor="#ffffff"
-              height={50}
-              mode="date"
-              date={this.state.birthday}
-              onDateChange={date => this.setState({ birthday: date })} />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Location:</Text>
-            <TextInput
-                value={location}
-                style={styles.textInput}
-                selectionColor="#428AF8"
-                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-                onChangeText={(text) => this.setState({location: text})}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur} />
+            <View style={styles.inputContainerLeft}>
+              <Text style={styles.inputLabel}>Location:</Text>
+            </View>
+            <View style={styles.inputContainerRight}>
+              <TextInput
+                  value={location}
+                  style={styles.textInput}
+                  selectionColor="#428AF8"
+                  underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+                  onChangeText={(text) => this.setState({location: text})}
+                  onFocus={this.handleFocus}
+                  onBlur={this.handleBlur} />
+            </View>
           </View>
 
           <View style={styles.passwordContainer}>
@@ -112,7 +130,8 @@ class ProfileEditScreen extends React.Component {
                 onChangeText={(text) => this.setState({ password: text })}
                 onFocus={this.handleFocus}
                 onBlur={this.handleBlur} />
-
+          </View>
+          <View style={styles.passwordContainer}>
             <BCPasswordInputText
                 placeholder="Confirm Password"
                 style={styles.textInput}

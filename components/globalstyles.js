@@ -87,6 +87,14 @@ const globalStyles = {
     paddingBottom: moderateScale(10),
     justifyContent: "center",
   },
+  copyrightRow: {
+    flex: 1,
+    borderTopColor: '#fff',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    paddingLeft: moderateScale(10),
+    paddingTop: moderateScale(10),
+    paddingBottom: moderateScale(10)
+  },
   picker: {
     color:"#111",
     marginLeft: moderateScale(20),
@@ -1125,6 +1133,7 @@ const learnMoreNavStyles = {
     marginRight: moderateScale(20)
   },
   navNext: {
+    color: '#000',
     padding: moderateScale(10),
     fontSize: moderateScale(18),
   },

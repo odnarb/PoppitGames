@@ -51,7 +51,7 @@ class AboutScreen extends React.Component {
               </TouchableHighlight>
             </View>
 
-            <View style={styles.settingsRow}>
+            <View style={styles.copyrightRow}>
               <Text style={styles.copyrightText}>© Copyright Poppit Games LLC</Text>
             </View>
           </View>

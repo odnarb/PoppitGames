@@ -189,7 +189,13 @@ const emailSignInStyles = {
   },
 
   contentContainer: {
-    flex: 6
+    flex: 6,
+    justifyContent: "flex-start"
+  },
+
+  inputContainer: {
+    height: moderateScale(60,0.4),
+    marginBottom: moderateScale(20)
   },
 
   textInput: {
@@ -612,7 +618,6 @@ const profileEditStyles = {
   },
 
   inputContainer: {
-    // backgroundColor: "red",
     flex:1,
     marginBottom: moderateScale(20)
   },
@@ -1179,7 +1184,7 @@ const bottomNavStyles = {
 
 const passwordStyles = {
   passwordContainer: {
-    flex:1,
+    height: moderateScale(46, 0.4),
     width: "100%"
   },
   icon: {
@@ -1189,9 +1194,13 @@ const passwordStyles = {
   },
   bcPassword: {
     flex:1,
+    fontSize: moderateScale(18)
+  },
+  bcPasswordLite: {
+    flex:1,
     fontSize: moderateScale(18),
-    // marginTop: moderateScale(6)
-  }
+    color: "#fff"
+  },
 };
 
 //this will be removed eventually..

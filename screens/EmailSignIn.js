@@ -65,38 +65,42 @@ class EmailSignInScreen extends React.Component {
         </View>
 
         <View style={styles.contentContainer}>
-          <TextInput
-              placeholder="Email"
-              keyboardType='email-address'
-              style={styles.textInput}
-              selectionColor="#428AF8"
-              underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-              onChangeText={(text) => this.setState({email: text})}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur} />
-
-          <BCPasswordInputText
-              placeholder="Password"
-              style={styles.textInput}
-              selectionColor="#428AF8"
-              underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-              value={password}
-              onChangeText={(text) => this.setState({ password: text })}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur} />
-
-          <View style={styles.btnContainer}>
-            <TouchableOpacity style={styles.buttonSignIn} onPress={() => this._navTo('Home')}>
-              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                <Text style={styles.btnSignIn}>{'Sign In'.toUpperCase()}</Text>
-                <Icon
-                  name='chevron-right'
-                  type='material-community'
-                  size={iconMediumSize}
-                  color="#bbb" />
-              </View>
-            </TouchableOpacity>
+          <View style={styles.inputContainer}>
+            <TextInput
+                placeholder="Email"
+                keyboardType='email-address'
+                style={styles.textInput}
+                selectionColor="#428AF8"
+                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+                onChangeText={(text) => this.setState({email: text})}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur} />
           </View>
+
+          <View style={styles.inputContainer}>
+            <BCPasswordInputText
+                placeholder="Password"
+                style={styles.textInput}
+                selectionColor="#428AF8"
+                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+                value={password}
+                onChangeText={(text) => this.setState({ password: text })}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur} />
+          </View>
+        </View>
+
+        <View style={styles.btnContainer}>
+          <TouchableOpacity style={styles.buttonSignIn} onPress={() => this._navTo('Home')}>
+            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+              <Text style={styles.btnSignIn}>{'Sign In'.toUpperCase()}</Text>
+              <Icon
+                name='chevron-right'
+                type='material-community'
+                size={iconMediumSize}
+                color="#bbb" />
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     );

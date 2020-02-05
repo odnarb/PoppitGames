@@ -103,29 +103,24 @@ class MapsScreen extends React.Component {
     componentDidMount() {
       Geolocation.getCurrentPosition(
         position => {
-        // const initialPosition = JSON.stringify(position);
-        // this.setState({initialPosition});
-
-          // console.log("---CURRENT STATE BEFORE: ", this.state.region);
 
           //update state
-          this.setState({ region: {
+          this.setState({
+            region: {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
               latitudeDelta: 0.05,
               longitudeDelta: 0.05
-          } });
+            }
+          });
 
           //goto the location
           this.map.animateToRegion(this.state.region, 350);
-
-          // console.log("---NEW COORDS: ", position);
-          // console.log("---CURRENT STATE AFTER: ", this.state.region);
-
         },
         error => Alert.alert('Error', JSON.stringify(error)),
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
       );
+
       this.watchID = Geolocation.watchPosition(position => {
         // const lastPosition = JSON.stringify(position);
         // this.setState({lastPosition});
@@ -158,6 +153,8 @@ class MapsScreen extends React.Component {
           }
         }, 10);
       });
+
+
     }
 
   render() {
@@ -169,6 +166,7 @@ class MapsScreen extends React.Component {
         index * CARD_WIDTH,
         ((index + 1) * CARD_WIDTH),
       ];
+
       const scale = this.animation.interpolate({
         inputRange,
         outputRange: [1, 2.5, 1],
@@ -255,8 +253,7 @@ class MapsScreen extends React.Component {
             value={search}
             inputStyle={{backgroundColor: 'white'}}
             inputContainerStyle={{backgroundColor: 'white'}}
-            containerStyle={{backgroundColor: 'white', borderWidth: 1}}
-            placeholderTextColor='#g5g5g5' />
+            containerStyle={{backgroundColor: 'white', borderWidth: 1}} />
         </View>
 
         <BottomNavigation />

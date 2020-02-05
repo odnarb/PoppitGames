@@ -45,7 +45,6 @@ class SettingsScreen extends React.Component {
             <Text style={styles.headerText}>Settings</Text>
 
             <View style={styles.settingsRow}>
-
               <TouchableHighlight onPress={() => this._navTo('Profile')} style={styles.optionBtn}>
                 <View style={styles.optionBtnView}>
                     <Icon
@@ -56,7 +55,6 @@ class SettingsScreen extends React.Component {
                     <Text style={styles.settingsText}>My Account</Text>
                 </View>
               </TouchableHighlight>
-
             </View>
 
             <View style={styles.settingsRow}>
@@ -122,6 +120,7 @@ class SettingsScreen extends React.Component {
               </TouchableHighlight>
             </View>
           <BottomNavigation />
+         </View>
       </View>
     );
   }

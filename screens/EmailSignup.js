@@ -15,7 +15,7 @@ import BCPasswordInputText from '../components/BCPasswordInputText';
 
 import { emailSignUpStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
 
-class EmailSignupScreen extends React.Component {
+class EmailSignUpScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -134,11 +134,11 @@ class EmailSignupScreen extends React.Component {
           </View>
 
           <View style={styles.btnContainer}>
-            <TouchableHighlight style={styles.buttonCancel} onPress={() => this._navTo('Home')}>
+            <TouchableHighlight style={styles.buttonCancel} onPress={() => this.props.navigation.goBack()}>
               <Text style={styles.btnCancel}>{'Cancel'.toUpperCase()}</Text>
             </TouchableHighlight>
 
-            <TouchableHighlight style={styles.buttonSignup} onPress={() => this._navTo('Home')}>
+            <TouchableHighlight style={styles.buttonSignup} onPress={this._signUp}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <Text style={styles.btnSignup}>{'Sign Up'.toUpperCase()}</Text>
                 <Icon
@@ -153,11 +153,23 @@ class EmailSignupScreen extends React.Component {
       </View>
     );
   }
-  _navTo = (screen) => {
-    console.log("Navigating to :: " + screen);
 
-    this.props.navigation.navigate(screen);
+  _signUp = () => {
+    //get values from email and password fields
+
+    const signUpPayload = {
+      fullname: this.state.fullname,
+      email: this.state.email,
+      password: this.state.password,
+      confirm_password: this.state.confirm_password,
+      agreeToTerms: this.state.agreeToTerms
+    };
+
+    console.log("Email signup payload:", signUpPayload);
+
+    this.props.navigation.navigate('EmailSignUpConfirm');
   };
+
 }
 
-export default EmailSignupScreen
+export default EmailSignUpScreen

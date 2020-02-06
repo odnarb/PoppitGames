@@ -132,7 +132,9 @@ class SettingsScreen extends React.Component {
   };
 
   _signOutAsync = async () => {
+    AsyncStorage.removeItem('userToken');
     await AsyncStorage.clear();
+
     this.props.navigation.navigate('Auth');
   };
 }

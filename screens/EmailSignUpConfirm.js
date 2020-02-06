@@ -9,9 +9,9 @@ import {
 
 import { Icon } from 'react-native-elements';
 
-import { recoverPasswordConfirmStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
+import { emailSignUpConfirmStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
 
-class RecoverPasswordConfirmScreen extends React.Component {
+class EmailSignUpConfirmScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,12 +57,12 @@ class RecoverPasswordConfirmScreen extends React.Component {
         </View>
 
         <View style={styles.contentContainer}>
-          <Text style={styles.textHeader}>Recover Password</Text>
+          <Text style={styles.textHeader}>Account Sign Up</Text>
 
-          <Text style={styles.text}>We've sent you an email with a link to reset your password.</Text>
+          <Text style={styles.text}>We sent you an email with a link to confirm your account creation.</Text>
 
           <View style={styles.btnContainer}>
-            <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('EmailSignIn')}>
+            <TouchableOpacity style={styles.buttonDark} onPress={() => this.props.navigation.popToTop()}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <Icon
                   name='chevron-left'
@@ -78,11 +78,6 @@ class RecoverPasswordConfirmScreen extends React.Component {
       </View>
     );
   }
-  _navTo = (screen) => {
-    console.log("Navigating to :: " + screen);
-
-    this.props.navigation.navigate(screen);
-  };
 }
 
-export default RecoverPasswordConfirmScreen
+export default EmailSignUpConfirmScreen

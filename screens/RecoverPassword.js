@@ -16,7 +16,8 @@ class RecoverPasswordScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFocused: false
+      isFocused: false,
+      email: ""
     };
   }
 
@@ -27,7 +28,8 @@ class RecoverPasswordScreen extends React.Component {
   };
 
   state = {
-    isFocused: false
+    isFocused: false,
+    email: ""
   };
 
   handleFocus = event => {
@@ -60,7 +62,7 @@ class RecoverPasswordScreen extends React.Component {
         <View style={styles.contentContainer}>
           <Text style={styles.textHeader}>Recover Password</Text>
 
-          <Text style={styles.text}>Please enter the email address you used to register with us and we'll send you a link for recovering your password with.</Text>
+          <Text style={styles.text}>Please enter the email address you used to register with us and we will send you a link for recovering your password with.</Text>
 
             <TextInput
                 placeholder="Enter Email"
@@ -68,17 +70,17 @@ class RecoverPasswordScreen extends React.Component {
                 style={styles.textInput}
                 selectionColor="#428AF8"
                 underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(text) => this.setState({email: text})}
                 onFocus={this.handleFocus}
                 onBlur={this.handleBlur} />
         </View>
 
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.buttonLight} onPress={() => this._navTo('Home')}>
+          <TouchableOpacity style={styles.buttonLight} onPress={() => this.props.navigation.goBack()}>
             <Text style={styles.btnLight}>{'Cancel'.toUpperCase()}</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('Home')}>
+          <TouchableOpacity style={styles.buttonDark} onPress={this._recoverPassword}>
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <Text style={styles.btnDark}>{'Reset Password'.toUpperCase()}</Text>
               <Icon
@@ -92,11 +94,11 @@ class RecoverPasswordScreen extends React.Component {
       </View>
     );
   }
-  _navTo = (screen) => {
-    console.log("Navigating to :: " + screen);
+  _recoverPassword = () => {
+    console.log("Recover password for: " + this.state.email);
 
-    this.props.navigation.navigate(screen);
-  };
+    this.props.navigation.navigate('RecoverPasswordConfirm');
+  }
 }
 
 export default RecoverPasswordScreen

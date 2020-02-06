@@ -3,35 +3,32 @@ import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
+//Auth stack screens
 import AuthLoadingScreen from './screens/AuthLoading';
-
 import SignInScreen from './screens/SignIn';
 import EmailSignInScreen from './screens/EmailSignIn';
-import EmailSignupScreen from './screens/EmailSignup';
+import EmailSignInErrorScreen from './screens/EmailSignInError';
+import EmailSignUpScreen from './screens/EmailSignup';
+import EmailSignUpConfirmScreen from './screens/EmailSignUpConfirm';
 import RecoverPasswordScreen from './screens/RecoverPassword';
 import RecoverPasswordConfirmScreen from './screens/RecoverPasswordConfirm';
 import LearnMoreScreen from './screens/LearnMore';
 import LearnMore2Screen from './screens/LearnMore2';
 import LearnMore3Screen from './screens/LearnMore3';
-import EmailSignInErrorScreen from './screens/EmailSignInError';
-import PrizesScreen from './screens/Prizes';
-import AboutScreen from './screens/About';
 
-import TermsScreen from './screens/Terms';
-import PrivacyPolicyScreen from './screens/PrivacyPolicy';
-
-
-//Home screen is just a landing page to show links to the different screens for now..
-import HomeScreen from './screens/Home';
+//The app stack screens
 import MapsScreen from './screens/Maps';
 import GameScreen from './screens/Game';
+import PrizesScreen from './screens/Prizes';
 import ProfileScreen from './screens/Profile';
 import ProfileEditScreen from './screens/ProfileEdit';
 import SettingsScreen from './screens/Settings';
 import NotificationsScreen from './screens/Notifications';
+import AboutScreen from './screens/About';
+import TermsScreen from './screens/Terms';
+import PrivacyPolicyScreen from './screens/PrivacyPolicy';
 
 const AppStack = createStackNavigator({
-    Home: HomeScreen,
     Maps: MapsScreen,
     Game: GameScreen,
     Prizes: PrizesScreen,
@@ -41,38 +38,30 @@ const AppStack = createStackNavigator({
     Notifications: NotificationsScreen,
     About: AboutScreen,
     Terms: TermsScreen,
-    PrivacyPolicy: PrivacyPolicyScreen,
+    PrivacyPolicy: PrivacyPolicyScreen
+});
+
+const AuthStack = createStackNavigator({
+    SignIn: SignInScreen,
     LearnMore: LearnMoreScreen,
     LearnMore2: LearnMore2Screen,
     LearnMore3: LearnMore3Screen,
-    EmailSignUp: EmailSignupScreen,
+    EmailSignUp: EmailSignUpScreen,
+    EmailSignUpConfirm: EmailSignUpConfirmScreen,
     EmailSignIn: EmailSignInScreen,
     EmailSignInError: EmailSignInErrorScreen,
     RecoverPassword: RecoverPasswordScreen,
     RecoverPasswordConfirm: RecoverPasswordConfirmScreen
 });
 
-const AuthStack = createStackNavigator({
-    SignIn: SignInScreen,
-    // EmailSignUp: EmailSignupScreen,
-    // EmailSignIn: EmailSignInScreen,
-    // EmailSignInError: EmailSignInErrorScreen,
-    // RecoverPassword: RecoverPasswordScreen,
-    // RecoverPasswordConfirmScreen: RecoverPasswordConfirm
-    //This will need to be part of the auth stack, since you don't have to sign in to see this content
-    // LearnMore: LearnMoreScreen,
-    // LearnMore2: LearnMore2Screen,
-    // LearnMore3: LearnMore3Screen
-});
-
 const MainStack = createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
       App: AppStack,
-      Auth: AuthStack,
+      Auth: AuthStack
     },
     {
-      initialRouteName: 'AuthLoading',
+      initialRouteName: 'AuthLoading'
     }
 )
 

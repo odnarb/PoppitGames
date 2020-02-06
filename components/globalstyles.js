@@ -685,6 +685,93 @@ const profileEditStyles = {
 
 };
 
+emailSignUpConfirmStyles = {
+
+  baseContainer: {
+    flex: 1,
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
+  },
+
+  logoContainer: {
+    flex: 2
+  },
+
+  logo: {
+    flex: 1,
+    alignItems: "center",
+    height: undefined,
+    width: undefined
+  },
+
+  contentContainer: {
+    flex: 6
+  },
+
+  btnContainer: {
+    flex: 1,
+    marginBottom: moderateScale(10),
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+
+  textHeader: {
+    fontSize: moderateScale(20),
+    fontWeight: 'bold',
+    marginTop: moderateScale(6),
+    marginBottom: moderateScale(30)
+  },
+
+  text: {
+    fontSize: moderateScale(18),
+    color: '#777',
+    marginBottom: moderateScale(10)
+  },
+
+  textInput: {
+    fontSize: moderateScale(18),
+    marginTop: moderateScale(6),
+    width: "100%"
+  },
+
+  buttonLight: {
+    width: "100%",
+    height: verticalScale(64),
+    borderColor: '#dcdcdc',
+    backgroundColor: "#dcdcdc",
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
+  },
+
+  buttonDark: {
+    width: "100%",
+    height: verticalScale(64),
+    borderColor: '#000',
+    backgroundColor: "#000",
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
+  },
+
+  btnLight: {
+    color: '#777',
+    fontWeight: 'bold',
+    fontSize: moderateScale(16),
+    textAlign:'center'
+  },
+
+  btnDark: {
+    color: '#ccc',
+    fontWeight: 'bold',
+    fontSize: moderateScale(16),
+    textAlign:'center'
+  }
+
+};
+
 const recoverPasswordStyles = {
 
   baseContainer: {
@@ -1215,6 +1302,7 @@ const authLoadingStyleSheet = StyleSheet.create({ ...globalStyles, ...authLoadin
 const emailSignInErrorStyleSheet = StyleSheet.create({ ...globalStyles, ...emailSignInErrorStyles });
 const emailSignInStyleSheet = StyleSheet.create({ ...globalStyles, ...emailSignInStyles });
 const emailSignUpStyleSheet = StyleSheet.create({ ...globalStyles, ...emailSignUpStyles });
+const emailSignUpConfirmStyleSheet = StyleSheet.create({ ...globalStyles, ...emailSignUpConfirmStyles });
 const learnMoreStyleSheet =  StyleSheet.create({ ...globalStyles, ...learnMoreStyles });
 const mapsStyleSheet =  StyleSheet.create({ ...globalStyles, ...mapsStyles });
 const notificationsStyleSheet =  StyleSheet.create({ ...globalStyles, ...notificationsStyles });
@@ -1252,9 +1340,12 @@ export {
   homeStyleSheet,
   aboutStyleSheet,
   authLoadingStyleSheet,
+
   emailSignInStyleSheet,
   emailSignInErrorStyleSheet,
   emailSignUpStyleSheet,
+  emailSignUpConfirmStyleSheet,
+
   learnMoreStyleSheet,
   mapsStyleSheet,
   notificationsStyleSheet,

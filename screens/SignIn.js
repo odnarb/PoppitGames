@@ -9,6 +9,8 @@ import React from 'react';
 //   onPress={this._signIn}
 //   disabled={this.state.isSigninInProgress} />
 
+const appName = "PoppitGames";
+
 import {
   Button,
   Image,
@@ -25,9 +27,28 @@ import { Icon } from 'react-native-elements';
 import { signInStyleSheet as styles, signInIconSize as iconSize } from '../components/globalstyles';
 
 class SignInScreen extends React.Component {
+  componentDidMount() {
+    this._bootstrapAsync();
+  }
+
+  // Fetch the token from storage then navigate to our appropriate place
+  _bootstrapAsync = async () => {
+    const userSeen = await AsyncStorage.getItem('userSeen');
+
+    if(userSeen) {
+      this.setState({
+        btnFBWording : "Signin with Facebook",
+        btnGoogleWording: "Signin with Google",
+        btnEmailWording: "Signin with Email"
+      })
+    }
+  }
 
   state = {
-    isFocused: false
+    isFocused: false,
+    btnFBWording: "Signup with Facebook",
+    btnGoogleWording:  "Signup with Google",
+    btnEmailWording: "Signup with Email"
   };
 
   handleFocus = event => {
@@ -51,7 +72,7 @@ class SignInScreen extends React.Component {
   };
 
   render() {
-    const { isFocused } = this.state;
+    const { isFocused, btnFBWording, btnGoogleWording, btnEmailWording } = this.state;
     const { onFocus, onBlur, ...otherProps } = this.props;
     return (
 
@@ -64,8 +85,12 @@ class SignInScreen extends React.Component {
         </View>
 
         <View style={styles.contentContainer}>
+            <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={this._learnMore}>
+              <Text>New to {appName}? Tap to learn more.</Text>
+            </TouchableOpacity>
 
-            <TouchableOpacity style={styles.btnFB} onPress={this._signInAsync}>
+
+            <TouchableOpacity style={styles.btnFB} onPress={this._ssoFB}>
               <View style={styles.btnView}>
                 <Icon
                   name='facebook'
@@ -73,11 +98,11 @@ class SignInScreen extends React.Component {
                   size={iconSize}
                   color='#fff'
                   style={styles.btnIcon} />
-                <Text style={styles.btnText}>Signup with Facebook</Text>
+                <Text style={styles.btnText}>{btnFBWording}</Text>
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.btnGoogle} onPress={this._signInAsync}>
+            <TouchableOpacity style={styles.btnGoogle} onPress={this._ssoGoogle}>
               <View style={styles.btnView}>
                 <Icon
                   name='google'
@@ -85,7 +110,7 @@ class SignInScreen extends React.Component {
                   size={iconSize}
                   color='#fff'
                   style={styles.btnIcon} />
-                <Text style={styles.btnText}>Signup with Google</Text>
+                <Text style={styles.btnText}>{btnGoogleWording}</Text>
               </View>
             </TouchableOpacity>
 
@@ -105,7 +130,7 @@ class SignInScreen extends React.Component {
                 style={styles.inputEmail}
                 {...otherProps} />
 
-            <TouchableOpacity style={styles.btnEmail} onPress={this._signInAsync}>
+            <TouchableOpacity style={styles.btnEmail} onPress={this._signInOrSignUp}>
               <View style={styles.btnView}>
                 <Icon
                   name='email'
@@ -113,7 +138,7 @@ class SignInScreen extends React.Component {
                   size={iconSize}
                   color='#fff'
                   style={styles.btnIcon} />
-              <Text style={styles.btnText}>Signup with Email</Text>
+              <Text style={styles.btnText}>{btnEmailWording}</Text>
               </View>
             </TouchableOpacity>
         </View>
@@ -122,8 +147,33 @@ class SignInScreen extends React.Component {
     );
   }
 
+  _learnMore = () => {
+    this.props.navigation.navigate('LearnMore');
+  };
+
+  _ssoFB = async() => {
+    this._signInAsync();
+  }
+
+  _ssoGoogle = () => {
+    this._signInAsync();
+  }
+
+  _signInOrSignUp = async () => {
+    console.log("_signInOrSignUp: this.state.userseen :: ", this.state.userseen);
+    const userseen = await AsyncStorage.getItem('userSeen');
+
+    if( userseen == "true" ){
+      this.props.navigation.navigate('EmailSignIn');
+    } else {
+      this.props.navigation.navigate('EmailSignUp');
+    }
+  }
+
   _signInAsync = async () => {
     await AsyncStorage.setItem('userToken', 'abc');
+    await AsyncStorage.setItem('userSeen', "true");
+
     this.props.navigation.navigate('App');
   };
 }

@@ -35,7 +35,7 @@ class EmailSignInErrorScreen extends React.Component {
           <Text style={styles.text}>Your username and password don't match.{'\n'}Please try again.</Text>
 
           <View style={styles.btnContainer}>
-            <TouchableOpacity style={styles.buttonTryAgain} onPress={() => this._navTo('Home')}>
+            <TouchableOpacity style={styles.buttonTryAgain} onPress={() => this.props.navigation.goBack()}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <Icon
                   name='chevron-left'
@@ -51,12 +51,6 @@ class EmailSignInErrorScreen extends React.Component {
       </View>
     );
   }
-
-  _navTo = (screen) => {
-    console.log("Navigating to :: " + screen);
-
-    this.props.navigation.navigate(screen);
-  };
 }
 
 export default EmailSignInErrorScreen

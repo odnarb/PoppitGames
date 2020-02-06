@@ -41,7 +41,7 @@ class LearnMoreScreen extends React.Component {
           </View>
         </View>
 
-        <LearnMoreNav slideNum={3} nextNavText="Finish" navToFn={() => this._navTo('Home')} />
+        <LearnMoreNav slideNum={3} nextNavText="Finish" navToFn={() => this._navTo('AuthLoading')} />
       </View>
     );
   }

@@ -48,7 +48,7 @@ class LearnMoreNav extends React.Component {
           </View>
 
           <View style={styles.navBtnGroup}>
-            <TouchableHighlight style={styles.highLightBtn} onPress={() => this._navTo('Home')}>
+            <TouchableHighlight style={styles.highLightBtn} onPress={() => this._navTo('AuthLoading')}>
               <View style={styles.navBtn}>
                 <Text style={styles.navSkip}>Skip</Text>
               </View>

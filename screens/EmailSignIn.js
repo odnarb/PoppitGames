@@ -6,6 +6,7 @@ import React from 'react';
 
 import {
   Image,
+  Switch,
   Text,
   TextInput,
   TouchableOpacity,
@@ -25,8 +26,9 @@ class EmailSignInScreen extends React.Component {
     super(props);
     this.state = {
       isFocused: false,
+      email: '',
       password: '',
-      email: ''
+      keepMeSignedIn: false
     };
   }
 
@@ -39,7 +41,12 @@ class EmailSignInScreen extends React.Component {
   state = {
     isFocused: false,
     email: '',
-    password: ''
+    password: '',
+    keepMeSignedIn: false
+  };
+
+  toggleSwitch = (value) => {
+      this.setState({keepMeSignedIn: value})
   };
 
   handleFocus = event => {
@@ -57,7 +64,7 @@ class EmailSignInScreen extends React.Component {
   };
 
   render() {
-    const { isFocused, email, password } = this.state;
+    const { isFocused, email, password, keepMeSignedIn } = this.state;
     const { onFocus, onBlur, ...otherProps } = this.props;
 
     return (
@@ -83,7 +90,7 @@ class EmailSignInScreen extends React.Component {
                 onBlur={this.handleBlur} />
           </View>
 
-          <View style={styles.inputContainer}>
+          <View style={styles.inputContainerNoMargin}>
             <BCPasswordInputText
                 placeholder="Password"
                 style={styles.textInput}
@@ -94,15 +101,24 @@ class EmailSignInScreen extends React.Component {
                 onFocus={this.handleFocus}
                 onBlur={this.handleBlur} />
           </View>
-          <View style={styles.inputContainer}>
-              <TouchableOpacity onPress={this._recoverPassword}>
-                <Text>Recover password?</Text>
+
+          <View style={styles.switchContainer}>
+            <Switch
+              onValueChange = {this.toggleSwitch}
+              value = {keepMeSignedIn}
+              style={styles.switch} />
+            <Text style={styles.switchText}>Keep me signed in.</Text>
+          </View>
+
+          <View style={styles.recoverPwContainer}>
+              <TouchableOpacity onPress={() => this._recoverPassword()}>
+                <Text style={styles.recoverPwLink}>Recover password?</Text>
               </TouchableOpacity>
           </View>
         </View>
 
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.buttonSignIn} onPress={this._signInAsync}>
+          <TouchableOpacity style={styles.buttonSignIn} onPress={() => this._signInAsync()}>
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <Text style={styles.btnSignIn}>{'Sign In'.toUpperCase()}</Text>
               <Icon

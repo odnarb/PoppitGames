@@ -5,9 +5,11 @@ import {
   Switch,
   Text,
   TextInput,
-  TouchableHighlight,
+  TouchableOpacity,
   View
 } from 'react-native';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { Icon } from 'react-native-elements';
 
@@ -44,10 +46,7 @@ class EmailSignUpScreen extends React.Component {
   };
 
   toggleSwitch = (value) => {
-      //onValueChange of the switch this function will be called
       this.setState({agreeToTerms: value})
-      //state changes according to switch
-      //which will result in re-render the text
   };
 
   handleFocus = event => {
@@ -119,26 +118,26 @@ class EmailSignUpScreen extends React.Component {
               onFocus={this.handleFocus}
               onBlur={this.handleBlur} />
 
-          <View style={styles.termsContainer}>
+          <View style={styles.switchContainer}>
             <Switch
               onValueChange = {this.toggleSwitch}
               value = {agreeToTerms}
               style={styles.switch} />
             <Text style={styles.termsText}>I agree to the </Text>
 
-            <TouchableHighlight style={{marginLeft: 10, marginTop: 5}} onPress={() => this._navTo('Terms')} style={styles.optionBtn}>
+            <TouchableOpacity style={{marginLeft: 10, marginTop: 5}} onPress={() => this.props.navigation.navigate("TermsPreSignUp")} style={styles.optionBtn}>
               <View style={styles.optionBtnView}>
                 <Text style={styles.textLink}>terms and conditions.</Text>
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.btnContainer}>
-            <TouchableHighlight style={styles.buttonCancel} onPress={() => this.props.navigation.goBack()}>
+            <TouchableOpacity style={styles.buttonCancel} onPress={() => this.props.navigation.goBack()}>
               <Text style={styles.btnCancel}>{'Cancel'.toUpperCase()}</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
-            <TouchableHighlight style={styles.buttonSignup} onPress={this._signUp}>
+            <TouchableOpacity style={styles.buttonSignup} onPress={() => this._signUp()}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <Text style={styles.btnSignup}>{'Sign Up'.toUpperCase()}</Text>
                 <Icon
@@ -147,14 +146,14 @@ class EmailSignUpScreen extends React.Component {
                   size={iconMediumSize}
                   color="#bbb" />
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
     );
   }
 
-  _signUp = () => {
+  _signUp = async () => {
     //get values from email and password fields
 
     const signUpPayload = {
@@ -166,6 +165,8 @@ class EmailSignUpScreen extends React.Component {
     };
 
     console.log("Email signup payload:", signUpPayload);
+
+    await AsyncStorage.setItem('userSeen', "true");
 
     this.props.navigation.navigate('EmailSignUpConfirm');
   };

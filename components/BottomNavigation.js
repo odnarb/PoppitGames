@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
     Text,
-    TouchableHighlight,
+    TouchableOpacity,
     View
 } from 'react-native';
 
@@ -21,7 +21,7 @@ class BottomNavigation extends React.Component {
     render() {
         return (
           <View style={styles.navContainer}>
-            <TouchableHighlight onPress={() => this._navTo('Prizes')} style={styles.navBtn}>
+            <TouchableOpacity onPress={() => this._navTo('Prizes')} style={styles.navBtn}>
               <View style={styles.navBtnView}>
               <Icon
                 name="trophy"
@@ -30,9 +30,9 @@ class BottomNavigation extends React.Component {
                 color={iconColor} />
                 <Text style={styles.navText}>Prizes</Text>
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
-            <TouchableHighlight onPress={() => this._navTo('Maps')} style={styles.navBtn}>
+            <TouchableOpacity onPress={() => this._navTo('Maps')} style={styles.navBtn}>
               <View style={styles.navBtnView}>
               <Icon
                 name="magnify"
@@ -41,9 +41,9 @@ class BottomNavigation extends React.Component {
                 color={iconColor} />
                 <Text style={styles.navText}>Search</Text>
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
-            <TouchableHighlight onPress={() => this._navTo('Settings')} style={styles.navBtn}>
+            <TouchableOpacity onPress={() => this._navTo('Settings')} style={styles.navBtn}>
               <View style={styles.navBtnView}>
               <Icon
                 name="settings"
@@ -52,7 +52,7 @@ class BottomNavigation extends React.Component {
                 color={iconColor} />
                 <Text style={styles.navText}>Settings</Text>
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
         );
     }

@@ -62,7 +62,7 @@ class EmailSignUpConfirmScreen extends React.Component {
           <Text style={styles.text}>We sent you an email with a link to confirm your account creation.</Text>
 
           <View style={styles.btnContainer}>
-            <TouchableOpacity style={styles.buttonDark} onPress={() => this.props.navigation.popToTop()}>
+            <TouchableOpacity style={styles.buttonDark} onPress={() => this.props.navigation.navigate('AuthLoading')}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <Icon
                   name='chevron-left'

@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
     Text,
-    TouchableHighlight,
+    TouchableOpacity,
     View
 } from 'react-native';
 
@@ -48,13 +48,13 @@ class LearnMoreNav extends React.Component {
           </View>
 
           <View style={styles.navBtnGroup}>
-            <TouchableHighlight style={styles.highLightBtn} onPress={() => this._navTo('AuthLoading')}>
+            <TouchableOpacity style={styles.highLightBtn} onPress={() => this._navTo('AuthLoading')}>
               <View style={styles.navBtn}>
                 <Text style={styles.navSkip}>Skip</Text>
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
-            <TouchableHighlight style={styles.highLightBtn} onPress={navToFn}>
+            <TouchableOpacity style={styles.highLightBtn} onPress={navToFn}>
               <View style={styles.navBtn}>
                 <Text style={styles.navNext}>{nextNavText}</Text>
                 <Icon
@@ -63,7 +63,7 @@ class LearnMoreNav extends React.Component {
                   color={iconColor}
                   size={navIconSize} />
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
         </View>
         );

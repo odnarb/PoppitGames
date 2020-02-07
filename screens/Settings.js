@@ -4,7 +4,7 @@ import {
   Image,
   Picker,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   View
 } from 'react-native';
 
@@ -45,7 +45,7 @@ class SettingsScreen extends React.Component {
             <Text style={styles.headerText}>Settings</Text>
 
             <View style={styles.settingsRow}>
-              <TouchableHighlight onPress={() => this._navTo('Profile')} style={styles.optionBtn}>
+              <TouchableOpacity onPress={() => this._navTo('Profile')} style={styles.optionBtn}>
                 <View style={styles.optionBtnView}>
                     <Icon
                       name='account'
@@ -54,11 +54,11 @@ class SettingsScreen extends React.Component {
                       color='#fff' />
                     <Text style={styles.settingsText}>My Account</Text>
                 </View>
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.settingsRow}>
-              <TouchableHighlight onPress={() => this._navTo('Notifications')} style={styles.optionBtn}>
+              <TouchableOpacity onPress={() => this._navTo('Notifications')} style={styles.optionBtn}>
                 <View style={styles.optionBtnView}>
                   <Icon
                     name='bell'
@@ -67,7 +67,7 @@ class SettingsScreen extends React.Component {
                     color='#fff' />
                   <Text style={styles.settingsText}>Notifications</Text>
                 </View>
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.settingsRow}>
@@ -93,7 +93,7 @@ class SettingsScreen extends React.Component {
             </View>
 
             <View style={styles.settingsRow}>
-              <TouchableHighlight onPress={() => this._navTo('About')} style={styles.optionBtn}>
+              <TouchableOpacity onPress={() => this._navTo('About')} style={styles.optionBtn}>
                 <View style={styles.optionBtnView}>
                   <Icon
                     name='information'
@@ -103,11 +103,11 @@ class SettingsScreen extends React.Component {
 
                   <Text style={styles.settingsText}>About</Text>
                 </View>
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.settingsRow}>
-              <TouchableHighlight onPress={this._signOutAsync} style={styles.optionBtn}>
+              <TouchableOpacity onPress={this._signOutAsync} style={styles.optionBtn}>
                 <View style={styles.optionBtnView}>
                   <Icon
                     name='logout'
@@ -117,7 +117,7 @@ class SettingsScreen extends React.Component {
 
                   <Text style={styles.settingsText}>Logout</Text>
                 </View>
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
           <BottomNavigation />
          </View>

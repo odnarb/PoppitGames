@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Image,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   View
 } from 'react-native';
 
@@ -36,19 +36,19 @@ class AboutScreen extends React.Component {
 
           <View style={styles.contentContainer}>
             <View style={styles.settingsRow}>
-              <TouchableHighlight onPress={() => this._navTo('Terms')} style={styles.optionBtn}>
+              <TouchableOpacity onPress={() => this._navTo('Terms')} style={styles.optionBtn}>
                 <View style={styles.optionBtnView}>
                   <Text style={styles.settingsText}>Terms of Use</Text>
                 </View>
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.settingsRow}>
-              <TouchableHighlight onPress={() => this._navTo('PrivacyPolicy')} style={styles.optionBtn}>
+              <TouchableOpacity onPress={() => this._navTo('PrivacyPolicy')} style={styles.optionBtn}>
                 <View style={styles.optionBtnView}>
                   <Text style={styles.settingsText}>Privacy Policy</Text>
                 </View>
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.copyrightRow}>

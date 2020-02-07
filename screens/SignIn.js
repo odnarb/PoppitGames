@@ -85,12 +85,12 @@ class SignInScreen extends React.Component {
         </View>
 
         <View style={styles.contentContainer}>
-            <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={this._learnMore}>
+            <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={() => this._learnMore()}>
               <Text>New to {appName}? Tap to learn more.</Text>
             </TouchableOpacity>
 
 
-            <TouchableOpacity style={styles.btnFB} onPress={this._ssoFB}>
+            <TouchableOpacity style={styles.btnFB} onPress={() => this._ssoFB()}>
               <View style={styles.btnView}>
                 <Icon
                   name='facebook'
@@ -102,7 +102,7 @@ class SignInScreen extends React.Component {
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.btnGoogle} onPress={this._ssoGoogle}>
+            <TouchableOpacity style={styles.btnGoogle} onPress={() => this._ssoGoogle()}>
               <View style={styles.btnView}>
                 <Icon
                   name='google'
@@ -120,17 +120,7 @@ class SignInScreen extends React.Component {
               <View style={styles.hr} />
             </View>
 
-            <TextInput
-                placeholder="Enter your email"
-                selectionColor="#428AF8"
-                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-                onChangeText={(text) => this.setState({text})}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur}
-                style={styles.inputEmail}
-                {...otherProps} />
-
-            <TouchableOpacity style={styles.btnEmail} onPress={this._signInOrSignUp}>
+            <TouchableOpacity style={styles.btnEmail} onPress={() => this._signInOrSignUp()}>
               <View style={styles.btnView}>
                 <Icon
                   name='email'
@@ -160,10 +150,11 @@ class SignInScreen extends React.Component {
   }
 
   _signInOrSignUp = async () => {
-    console.log("_signInOrSignUp: this.state.userseen :: ", this.state.userseen);
-    const userseen = await AsyncStorage.getItem('userSeen');
+    const userSeen = await AsyncStorage.getItem('userSeen');
 
-    if( userseen == "true" ){
+    console.log("_signInOrSignUp: userSeen :: ", userSeen);
+
+    if( userSeen == "true" ){
       this.props.navigation.navigate('EmailSignIn');
     } else {
       this.props.navigation.navigate('EmailSignUp');

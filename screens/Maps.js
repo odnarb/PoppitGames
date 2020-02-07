@@ -9,7 +9,7 @@ import {
   Animated,
   Image,
   Dimensions,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native';
 
 import {SearchBar} from 'react-native-elements'
@@ -230,12 +230,12 @@ class MapsScreen extends React.Component {
           {this.state.markers.map((marker, index) => (
             <View
               style={styles.card} key={index}>
-              <TouchableHighlight onPress={() => this._onPressMapButton(index) } style={styles.cardImage}>
+              <TouchableOpacity onPress={() => this._onPressMapButton(index) } style={styles.cardImage}>
                 <Image
                   source={marker.image}
                   style={styles.cardImage}
                   resizeMode="cover" />
-              </TouchableHighlight>
+              </TouchableOpacity>
               <View style={styles.textContent}>
                 <Text numberOfLines={1} style={styles.cardtitle}>{marker.title}</Text>
                 <Text numberOfLines={1} style={styles.cardDescription}>

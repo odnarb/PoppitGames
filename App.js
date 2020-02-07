@@ -51,7 +51,8 @@ const AuthStack = createStackNavigator({
     EmailSignIn: EmailSignInScreen,
     EmailSignInError: EmailSignInErrorScreen,
     RecoverPassword: RecoverPasswordScreen,
-    RecoverPasswordConfirm: RecoverPasswordConfirmScreen
+    RecoverPasswordConfirm: RecoverPasswordConfirmScreen,
+    TermsPreSignUp: TermsScreen
 });
 
 const MainStack = createSwitchNavigator(

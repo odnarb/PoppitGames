@@ -113,8 +113,20 @@ const globalStyles = {
       { scaleX: moderateScale(1, 0.2) },
       { scaleY: moderateScale(1, 0.2) }
     ]
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    paddingLeft: moderateScale(10),
+    marginTop: moderateScale(20)
+  },
+  switchContainerNoMargin: {
+    flexDirection: 'row',
+    paddingLeft: moderateScale(10)
+  },
+  switchText: {
+    fontSize: moderateScale(16),
+    alignSelf: "center"
   }
-
 };
 
 const settingsStyles = {
@@ -198,10 +210,23 @@ const emailSignInStyles = {
     marginBottom: moderateScale(20)
   },
 
+  inputContainerNoMargin: {
+    height: moderateScale(60,0.4)
+  },
+
   textInput: {
     fontSize: moderateScale(18),
     marginTop: moderateScale(6),
     width: "100%"
+  },
+
+  recoverPwContainer: {
+    marginTop: moderateScale(20)
+
+  },
+
+  recoverPwLink: {
+    fontSize: moderateScale(16)
   },
 
   btnContainer: {
@@ -332,12 +357,6 @@ const emailSignUpStyles = {
     fontSize: moderateScale(18),
     marginTop: scale(10),
     width: "100%"
-  },
-
-  termsContainer: {
-    flexDirection: 'row',
-    paddingLeft: moderateScale(10),
-    marginTop: moderateScale(20)
   },
 
   termsText: {

@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 import {
@@ -30,7 +31,7 @@ class LearnMoreScreen extends React.Component {
         </View>
 
         <View style={styles.contentContainer}>
-          <Text style={styles.tutoralHeader}>Poppit Tutorial Slide 3</Text>
+          <Text style={styles.tutoralHeader}>Tutorial Slide 3</Text>
           <Text style={styles.tutorialText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
 
           <View style={styles.imageContainer}>

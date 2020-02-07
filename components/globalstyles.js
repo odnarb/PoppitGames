@@ -432,7 +432,7 @@ const learnMoreStyles = {
   },
 
   tutoralHeader: {
-    fontSize: moderateScale(32),
+    fontSize: moderateScale(26),
     fontWeight: 'bold',
     color: '#000'
   },

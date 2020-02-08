@@ -1,10 +1,11 @@
 import React from 'react';
 
 import {
-  Image,
   Text,
   View,
 } from 'react-native';
+
+import LogoBanner from '../components/LogoBanner';
 
 import BottomNavigation from '../components/BottomNavigation';
 
@@ -21,11 +22,7 @@ class PrizesScreen extends React.Component {
     return (
 
       <View style={styles.baseContainer}>
-          <View style={styles.logoContainer}>
-            <Image style={styles.logo}
-              source={require('../assets/images/poppit-logo.png')}
-              resizeMode='contain' />
-          </View>
+          <LogoBanner container="flex1" size="small" />
 
           <View style={styles.contentContainer}>
 

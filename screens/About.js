@@ -9,6 +9,8 @@ import {
 
 import { aboutStyleSheet as styles } from '../components/globalstyles';
 
+import LogoBanner from '../components/LogoBanner';
+
 class AboutScreen extends React.Component {
     constructor(props) {
     super(props);
@@ -24,15 +26,13 @@ class AboutScreen extends React.Component {
   render() {
     return (
      <View style={styles.baseContainer}>
-        <View style={styles.logoContainer}>
-          <Image
-            source={require("../assets/images/poppit-logo.png")}
-            style={styles.logo}
-            resizeMode="contain" />
-          <View style={styles.versionRow}>
-            <Text style={styles.versionText}>version 1.3.2 (0bdd85b1)</Text>
-          </View>
+      <View style={styles.versionContainer}>
+        <LogoBanner container="flex1" size="scaled" />
+
+        <View style={styles.versionRow}>
+          <Text style={styles.versionText}>version 1.3.2 (0bdd85b1)</Text>
         </View>
+      </View>
 
           <View style={styles.contentContainer}>
             <View style={styles.settingsRow}>

@@ -13,7 +13,6 @@ const appName = "PoppitGames";
 
 import {
   Button,
-  Image,
   Text,
   TextInput,
   TouchableOpacity,
@@ -21,6 +20,8 @@ import {
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
+
+import LogoBanner from '../components/LogoBanner';
 
 import { Icon } from 'react-native-elements';
 
@@ -77,12 +78,7 @@ class SignInScreen extends React.Component {
     return (
 
      <View style={styles.baseContainer}>
-        <View style={styles.logoContainer}>
-            <Image
-              source={require("../assets/images/poppit-logo.png")}
-              style={styles.logo}
-              resizeMode="contain" />
-        </View>
+        <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
             <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={() => this._learnMore()}>

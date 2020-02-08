@@ -40,7 +40,27 @@ const globalStyles = {
     alignItems: 'center'
   },
 
-  logo: {
+  logoContainer2: {
+    flex: 2
+  },
+
+  fixedLogoContainer: {
+    position: 'absolute',
+    top: verticalScale(10),
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: 'center'
+  },
+
+  scaledLogo: {
+    flex: 1,
+    alignItems: "center",
+    height: undefined,
+    width: undefined
+  },
+
+  smallLogo: {
     height: verticalScale(50)
   },
 
@@ -139,7 +159,7 @@ const aboutStyles = {
     backgroundColor: "#666"
   },
 
-  logoContainer: {
+  versionContainer:{
     flex:3,
     paddingLeft: moderateScale(10),
     paddingRight: moderateScale(10),
@@ -155,13 +175,6 @@ const aboutStyles = {
 
     elevation: 5,
     backgroundColor: "#888"
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
   },
 
   contentContainer: {
@@ -187,17 +200,6 @@ const emailSignInStyles = {
     flex: 1,
     paddingLeft: moderateScale(20),
     paddingRight: moderateScale(20)
-  },
-
-  logoContainer: {
-    flex:2
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
   },
 
   contentContainer: {
@@ -262,17 +264,6 @@ const emailSignInErrorStyles = {
     paddingRight: moderateScale(20)
   },
 
-  logoContainer: {
-    flex: 2
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  },
-
   contentContainer: {
     flex: 6
   },
@@ -322,17 +313,6 @@ const emailSignUpStyles = {
     flex: 1,
     paddingLeft: moderateScale(20),
     paddingRight: moderateScale(20)
-  },
-
-  logoContainer: {
-    flex: 2
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
   },
 
   contentContainer: {
@@ -413,17 +393,6 @@ const learnMoreStyles = {
     flex: 1,
     paddingLeft: moderateScale(20),
     paddingRight: moderateScale(20)
-  },
-
-  logoContainer: {
-    flex: 2
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
   },
 
   contentContainer: {
@@ -508,14 +477,7 @@ const prizesStyles = {
     flex: 1,
     backgroundColor: '#666'
   },
-  logoContainer: {
-    flex: 1,
-    paddingTop: moderateScale(10),
-    alignItems: 'center'
-  },
-  logo: {
-    height: verticalScale(50)
-  },
+
   contentContainer: {
     flex: 7,
     marginTop: moderateScale(10),
@@ -712,17 +674,6 @@ emailSignUpConfirmStyles = {
     paddingRight: moderateScale(20)
   },
 
-  logoContainer: {
-    flex: 2
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  },
-
   contentContainer: {
     flex: 6
   },
@@ -797,17 +748,6 @@ const recoverPasswordStyles = {
     flex: 1,
     paddingLeft: moderateScale(20),
     paddingRight: moderateScale(20)
-  },
-
-  logoContainer: {
-    flex: 2
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
   },
 
   contentContainer: {
@@ -885,17 +825,6 @@ const recoverPasswordConfirmStyles = {
     paddingRight: moderateScale(20)
   },
 
-  logoContainer: {
-    flex: 2
-  },
-
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  },
-
   contentContainer: {
     flex: 6
   },
@@ -942,26 +871,14 @@ const recoverPasswordConfirmStyles = {
 
 const signInStyles = {
   baseContainer: {
-    flex: 1
-  },
-
-  logoContainer: {
-    flex: 2,
+    flex: 1,
     paddingLeft: moderateScale(20),
     paddingRight: moderateScale(20)
   },
 
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  },
-
   contentContainer: {
     flex: 4,
-    alignItems: 'center',
-    padding: moderateScale(20)
+    alignItems: 'center'
   },
 
   // btnTouch:{
@@ -981,7 +898,7 @@ const signInStyles = {
     borderColor: '#4285F4',
     borderWidth: 1,
     borderRadius: moderateScale(5),
-    padding: moderateScale(5),
+    // padding: moderateScale(5),
     justifyContent: 'center',
     marginTop: moderateScale(20)
   },
@@ -992,7 +909,7 @@ const signInStyles = {
     borderColor: '#3b5998',
     borderWidth: 1,
     borderRadius: moderateScale(5),
-    padding: moderateScale(5),
+    // padding: moderateScale(5),
     justifyContent: 'center',
     marginTop: moderateScale(20)
   },
@@ -1003,7 +920,7 @@ const signInStyles = {
     borderColor: '#777',
     borderWidth: 1,
     borderRadius: moderateScale(5),
-    padding: moderateScale(5),
+    // padding: moderateScale(5),
     justifyContent: 'center',
     marginTop: moderateScale(10)
   },
@@ -1061,17 +978,7 @@ const mapsStyles = {
   container: {
     flex: 1,
   },
-  logoContainer: {
-    position: 'absolute',
-    top: verticalScale(10),
-    left: 0,
-    right: 0,
-    bottom: 0,
-    alignItems: 'center'
-  },
-  logo: {
-    height: verticalScale(50)
-  },
+
   searchBarContainer: {
     position: 'absolute',
     top: verticalScale(70),
@@ -1147,77 +1054,14 @@ const mapsStyles = {
 
 const authLoadingStyles = {
   baseContainer: {
-    flex: 1
-  },
-
-  // old styles
-  // logoContainer: {
-  //   // backgroundColor: 'yellow',
-  //   alignItems: 'center',
-  //   flex: 5
-  // },
-  // logo: {
-  //   width: 364,
-  //   height: verticalScale(11)8
-  // },
-
-  logoContainer: {
-    flex: 2,
+    flex: 1,
     paddingLeft: moderateScale(20),
     paddingRight: moderateScale(20)
   },
 
-  logo: {
-    flex: 1,
-    alignItems: "center",
-    height: undefined,
-    width: undefined
-  },
-
   contentContainer: {
-    // backgroundColor: 'green',
     flex: 2,
     alignItems: 'center'
-  },
-
-  text: {
-    
-  }
-};
-
-const homeStyles = {
-  baseContainer: {
-        flex: 1
-  },
-
-  logoContainer: {
-    flex: 1,
-    paddingTop: moderateScale(10, 0.4),
-    alignItems: 'center'
-  },
-
-  logo: {
-    height: moderateScale(50, 0.4)
-  },
-
-  contentContainer: {
-    flex: 7
-  },
-
-  introText: {
-    fontSize: moderateScale(16, 0.4),
-    padding: moderateScale(20)
-  },
-
-  btnContainer: {
-    backgroundColor: "#58d5ff",
-    marginTop: moderateScale(3),
-    alignItems: "center"
-  },
-
-  btnTitle: {
-    fontSize: moderateScale(14, 0.4),
-    color: "#fff"
   }
 };
 
@@ -1309,9 +1153,6 @@ const passwordStyles = {
   },
 };
 
-//this will be removed eventually..
-const homeStyleSheet = StyleSheet.create({ ...globalStyles, ...homeStyles });
-
 const passwordStyleSheet = StyleSheet.create(passwordStyles);
 const learnMoreNavStyleSheet = StyleSheet.create(learnMoreNavStyles);
 const bottomNavStyleSheet = StyleSheet.create(bottomNavStyles);
@@ -1356,7 +1197,6 @@ export {
   bottomNavIconSize,
   bottomNavIconColor,
 
-  homeStyleSheet,
   aboutStyleSheet,
   authLoadingStyleSheet,
 

@@ -1,13 +1,14 @@
 import React from 'react';
 
 import {
-  Image,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
 
 import { Icon } from 'react-native-elements';
+
+import LogoBanner from '../components/LogoBanner';
 
 import { recoverPasswordConfirmStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
 
@@ -49,17 +50,12 @@ class RecoverPasswordConfirmScreen extends React.Component {
 
     return (
      <View style={styles.baseContainer}>
-        <View style={styles.logoContainer}>
-            <Image
-              source={require("../assets/images/poppit-logo.png")}
-              style={styles.logo}
-              resizeMode="contain" />
-        </View>
+        <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
           <Text style={styles.textHeader}>Recover Password</Text>
 
-          <Text style={styles.text}>We've sent you an email with a link to reset your password.</Text>
+          <Text style={styles.text}>We have sent you an email with a link to reset your password.</Text>
 
           <View style={styles.btnContainer}>
             <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('EmailSignIn')}>

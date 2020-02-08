@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  Image,
   Switch,
   Text,
   TextInput,
@@ -12,6 +11,8 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 
 import { Icon } from 'react-native-elements';
+
+import LogoBanner from '../components/LogoBanner';
 
 import BCPasswordInputText from '../components/BCPasswordInputText';
 
@@ -70,13 +71,7 @@ class EmailSignUpScreen extends React.Component {
     return (
 
      <View style={styles.baseContainer}>
-        <View style={styles.logoContainer}>
-            <Image
-              source={require("../assets/images/poppit-logo.png")}
-              style={styles.logo}
-              resizeMode="contain"
-          ></Image>
-        </View>
+        <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
           <TextInput

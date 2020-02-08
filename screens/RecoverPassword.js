@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  Image,
   Text,
   TextInput,
   TouchableOpacity,
@@ -9,6 +8,8 @@ import {
 } from 'react-native';
 
 import { Icon } from 'react-native-elements';
+
+import LogoBanner from '../components/LogoBanner';
 
 import { recoverPasswordStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
 
@@ -52,12 +53,7 @@ class RecoverPasswordScreen extends React.Component {
 
     return (
      <View style={styles.baseContainer}>
-        <View style={styles.logoContainer}>
-            <Image
-              source={require("../assets/images/poppit-logo.png")}
-              style={styles.logo}
-              resizeMode="contain" />
-        </View>
+        <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
           <Text style={styles.textHeader}>Recover Password</Text>

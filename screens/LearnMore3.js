@@ -11,6 +11,8 @@ import { Icon } from 'react-native-elements';
 
 import LearnMoreNav from '../components/LearnMoreNav';
 
+import LogoBanner from '../components/LogoBanner';
+
 import { learnMoreStyleSheet as styles } from '../components/globalstyles';
 
 class LearnMoreScreen extends React.Component {
@@ -23,12 +25,7 @@ class LearnMoreScreen extends React.Component {
   render() {
     return (
       <View style={styles.baseContainer}>
-        <View style={styles.logoContainer}>
-            <Image
-              source={require("../assets/images/poppit-logo.png")}
-              style={styles.logo}
-              resizeMode="contain" />
-        </View>
+        <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
           <Text style={styles.tutoralHeader}>Tutorial Slide 3</Text>

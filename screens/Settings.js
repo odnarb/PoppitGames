@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  Image,
   Picker,
   Text,
   TouchableOpacity,
@@ -11,6 +10,8 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 
 import { Icon } from 'react-native-elements';
+
+import LogoBanner from '../components/LogoBanner';
 
 import BottomNavigation from '../components/BottomNavigation';
 
@@ -33,12 +34,7 @@ class SettingsScreen extends React.Component {
   render() {
     return (
       <View style={styles.baseContainer}>
-        <View style={styles.logoContainer}>
-            <Image
-              source={require("../assets/images/poppit-logo.png")}
-              style={styles.logo}
-              resizeMode="contain" />
-        </View>
+          <LogoBanner container="flex1" size="small" />
 
           <View style={styles.contentContainer}>
 

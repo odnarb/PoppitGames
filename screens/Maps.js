@@ -18,6 +18,8 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import Geolocation from '@react-native-community/geolocation';
 
+import LogoBanner from '../components/LogoBanner';
+
 import BottomNavigation from '../components/BottomNavigation';
 
 import { mapsStyleSheet as styles } from '../components/globalstyles';
@@ -203,9 +205,7 @@ class MapsScreen extends React.Component {
           })}
         </MapView>
 
-        <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={require('../assets/images/poppit-logo.png')} resizeMode='contain' />
-        </View>
+        <LogoBanner container="absolute" size="small" />
 
         <Animated.ScrollView
           horizontal

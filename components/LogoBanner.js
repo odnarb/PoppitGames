@@ -27,9 +27,6 @@ class LogoBanner extends React.Component {
           logoStyle = [styles.scaledLogo];
         }
 
-        console.log("Logo size: ", size);
-        console.log("Logo container: ", containerStyle);
-
         return (
         <View style={containerStyle}>
             <Image

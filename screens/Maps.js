@@ -43,7 +43,7 @@ class MapsScreen extends React.Component {
   };
 
   _onPressMapButton = (index) => {
-    this.props.navigation.navigate('LocationFullView', { current_marker: this.state.markers[index] });
+    this.props.navigation.navigate('Game', { current_marker: this.state.markers[index] });
   };
 
   _updateSearch = (search) => {

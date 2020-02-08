@@ -31,14 +31,14 @@ class EmailSignInErrorScreen extends React.Component {
           <Text style={styles.text}>Your username and password don't match.{'\n'}Please try again.</Text>
 
           <View style={styles.btnContainer}>
-            <TouchableOpacity style={styles.buttonTryAgain} onPress={() => this.props.navigation.goBack()}>
+            <TouchableOpacity style={styles.buttonDark} onPress={() => this.props.navigation.goBack()}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <Icon
                   name='chevron-left'
                   type='material-community'
                   size={iconMediumSize}
                   color="#bbb" />
-                <Text style={styles.btnTryAgain}>{'Try Again'.toUpperCase()}</Text>
+                <Text style={styles.btnDark}>{'Try Again'.toUpperCase()}</Text>
               </View>
             </TouchableOpacity>
           </View>

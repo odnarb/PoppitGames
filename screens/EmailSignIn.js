@@ -114,9 +114,9 @@ class EmailSignInScreen extends React.Component {
         </View>
 
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.buttonSignIn} onPress={() => this._signInAsync()}>
+          <TouchableOpacity style={styles.buttonDark} onPress={() => this._signInAsync()}>
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-              <Text style={styles.btnSignIn}>{'Sign In'.toUpperCase()}</Text>
+              <Text style={styles.btnDark}>{'Sign In'.toUpperCase()}</Text>
               <Icon
                 name='chevron-right'
                 type='material-community'

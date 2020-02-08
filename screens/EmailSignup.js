@@ -128,13 +128,13 @@ class EmailSignUpScreen extends React.Component {
           </View>
 
           <View style={styles.btnContainer}>
-            <TouchableOpacity style={styles.buttonCancel} onPress={() => this.props.navigation.goBack()}>
-              <Text style={styles.btnCancel}>{'Cancel'.toUpperCase()}</Text>
+            <TouchableOpacity style={styles.buttonLight} onPress={() => this.props.navigation.goBack()}>
+              <Text style={styles.btnLight}>{'Cancel'.toUpperCase()}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.buttonSignup} onPress={() => this._signUp()}>
+            <TouchableOpacity style={styles.buttonDark} onPress={() => this._signUp()}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                <Text style={styles.btnSignup}>{'Sign Up'.toUpperCase()}</Text>
+                <Text style={styles.btnDark}>{'Sign Up'.toUpperCase()}</Text>
                 <Icon
                   name='chevron-right'
                   type='material-community'

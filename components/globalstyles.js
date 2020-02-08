@@ -86,12 +86,29 @@ const globalStyles = {
     flexDirection: 'row'
   },
 
+  settingsLabel: {
+    fontSize: moderateScale(20),
+    fontWeight: "bold",
+    color: '#fff',
+    paddingLeft: moderateScale(10),
+    paddingRight: moderateScale(10)
+  },
+
   settingsText: {
+    fontSize: moderateScale(17),
     marginTop: moderateScale(5),
     paddingLeft: moderateScale(15),
-    fontSize: moderateScale(17),
     color: '#fff'
   },
+
+  settingsValue: {
+    fontSize: moderateScale(20),
+    color: '#fff',
+    marginLeft: "auto",
+    paddingLeft: moderateScale(10),
+    paddingRight: moderateScale(10)
+  },
+
   copyrightText :{
     paddingLeft: moderateScale(10),
     marginTop: moderateScale(10),
@@ -146,6 +163,42 @@ const globalStyles = {
   switchText: {
     fontSize: moderateScale(16),
     alignSelf: "center"
+  },
+
+  buttonLight: {
+    width: "100%",
+    height: verticalScale(64),
+    borderColor: '#dcdcdc',
+    backgroundColor: "#dcdcdc",
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20),
+  },
+
+  btnLight: {
+    color: '#777',
+    fontWeight: 'bold',
+    fontSize: moderateScale(16),
+    textAlign:'center'
+  },
+
+  buttonDark: {
+    width: "100%",
+    height: verticalScale(64),
+    borderColor: '#000',
+    backgroundColor: "#000",
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: moderateScale(20),
+    marginTop: moderateScale(20)
+  },
+
+  btnDark: {
+    color: '#ccc',
+    fontWeight: 'bold',
+    fontSize: moderateScale(16),
+    textAlign:'center'
   }
 };
 
@@ -204,7 +257,7 @@ const emailSignInStyles = {
 
   contentContainer: {
     flex: 6,
-    justifyContent: "flex-start"
+    justifyContent: "flex-end"
   },
 
   inputContainer: {
@@ -236,24 +289,6 @@ const emailSignInStyles = {
     marginBottom: moderateScale(10),
     justifyContent: 'flex-end',
     alignItems: 'center'
-  },
-
-  buttonSignIn: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
-  btnSignIn: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
   }
 };
 
@@ -287,25 +322,7 @@ const emailSignInErrorStyles = {
     marginTop: moderateScale(6),
     width: "100%",
     color: "#777"
-  },
-
-  buttonTryAgain: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
-  btnTryAgain: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
-  },
+  }
 };
 
 const emailSignUpStyles = {
@@ -349,42 +366,6 @@ const emailSignUpStyles = {
     color: '#444',
     fontSize: moderateScale(16),
     marginLeft: moderateScale(10)
-  },
-
-  buttonCancel: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#dcdcdc',
-    backgroundColor: "#dcdcdc",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
-  buttonSignup: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
-  btnCancel: {
-    color: '#777',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
-  },
-
-  btnSignup: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
   }
 };
 
@@ -396,14 +377,15 @@ const learnMoreStyles = {
   },
 
   contentContainer: {
-    flex: 6,
-    paddingBottom: moderateScale(10)
+    flex: 6
   },
 
   tutoralHeader: {
     fontSize: moderateScale(26),
     fontWeight: 'bold',
-    color: '#000'
+    color: '#000',
+    marginTop: moderateScale(10)
+
   },
 
   tutorialText: {
@@ -479,10 +461,9 @@ const prizesStyles = {
   },
 
   contentContainer: {
-    flex: 7,
-    marginTop: moderateScale(10),
-    marginBottom: moderateScale(20)
+    flex: 6
   },
+
   headerText: {
     fontSize: moderateScale(30),
     color: "#fff",
@@ -537,23 +518,7 @@ const profileStyles = {
   },
 
   contentContainer: {
-    flex: 6,
-    marginTop: moderateScale(10),
-    marginBottom: moderateScale(20),
-    paddingLeft: moderateScale(20),
-    paddingRight: moderateScale(20)
-  },
-
-  settingLabel: {
-    fontSize: moderateScale(20),
-    fontWeight: "bold",
-    color: '#fff'
-  },
-
-  settingValue: {
-    fontSize: moderateScale(20),
-    color: '#fff',
-    marginLeft: "auto"
+    flex: 6
   },
 
   btnContainer: {
@@ -564,38 +529,21 @@ const profileStyles = {
     paddingBottom: moderateScale(20)
   },
 
-  buttonDark: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
-  btnDark: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
-  },
 };
 
 const profileEditStyles = {
 
   baseContainer: {
     flex: 1,
-    backgroundColor: '#666'
+    backgroundColor: '#666',
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
   },
 
   contentContainer: {
     flex: 6,
     marginTop: moderateScale(10),
     marginBottom: moderateScale(20),
-    paddingLeft: moderateScale(20),
-    paddingRight: moderateScale(20)
   },
 
   inputContainer: {
@@ -616,54 +564,15 @@ const profileEditStyles = {
 
   btnContainer: {
     flex: 2,
-    paddingLeft: moderateScale(20),
-    paddingRight: moderateScale(20),
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: moderateScale(20)
   },
 
-  buttonLight: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#dcdcdc',
-    backgroundColor: "#dcdcdc",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
-  buttonDark: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
   textLink: {
     fontWeight: 'bold',
     textDecorationLine: 'underline'
-  },
-
-  btnLight: {
-    color: '#777',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
-  },
-
-  btnDark: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
-  },
-
+  }
 };
 
 emailSignUpConfirmStyles = {
@@ -702,44 +611,7 @@ emailSignUpConfirmStyles = {
     fontSize: moderateScale(18),
     marginTop: moderateScale(6),
     width: "100%"
-  },
-
-  buttonLight: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#dcdcdc',
-    backgroundColor: "#dcdcdc",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
-  buttonDark: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
-  btnLight: {
-    color: '#777',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
-  },
-
-  btnDark: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
   }
-
 };
 
 const recoverPasswordStyles = {
@@ -778,44 +650,7 @@ const recoverPasswordStyles = {
     fontSize: moderateScale(18),
     marginTop: moderateScale(6),
     width: "100%"
-  },
-
-  buttonLight: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#dcdcdc',
-    backgroundColor: "#dcdcdc",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
-  buttonDark: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
-  btnLight: {
-    color: '#777',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
-  },
-
-  btnDark: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
-  },
-
+  }
 };
 
 const recoverPasswordConfirmStyles = {
@@ -847,26 +682,7 @@ const recoverPasswordConfirmStyles = {
     fontSize: moderateScale(18),
     color: '#777',
     marginBottom: moderateScale(10)
-  },
-
-  buttonDark: {
-    width: "100%",
-    height: verticalScale(64),
-    borderColor: '#000',
-    backgroundColor: "#000",
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: moderateScale(20),
-    marginTop: moderateScale(20),
-  },
-
-  btnDark: {
-    color: '#ccc',
-    fontWeight: 'bold',
-    fontSize: moderateScale(16),
-    textAlign:'center'
-  },
-
+  }
 };
 
 const signInStyles = {
@@ -881,24 +697,12 @@ const signInStyles = {
     alignItems: 'center'
   },
 
-  // btnTouch:{
-  //   flexDirection: "row",
-  //   backgroundColor: '#000',
-  //   borderColor: '#000',
-  //   borderWidth: 1,
-  //   borderRadius: 5,
-  //   padding: 20,
-  //   justifyContent: 'center',
-  //   marginTop: 20
-  // },
-
   btnGoogle:{
     flexDirection: "row",
     backgroundColor: '#4285F4',
     borderColor: '#4285F4',
     borderWidth: 1,
     borderRadius: moderateScale(5),
-    // padding: moderateScale(5),
     justifyContent: 'center',
     marginTop: moderateScale(20)
   },
@@ -909,7 +713,6 @@ const signInStyles = {
     borderColor: '#3b5998',
     borderWidth: 1,
     borderRadius: moderateScale(5),
-    // padding: moderateScale(5),
     justifyContent: 'center',
     marginTop: moderateScale(20)
   },
@@ -920,7 +723,6 @@ const signInStyles = {
     borderColor: '#777',
     borderWidth: 1,
     borderRadius: moderateScale(5),
-    // padding: moderateScale(5),
     justifyContent: 'center',
     marginTop: moderateScale(10)
   },

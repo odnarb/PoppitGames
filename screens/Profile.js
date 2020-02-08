@@ -20,23 +20,23 @@ class ProfileScreen extends React.Component {
           <View style={styles.contentContainer}>
 
             <View style={styles.settingsRow}>
-              <Text style={styles.settingLabel}>Full Name: </Text>
-              <Text style={styles.settingValue}>John Smith</Text>
+              <Text style={styles.settingsLabel}>Full Name: </Text>
+              <Text style={styles.settingsValue}>John Smith</Text>
             </View>
 
             <View style={styles.settingsRow}>
-              <Text style={styles.settingLabel}>Email Address: </Text>
-              <Text style={styles.settingValue}>john.smith@gmail.com</Text>
+              <Text style={styles.settingsLabel}>Email Address: </Text>
+              <Text style={styles.settingsValue}>john.smith@gmail.com</Text>
             </View>
 
             <View style={styles.settingsRow}>
-              <Text style={styles.settingLabel}>Birthdate: </Text>
-              <Text style={styles.settingValue}>3/7/1980</Text>
+              <Text style={styles.settingsLabel}>Birthdate: </Text>
+              <Text style={styles.settingsValue}>3/7/1980</Text>
             </View>
 
             <View style={styles.settingsRow}>
-              <Text style={styles.settingLabel}>Location: </Text>
-              <Text style={styles.settingValue}>Tucson, AZ</Text>
+              <Text style={styles.settingsLabel}>Location: </Text>
+              <Text style={styles.settingsValue}>Tucson, AZ</Text>
             </View>
           </View>
 

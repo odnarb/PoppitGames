@@ -27,7 +27,7 @@ class AboutScreen extends React.Component {
     return (
      <View style={styles.baseContainer}>
       <View style={styles.versionContainer}>
-        <LogoBanner container="flex1" size="scaled" />
+        <LogoBanner size="scaled" />
 
         <View style={styles.versionRow}>
           <Text style={styles.versionText}>version 1.3.2 (0bdd85b1)</Text>

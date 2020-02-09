@@ -24,11 +24,19 @@ import BottomNavigation from '../components/BottomNavigation';
 
 import { mapsStyleSheet as styles } from '../components/globalstyles';
 
+//an example of using external/remote assets
+// const Images = [
+//   { uri: "https://i.imgur.com/sNam9iJ.jpg" },
+//   { uri: "https://i.imgur.com/N7rlQYt.jpg" },
+//   { uri: "https://i.imgur.com/UDrH0wm.jpg" },
+//   { uri: "https://i.imgur.com/Ka8kNST.jpg" }
+// ];
+
 const Images = [
-  { uri: "https://i.imgur.com/sNam9iJ.jpg" },
-  { uri: "https://i.imgur.com/N7rlQYt.jpg" },
-  { uri: "https://i.imgur.com/UDrH0wm.jpg" },
-  { uri: "https://i.imgur.com/Ka8kNST.jpg" }
+  require("../assets/images/brands/quicktrip-logo-small.png"),
+  require("../assets/images/brands/quicktrip-logo-small.png"),
+  require("../assets/images/brands/quicktrip-logo-small.png"),
+  require("../assets/images/brands/quicktrip-logo-small.png")
 ];
 
 const { width, height } = Dimensions.get("window");

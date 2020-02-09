@@ -839,7 +839,7 @@ const mapsStyles = {
   marker: {
     width: moderateScale(8),
     height: moderateScale(8),
-    borderRadius: moderateScale(4),
+    borderRadius: moderateScale(6),
     backgroundColor: "rgba(130,4,150, 0.9)",
   },
   ring: {

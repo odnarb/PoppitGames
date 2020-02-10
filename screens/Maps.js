@@ -53,11 +53,17 @@ class MapsScreen extends React.Component {
   };
 
   _onPressMarker = (e) => {
-    Alert.alert("_onPressMarker()");
-    console.log("_onPressMarker(): ", e.nativeEvent);
+    this._showCarousel();
+    // Alert.alert("_onPressMarker(), carousel state: ", this.state.showCarousel);
+    // console.log("_onPressMarker(): ", e.nativeEvent);
+    // console.log("_onPressMarker(), carousel state: ", this.state.showCarousel);
   }
 
-  _onPressMapButton = (index) => {
+  _onPressMap = () => {
+      this._hideCarousel();
+  }
+
+  _onPressCarouselItem = (index) => {
     this.props.navigation.navigate('Game', { current_marker: this.state.markers[index] });
   };
 
@@ -65,9 +71,68 @@ class MapsScreen extends React.Component {
     this.setState({ search });
   };
 
+  _showCarousel = () => {
+    this.setState({
+      showCarousel: true
+    });
+  };
+
+  _hideCarousel = () => {
+    this.setState({
+      showCarousel: false
+    });
+  };
+
+  _renderCarousel = () => {
+      if (this.state.showCarousel) {
+        return (
+          <Animated.ScrollView
+            horizontal
+            scrollEventThrottle={1}
+            showsHorizontalScrollIndicator={false}
+            snapToInterval={CARD_WIDTH}
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: {
+                      x: this.animation,
+                    },
+                  },
+                },
+              ],
+              { useNativeDriver: true }
+            )}
+            style={styles.scrollView}
+            contentContainerStyle={styles.endPadding}>
+
+            {this.state.markers.map((marker, index) => (
+              <View
+                style={styles.card} key={index}>
+                <TouchableOpacity onPress={() => this._onPressCarouselItem(index) } style={styles.cardImage}>
+                  <Image
+                    source={marker.image}
+                    style={styles.cardImage}
+                    resizeMode="cover" />
+                </TouchableOpacity>
+                <View style={styles.textContent}>
+                  <Text numberOfLines={1} style={styles.cardtitle}>{marker.title}</Text>
+                  <Text numberOfLines={1} style={styles.cardDescription}>
+                    {marker.description}
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </Animated.ScrollView>
+        );
+       } else {
+            return null;
+        }
+  };
     watchID: ?number = null;
 
     state = {
+      showCarousel: false,
       // initialPosition: 'unknown',
       // lastPosition: 'unknown',
       search: '',
@@ -213,6 +278,7 @@ class MapsScreen extends React.Component {
           ref={map => this.map = map}
           initialRegion={this.state.region}
           style={styles.mapContainer}
+          onPress={this._onPressMap}
           loadingEnabled={true}
           showsUserLocation={true}>
 
@@ -234,44 +300,7 @@ class MapsScreen extends React.Component {
 
         <LogoBanner container="absolute" size="small" />
 
-        <Animated.ScrollView
-          horizontal
-          scrollEventThrottle={1}
-          showsHorizontalScrollIndicator={false}
-          snapToInterval={CARD_WIDTH}
-          onScroll={Animated.event(
-            [
-              {
-                nativeEvent: {
-                  contentOffset: {
-                    x: this.animation,
-                  },
-                },
-              },
-            ],
-            { useNativeDriver: true }
-          )}
-          style={styles.scrollView}
-          contentContainerStyle={styles.endPadding}>
-
-          {this.state.markers.map((marker, index) => (
-            <View
-              style={styles.card} key={index}>
-              <TouchableOpacity onPress={() => this._onPressMapButton(index) } style={styles.cardImage}>
-                <Image
-                  source={marker.image}
-                  style={styles.cardImage}
-                  resizeMode="cover" />
-              </TouchableOpacity>
-              <View style={styles.textContent}>
-                <Text numberOfLines={1} style={styles.cardtitle}>{marker.title}</Text>
-                <Text numberOfLines={1} style={styles.cardDescription}>
-                  {marker.description}
-                </Text>
-              </View>
-            </View>
-          ))}
-        </Animated.ScrollView>
+        {this._renderCarousel()}
 
         <View style={styles.searchBarContainer}>
           <SearchBar

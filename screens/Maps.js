@@ -14,7 +14,7 @@ import {
 
 import {SearchBar} from 'react-native-elements'
 
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import Geolocation from '@react-native-community/geolocation';
 
@@ -52,6 +52,11 @@ class MapsScreen extends React.Component {
     header: null
   };
 
+  _onPressMarker = (e) => {
+    Alert.alert("_onPressMarker()");
+    console.log("_onPressMarker(): ", e.nativeEvent);
+  }
+
   _onPressMapButton = (index) => {
     this.props.navigation.navigate('Game', { current_marker: this.state.markers[index] });
   };
@@ -69,6 +74,10 @@ class MapsScreen extends React.Component {
       markers: [{
         title: "Quick Trip #1",
         description: "Test description #1",
+        coupon: {
+          title: "$.50 OFF",
+          description: ""
+        },
         coordinate: {
           latitude: 33.3776538,
           longitude: -112.0490218,
@@ -78,6 +87,10 @@ class MapsScreen extends React.Component {
       {
         title: "Quick Trip #2",
         description: "Test description #2",
+        coupon: {
+          title: "-50% OFF",
+          description: ""
+        },
         coordinate: {
           latitude: 33.4803774,
           longitude: -112.0328086,
@@ -87,6 +100,10 @@ class MapsScreen extends React.Component {
       {
         title: "Quick Trip #3",
         description: "Test description #3",
+        coupon: {
+          title: "FREE COFFEE",
+          description: ""
+        },
         coordinate: {
           latitude: 33.4796037,
           longitude: -112.1171363,
@@ -101,7 +118,7 @@ class MapsScreen extends React.Component {
       }
     };
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
       this.index = 0;
       this.animation = new Animated.Value(0);
     }
@@ -203,10 +220,12 @@ class MapsScreen extends React.Component {
             const scaleStyle = { transform: [{scale: interpolations[index].scale}] };
             const opacityStyle = { opacity: interpolations[index].opacity };
             return (
-              <MapView.Marker key={index} coordinate={marker.coordinate}>
+              <MapView.Marker key={index} coordinate={marker.coordinate}
+                onPress={e => this._onPressMarker(e)}>
                 <Animated.View style={[styles.markerWrap, opacityStyle]}>
-                  <Animated.View style={[styles.ring, scaleStyle]} />
-                  <View style={styles.marker} />
+                  <View style={styles.marker}>
+                    <Text style={styles.markerText}>{marker.coupon.title.toUpperCase()}</Text>
+                  </View>
                 </Animated.View>
               </MapView.Marker>
             );

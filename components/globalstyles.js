@@ -832,26 +832,26 @@ const mapsStyles = {
     fontSize: moderateScale(12),
     color: "#444",
   },
+
   markerWrap: {
     alignItems: "center",
     justifyContent: "center",
   },
+
   marker: {
-    width: moderateScale(8),
-    height: moderateScale(8),
-    borderRadius: moderateScale(6),
-    backgroundColor: "rgba(130,4,150, 0.9)",
-  },
-  ring: {
-    width: moderateScale(24),
-    height: verticalScale(24),
-    borderRadius: moderateScale(12),
-    backgroundColor: "rgba(130,4,150, 0.3)",
-    position: "absolute",
-    borderWidth: 1,
-    borderColor: "rgba(130,4,150, 0.5)",
+    flex: 1,
+    paddingLeft: moderateScale(5),
+    paddingRight: moderateScale(5),
+    // width: moderateScale(48),
+    // height: moderateScale(20),
+    borderRadius: moderateScale(8),
+    backgroundColor: "#1eff29"
   },
 
+  markerText: {
+    color: "#fff",
+    alignSelf: "center"
+  }
 };
 
 const authLoadingStyles = {

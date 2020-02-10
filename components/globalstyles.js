@@ -788,6 +788,27 @@ const mapsStyles = {
     right: 0,
     bottom: 0,
   },
+
+  searchResultsIndicator: {
+    position: 'absolute',
+    height: moderateScale(30),
+    top: verticalScale(140),
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "#000"
+  },
+
+  searchResultsIndicatorContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingLeft: moderateScale(5)
+  },
+
+  searchResultsIndicatorText: {
+    color: "#fff"
+  },
+
   mapContainer: {
     flex: 8,
   },

@@ -12,6 +12,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import { Icon } from 'react-native-elements';
+
 import {SearchBar} from 'react-native-elements'
 
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -52,6 +54,26 @@ class MapsScreen extends React.Component {
     header: null
   };
 
+
+  // _getBoundingBox = (region) => {
+  //   let boundingBox = {
+  //     westLng: region.longitude - region.longitudeDelta/2, // westLng - min lng
+  //     southLat: region.latitude - region.latitudeDelta/2, // southLat - min lat
+  //     eastLng: region.longitude + region.longitudeDelta/2, // eastLng - max lng
+  //     northLat: region.latitude + region.latitudeDelta/2 // northLat - max lat
+  //   }
+  //   return boundingBox;
+  // }
+
+  // _isInBoudingBox(coordinate) {
+  //   if (coordinate.latitude > this.state.boundingBox.southLat && coordinate.latitude < this.state.boundingBox.northLat &&
+  //       coordinate.longitude > this.state.boundingBox.westLng && coordinate.longitude < this.state.boundingBox.eastLng)
+  //   {
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
   _onPressMarker = (e) => {
     this._showCarousel();
     // Alert.alert("_onPressMarker(), carousel state: ", this.state.showCarousel);
@@ -68,7 +90,10 @@ class MapsScreen extends React.Component {
   };
 
   _updateSearch = (search) => {
-    this.setState({ search });
+    this.setState({ lastSearch: this.state.search });
+    this.setState({ search: search });
+
+    this._search();
   };
 
   _showCarousel = () => {
@@ -81,6 +106,145 @@ class MapsScreen extends React.Component {
     this.setState({
       showCarousel: false
     });
+  };
+
+  _search = () => {
+    if(this.state.search != this.state.lastSearch){
+      this.setState({
+        searchInProgress: true
+      });
+
+    //simulate a search
+    setTimeout(() => {
+
+      this.setState({
+        searchInProgress: false
+      });
+
+      //run search and set new marker data
+      this.setState({ markers: [{
+              title: "Quick Trip #1",
+              description: "Test description #1",
+              coupon: {
+                title: "$.50 OFF",
+                description: ""
+              },
+              coordinate: {
+                latitude: 33.3776538,
+                longitude: -112.0490218,
+              },
+              image: Images[0]
+            },
+            {
+              title: "Quick Trip #2",
+              description: "Test description #2",
+              coupon: {
+                title: "-50% OFF",
+                description: ""
+              },
+              coordinate: {
+                latitude: 33.4803774,
+                longitude: -112.0328086,
+              },
+              image: Images[1]
+            },
+            {
+              title: "Quick Trip #3",
+              description: "Test description #3",
+              coupon: {
+                title: "FREE COFFEE",
+                description: ""
+              },
+              coordinate: {
+                latitude: 33.4796037,
+                longitude: -112.1171363,
+              },
+              image: Images[2]
+            }]
+      });
+      this._renderMarkers();
+
+
+    }, 2000)
+
+    } else {
+      console.log("No markers to render...");
+    }
+  };
+
+  _renderSearchResultsIndicator = () => {
+
+    if(this.state.searchInProgress) {
+      return (
+        <View style={styles.searchResultsIndicator}>
+          <View style={styles.searchResultsIndicatorContainer}>
+            <Text style={styles.searchResultsIndicatorText}>Loading...</Text>
+          </View>
+        </View>
+      );
+    } else if (!this.state.searchInProgress && this.state.markers.length > 0) {
+      return (
+        <View style={styles.searchResultsIndicator}>
+          <View style={styles.searchResultsIndicatorContainer}>
+            <Text style={styles.searchResultsIndicatorText}>{this.state.markers.length} Results</Text>
+          </View>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.searchResultsIndicator}>
+          <View style={styles.searchResultsIndicatorContainer}>
+            <Text style={styles.searchResultsIndicatorText}>No Results</Text>
+            <Icon name='circle-small' type='material-community' color="#fff" size={30} />
+            <Text style={styles.searchResultsIndicatorText}>please zoom out or update filters</Text>
+          </View>
+        </View>
+      );
+    }
+  };
+
+  _renderMarkers = () => {
+      if (this.state.markers.length > 0) {
+        const interpolations = this.state.markers.map((marker, index) => {
+          const inputRange = [
+            (index - 1) * CARD_WIDTH,
+            index * CARD_WIDTH,
+            ((index + 1) * CARD_WIDTH),
+          ];
+
+          const scale = this.animation.interpolate({
+            inputRange,
+            outputRange: [1, 2.5, 1],
+            extrapolate: "clamp",
+          });
+          const opacity = this.animation.interpolate({
+            inputRange,
+            outputRange: [0.35, 1, 0.35],
+            extrapolate: "clamp",
+          });
+          return { scale, opacity };
+        });
+
+        //render
+        return ( this.state.markers.map((marker, index) => {
+            const scaleStyle = { transform: [{scale: interpolations[index].scale}] };
+            const opacityStyle = { opacity: interpolations[index].opacity };
+            return (
+              <MapView.Marker key={index} coordinate={marker.coordinate}
+                onPress={e => this._onPressMarker(e)}>
+                <Animated.View style={[styles.markerWrap, opacityStyle]}>
+                  <View style={styles.marker}>
+                    <Text style={styles.markerText}>{marker.coupon.title.toUpperCase()}</Text>
+                  </View>
+                </Animated.View>
+              </MapView.Marker>
+            );
+        }));
+      } else {
+
+        //show "no results"
+        return null;
+      }
   };
 
   _renderCarousel = () => {
@@ -135,46 +299,9 @@ class MapsScreen extends React.Component {
       showCarousel: false,
       // initialPosition: 'unknown',
       // lastPosition: 'unknown',
+      searchInProgress: false,
       search: '',
-      markers: [{
-        title: "Quick Trip #1",
-        description: "Test description #1",
-        coupon: {
-          title: "$.50 OFF",
-          description: ""
-        },
-        coordinate: {
-          latitude: 33.3776538,
-          longitude: -112.0490218,
-        },
-        image: Images[0]
-      },
-      {
-        title: "Quick Trip #2",
-        description: "Test description #2",
-        coupon: {
-          title: "-50% OFF",
-          description: ""
-        },
-        coordinate: {
-          latitude: 33.4803774,
-          longitude: -112.0328086,
-        },
-        image: Images[1]
-      },
-      {
-        title: "Quick Trip #3",
-        description: "Test description #3",
-        coupon: {
-          title: "FREE COFFEE",
-          description: ""
-        },
-        coordinate: {
-          latitude: 33.4796037,
-          longitude: -112.1171363,
-        },
-        image: Images[2]
-      }],
+      markers: [],
       region: {
         latitude: 33.4486,
         longitude: -112.077,
@@ -252,26 +379,6 @@ class MapsScreen extends React.Component {
   render() {
     const { search } = this.state;
 
-    const interpolations = this.state.markers.map((marker, index) => {
-      const inputRange = [
-        (index - 1) * CARD_WIDTH,
-        index * CARD_WIDTH,
-        ((index + 1) * CARD_WIDTH),
-      ];
-
-      const scale = this.animation.interpolate({
-        inputRange,
-        outputRange: [1, 2.5, 1],
-        extrapolate: "clamp",
-      });
-      const opacity = this.animation.interpolate({
-        inputRange,
-        outputRange: [0.35, 1, 0.35],
-        extrapolate: "clamp",
-      });
-      return { scale, opacity };
-    });
-
     return (
       <View style={styles.container}>
         <MapView
@@ -282,20 +389,7 @@ class MapsScreen extends React.Component {
           loadingEnabled={true}
           showsUserLocation={true}>
 
-          {this.state.markers.map((marker, index) => {
-            const scaleStyle = { transform: [{scale: interpolations[index].scale}] };
-            const opacityStyle = { opacity: interpolations[index].opacity };
-            return (
-              <MapView.Marker key={index} coordinate={marker.coordinate}
-                onPress={e => this._onPressMarker(e)}>
-                <Animated.View style={[styles.markerWrap, opacityStyle]}>
-                  <View style={styles.marker}>
-                    <Text style={styles.markerText}>{marker.coupon.title.toUpperCase()}</Text>
-                  </View>
-                </Animated.View>
-              </MapView.Marker>
-            );
-          })}
+          {this._renderMarkers()}
         </MapView>
 
         <LogoBanner container="absolute" size="small" />
@@ -311,6 +405,8 @@ class MapsScreen extends React.Component {
             inputContainerStyle={{backgroundColor: 'white'}}
             containerStyle={{backgroundColor: 'white', borderWidth: 1}} />
         </View>
+
+        {this._renderSearchResultsIndicator()}
 
         <BottomNavigation />
 

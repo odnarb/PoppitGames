@@ -428,6 +428,9 @@ class MapsScreen extends React.Component {
         if (this.index !== index) {
           this.index = index;
           const { coordinate } = this.state.markers[index];
+          //also highlight the current selected marker
+          this.setState({ selectedMarkerIndex: index });
+
           this.map.animateToRegion(
             {
               ...coordinate,

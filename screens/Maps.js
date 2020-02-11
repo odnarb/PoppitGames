@@ -54,7 +54,6 @@ class MapsScreen extends React.Component {
     header: null
   };
 
-
   // _getBoundingBox = (region) => {
   //   let boundingBox = {
   //     westLng: region.longitude - region.longitudeDelta/2, // westLng - min lng
@@ -76,14 +75,11 @@ class MapsScreen extends React.Component {
 
   _onPressMarker = (e) => {
     this._showCarousel();
-    // Alert.alert("_onPressMarker(), carousel state: ", this.state.showCarousel);
-    // console.log("_onPressMarker(): ", e.nativeEvent);
-    // console.log("_onPressMarker(), carousel state: ", this.state.showCarousel);
-  }
+  };
 
   _onPressMap = () => {
       this._hideCarousel();
-  }
+  };
 
   _onPressCarouselItem = (index) => {
     this.props.navigation.navigate('Game', { current_marker: this.state.markers[index] });
@@ -92,8 +88,11 @@ class MapsScreen extends React.Component {
   _updateSearch = (search) => {
     this.setState({ lastSearch: this.state.search });
     this.setState({ search: search });
-
     this._search();
+  };
+
+  _clearSearch = () => {
+    this._updateSearch("");
   };
 
   _showCarousel = () => {
@@ -114,15 +113,25 @@ class MapsScreen extends React.Component {
         searchInProgress: true
       });
 
-    //simulate a search
-    setTimeout(() => {
+      //render nothing if we've cleared the search
+      if(this.state.search === "" ){
+        this.setState({
+          markers: [],
+          searchInProgress: false
+        });
 
-      this.setState({
-        searchInProgress: false
-      });
+        this._renderMarkers();
+      } else {
+        //simulate a search
+        setTimeout(() => {
 
-      //run search and set new marker data
-      this.setState({ markers: [{
+          this.setState({
+            searchInProgress: false
+          });
+
+          //run search and set new marker data
+          this.setState({ markers: [
+            {
               title: "Quick Trip #1",
               description: "Test description #1",
               coupon: {
@@ -160,15 +169,10 @@ class MapsScreen extends React.Component {
                 longitude: -112.1171363,
               },
               image: Images[2]
-            }]
-      });
-      this._renderMarkers();
-
-
-    }, 2000)
-
-    } else {
-      console.log("No markers to render...");
+          }]});
+          this._renderMarkers();
+        }, 2000);
+      } //endif
     }
   };
 
@@ -293,88 +297,87 @@ class MapsScreen extends React.Component {
             return null;
         }
   };
-    watchID: ?number = null;
 
-    state = {
-      showCarousel: false,
-      // initialPosition: 'unknown',
-      // lastPosition: 'unknown',
-      searchInProgress: false,
-      search: '',
-      markers: [],
-      region: {
-        latitude: 33.4486,
-        longitude: -112.077,
-        latitudeDelta: 1,
-        longitudeDelta: 0.0421
-      }
-    };
+  watchID: ?number = null;
 
-    UNSAFE_componentWillMount() {
-      this.index = 0;
-      this.animation = new Animated.Value(0);
+  state = {
+    showCarousel: false,
+    // initialPosition: 'unknown',
+    // lastPosition: 'unknown',
+    searchInProgress: false,
+    search: '',
+    markers: [],
+    region: {
+      latitude: 33.4486,
+      longitude: -112.077,
+      latitudeDelta: 1,
+      longitudeDelta: 0.0421
     }
+  };
 
-    componentWillUnmount() {
-      this.watchID != null && Geolocation.clearWatch(this.watchID);
-    }
+  UNSAFE_componentWillMount() {
+    this.index = 0;
+    this.animation = new Animated.Value(0);
+  }
 
-    componentDidMount() {
-      Geolocation.getCurrentPosition(
-        position => {
+  componentWillUnmount() {
+    this.watchID != null && Geolocation.clearWatch(this.watchID);
+  }
 
-          //update state
-          this.setState({
-            region: {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              latitudeDelta: 0.05,
-              longitudeDelta: 0.05
-            }
-          });
+  componentDidMount() {
+    Geolocation.getCurrentPosition(
+      position => {
 
-          //goto the location
-          this.map.animateToRegion(this.state.region, 350);
-        },
-        error => Alert.alert('Error', JSON.stringify(error)),
-        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-      );
-
-      this.watchID = Geolocation.watchPosition(position => {
-        // const lastPosition = JSON.stringify(position);
-        // this.setState({lastPosition});
-      });
-
-      // We should detect when scrolling has stopped then animate
-      // We should just debounce the event listener here
-      this.animation.addListener(({ value }) => {
-        let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
-        if (index >= this.state.markers.length) {
-          index = this.state.markers.length - 1;
-        }
-        if (index <= 0) {
-          index = 0;
-        }
-
-        clearTimeout(this.regionTimeout);
-        this.regionTimeout = setTimeout(() => {
-          if (this.index !== index) {
-            this.index = index;
-            const { coordinate } = this.state.markers[index];
-            this.map.animateToRegion(
-              {
-                ...coordinate,
-                latitudeDelta: this.state.region.latitudeDelta,
-                longitudeDelta: this.state.region.longitudeDelta,
-              },
-              350
-            );
+        //update state
+        this.setState({
+          region: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05
           }
-        }, 10);
-      });
+        });
 
+        //goto the location
+        this.map.animateToRegion(this.state.region, 350);
+      },
+      error => Alert.alert('Error', JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    );
 
-    }
+    this.watchID = Geolocation.watchPosition(position => {
+      // const lastPosition = JSON.stringify(position);
+      // this.setState({lastPosition});
+    });
+
+    // We should detect when scrolling has stopped then animate
+    // We should just debounce the event listener here
+    this.animation.addListener(({ value }) => {
+      let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+      if (index >= this.state.markers.length) {
+        index = this.state.markers.length - 1;
+      }
+      if (index <= 0) {
+        index = 0;
+      }
+
+      clearTimeout(this.regionTimeout);
+      this.regionTimeout = setTimeout(() => {
+        if (this.index !== index) {
+          this.index = index;
+          const { coordinate } = this.state.markers[index];
+          this.map.animateToRegion(
+            {
+              ...coordinate,
+              latitudeDelta: this.state.region.latitudeDelta,
+              longitudeDelta: this.state.region.longitudeDelta,
+            },
+            350
+          );
+        }
+      }, 10);
+    });
+  }
 
   render() {
     const { search } = this.state;
@@ -400,6 +403,7 @@ class MapsScreen extends React.Component {
           <SearchBar
             placeholder="Search for coupons near you..."
             onChangeText={this._updateSearch}
+            onClear={this._clearSearch}
             value={search}
             inputStyle={{backgroundColor: 'white'}}
             inputContainerStyle={{backgroundColor: 'white'}}

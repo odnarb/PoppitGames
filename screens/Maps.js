@@ -89,6 +89,10 @@ class MapsScreen extends React.Component {
     this._showCarousel();
   };
 
+  _onRegionChange = (r) => {
+    this.setState({ region: r });
+  }
+
   _onPressMap = () => {
       this.setState({ selectedMarkerIndex: -1 });
       this._hideCarousel();
@@ -99,8 +103,10 @@ class MapsScreen extends React.Component {
   };
 
   _updateSearch = (search) => {
-    this.setState({ lastSearch: this.state.search });
-    this.setState({ search: search });
+    this.setState({
+      lastSearch: this.state.search,
+      search: search
+    });
     this._search();
   };
 
@@ -281,6 +287,17 @@ class MapsScreen extends React.Component {
     }
   };
 
+   _getCachedItem = async (key) => {
+    let item = await AsyncStorage.getItem(key);
+    return item;
+  };
+
+  _setCachedItem = async (key, val) => {
+    await AsyncStorage.setItem(key, val);
+
+    return;
+  };
+
   _renderCarousel = () => {
     if (this.state.showCarousel) {
       return (
@@ -353,28 +370,42 @@ class MapsScreen extends React.Component {
 
   componentWillUnmount() {
     this.watchID != null && Geolocation.clearWatch(this.watchID);
+    this._setCachedItem('lastRegion', JSON.stringify(this.state.region));
   }
 
   componentDidMount() {
-    Geolocation.getCurrentPosition(
-      position => {
 
-        //update state
-        this.setState({
-          region: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05
-          }
-        });
+    //restore the last region, if one..
+    //what if the region was null, default region to user's location
+    this._getCachedItem('lastRegion').then(data => {
+      if(data !== null){
+        this.setState({ region: JSON.parse(data) });
 
         //goto the location
         this.map.animateToRegion(this.state.region, 350);
-      },
-      error => Alert.alert('Error', JSON.stringify(error)),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-    );
+      } else {
+        Geolocation.getCurrentPosition(
+          position => {
+
+            //update state
+            this.setState({
+              region: {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                latitudeDelta: 0.05,
+                longitudeDelta: 0.05
+              }
+            });
+
+            //goto the location
+            this.map.animateToRegion(this.state.region, 350);
+          },
+          error => Alert.alert('Error', JSON.stringify(error)),
+          {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+        );
+      }
+    });
+
 
     this.watchID = Geolocation.watchPosition(position => {
       // const lastPosition = JSON.stringify(position);
@@ -420,6 +451,7 @@ class MapsScreen extends React.Component {
           initialRegion={this.state.region}
           style={styles.mapContainer}
           onPress={this._onPressMap}
+          onRegionChangeComplete={ r => {this._onRegionChange(r)}}
           loadingEnabled={true}
           showsUserLocation={true}>
 

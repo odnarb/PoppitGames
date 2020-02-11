@@ -24,7 +24,12 @@ import Geolocation from '@react-native-community/geolocation';
 
 import LogoBanner from '../components/LogoBanner';
 import BottomNavigation from '../components/BottomNavigation';
-import { mapsStyleSheet as styles } from '../components/globalstyles';
+
+import {
+  mapsStyleSheet as styles,
+  searchResultsIconColor,
+  searchResultsIconSize
+} from '../components/globalstyles';
 
 //an example of using external/remote assets
 // const Images = [
@@ -204,7 +209,7 @@ class MapsScreen extends React.Component {
         <View style={styles.searchResultsIndicatorContainer}>
           <View style={styles.searchResultsIndicatorView}>
             <View style={styles.searchResultsIndicator}>
-              <Icon name='circle-slice-8' type='material-community' color="#1eff29" size={20} />
+              <Icon name='circle-slice-8' type='material-community' color={searchResultsIconColor} size={searchResultsIconSize} />
               <Text style={[styles.searchResultsIndicatorText, styles.marginLeft10]}>{this.state.markers.length} Results</Text>
             </View>
           </View>

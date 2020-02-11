@@ -26,6 +26,11 @@ const bottomNavIconColor = "#777";
 const passwordInputIconSize = moderateScale(25);
 const passwordInputIconColor = moderateScale(25);
 
+
+//const searchResultsIconColor = "#1eff29"; //green-ish color
+const searchResultsIconColor = "#ff3030"; //red-ish color
+const searchResultsIconSize = moderateScale(20);
+
 const signInIconSize = iconLargeSize;
 
 const globalStyles = {
@@ -1050,7 +1055,11 @@ export {
   emailSignUpConfirmStyleSheet,
 
   learnMoreStyleSheet,
+
   mapsStyleSheet,
+  searchResultsIconColor,
+  searchResultsIconSize,
+
   notificationsStyleSheet,
   prizesStyleSheet,
   profileStyleSheet,

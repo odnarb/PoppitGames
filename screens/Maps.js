@@ -71,6 +71,9 @@ class MapsScreen extends React.Component {
 // await AsyncStorage.setItem('marker@'+marker.hash, "seen");
 
   _onPressMarker = async (e,index) => {
+    //set the current marker selected
+    this.setState({ selectedMarkerIndex: index });
+
     let markerSeen = await AsyncStorage.getItem('marker@'+this.state.markers[index].hash);
     if( markerSeen !== MARKER_SEEN){
       await AsyncStorage.setItem('marker@'+this.state.markers[index].hash, MARKER_SEEN);
@@ -82,6 +85,7 @@ class MapsScreen extends React.Component {
   };
 
   _onPressMap = () => {
+      this.setState({ selectedMarkerIndex: -1 });
       this._hideCarousel();
   };
 
@@ -258,7 +262,7 @@ class MapsScreen extends React.Component {
           <MapView.Marker key={index} coordinate={marker.coordinate}
             onPress={e => this._onPressMarker(e, index)}>
             <Animated.View style={styles.markerWrap}>
-              <View style={[styles.marker]}>
+              <View style={[styles.marker, this.state.selectedMarkerIndex === index ? styles.selectedMarker : styles.regularMarker]}>
                 <Text style={styles.markerText}>{marker.coupon.title.toUpperCase()}</Text>
               </View>
             </Animated.View>
@@ -323,6 +327,7 @@ class MapsScreen extends React.Component {
 
   state = {
     showCarousel: false,
+    selectedMarkerIndex: -1,
     // initialPosition: 'unknown',
     // lastPosition: 'unknown',
     searchInProgress: false,

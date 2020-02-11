@@ -877,15 +877,17 @@ searchResultsIndicatorContainer: {
     backgroundColor: "blue"
   },
 
-  darkMarker: {
-      backgroundColor: "#1eff29"
+  regularMarker: {
+      backgroundColor: "#ff3030"
   },
 
-  lightMarker: {
+  selectedMarker: {
       backgroundColor: "#6afc71"
   },
 
-
+  visitedMarker: {
+      backgroundColor: "#6afc71"
+  },
 
 
   markerText: {

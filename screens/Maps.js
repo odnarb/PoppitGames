@@ -112,6 +112,8 @@ class MapsScreen extends React.Component {
 
   _clearSearch = () => {
     this._updateSearch("");
+    this.setState({ selectedMarkerIndex: -1 });
+    this._hideCarousel();
   };
 
   _showCarousel = () => {

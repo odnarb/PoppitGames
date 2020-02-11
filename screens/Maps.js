@@ -73,20 +73,19 @@ class MapsScreen extends React.Component {
   //   return false;
   // }
 
-// await AsyncStorage.setItem('marker@'+marker.hash, "seen");
-
-  _onPressMarker = async (e,index) => {
+  _onPressMarker = (event,index) => {
     //set the current marker selected
-    this.setState({ selectedMarkerIndex: index });
+    this.setState({ selectedMarkerIndex: index }, () => {
+      AsyncStorage.getItem('marker@'+this.state.markers[index].hash, (markerSeen) => {
+        if( markerSeen !== MARKER_SEEN){
+          AsyncStorage.setItem('marker@'+this.state.markers[index].hash, MARKER_SEEN, (e) => {
+            console.log("marker clicked: ", this.state.markers[index].hash, markerSeen);
 
-    let markerSeen = await AsyncStorage.getItem('marker@'+this.state.markers[index].hash);
-    if( markerSeen !== MARKER_SEEN){
-      await AsyncStorage.setItem('marker@'+this.state.markers[index].hash, MARKER_SEEN);
-    }
-
-    console.log("marker clicked: ", this.state.markers[index].hash, markerSeen);
-
-    this._showCarousel();
+            this._showCarousel();
+          });
+        }
+      });
+    });
   };
 
   _onRegionChange = (r) => {
@@ -106,8 +105,9 @@ class MapsScreen extends React.Component {
     this.setState({
       lastSearch: this.state.search,
       search: search
+    }, () =>{
+      this._search();
     });
-    this._search();
   };
 
   _clearSearch = () => {
@@ -137,19 +137,18 @@ class MapsScreen extends React.Component {
         this.setState({
           markers: [],
           searchInProgress: false
+        }, () => {
+          //render AFTER setting state
+          this._renderMarkers();
         });
-
-        this._renderMarkers();
       } else {
         //simulate a search
         setTimeout(() => {
 
-          this.setState({
-            searchInProgress: false
-          });
-
           //run search and set new marker data
-          this.setState({ markers: [
+          this.setState({
+            searchInProgress: false,
+            markers: [
             {
               hash: "111111111-12345-11111111111111",
               title: "Quick Trip #1",
@@ -191,8 +190,10 @@ class MapsScreen extends React.Component {
                 longitude: -112.1171363,
               },
               image: require("../assets/images/brands/quicktrip-logo-small.png")
-          }]});
-          this._renderMarkers();
+          }]}, () => {
+            //render AFTER setting state
+            this._renderMarkers();
+          });
         }, 2000);
       } //endif
     }
@@ -424,23 +425,26 @@ class MapsScreen extends React.Component {
       }
 
       clearTimeout(this.regionTimeout);
-      this.regionTimeout = setTimeout(() => {
-        if (this.index !== index) {
-          this.index = index;
-          const { coordinate } = this.state.markers[index];
-          //also highlight the current selected marker
-          this.setState({ selectedMarkerIndex: index });
 
-          this.map.animateToRegion(
-            {
-              ...coordinate,
-              latitudeDelta: this.state.region.latitudeDelta,
-              longitudeDelta: this.state.region.longitudeDelta,
-            },
-            350
-          );
-        }
-      }, 10);
+      if (this.state.markers.length > 0) {
+        this.regionTimeout = setTimeout(() => {
+          if (this.index !== index) {
+            this.index = index;
+            const { coordinate } = this.state.markers[index];
+            //also highlight the current selected marker
+            this.setState({ selectedMarkerIndex: index });
+
+            this.map.animateToRegion(
+              {
+                ...coordinate,
+                latitudeDelta: this.state.region.latitudeDelta,
+                longitudeDelta: this.state.region.longitudeDelta,
+              },
+              350
+            );
+          }
+        }, 10);
+      }
     });
   }
 

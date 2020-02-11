@@ -20,10 +20,10 @@ import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import Geolocation from '@react-native-community/geolocation';
 
+ import AsyncStorage from '@react-native-community/async-storage';
+
 import LogoBanner from '../components/LogoBanner';
-
 import BottomNavigation from '../components/BottomNavigation';
-
 import { mapsStyleSheet as styles } from '../components/globalstyles';
 
 //an example of using external/remote assets
@@ -34,12 +34,7 @@ import { mapsStyleSheet as styles } from '../components/globalstyles';
 //   { uri: "https://i.imgur.com/Ka8kNST.jpg" }
 // ];
 
-const Images = [
-  require("../assets/images/brands/quicktrip-logo-small.png"),
-  require("../assets/images/brands/quicktrip-logo-small.png"),
-  require("../assets/images/brands/quicktrip-logo-small.png"),
-  require("../assets/images/brands/quicktrip-logo-small.png")
-];
+const MARKER_SEEN = "seen";
 
 const { width, height } = Dimensions.get("window");
 
@@ -73,7 +68,16 @@ class MapsScreen extends React.Component {
   //   return false;
   // }
 
-  _onPressMarker = (e) => {
+// await AsyncStorage.setItem('marker@'+marker.hash, "seen");
+
+  _onPressMarker = async (e,index) => {
+    let markerSeen = await AsyncStorage.getItem('marker@'+this.state.markers[index].hash);
+    if( markerSeen !== MARKER_SEEN){
+      await AsyncStorage.setItem('marker@'+this.state.markers[index].hash, MARKER_SEEN);
+    }
+
+    console.log("marker clicked: ", this.state.markers[index].hash, markerSeen);
+
     this._showCarousel();
   };
 
@@ -132,6 +136,7 @@ class MapsScreen extends React.Component {
           //run search and set new marker data
           this.setState({ markers: [
             {
+              hash: "111111111-12345-11111111111111",
               title: "Quick Trip #1",
               description: "Test description #1",
               coupon: {
@@ -142,9 +147,10 @@ class MapsScreen extends React.Component {
                 latitude: 33.3776538,
                 longitude: -112.0490218,
               },
-              image: Images[0]
+              image: require("../assets/images/brands/quicktrip-logo-small.png")
             },
             {
+              hash: "222222222-12345-22222222222222",
               title: "Quick Trip #2",
               description: "Test description #2",
               coupon: {
@@ -155,9 +161,10 @@ class MapsScreen extends React.Component {
                 latitude: 33.4803774,
                 longitude: -112.0328086,
               },
-              image: Images[1]
+              image: require("../assets/images/brands/quicktrip-logo-small.png")
             },
             {
+              hash: "333333333-12345-33333333333333",
               title: "Quick Trip #3",
               description: "Test description #3",
               coupon: {
@@ -168,7 +175,7 @@ class MapsScreen extends React.Component {
                 latitude: 33.4796037,
                 longitude: -112.1171363,
               },
-              image: Images[2]
+              image: require("../assets/images/brands/quicktrip-logo-small.png")
           }]});
           this._renderMarkers();
         }, 2000);
@@ -180,27 +187,34 @@ class MapsScreen extends React.Component {
 
     if(this.state.searchInProgress) {
       return (
-        <View style={styles.searchResultsIndicator}>
-          <View style={styles.searchResultsIndicatorContainer}>
-            <Text style={styles.searchResultsIndicatorText}>Loading...</Text>
+        <View style={styles.searchResultsIndicatorContainer}>
+          <View style={styles.searchResultsIndicatorView}>
+            <View style={styles.searchResultsIndicator}>
+              <Text style={styles.searchResultsIndicatorText}>Loading...</Text>
+            </View>
           </View>
         </View>
       );
     } else if (!this.state.searchInProgress && this.state.markers.length > 0) {
       return (
-        <View style={styles.searchResultsIndicator}>
-          <View style={styles.searchResultsIndicatorContainer}>
-            <Text style={styles.searchResultsIndicatorText}>{this.state.markers.length} Results</Text>
+        <View style={styles.searchResultsIndicatorContainer}>
+          <View style={styles.searchResultsIndicatorView}>
+            <View style={styles.searchResultsIndicator}>
+              <Icon name='circle-slice-8' type='material-community' color="#1eff29" size={20} />
+              <Text style={[styles.searchResultsIndicatorText, styles.marginLeft10]}>{this.state.markers.length} Results</Text>
+            </View>
           </View>
         </View>
       );
     } else {
       return (
-        <View style={styles.searchResultsIndicator}>
-          <View style={styles.searchResultsIndicatorContainer}>
-            <Text style={styles.searchResultsIndicatorText}>No Results</Text>
-            <Icon name='circle-small' type='material-community' color="#fff" size={30} />
-            <Text style={styles.searchResultsIndicatorText}>please zoom out or update filters</Text>
+        <View style={styles.searchResultsIndicatorContainer}>
+          <View style={styles.searchResultsIndicatorView}>
+            <View style={styles.searchResultsIndicator}>
+              <Text style={styles.searchResultsIndicatorText}>No Results</Text>
+              <Icon name='circle-small' type='material-community' color="#fff" />
+              <Text style={styles.searchResultsIndicatorText}>please zoom out or update filters</Text>
+            </View>
           </View>
         </View>
       );
@@ -208,94 +222,101 @@ class MapsScreen extends React.Component {
   };
 
   _renderMarkers = () => {
-      if (this.state.markers.length > 0) {
-        const interpolations = this.state.markers.map((marker, index) => {
-          const inputRange = [
-            (index - 1) * CARD_WIDTH,
-            index * CARD_WIDTH,
-            ((index + 1) * CARD_WIDTH),
-          ];
+    if (this.state.markers.length > 0) {
+      const interpolations = this.state.markers.map((marker, index) => {
+        const inputRange = [
+          (index - 1) * CARD_WIDTH,
+          index * CARD_WIDTH,
+          ((index + 1) * CARD_WIDTH),
+        ];
 
-          const scale = this.animation.interpolate({
-            inputRange,
-            outputRange: [1, 2.5, 1],
-            extrapolate: "clamp",
-          });
-          const opacity = this.animation.interpolate({
-            inputRange,
-            outputRange: [0.35, 1, 0.35],
-            extrapolate: "clamp",
-          });
-          return { scale, opacity };
+        const scale = this.animation.interpolate({
+          inputRange,
+          outputRange: [1, 2.5, 1],
+          extrapolate: "clamp",
         });
+        const opacity = this.animation.interpolate({
+          inputRange,
+          outputRange: [0.35, 1, 0.35],
+          extrapolate: "clamp",
+        });
+        return { scale, opacity };
+      });
 
-        //render
-        return ( this.state.markers.map((marker, index) => {
-            const scaleStyle = { transform: [{scale: interpolations[index].scale}] };
-            const opacityStyle = { opacity: interpolations[index].opacity };
-            return (
-              <MapView.Marker key={index} coordinate={marker.coordinate}
-                onPress={e => this._onPressMarker(e)}>
-                <Animated.View style={[styles.markerWrap, opacityStyle]}>
-                  <View style={styles.marker}>
-                    <Text style={styles.markerText}>{marker.coupon.title.toUpperCase()}</Text>
-                  </View>
-                </Animated.View>
-              </MapView.Marker>
-            );
-        }));
-      } else {
+      //render
+      return ( this.state.markers.map( (marker, index) => {
+        // let markerSeen = await AsyncStorage.getItem('marker@'+marker.hash);
+        // let markerSeenBool = false;
+        // if(markerSeen == MARKER_SEEN) {
+        //   markerSeenBool = true;
+        // }
+              // <View style={[styles.marker, markerSeenBool ? styles.darkMarker : styles.lightMarker]}>
 
-        //show "no results"
-        return null;
-      }
+        //const scaleStyle = { transform: [{scale: interpolations[index].scale}] };
+        //const opacityStyle = { opacity: interpolations[index].opacity };
+        return (
+          <MapView.Marker key={index} coordinate={marker.coordinate}
+            onPress={e => this._onPressMarker(e, index)}>
+            <Animated.View style={styles.markerWrap}>
+              <View style={[styles.marker]}>
+                <Text style={styles.markerText}>{marker.coupon.title.toUpperCase()}</Text>
+              </View>
+            </Animated.View>
+          </MapView.Marker>
+        );
+      }));
+    } else {
+
+      //show "no results"
+      return null;
+    }
   };
 
   _renderCarousel = () => {
-      if (this.state.showCarousel) {
-        return (
-          <Animated.ScrollView
-            horizontal
-            scrollEventThrottle={1}
-            showsHorizontalScrollIndicator={false}
-            snapToInterval={CARD_WIDTH}
-            onScroll={Animated.event(
-              [
-                {
-                  nativeEvent: {
-                    contentOffset: {
-                      x: this.animation,
-                    },
+    if (this.state.showCarousel) {
+      return (
+        <Animated.ScrollView
+          horizontal
+          scrollEventThrottle={1}
+          showsHorizontalScrollIndicator={false}
+          snapToInterval={CARD_WIDTH}
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: {
+                    x: this.animation,
                   },
                 },
-              ],
-              { useNativeDriver: true }
-            )}
-            style={styles.scrollView}
-            contentContainerStyle={styles.endPadding}>
+              },
+            ],
+            { useNativeDriver: true }
+          )}
+          style={styles.scrollView}
+          contentContainerStyle={styles.endPadding}>
 
-            {this.state.markers.map((marker, index) => (
-              <View
-                style={styles.card} key={index}>
-                <TouchableOpacity onPress={() => this._onPressCarouselItem(index) } style={styles.cardImage}>
-                  <Image
-                    source={marker.image}
-                    style={styles.cardImage}
-                    resizeMode="cover" />
-                </TouchableOpacity>
-                <View style={styles.textContent}>
-                  <Text numberOfLines={1} style={styles.cardtitle}>{marker.title}</Text>
-                  <Text numberOfLines={1} style={styles.cardDescription}>
-                    {marker.description}
-                  </Text>
-                </View>
+          {this.state.markers.map((marker, index) => (
+            <View
+              style={styles.card} key={index}>
+              <TouchableOpacity onPress={() => this._onPressCarouselItem(index) } style={styles.cardImage}>
+                <Image
+                  source={marker.image}
+                  style={styles.cardImage}
+                  resizeMode="cover" />
+              </TouchableOpacity>
+              <View style={styles.textContent}>
+                <Text numberOfLines={1} style={styles.cardtitle}>{marker.title}</Text>
+                <Text numberOfLines={1} style={styles.cardDescription}>
+                  {marker.description}
+                </Text>
               </View>
-            ))}
-          </Animated.ScrollView>
-        );
-       } else {
-            return null;
-        }
+            </View>
+          ))}
+        </Animated.ScrollView>
+      );
+    } else {
+      return null;
+    }
   };
 
   watchID: ?number = null;

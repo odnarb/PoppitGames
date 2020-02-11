@@ -199,6 +199,10 @@ const globalStyles = {
     fontWeight: 'bold',
     fontSize: moderateScale(16),
     textAlign:'center'
+  },
+
+  marginLeft10: {
+    marginLeft: moderateScale(10)
   }
 };
 
@@ -789,7 +793,7 @@ const mapsStyles = {
     bottom: 0,
   },
 
-  searchResultsIndicator: {
+searchResultsIndicatorContainer: {
     position: 'absolute',
     height: moderateScale(30),
     top: verticalScale(140),
@@ -799,7 +803,11 @@ const mapsStyles = {
     backgroundColor: "#000"
   },
 
-  searchResultsIndicatorContainer: {
+  searchResultsIndicatorView: {
+    paddingTop: moderateScale(4)
+  },
+
+  searchResultsIndicator: {
       flexDirection: "row",
       alignItems: "center",
       paddingLeft: moderateScale(5)
@@ -866,8 +874,19 @@ const mapsStyles = {
     // width: moderateScale(48),
     // height: moderateScale(20),
     borderRadius: moderateScale(8),
-    backgroundColor: "#1eff29"
+    backgroundColor: "blue"
   },
+
+  darkMarker: {
+      backgroundColor: "#1eff29"
+  },
+
+  lightMarker: {
+      backgroundColor: "#6afc71"
+  },
+
+
+
 
   markerText: {
     color: "#fff",

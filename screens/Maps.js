@@ -39,6 +39,52 @@ import {
 //   { uri: "https://i.imgur.com/Ka8kNST.jpg" }
 // ];
 
+const FAKE_MARKERS = [{
+    seen: true,
+    hash: "111111111-12345-11111111111111",
+    title: "Quick Trip #1",
+    description: "Test description #1",
+    coupon: {
+      title: "$.50 OFF",
+      description: ""
+    },
+    coordinate: {
+      latitude: 33.3776538,
+      longitude: -112.0490218,
+    },
+    image: require("../assets/images/brands/quicktrip-logo-small.png")
+  },
+  {
+    seen: false,
+    hash: "222222222-12345-22222222222222",
+    title: "Quick Trip #2",
+    description: "Test description #2",
+    coupon: {
+      title: "-50% OFF",
+      description: ""
+    },
+    coordinate: {
+      latitude: 33.4803774,
+      longitude: -112.0328086,
+    },
+    image: require("../assets/images/brands/quicktrip-logo-small.png")
+  },
+  {
+    seen: false,
+    hash: "333333333-12345-33333333333333",
+    title: "Quick Trip #3",
+    description: "Test description #3",
+    coupon: {
+      title: "FREE COFFEE",
+      description: ""
+    },
+    coordinate: {
+      latitude: 33.4796037,
+      longitude: -112.1171363,
+    },
+    image: require("../assets/images/brands/quicktrip-logo-small.png")
+}];
+
 const MARKER_SEEN = "seen";
 
 const { width, height } = Dimensions.get("window");
@@ -73,26 +119,55 @@ class MapsScreen extends React.Component {
   //   return false;
   // }
 
-  _onPressMarker = (event,index) => {
-    //set the current marker selected
-    this.setState({ selectedMarkerIndex: index }, () => {
-      AsyncStorage.getItem('marker@'+this.state.markers[index].hash, (markerSeen) => {
-        if( markerSeen !== MARKER_SEEN){
-          AsyncStorage.setItem('marker@'+this.state.markers[index].hash, MARKER_SEEN, (e) => {
-            console.log("marker clicked: ", this.state.markers[index].hash, markerSeen);
+  //if we haven't seen this marker, save it
+  _seenMarker = (marker, cb) => {
+    // console.log("_seenMarker() START : ", marker);
+    AsyncStorage.getItem('marker@'+marker.hash, (markerSeen) => {
+      marker.seen = false;
 
-            this._showCarousel();
-          });
-        }
-      });
+      if( markerSeen == MARKER_SEEN ){
+        marker.seen = true;
+      }
+
+      // console.log("_seenMarker() BEFORE CB() : ", marker);
+      if(cb !== undefined) cb(marker);
     });
   };
 
+  _onPressMarker = (event,index) => {
+    //set the current marker selected
+    this.setState({ selectedMarkerIndex: index }, () => {
+      // console.log("marker pressed: ", this.state.markers[index].hash);
+
+      //if we've seen this marker, set it
+      this._seenMarker(this.state.markers[index], (marker)=> {
+        if(!marker.seen) {
+          AsyncStorage.setItem('marker@'+marker.hash, MARKER_SEEN, (e) => {
+          });
+        }
+      });
+      this._showCarousel();
+      // this._animateCarouselToMarker({}, this.state.selectedMarkerIndex);
+    });
+  };
+
+  _onMapReady = () => {
+    this.setState({ mapReady: true}, () => {
+      this._updateSearch("");
+    })
+  }
+
   _onRegionChange = (r) => {
-    this.setState({ region: r });
+    // console.log("_onRegionChange() FIRED");
+
+    this.setState({ region: r }, () => {
+      // console.log("_onRegionChange() :: TODO :: search this area...");
+    });
   }
 
   _onPressMap = () => {
+      // console.log("_onPressMap() FIRED");
+
       this.setState({ selectedMarkerIndex: -1 });
       this._hideCarousel();
   };
@@ -102,12 +177,19 @@ class MapsScreen extends React.Component {
   };
 
   _updateSearch = (search) => {
-    this.setState({
-      lastSearch: this.state.search,
-      search: search
-    }, () =>{
-      this._search();
-    });
+    // console.log("_updateSearch() FIRED");
+    if(this.state.mapReady){
+      // console.log("_updateSearch() :: updating search");
+
+      this.setState({
+        lastSearch: this.state.search,
+        search: search
+      }, () =>{
+        this._search();
+      });
+    } else {
+      // console.log("_updateSearch() :: map not ready");
+    }
   };
 
   _clearSearch = () => {
@@ -117,22 +199,32 @@ class MapsScreen extends React.Component {
   };
 
   _showCarousel = () => {
-    this.setState({
-      showCarousel: true
-    });
+    if(this.state.showCarousel === false){
+      this.setState({
+        showCarousel: true
+      });
+    }
   };
 
   _hideCarousel = () => {
-    this.setState({
-      showCarousel: false
-    });
+    if(this.state.showCarousel === true){
+      this.setState({
+        showCarousel: false
+      });
+    }
   };
 
   _search = () => {
-    if(this.state.search != this.state.lastSearch){
+    // console.log("_search() FIRED");
+
+    //don't allow others to run if a search is already in progress...?
+      //this might lock out the real search someone wants to perform...
+      //or launch a miniature screen to just get a user's search
+    if(!this.state.searchInProgress && this.state.search != this.state.lastSearch){
+      // console.log("_search() ALLOWED");
       this.setState({
         searchInProgress: true
-      });
+      }, () => {
 
       //render nothing if we've cleared the search
       if(this.state.search === "" ){
@@ -146,58 +238,30 @@ class MapsScreen extends React.Component {
       } else {
         //simulate a search
         setTimeout(() => {
+          //loop through results and check if they've been seen
+          let results = [];
+          FAKE_MARKERS.map((marker, index) => {
+            // console.log("BEFORE _seenMarker() :: marker ", marker);
+            this._seenMarker(marker, (newMarker) =>{
+              // console.log("AFTER _seenMarker() :: newMarker ", newMarker);
+              results.push(newMarker);
 
-          //run search and set new marker data
-          this.setState({
-            searchInProgress: false,
-            markers: [
-            {
-              hash: "111111111-12345-11111111111111",
-              title: "Quick Trip #1",
-              description: "Test description #1",
-              coupon: {
-                title: "$.50 OFF",
-                description: ""
-              },
-              coordinate: {
-                latitude: 33.3776538,
-                longitude: -112.0490218,
-              },
-              image: require("../assets/images/brands/quicktrip-logo-small.png")
-            },
-            {
-              hash: "222222222-12345-22222222222222",
-              title: "Quick Trip #2",
-              description: "Test description #2",
-              coupon: {
-                title: "-50% OFF",
-                description: ""
-              },
-              coordinate: {
-                latitude: 33.4803774,
-                longitude: -112.0328086,
-              },
-              image: require("../assets/images/brands/quicktrip-logo-small.png")
-            },
-            {
-              hash: "333333333-12345-33333333333333",
-              title: "Quick Trip #3",
-              description: "Test description #3",
-              coupon: {
-                title: "FREE COFFEE",
-                description: ""
-              },
-              coordinate: {
-                latitude: 33.4796037,
-                longitude: -112.1171363,
-              },
-              image: require("../assets/images/brands/quicktrip-logo-small.png")
-          }]}, () => {
-            //render AFTER setting state
-            this._renderMarkers();
+              if(index == FAKE_MARKERS.length-1){
+                // console.log("SEARCH COMPLETE: ", results);
+
+                this.setState({
+                  searchInProgress: false,
+                  markers: results
+                }, () => {
+                  //render AFTER setting state
+                  this._renderMarkers();
+                });
+              }
+            })
           });
         }, 2000);
       } //endif
+      });
     }
   };
 
@@ -240,6 +304,8 @@ class MapsScreen extends React.Component {
   };
 
   _renderMarkers = () => {
+    console.log("_renderMarkers() FIRED");
+
     if (this.state.markers.length > 0) {
       const interpolations = this.state.markers.map((marker, index) => {
         const inputRange = [
@@ -261,22 +327,21 @@ class MapsScreen extends React.Component {
         return { scale, opacity };
       });
 
-      //render
-      return ( this.state.markers.map( (marker, index) => {
-        // let markerSeen = await AsyncStorage.getItem('marker@'+marker.hash);
-        // let markerSeenBool = false;
-        // if(markerSeen == MARKER_SEEN) {
-        //   markerSeenBool = true;
-        // }
-              // <View style={[styles.marker, markerSeenBool ? styles.darkMarker : styles.lightMarker]}>
+      // console.log("RENDERING this.state.markers: ",this.state.markers);
 
-        //const scaleStyle = { transform: [{scale: interpolations[index].scale}] };
-        //const opacityStyle = { opacity: interpolations[index].opacity };
+      //const scaleStyle = { transform: [{scale: interpolations[index].scale}] };
+      //const opacityStyle = { opacity: interpolations[index].opacity };
+      return ( this.state.markers.map( (marker, index) => {
+        console.log("This marker seen? ", this.state.markers[index].seen);
         return (
           <MapView.Marker key={index} coordinate={marker.coordinate}
             onPress={e => this._onPressMarker(e, index)}>
             <Animated.View style={styles.markerWrap}>
-              <View style={[styles.marker, this.state.selectedMarkerIndex === index ? styles.selectedMarker : styles.regularMarker]}>
+              <View style={[
+                styles.marker,
+                this.state.markers[index].seen ? styles.visitedMarker : styles.regularMarker,
+                this.state.selectedMarkerIndex === index ? styles.selectedMarker : styles.regularMarker
+              ]}>
                 <Text style={styles.markerText}>{marker.coupon.title.toUpperCase()}</Text>
               </View>
             </Animated.View>
@@ -348,9 +413,50 @@ class MapsScreen extends React.Component {
     }
   };
 
+  _animateCarouselToMarker = ({ value }, indexOverride) => {
+    console.log("_animateToMarker() value: ", value);
+
+    let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+
+    //allow an override if we're trying to force an animation, like when a user selects a marker
+    if(indexOverride > -1){
+      index = indexOverride;
+    }
+
+    if (index >= this.state.markers.length) {
+      index = this.state.markers.length - 1;
+    }
+    if (index <= 0) {
+      index = 0;
+    }
+
+    clearTimeout(this.regionTimeout);
+
+    if (this.state.markers.length > 0) {
+      this.regionTimeout = setTimeout(() => {
+        if (this.index !== index) {
+          this.index = index;
+          const { coordinate } = this.state.markers[index];
+          //also highlight the current selected marker
+          this.setState({ selectedMarkerIndex: index });
+
+          this.map.animateToRegion(
+            {
+              ...coordinate,
+              latitudeDelta: this.state.region.latitudeDelta,
+              longitudeDelta: this.state.region.longitudeDelta,
+            },
+            350
+          );
+        }
+      }, 10);
+    }
+  };
+
   watchID: ?number = null;
 
   state = {
+    mapReady: true,
     showCarousel: false,
     selectedMarkerIndex: -1,
     // initialPosition: 'unknown',
@@ -382,26 +488,27 @@ class MapsScreen extends React.Component {
     //what if the region was null, default region to user's location
     this._getCachedItem('lastRegion').then(data => {
       if(data !== null){
-        this.setState({ region: JSON.parse(data) });
+        let region = JSON.parse(data);
+        this.setState({ region: region });
 
         //goto the location
-        this.map.animateToRegion(this.state.region, 350);
+        this.map.animateToRegion( region , 350);
       } else {
         Geolocation.getCurrentPosition(
           position => {
 
+            let region = {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              latitudeDelta: 0.05,
+              longitudeDelta: 0.05
+            };
+
             //update state
-            this.setState({
-              region: {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
-                latitudeDelta: 0.05,
-                longitudeDelta: 0.05
-              }
-            });
+            this.setState({ region: region });
 
             //goto the location
-            this.map.animateToRegion(this.state.region, 350);
+            this.map.animateToRegion(region, 350);
           },
           error => Alert.alert('Error', JSON.stringify(error)),
           {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
@@ -417,6 +524,7 @@ class MapsScreen extends React.Component {
 
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
+    // this.animation.addListener(this._animateCarouselToMarker);
     this.animation.addListener(({ value }) => {
       let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
       if (index >= this.state.markers.length) {
@@ -473,6 +581,7 @@ class MapsScreen extends React.Component {
 
         <View style={styles.searchBarContainer}>
           <SearchBar
+            showLoading={this.state.searchInProgress}
             placeholder="Search for coupons near you..."
             onChangeText={this._updateSearch}
             onClear={this._clearSearch}

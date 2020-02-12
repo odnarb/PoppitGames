@@ -891,7 +891,7 @@ searchResultsIndicatorContainer: {
   },
 
   visitedMarker: {
-      backgroundColor: "#6afc71"
+      backgroundColor: "#ff5e5e"
   },
 
 

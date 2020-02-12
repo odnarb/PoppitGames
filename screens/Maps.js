@@ -28,7 +28,8 @@ import BottomNavigation from '../components/BottomNavigation';
 import {
   mapsStyleSheet as styles,
   searchResultsIconColor,
-  searchResultsIconSize
+  searchResultsIconSize,
+  carouselShownPosition
 } from '../components/globalstyles';
 
 //an example of using external/remote assets
@@ -138,6 +139,8 @@ class MapsScreen extends React.Component {
   };
 
   _onPressMarker = (event,index) => {
+    this._moveCarousel();
+
     //set the current marker selected
     this.setState({ selectedMarkerIndex: index }, () => {
       // console.log("_onPressMarker() :: marker pressed: ", this.state.markers[index].hash);
@@ -218,6 +221,8 @@ class MapsScreen extends React.Component {
     if(this.state.showCarousel === false){
       this.setState({
         showCarousel: true
+      }, () => {
+        this._moveCarousel();
       });
     }
   };
@@ -226,6 +231,8 @@ class MapsScreen extends React.Component {
     if(this.state.showCarousel === true){
       this.setState({
         showCarousel: false
+      }, () => {
+        this._moveCarousel();
       });
     }
   };
@@ -385,9 +392,22 @@ class MapsScreen extends React.Component {
     return;
   };
 
+  _moveCarousel = () => {
+    //default to hide
+    let yValue = height;
+    if(this.state.showCarousel){
+      yValue = carouselShownPosition;
+    }
+
+    Animated.spring(this.carouselShowHideAnimation, {
+      bounciness: 0,
+      toValue: {x: 0, y: yValue },
+    }).start()
+  }
+
   _renderCarousel = () => {
-    if (this.state.showCarousel) {
       return (
+        <Animated.View style={[styles.scrollView,this.carouselShowHideAnimation.getLayout()]}>
         <Animated.ScrollView
           horizontal
           scrollEventThrottle={1}
@@ -405,7 +425,6 @@ class MapsScreen extends React.Component {
             ],
             { useNativeDriver: true }
           )}
-          style={styles.scrollView}
           contentContainerStyle={styles.endPadding}>
 
           {this.state.markers.map((marker, index) => (
@@ -426,10 +445,8 @@ class MapsScreen extends React.Component {
             </View>
           ))}
         </Animated.ScrollView>
+        </Animated.View>
       );
-    } else {
-      return null;
-    }
   };
 
   _animateCarouselToMarker = ({ value }, indexOverride) => {
@@ -494,6 +511,7 @@ class MapsScreen extends React.Component {
   UNSAFE_componentWillMount() {
     this.index = 0;
     this.animation = new Animated.Value(0);
+    this.carouselShowHideAnimation = new Animated.ValueXY({ x: 0, y: height })
   }
 
   componentWillUnmount() {

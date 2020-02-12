@@ -10,6 +10,8 @@ const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = height / 4;
 const CARD_WIDTH = CARD_HEIGHT - 50;
 
+const carouselShownPosition = height-moderateScale(270);
+
 const iconMediumSize = moderateScale(32);
 const iconLargeSize = moderateScale(42);
 
@@ -825,7 +827,10 @@ searchResultsIndicatorContainer: {
   mapContainer: {
     flex: 8,
   },
+
   scrollView: {
+    backgroundColor: "red",
+    height: CARD_HEIGHT + moderateScale(20),
     position: "absolute",
     bottom: verticalScale(100),
     left: 0,
@@ -1059,6 +1064,7 @@ export {
   mapsStyleSheet,
   searchResultsIconColor,
   searchResultsIconSize,
+  carouselShownPosition,
 
   notificationsStyleSheet,
   prizesStyleSheet,

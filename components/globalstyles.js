@@ -829,7 +829,7 @@ searchResultsIndicatorContainer: {
   },
 
   scrollView: {
-    backgroundColor: "red",
+    // backgroundColor: "red",
     height: CARD_HEIGHT + moderateScale(20),
     position: "absolute",
     bottom: verticalScale(100),

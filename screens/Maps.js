@@ -124,7 +124,7 @@ class MapsScreen extends React.Component {
   _seenMarker = (marker, cb) => {
     let computedMarkerHash = MARKER_SEEN_PREPEND + marker.hash;
     console.log("_seenMarker() START : checking: " + computedMarkerHash);
-    AsyncStorage.getItem(computedMarkerHash, (seenValue) => {
+    AsyncStorage.getItem(computedMarkerHash, (err, seenValue) => {
       marker.seen = false;
 
       console.log("_seenMarker() START : "+ computedMarkerHash + " :: " + seenValue);
@@ -146,8 +146,8 @@ class MapsScreen extends React.Component {
       //if we've seen this marker, set it
       if(!thisMarker.seen) {
         let computedMarkerHash = MARKER_SEEN_PREPEND + thisMarker.hash;
-        AsyncStorage.setItem(computedMarkerHash, MARKER_SEEN, (e) => {
-          if(e) throw e;
+        AsyncStorage.setItem(computedMarkerHash, MARKER_SEEN, (err) => {
+          if(err) throw err;
 
           //we also need to update local copy of markers
           let clonedMarkers = JSON.parse(JSON.stringify(this.state.markers))
@@ -359,11 +359,11 @@ class MapsScreen extends React.Component {
         return (
           <MapView.Marker key={index} coordinate={marker.coordinate}
             onPress={e => this._onPressMarker(e, index)}>
-            <Animated.View style={styles.markerWrap}>
+            <View style={styles.markerWrap}>
               <View style={markerStylesArr}>
                 <Text style={styles.markerText}>{marker.coupon.title.toUpperCase()}</Text>
               </View>
-            </Animated.View>
+            </View>
           </MapView.Marker>
         );
       }));

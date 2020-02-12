@@ -40,7 +40,7 @@ import {
 // ];
 
 const FAKE_MARKERS = [{
-    seen: true,
+    seen: false,
     hash: "111111111-12345-11111111111111",
     title: "Quick Trip #1",
     description: "Test description #1",
@@ -86,6 +86,7 @@ const FAKE_MARKERS = [{
 }];
 
 const MARKER_SEEN = "seen";
+const MARKER_SEEN_PREPEND = "marker@";
 
 const { width, height } = Dimensions.get("window");
 
@@ -121,15 +122,17 @@ class MapsScreen extends React.Component {
 
   //if we haven't seen this marker, save it
   _seenMarker = (marker, cb) => {
-    // console.log("_seenMarker() START : ", marker);
-    AsyncStorage.getItem('marker@'+marker.hash, (markerSeen) => {
+    let computedMarkerHash = MARKER_SEEN_PREPEND + marker.hash;
+    console.log("_seenMarker() START : checking: " + computedMarkerHash);
+    AsyncStorage.getItem(computedMarkerHash, (seenValue) => {
       marker.seen = false;
 
-      if( markerSeen == MARKER_SEEN ){
+      console.log("_seenMarker() START : "+ computedMarkerHash + " :: " + seenValue);
+      if( seenValue == MARKER_SEEN ){
         marker.seen = true;
       }
 
-      // console.log("_seenMarker() BEFORE CB() : ", marker);
+      console.log("_seenMarker() BEFORE CB() : ", marker);
       if(cb !== undefined) cb(marker);
     });
   };
@@ -137,16 +140,29 @@ class MapsScreen extends React.Component {
   _onPressMarker = (event,index) => {
     //set the current marker selected
     this.setState({ selectedMarkerIndex: index }, () => {
-      // console.log("marker pressed: ", this.state.markers[index].hash);
+      // console.log("_onPressMarker() :: marker pressed: ", this.state.markers[index].hash);
 
+      let thisMarker = this.state.markers[index];
       //if we've seen this marker, set it
-      this._seenMarker(this.state.markers[index], (marker)=> {
-        if(!marker.seen) {
-          AsyncStorage.setItem('marker@'+marker.hash, MARKER_SEEN, (e) => {
+      if(!thisMarker.seen) {
+        let computedMarkerHash = MARKER_SEEN_PREPEND + thisMarker.hash;
+        AsyncStorage.setItem(computedMarkerHash, MARKER_SEEN, (e) => {
+          if(e) throw e;
+
+          //we also need to update local copy of markers
+          let clonedMarkers = JSON.parse(JSON.stringify(this.state.markers))
+
+          clonedMarkers[index].seen = true;
+
+          this.setState({ markers: clonedMarkers }, () => {
+            this._showCarousel();
+            console.log("_onPressMarker() :: Marker set as seen: ", thisMarker.hash);
           });
-        }
-      });
-      this._showCarousel();
+        });
+      } else {
+        console.log("_onPressMarker() :: Marker already seen: ", thisMarker.hash);
+        this._showCarousel();
+      }
       // this._animateCarouselToMarker({}, this.state.selectedMarkerIndex);
     });
   };
@@ -247,7 +263,7 @@ class MapsScreen extends React.Component {
               results.push(newMarker);
 
               if(index == FAKE_MARKERS.length-1){
-                // console.log("SEARCH COMPLETE: ", results);
+                console.log("_search() :: SEARCH COMPLETE: ", results);
 
                 this.setState({
                   searchInProgress: false,
@@ -307,41 +323,44 @@ class MapsScreen extends React.Component {
     console.log("_renderMarkers() FIRED");
 
     if (this.state.markers.length > 0) {
-      const interpolations = this.state.markers.map((marker, index) => {
-        const inputRange = [
-          (index - 1) * CARD_WIDTH,
-          index * CARD_WIDTH,
-          ((index + 1) * CARD_WIDTH),
-        ];
+      // const interpolations = this.state.markers.map((marker, index) => {
+      //   const inputRange = [
+      //     (index - 1) * CARD_WIDTH,
+      //     index * CARD_WIDTH,
+      //     ((index + 1) * CARD_WIDTH),
+      //   ];
 
-        const scale = this.animation.interpolate({
-          inputRange,
-          outputRange: [1, 2.5, 1],
-          extrapolate: "clamp",
-        });
-        const opacity = this.animation.interpolate({
-          inputRange,
-          outputRange: [0.35, 1, 0.35],
-          extrapolate: "clamp",
-        });
-        return { scale, opacity };
-      });
-
-      // console.log("RENDERING this.state.markers: ",this.state.markers);
+      //   const scale = this.animation.interpolate({
+      //     inputRange,
+      //     outputRange: [1, 2.5, 1],
+      //     extrapolate: "clamp",
+      //   });
+      //   const opacity = this.animation.interpolate({
+      //     inputRange,
+      //     outputRange: [0.35, 1, 0.35],
+      //     extrapolate: "clamp",
+      //   });
+      //   return { scale, opacity };
+      // });
 
       //const scaleStyle = { transform: [{scale: interpolations[index].scale}] };
       //const opacityStyle = { opacity: interpolations[index].opacity };
+
       return ( this.state.markers.map( (marker, index) => {
-        console.log("This marker seen? ", this.state.markers[index].seen);
+        let markerStylesArr = [styles.marker];
+        if(index === this.state.selectedMarkerIndex) {
+          markerStylesArr.push(styles.selectedMarker);
+        } else if(this.state.markers[index].seen === true) {
+          markerStylesArr.push(styles.visitedMarker);
+        } else {
+          markerStylesArr.push(styles.regularMarker);
+        }
+        console.log("_renderMarkers() :: This marker seen? ", this.state.markers[index].seen);
         return (
           <MapView.Marker key={index} coordinate={marker.coordinate}
             onPress={e => this._onPressMarker(e, index)}>
             <Animated.View style={styles.markerWrap}>
-              <View style={[
-                styles.marker,
-                this.state.markers[index].seen ? styles.visitedMarker : styles.regularMarker,
-                this.state.selectedMarkerIndex === index ? styles.selectedMarker : styles.regularMarker
-              ]}>
+              <View style={markerStylesArr}>
                 <Text style={styles.markerText}>{marker.coupon.title.toUpperCase()}</Text>
               </View>
             </Animated.View>

@@ -15,15 +15,20 @@ const carouselShownPosition = height-moderateScale(270);
 const iconMediumSize = moderateScale(32);
 const iconLargeSize = moderateScale(42);
 
+const blueColor = "#5bc0eb";
+const yellowColor = "#fde74c";
+const greenColor = "#9bc53d";
+const redColor = "#c34231";
+const greyColor = "#404e4d";
 
 const settingsIconSize = iconMediumSize;
 const learnMoreNavDotSize = iconMediumSize;
 const learnMoreNavIconSize = iconMediumSize;
-const learnMoreNavIconLightColor = "#dcdcdc"
-const learnMoreNavIconDarkColor = "#000";
+const learnMoreNavIconLightColor = "#dcdcdc";
+const learnMoreNavIconDarkColor = greyColor;
 
 const bottomNavIconSize = moderateScale(32);
-const bottomNavIconColor = "#777";
+const bottomNavIconColor = greyColor;
 
 const passwordInputIconSize = moderateScale(25);
 const passwordInputIconColor = moderateScale(25);
@@ -394,7 +399,7 @@ const learnMoreStyles = {
   tutoralHeader: {
     fontSize: moderateScale(26),
     fontWeight: 'bold',
-    color: '#000',
+    color: greyColor,
     marginTop: moderateScale(10)
 
   },
@@ -402,7 +407,7 @@ const learnMoreStyles = {
   tutorialText: {
     marginTop: moderateScale(10),
     fontSize: moderateScale(17),
-    color: '#555'
+    color: greyColor
   },
 
   imageContainer: {
@@ -700,7 +705,9 @@ const signInStyles = {
   baseContainer: {
     flex: 1,
     paddingLeft: moderateScale(20),
-    paddingRight: moderateScale(20)
+    paddingRight: moderateScale(20),
+    backgroundColor: greyColor,
+
   },
 
   contentContainer: {
@@ -756,6 +763,10 @@ const signInStyles = {
       textAlign: "center",
       marginLeft: moderateScale(50),
       marginRight: moderateScale(50)
+  },
+
+  learnMoreText: {
+    color: "#fff"
   },
 
   separatorContainer: {

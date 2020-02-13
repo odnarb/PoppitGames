@@ -82,7 +82,7 @@ class SignInScreen extends React.Component {
 
         <View style={styles.contentContainer}>
             <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={() => this._learnMore()}>
-              <Text>New to {appName}? Tap to learn more.</Text>
+              <Text style={styles.learnMoreText}>New to {appName}? Tap to learn more.</Text>
             </TouchableOpacity>
 
 

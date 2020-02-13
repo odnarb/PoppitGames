@@ -287,6 +287,15 @@ const globalStyles = {
 
   marginLeft10: {
     marginLeft: moderateScale(10)
+  },
+  marginRight10: {
+    marginRight: moderateScale(10)
+  },
+  marginBottom10: {
+    marginBottom: moderateScale(10)
+  },
+  marginTop10: {
+    marginTop: moderateScale(10)
   }
 };
 

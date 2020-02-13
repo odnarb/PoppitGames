@@ -110,7 +110,7 @@ class EmailSignInScreen extends React.Component {
 
           <View style={styles.recoverPwContainer}>
               <TouchableOpacity onPress={() => this._recoverPassword()}>
-                <Text style={[styles.grey,styles.recoverPwLink]}>Recover password?</Text>
+                <Text style={[styles.grey,styles.marginBottom10,styles.recoverPwLink]}>Recover password?</Text>
               </TouchableOpacity>
           </View>
         </View>

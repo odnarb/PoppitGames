@@ -12,6 +12,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import { Keyboard } from 'react-native'
+
 import { Icon } from 'react-native-elements';
 
 import {SearchBar} from 'react-native-elements'
@@ -20,7 +22,7 @@ import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import Geolocation from '@react-native-community/geolocation';
 
- import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import LogoBanner from '../components/LogoBanner';
 import BottomNavigation from '../components/BottomNavigation';
@@ -257,6 +259,7 @@ class MapsScreen extends React.Component {
         }, () => {
           //render AFTER setting state
           this._renderMarkers();
+          Keyboard.dismiss();
         });
       } else {
         //simulate a search
@@ -278,6 +281,7 @@ class MapsScreen extends React.Component {
                 }, () => {
                   //render AFTER setting state
                   this._renderMarkers();
+                  Keyboard.dismiss();
                 });
               }
             })

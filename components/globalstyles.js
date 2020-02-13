@@ -53,6 +53,10 @@ const globalStyles = {
     //backgroundColor: greyColor
   },
 
+  blue: {
+    color: blueColor
+  },
+
   grey: {
     color: greyColor
   },
@@ -79,6 +83,10 @@ const globalStyles = {
 
   white: {
     color: whiteColor
+  },
+
+  whiteBG: {
+    backgroundColor: whiteColor
   },
 
   black: {
@@ -851,7 +859,7 @@ searchResultsIndicatorContainer: {
     // width: moderateScale(48),
     // height: moderateScale(20),
     borderRadius: moderateScale(8),
-    backgroundColor: "blue"
+    // backgroundColor: "blue"
   },
 
   regularMarker: {
@@ -927,20 +935,19 @@ const learnMoreNavStyles = {
 
 const bottomNavStyles = {
   navContainer: {
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'stretch'
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'stretch'
   },
   navBtn: {
-      flex: 1,
-      justifyContent: 'center',
-      backgroundColor: lightGreyColor
+    flex: 1,
+    justifyContent: 'center'
   },
 
   navBtnView: {
-        alignItems: "center",
-        justifyContent: "center"
+    alignItems: "center",
+    justifyContent: "center"
   },
 
   navText: {
@@ -971,7 +978,7 @@ const passwordStyles = {
 
 const passwordStyleSheet = StyleSheet.create(passwordStyles);
 const learnMoreNavStyleSheet = StyleSheet.create({ ...globalStyles, ...learnMoreNavStyles});
-const bottomNavStyleSheet = StyleSheet.create(bottomNavStyles);
+const bottomNavStyleSheet = StyleSheet.create({ ...globalStyles, ...bottomNavStyles});
 
 const aboutStyleSheet = StyleSheet.create({ ...globalStyles, ...aboutStyles });
 const authLoadingStyleSheet = StyleSheet.create({ ...globalStyles, ...authLoadingStyles });
@@ -998,6 +1005,7 @@ export {
 
   greyColor,
   whiteColor,
+  blueColor,
 
   // make a global icon size available
   iconMediumSize,

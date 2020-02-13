@@ -17,7 +17,6 @@ class RecoverPasswordScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFocused: false,
       email: ""
     };
   }
@@ -29,22 +28,7 @@ class RecoverPasswordScreen extends React.Component {
   };
 
   state = {
-    isFocused: false,
     email: ""
-  };
-
-  handleFocus = event => {
-      this.setState({ isFocused: true });
-      if (this.props.onFocus) {
-        this.props.onFocus(event);
-      }
-  };
-
-  handleBlur = event => {
-      this.setState({ isFocused: false });
-      if (this.props.onBlur) {
-        this.props.onBlur(event);
-      }
   };
 
   render() {
@@ -65,10 +49,8 @@ class RecoverPasswordScreen extends React.Component {
                 keyboardType='email-address'
                 style={[styles.grey,styles.textInput]}
                 selectionColor="#428AF8"
-                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
-                onChangeText={(text) => this.setState({email: text})}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur} />
+                underlineColorAndroid={ "#D3D3D3" }
+                onChangeText={(text) => this.setState({email: text})} />
         </View>
 
         <View style={styles.btnContainer}>

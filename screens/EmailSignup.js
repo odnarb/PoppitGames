@@ -22,7 +22,10 @@ class EmailSignUpScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFocused: false,
+      isNameFocused: false,
+      isEmailFocused: false,
+      isPassword1Focused: false,
+      isPassword2Focused: false,
       fullname: '',
       email: '',
       password: '',
@@ -38,7 +41,10 @@ class EmailSignUpScreen extends React.Component {
   };
 
   state = {
-      isFocused: false,
+      isNameFocused: false,
+      isEmailFocused: false,
+      isPassword1Focused: false,
+      isPassword2Focused: false,
       fullname: '',
       email: '',
       password: '',
@@ -50,22 +56,32 @@ class EmailSignUpScreen extends React.Component {
       this.setState({agreeToTerms: value})
   };
 
-  handleFocus = event => {
-      this.setState({ isFocused: true });
+  handleFocus = (key, event) => {
+      this.setState({ [key]: true });
       if (this.props.onFocus) {
         this.props.onFocus(event);
       }
   };
 
-  handleBlur = event => {
-      this.setState({ isFocused: false });
+  handleBlur = (key, event) => {
+      this.setState({ [key]: false });
       if (this.props.onBlur) {
         this.props.onBlur(event);
       }
   };
 
   render() {
-    const { isFocused,fullname,email,password,confirm_password,agreeToTerms } = this.state;
+    const {
+        isNameFocused,
+        isEmailFocused,
+        isPassword1Focused,
+        isPassword2Focused,
+        fullname,
+        email,
+        password,
+        confirm_password,
+        agreeToTerms
+    } = this.state;
     const { onFocus, onBlur, ...otherProps } = this.props;
 
     return (
@@ -78,40 +94,40 @@ class EmailSignUpScreen extends React.Component {
               placeholder="Full Name"
               style={[styles.grey,styles.textInput]}
               selectionColor="#428AF8"
-              underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+              underlineColorAndroid={ isNameFocused? "#428AF8" : "#D3D3D3" }
               onChangeText={(text) => this.setState({fullname: text})}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur} />
+              onFocus={(e) => {this.handleFocus(e, 'isNameFocused')}}
+              onBlur={(e) => {this.handleBlur(e, 'isNameFocused')}} />
 
           <TextInput
               placeholder="Email"
               keyboardType='email-address'
               style={[styles.grey,styles.textInput]}
               selectionColor="#428AF8"
-              underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+              underlineColorAndroid={ isEmailFocused? "#428AF8" : "#D3D3D3" }
               onChangeText={(text) => this.setState({email: text})}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur} />
+              onFocus={(e) => {this.handleFocus(e, 'isEmailFocused')}}
+              onBlur={(e) => {this.handleBlur(e, 'isEmailFocused')}} />
 
           <BCPasswordInputText
               placeholder="Password"
               style={[styles.grey,styles.textInput]}
               selectionColor="#428AF8"
-              underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+              underlineColorAndroid={ isPassword1Focused? "#428AF8" : "#D3D3D3" }
               value={password}
               onChangeText={(text) => this.setState({ password: text })}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur} />
+              onFocus={(e) => {this.handleFocus(e, 'isPassword1Focused')}}
+              onBlur={(e) => {this.handleBlur(e, 'isPassword1Focused')}} />
 
           <BCPasswordInputText
               placeholder="Confirm Password"
               style={[styles.grey,styles.textInput]}
               selectionColor="#428AF8"
-              underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+              underlineColorAndroid={ isPassword2Focused? "#428AF8" : "#D3D3D3" }
               value={confirm_password}
               onChangeText={(text) => this.setState({ confirm_password: text })}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur} />
+              onFocus={(e) => {this.handleFocus(e, 'isPassword2Focused')}}
+              onBlur={(e) => {this.handleBlur(e, 'isPassword2Focused')}} />
 
           <View style={styles.switchContainer}>
             <Switch

@@ -26,7 +26,8 @@ class EmailSignInScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFocused: false,
+      isEmailFocused: false,
+      isPasswordFocused: false,
       email: '',
       password: '',
       keepMeSignedIn: false
@@ -40,7 +41,8 @@ class EmailSignInScreen extends React.Component {
   };
 
   state = {
-    isFocused: false,
+    isEmailFocused: false,
+    isPasswordFocused: false,
     email: '',
     password: '',
     keepMeSignedIn: false
@@ -50,22 +52,22 @@ class EmailSignInScreen extends React.Component {
       this.setState({keepMeSignedIn: value})
   };
 
-  handleFocus = event => {
-      this.setState({ isFocused: true });
+  handleFocus = (key, event) => {
+      this.setState({ [key]: true });
       if (this.props.onFocus) {
         this.props.onFocus(event);
       }
   };
 
-  handleBlur = event => {
-      this.setState({ isFocused: false });
+  handleBlur = (key, event) => {
+      this.setState({ [key]: false });
       if (this.props.onBlur) {
         this.props.onBlur(event);
       }
   };
 
   render() {
-    const { isFocused, email, password, keepMeSignedIn } = this.state;
+    const { isEmailFocused, isPasswordFocused, email, password, keepMeSignedIn } = this.state;
     const { onFocus, onBlur, ...otherProps } = this.props;
 
     return (
@@ -80,9 +82,9 @@ class EmailSignInScreen extends React.Component {
                 keyboardType='email-address'
                 style={[styles.grey,styles.textInput]}
                 selectionColor="#428AF8"
-                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+                underlineColorAndroid={ isEmailFocused? "#428AF8" : "#D3D3D3" }
                 onChangeText={(text) => this.setState({email: text})}
-                onFocus={this.handleFocus}
+                onFocus={(e) => {this.handleFocus(e, 'isEmailFocused')}}
                 onBlur={this.handleBlur} />
           </View>
 
@@ -91,10 +93,10 @@ class EmailSignInScreen extends React.Component {
                 placeholder="Password"
                 style={[styles.grey,styles.textInput]}
                 selectionColor="#428AF8"
-                underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
+                underlineColorAndroid={ isPasswordFocused? "#428AF8" : "#D3D3D3" }
                 value={password}
                 onChangeText={(text) => this.setState({ password: text })}
-                onFocus={this.handleFocus}
+                onFocus={(e) => {this.handleFocus(e, 'isPasswordFocused')}}
                 onBlur={this.handleBlur} />
           </View>
 

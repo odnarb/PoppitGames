@@ -20,6 +20,7 @@ const yellowColor = "#fde74c";
 const greenColor = "#9bc53d";
 const redColor = "#c34231";
 const greyColor = "#404e4d";
+const lightGreyColor = "#5e7271";
 
 const settingsIconSize = iconMediumSize;
 const learnMoreNavDotSize = iconMediumSize;
@@ -31,7 +32,7 @@ const bottomNavIconSize = moderateScale(32);
 const bottomNavIconColor = greyColor;
 
 const passwordInputIconSize = moderateScale(25);
-const passwordInputIconColor = moderateScale(25);
+const passwordInputIconColor = greyColor;
 
 
 //const searchResultsIconColor = "#1eff29"; //green-ish color
@@ -43,7 +44,35 @@ const signInIconSize = iconLargeSize;
 const globalStyles = {
   baseContainer: {
     flex: 1,
-    backgroundColor: '#666'
+    backgroundColor: greyColor
+  },
+
+  grey: {
+    color: greyColor
+  },
+
+  lightGreyColor: {
+    color: lightGreyColor
+  },
+
+  white: {
+    color: "#fff"
+  },
+
+  black: {
+    color: "#000"
+  },
+
+  yellow: {
+    color: yellowColor
+  },
+
+  green: {
+    color: greenColor
+  },
+
+  red: {
+    color: redColor
   },
 
   logoContainer: {
@@ -87,6 +116,21 @@ const globalStyles = {
     paddingLeft: moderateScale(20),
     marginBottom: moderateScale(20)
   },
+
+  textHeader: {
+    fontSize: moderateScale(20),
+    color: greyColor,
+    fontWeight: 'bold',
+    marginTop: moderateScale(6),
+    marginBottom: moderateScale(30)
+  },
+
+  text: {
+    fontSize: moderateScale(18),
+    color: greyColor,
+    marginBottom: moderateScale(10)
+  },
+
   optionBtn: {
   },
 
@@ -125,7 +169,7 @@ const globalStyles = {
     paddingLeft: moderateScale(10),
     marginTop: moderateScale(10),
     fontSize: moderateScale(14),
-    color: '#ccc'
+    color: "#fff"
   },
   settingsRow: {
     flex: 1,
@@ -174,6 +218,7 @@ const globalStyles = {
   },
   switchText: {
     fontSize: moderateScale(16),
+    color: greyColor,
     alignSelf: "center"
   },
 
@@ -184,7 +229,8 @@ const globalStyles = {
     backgroundColor: "#dcdcdc",
     borderWidth: 1,
     borderRadius: 4,
-    padding: moderateScale(20),
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: moderateScale(20),
   },
 
@@ -198,11 +244,12 @@ const globalStyles = {
   buttonDark: {
     width: "100%",
     height: verticalScale(64),
-    borderColor: '#000',
-    backgroundColor: "#000",
+    borderColor: greyColor,
+    backgroundColor: greyColor,
     borderWidth: 1,
     borderRadius: 4,
-    padding: moderateScale(20),
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: moderateScale(20)
   },
 
@@ -225,7 +272,7 @@ const settingsStyles = {
 const aboutStyles = {
   baseContainer: {
     flex: 1,
-    backgroundColor: "#666"
+    backgroundColor: greyColor
   },
 
   versionContainer:{
@@ -243,7 +290,7 @@ const aboutStyles = {
     shadowRadius: 2.84,
 
     elevation: 5,
-    backgroundColor: "#888"
+    backgroundColor: lightGreyColor
   },
 
   contentContainer: {
@@ -254,7 +301,8 @@ const aboutStyles = {
     alignItems: "center",
     justifyContent: "center",
     fontSize: moderateScale(24),
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color: "#fff"
   },
 
   versionRow: {
@@ -297,7 +345,8 @@ const emailSignInStyles = {
   },
 
   recoverPwLink: {
-    fontSize: moderateScale(16)
+    fontSize: moderateScale(16),
+    color: greyColor
   },
 
   btnContainer: {
@@ -324,20 +373,6 @@ const emailSignInErrorStyles = {
     marginBottom: moderateScale(10),
     justifyContent: 'flex-end',
     alignItems: 'center'
-  },
-
-  textHeader: {
-    fontSize: moderateScale(20),
-    fontWeight: 'bold',
-    marginTop: moderateScale(6),
-    marginBottom: moderateScale(30)
-  },
-
-  text: {
-    fontSize: moderateScale(18),
-    marginTop: moderateScale(6),
-    width: "100%",
-    color: "#777"
   }
 };
 
@@ -361,7 +396,7 @@ const emailSignUpStyles = {
 
   textLink: {
     fontSize: moderateScale(16),
-    color: '#444',
+    color: greyColor,
     fontWeight: 'bold',
     textDecorationLine: 'underline'
   },
@@ -373,13 +408,13 @@ const emailSignUpStyles = {
   },
 
   termsText: {
-    color: '#444',
+    color: greyColor,
     fontSize: moderateScale(16),
     marginLeft: moderateScale(10)
   },
 
   termsText: {
-    color: '#444',
+    color: greyColor,
     fontSize: moderateScale(16),
     marginLeft: moderateScale(10)
   }
@@ -473,7 +508,7 @@ const notificationsStyles = {
 const prizesStyles = {
   baseContainer: {
     flex: 1,
-    backgroundColor: '#666'
+    backgroundColor: greyColor
   },
 
   contentContainer: {
@@ -489,7 +524,7 @@ const prizesStyles = {
   },
   claimedPrizeContainer: {
     flex: 0.3,
-    backgroundColor: "#666",
+    backgroundColor: greyColor,
     marginTop: moderateScale(2),
     marginBottom: moderateScale(2),
     flexDirection: "row",
@@ -610,19 +645,6 @@ emailSignUpConfirmStyles = {
     alignItems: 'center'
   },
 
-  textHeader: {
-    fontSize: moderateScale(20),
-    fontWeight: 'bold',
-    marginTop: moderateScale(6),
-    marginBottom: moderateScale(30)
-  },
-
-  text: {
-    fontSize: moderateScale(18),
-    color: '#777',
-    marginBottom: moderateScale(10)
-  },
-
   textInput: {
     fontSize: moderateScale(18),
     marginTop: moderateScale(6),
@@ -649,19 +671,6 @@ const recoverPasswordStyles = {
     alignItems: 'center'
   },
 
-  textHeader: {
-    fontSize: moderateScale(20),
-    fontWeight: 'bold',
-    marginTop: moderateScale(6),
-    marginBottom: moderateScale(30)
-  },
-
-  text: {
-    fontSize: moderateScale(18),
-    color: '#777',
-    marginBottom: moderateScale(10)
-  },
-
   textInput: {
     fontSize: moderateScale(18),
     marginTop: moderateScale(6),
@@ -685,19 +694,6 @@ const recoverPasswordConfirmStyles = {
     marginBottom: moderateScale(10),
     justifyContent: 'flex-end',
     alignItems: 'center'
-  },
-
-  textHeader: {
-    fontSize: moderateScale(20),
-    fontWeight: 'bold',
-    marginTop: moderateScale(6),
-    marginBottom: moderateScale(30)
-  },
-
-  text: {
-    fontSize: moderateScale(18),
-    color: '#777',
-    marginBottom: moderateScale(10)
   }
 };
 
@@ -705,14 +701,17 @@ const signInStyles = {
   baseContainer: {
     flex: 1,
     paddingLeft: moderateScale(20),
-    paddingRight: moderateScale(20),
-    backgroundColor: greyColor,
-
+    paddingRight: moderateScale(20)
   },
 
   contentContainer: {
     flex: 4,
     alignItems: 'center'
+  },
+
+  learnMoreText: {
+    fontSize: moderateScale(16),
+    color: greyColor
   },
 
   btnGoogle:{
@@ -763,10 +762,6 @@ const signInStyles = {
       textAlign: "center",
       marginLeft: moderateScale(50),
       marginRight: moderateScale(50)
-  },
-
-  learnMoreText: {
-    color: "#fff"
   },
 
   separatorContainer: {

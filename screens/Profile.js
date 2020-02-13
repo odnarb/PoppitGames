@@ -20,23 +20,23 @@ class ProfileScreen extends React.Component {
           <View style={styles.contentContainer}>
 
             <View style={styles.settingsRow}>
-              <Text style={styles.settingsLabel}>Full Name: </Text>
-              <Text style={styles.settingsValue}>John Smith</Text>
+              <Text style={[styles.grey,styles.settingsLabel]}>Full Name: </Text>
+              <Text style={[styles.grey,styles.settingsValue]}>John Smith</Text>
             </View>
 
             <View style={styles.settingsRow}>
-              <Text style={styles.settingsLabel}>Email Address: </Text>
-              <Text style={styles.settingsValue}>john.smith@gmail.com</Text>
+              <Text style={[styles.grey,styles.settingsLabel]}>Email Address: </Text>
+              <Text style={[styles.grey,styles.settingsValue]}>john.smith@gmail.com</Text>
             </View>
 
             <View style={styles.settingsRow}>
-              <Text style={styles.settingsLabel}>Birthdate: </Text>
-              <Text style={styles.settingsValue}>3/7/1980</Text>
+              <Text style={[styles.grey,styles.settingsLabel]}>Birthdate: </Text>
+              <Text style={[styles.grey,styles.settingsValue]}>3/7/1980</Text>
             </View>
 
             <View style={styles.settingsRow}>
-              <Text style={styles.settingsLabel}>Location: </Text>
-              <Text style={styles.settingsValue}>Tucson, AZ</Text>
+              <Text style={[styles.grey,styles.settingsLabel]}>Location: </Text>
+              <Text style={[styles.grey,styles.settingsValue]}>Tucson, AZ</Text>
             </View>
           </View>
 

@@ -28,7 +28,7 @@ class BottomNavigation extends React.Component {
                 type="material-community"
                 size={iconSize}
                 color={iconColor} />
-                <Text style={styles.navText}>Prizes</Text>
+                <Text style={[styles.grey,styles.navText]}>Prizes</Text>
                 </View>
             </TouchableOpacity>
 
@@ -39,7 +39,7 @@ class BottomNavigation extends React.Component {
                 type="material-community"
                 size={iconSize}
                 color={iconColor} />
-                <Text style={styles.navText}>Search</Text>
+                <Text style={[styles.grey,styles.navText]}>Search</Text>
               </View>
             </TouchableOpacity>
 
@@ -50,7 +50,7 @@ class BottomNavigation extends React.Component {
                 type="material-community"
                 size={iconSize}
                 color={iconColor} />
-                <Text style={styles.navText}>Settings</Text>
+                <Text style={[styles.grey,styles.navText]}>Settings</Text>
                 </View>
             </TouchableOpacity>
           </View>

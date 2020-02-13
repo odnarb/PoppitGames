@@ -76,7 +76,7 @@ class EmailSignUpScreen extends React.Component {
         <View style={styles.contentContainer}>
           <TextInput
               placeholder="Full Name"
-              style={styles.textInput}
+              style={[styles.grey,styles.textInput]}
               selectionColor="#428AF8"
               underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
               onChangeText={(text) => this.setState({fullname: text})}
@@ -86,7 +86,7 @@ class EmailSignUpScreen extends React.Component {
           <TextInput
               placeholder="Email"
               keyboardType='email-address'
-              style={styles.textInput}
+              style={[styles.grey,styles.textInput]}
               selectionColor="#428AF8"
               underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
               onChangeText={(text) => this.setState({email: text})}
@@ -95,7 +95,7 @@ class EmailSignUpScreen extends React.Component {
 
           <BCPasswordInputText
               placeholder="Password"
-              style={styles.textInput}
+              style={[styles.grey,styles.textInput]}
               selectionColor="#428AF8"
               underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
               value={password}
@@ -105,7 +105,7 @@ class EmailSignUpScreen extends React.Component {
 
           <BCPasswordInputText
               placeholder="Confirm Password"
-              style={styles.textInput}
+              style={[styles.grey,styles.textInput]}
               selectionColor="#428AF8"
               underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
               value={confirm_password}
@@ -118,11 +118,11 @@ class EmailSignUpScreen extends React.Component {
               onValueChange = {this.toggleSwitch}
               value = {agreeToTerms}
               style={styles.switch} />
-            <Text style={styles.termsText}>I agree to the </Text>
+            <Text style={[styles.grey,styles.termsText]}>I agree to the </Text>
 
             <TouchableOpacity style={{marginLeft: 10, marginTop: 5}} onPress={() => this.props.navigation.navigate("TermsPreSignUp")} style={styles.optionBtn}>
               <View style={styles.optionBtnView}>
-                <Text style={styles.textLink}>terms and conditions.</Text>
+                <Text style={[styles.grey,styles.textLink]}>terms and conditions.</Text>
               </View>
             </TouchableOpacity>
           </View>

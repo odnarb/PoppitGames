@@ -53,9 +53,9 @@ class RecoverPasswordConfirmScreen extends React.Component {
         <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
-          <Text style={styles.textHeader}>Recover Password</Text>
+          <Text style={[styles.grey,styles.textHeader]}>Recover Password</Text>
 
-          <Text style={styles.text}>We have sent you an email with a link to reset your password.</Text>
+          <Text style={[styles.grey,styles.text]}>We have sent you an email with a link to reset your password.</Text>
 
           <View style={styles.btnContainer}>
             <TouchableOpacity style={styles.buttonDark} onPress={() => this._navTo('EmailSignIn')}>

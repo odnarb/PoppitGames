@@ -50,13 +50,13 @@ class LearnMoreNav extends React.Component {
           <View style={styles.navBtnGroup}>
             <TouchableOpacity style={styles.highLightBtn} onPress={() => this._navTo('AuthLoading')}>
               <View style={styles.navBtn}>
-                <Text style={styles.navSkip}>Skip</Text>
+                <Text style={[styles.flatLightGrey,styles.navSkip]}>Skip</Text>
               </View>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.highLightBtn} onPress={navToFn}>
               <View style={styles.navBtn}>
-                <Text style={styles.navNext}>{nextNavText}</Text>
+                <Text style={[styles.grey,styles.navNext]}>{nextNavText}</Text>
                 <Icon
                   name='chevron-right'
                   type='material-community'

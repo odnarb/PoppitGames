@@ -22,48 +22,45 @@ class NotificationsScreen extends React.Component {
   render() {
     return (
 
-      <View style={{
-        flex: 1,
-        backgroundColor: '#666'
-      }}>
+      <View style={styles.baseContainer}>
         <View style={styles.topMargin}></View>
         <View style={styles.optionRow}>
           <View style={styles.optionSwitchContainer}>
-            <Text style={styles.optionHeader}>App Features & Updates</Text>
+            <Text style={[styles.grey,styles.optionHeader]}>App Features & Updates</Text>
             <Switch style={styles.switchWithMargin}
               onValueChange = {(value) => this.setState({switchValue1: value})}
               value = {this.state.switchValue1} />
           </View>
-          <Text style={styles.optionDescription}>Get notified whenever new features are available.</Text>
+          <Text style={[styles.grey,styles.optionDescription]}>Get notified whenever new features are available.</Text>
         </View>
 
         <View style={styles.optionRow}>
           <View style={styles.optionSwitchContainer}>
-            <Text style={styles.optionHeader}>Nearby Deals</Text>
+            <Text style={[styles.grey,styles.optionHeader]}>Nearby Deals</Text>
             <Switch style={styles.switchWithMargin}
               onValueChange = {(value) => this.setState({switchValue2: value})}
               value = {this.state.switchValue2} />
           </View>
-          <Text style={styles.optionDescription}>Get notified whenever you are near participating locations.</Text>
+          <Text style={[styles.grey,styles.optionDescription]}>Get notified whenever you are near participating locations.</Text>
         </View>
 
         <View style={styles.optionRow}>
           <View style={styles.optionSwitchContainer}>
-            <Text style={styles.optionHeader}>Recommended Deals</Text>
+            <Text style={[styles.grey,styles.optionHeader]}>Recommended Deals</Text>
             <Switch style={styles.switchWithMargin}
               onValueChange = {(value) => this.setState({switchValue3: value})}
               value = {this.state.switchValue3} />
           </View>
-          <Text style={styles.optionDescription}>Get notified whenever we have a new recommended deal for you.</Text>
+          <Text style={[styles.grey,styles.optionDescription]}>Get notified whenever we have a new recommended deal for you.</Text>
         </View>
 
 
         <View style={styles.optionRow}>
           <View style={styles.optionContainer}>
-            <Text style={styles.optionHeader}>Email Subscriptions</Text>
+            <Text style={[styles.grey,styles.optionHeader]}>Email Subscriptions</Text>
           </View>
-          <Text style={styles.optionSubHeader}>Need help unsubcribing to email?</Text>
-          <Text style={styles.optionDescription}>Every email sent by Poppit has an unsubscribe link at the bottom of the email. You can also unsubscribe on our website. Find out how by visiting our <Text style={{ textDecorationLine: 'underline' }}>Help Center.</Text></Text>
+          <Text style={[styles.grey,styles.optionSubHeader]}>Need help unsubcribing to email?</Text>
+          <Text style={[styles.grey,styles.optionDescription]}>Every email sent by Poppit has an unsubscribe link at the bottom of the email. You can also unsubscribe on our website. Find out how by visiting our <Text style={{ textDecorationLine: 'underline' }}>Help Center.</Text></Text>
         </View>
       </View>
     );

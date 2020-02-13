@@ -27,8 +27,8 @@ class LearnMoreScreen extends React.Component {
         <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
-          <Text style={styles.tutoralHeader}>Tutorial Slide 2</Text>
-          <Text style={styles.tutorialText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
+          <Text style={[styles.grey,styles.tutoralHeader]}>Tutorial Slide 2</Text>
+          <Text style={[styles.grey,styles.tutorialText]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
 
           <View style={styles.imageContainer}>
             <Image

@@ -41,7 +41,7 @@ class AuthLoadingScreen extends React.Component {
 
         <View style={styles.contentContainer}>
           <ActivityIndicator size="large" />
-          <Text style={styles.text}>Loading</Text>
+          <Text style={[styles.grey, styles.text]}>Loading</Text>
         </View>
       </View>
 

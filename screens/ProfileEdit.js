@@ -10,7 +10,11 @@ import {
 import BCPasswordInputText from '../components/BCPasswordInputText';
 import DatePicker from 'react-native-date-picker'
 
-import { profileEditStyleSheet as styles } from '../components/globalstyles';
+import {
+  profileEditStyleSheet as styles,
+  birthdayInputSize,
+  greyColor
+} from '../components/globalstyles';
 
 class ProfileEditScreen extends React.Component {
   constructor(props) {
@@ -54,12 +58,12 @@ class ProfileEditScreen extends React.Component {
 
           <View style={styles.inputContainer}>
             <View>
-              <Text style={styles.inputLabel}>{'Full Name:'.toUpperCase()}</Text>
+              <Text style={[styles.grey,styles.inputLabel]}>{'Full Name:'.toUpperCase()}</Text>
             </View>
             <View>
               <TextInput
                   value={fullname}
-                  style={styles.textInput}
+                  style={[styles.grey,styles.textInput]}
                   selectionColor="#428AF8"
                   underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
                   onChangeText={(text) => this.setState({fullname: text})}
@@ -71,14 +75,14 @@ class ProfileEditScreen extends React.Component {
 
           <View style={styles.inputContainer}>
             <View>
-              <Text style={styles.inputLabel}>{'Email Address:'.toUpperCase()}</Text>
+              <Text style={[styles.grey,styles.inputLabel]}>{'Email Address:'.toUpperCase()}</Text>
             </View>
 
             <View>
               <TextInput
                   value={email}
                   keyboardType='email-address'
-                  style={styles.textInput}
+                  style={[styles.grey,styles.textInput]}
                   selectionColor="#428AF8"
                   underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
                   onChangeText={(text) => this.setState({email: text})}
@@ -89,12 +93,12 @@ class ProfileEditScreen extends React.Component {
 
           <View style={styles.inputContainer}>
             <View>
-              <Text style={styles.inputLabel}>{'Birthdate:'.toUpperCase()}</Text>
+              <Text style={[styles.grey,styles.inputLabel]}>{'Birthdate:'.toUpperCase()}</Text>
             </View>
             <View>
               <DatePicker
                 style={styles.dateInput}
-                textColor="#ffffff"
+                textColor={greyColor}
                 mode="date"
                 height={50}
                 date={this.state.birthday}
@@ -104,12 +108,12 @@ class ProfileEditScreen extends React.Component {
 
           <View style={styles.inputContainer}>
             <View>
-              <Text style={styles.inputLabel}>{'Location:'.toUpperCase()}</Text>
+              <Text style={[styles.grey,styles.inputLabel]}>{'Location:'.toUpperCase()}</Text>
             </View>
             <View>
               <TextInput
                   value={location}
-                  style={styles.textInput}
+                  style={[styles.grey,styles.textInput]}
                   selectionColor="#428AF8"
                   underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
                   onChangeText={(text) => this.setState({location: text})}
@@ -121,10 +125,8 @@ class ProfileEditScreen extends React.Component {
           <View style={styles.inputContainer}>
             <BCPasswordInputText
                 placeholder="Password"
-                style={styles.textInput}
+                style={[styles.grey,styles.textInput]}
                 selectionColor="#428AF8"
-                textColor="#fff"
-                iconColor="#ccc"
                 underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
                 value={password}
                 onChangeText={(text) => this.setState({ password: text })}
@@ -134,10 +136,8 @@ class ProfileEditScreen extends React.Component {
           <View style={styles.inputContainer}>
             <BCPasswordInputText
                 placeholder="Confirm Password"
-                style={styles.textInput}
+                style={[styles.grey,styles.textInput]}
                 selectionColor="#428AF8"
-                textColor="#fff"
-                iconColor="#ccc"
                 underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
                 value={confirm_password}
                 onChangeText={(text) => this.setState({ confirm_password: text })}

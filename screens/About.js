@@ -30,7 +30,7 @@ class AboutScreen extends React.Component {
         <LogoBanner size="scaled" />
 
         <View style={styles.versionRow}>
-          <Text style={styles.versionText}>version 1.3.2 (0bdd85b1)</Text>
+          <Text style={[styles.grey,styles.versionText]}>version 1.3.2 (0bdd85b1)</Text>
         </View>
       </View>
 
@@ -38,7 +38,7 @@ class AboutScreen extends React.Component {
             <View style={styles.settingsRow}>
               <TouchableOpacity onPress={() => this._navTo('Terms')} style={styles.optionBtn}>
                 <View style={styles.optionBtnView}>
-                  <Text style={styles.settingsText}>Terms of Use</Text>
+                  <Text style={[styles.grey,styles.settingsText]}>Terms of Use</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -46,13 +46,13 @@ class AboutScreen extends React.Component {
             <View style={styles.settingsRow}>
               <TouchableOpacity onPress={() => this._navTo('PrivacyPolicy')} style={styles.optionBtn}>
                 <View style={styles.optionBtnView}>
-                  <Text style={styles.settingsText}>Privacy Policy</Text>
+                  <Text style={[styles.grey,styles.settingsText]}>Privacy Policy</Text>
                 </View>
               </TouchableOpacity>
             </View>
 
             <View style={styles.copyrightRow}>
-              <Text style={styles.copyrightText}>© Copyright Poppit Games LLC</Text>
+              <Text style={[styles.grey,styles.copyrightText]}>© Copyright Poppit Games LLC</Text>
             </View>
           </View>
       </View>

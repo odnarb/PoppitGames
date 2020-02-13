@@ -56,14 +56,14 @@ class RecoverPasswordScreen extends React.Component {
         <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
-          <Text style={styles.textHeader}>Recover Password</Text>
+          <Text style={[styles.grey,styles.textHeader]}>Recover Password</Text>
 
-          <Text style={styles.text}>Please enter the email address you used to register with us and we will send you a link for recovering your password with.</Text>
+          <Text style={[styles.grey,styles.text]}>Please enter the email address you used to register with us and we will send you a link for recovering your password with.</Text>
 
             <TextInput
                 placeholder="Enter Email"
                 keyboardType='email-address'
-                style={styles.textInput}
+                style={[styles.grey,styles.textInput]}
                 selectionColor="#428AF8"
                 underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
                 onChangeText={(text) => this.setState({email: text})}

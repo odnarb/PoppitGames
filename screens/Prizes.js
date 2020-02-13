@@ -26,34 +26,34 @@ class PrizesScreen extends React.Component {
 
           <View style={styles.contentContainer}>
 
-            <Text style={styles.headerText}>My Prizes</Text>
+            <Text style={[styles.grey,styles.padLeft20,styles.textHeader]}>My Prizes</Text>
 
-            <View style={styles.prizeContainer}>
+            <View style={[styles.greenBG,styles.prizeContainer]}>
               <View style={styles.prizeCell}>
-                <Text style={styles.prizeText}>-25% OFF{'\n'}2 Liter Pepsi</Text>
+                <Text style={[styles.grey,styles.prizeText]}>-25% OFF{'\n'}2 Liter Pepsi</Text>
               </View>
 
               <View style={styles.prizeCell}>
-                <Text style={styles.prizeText}>Hooters{'\n'}Scottsdale</Text>
+                <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
               </View>
 
               <View style={styles.prizeCell}>
-                <Text style={styles.prizeText}>CLAIM</Text>
+                <Text style={[styles.grey,styles.prizeText]}>CLAIM</Text>
               </View>
             </View>
 
 
-            <View style={styles.claimedPrizeContainer}>
+            <View style={[styles.lightGreyBG,styles.prizeContainer]}>
               <View style={styles.prizeCell}>
-                <Text style={styles.prizeText}>FREE{'\n'}2 Liter Pepsi</Text>
+                <Text style={[styles.grey,styles.prizeText]}>FREE{'\n'}2 Liter Pepsi</Text>
               </View>
 
               <View style={styles.prizeCell}>
-                <Text style={styles.prizeText}>Hooters{'\n'}Scottsdale</Text>
+                <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
               </View>
 
               <View style={styles.prizeCell}>
-                <Text style={styles.prizeText}>CLAIMED</Text>
+                <Text style={[styles.grey,styles.prizeText]}>CLAIMED</Text>
               </View>
             </View>
 

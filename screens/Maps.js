@@ -295,7 +295,7 @@ class MapsScreen extends React.Component {
         <View style={styles.searchResultsIndicatorContainer}>
           <View style={styles.searchResultsIndicatorView}>
             <View style={styles.searchResultsIndicator}>
-              <Text style={styles.searchResultsIndicatorText}>Loading...</Text>
+              <Text style={[styles.white, styles.searchResultsIndicatorText, styles.marginLeft10]}>Loading...</Text>
             </View>
           </View>
         </View>
@@ -306,7 +306,7 @@ class MapsScreen extends React.Component {
           <View style={styles.searchResultsIndicatorView}>
             <View style={styles.searchResultsIndicator}>
               <Icon name='circle-slice-8' type='material-community' color={searchResultsIconColor} size={searchResultsIconSize} />
-              <Text style={[styles.searchResultsIndicatorText, styles.marginLeft10]}>{this.state.markers.length} Results</Text>
+              <Text style={[styles.white, styles.searchResultsIndicatorText, styles.marginLeft10]}>{this.state.markers.length} Results</Text>
             </View>
           </View>
         </View>
@@ -316,9 +316,9 @@ class MapsScreen extends React.Component {
         <View style={styles.searchResultsIndicatorContainer}>
           <View style={styles.searchResultsIndicatorView}>
             <View style={styles.searchResultsIndicator}>
-              <Text style={styles.searchResultsIndicatorText}>No Results</Text>
+              <Text style={[styles.white, styles.searchResultsIndicatorText, styles.marginLeft10]}>No Results</Text>
               <Icon name='circle-small' type='material-community' color="#fff" />
-              <Text style={styles.searchResultsIndicatorText}>please zoom out or update filters</Text>
+              <Text style={[styles.white, styles.searchResultsIndicatorText]}>please zoom out or update filters</Text>
             </View>
           </View>
         </View>
@@ -368,7 +368,7 @@ class MapsScreen extends React.Component {
             onPress={e => this._onPressMarker(e, index)}>
             <View style={styles.markerWrap}>
               <View style={markerStylesArr}>
-                <Text style={styles.markerText}>{marker.coupon.title.toUpperCase()}</Text>
+                <Text style={[styles.white,styles.markerText]}>{marker.coupon.title.toUpperCase()}</Text>
               </View>
             </View>
           </MapView.Marker>
@@ -437,8 +437,8 @@ class MapsScreen extends React.Component {
                   resizeMode="cover" />
               </TouchableOpacity>
               <View style={styles.textContent}>
-                <Text numberOfLines={1} style={styles.cardtitle}>{marker.title}</Text>
-                <Text numberOfLines={1} style={styles.cardDescription}>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{marker.title}</Text>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardDescription]}>
                   {marker.description}
                 </Text>
               </View>

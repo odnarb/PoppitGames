@@ -53,9 +53,9 @@ class EmailSignUpConfirmScreen extends React.Component {
         <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
-          <Text style={styles.textHeader}>Account Sign Up</Text>
+          <Text style={[styles.grey,styles.textHeader]}>Account Sign Up</Text>
 
-          <Text style={styles.text}>We sent you an email with a link to confirm your account creation.</Text>
+          <Text style={[styles.grey,styles.text]}>We sent you an email with a link to confirm your account creation.</Text>
 
           <View style={styles.btnContainer}>
             <TouchableOpacity style={styles.buttonDark} onPress={() => this.props.navigation.navigate('AuthLoading')}>

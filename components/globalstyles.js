@@ -19,13 +19,18 @@ const blueColor = "#5bc0eb";
 const yellowColor = "#fde74c";
 const greenColor = "#9bc53d";
 const redColor = "#c34231";
+const lightRedColor  = "#ff5e5e";
 const greyColor = "#404e4d";
-const lightGreyColor = "#5e7271";
+const lightGreyColor = "#def0ef";
+const flatDarkGreyColor = "#777";
+const flatLightGreyColor = "#dcdcdc";
+const whiteColor = "#fff";
+const blackColor = "#000";
 
 const settingsIconSize = iconMediumSize;
 const learnMoreNavDotSize = iconMediumSize;
 const learnMoreNavIconSize = iconMediumSize;
-const learnMoreNavIconLightColor = "#dcdcdc";
+const learnMoreNavIconLightColor = flatLightGreyColor;
 const learnMoreNavIconDarkColor = greyColor;
 
 const bottomNavIconSize = moderateScale(32);
@@ -34,9 +39,10 @@ const bottomNavIconColor = greyColor;
 const passwordInputIconSize = moderateScale(25);
 const passwordInputIconColor = greyColor;
 
+const birthdayInputSize = moderateScale(40);
 
-//const searchResultsIconColor = "#1eff29"; //green-ish color
-const searchResultsIconColor = "#ff3030"; //red-ish color
+//const searchResultsIconColor = greenColor; //green-ish color
+const searchResultsIconColor = redColor; //red-ish color
 const searchResultsIconSize = moderateScale(20);
 
 const signInIconSize = iconLargeSize;
@@ -44,23 +50,39 @@ const signInIconSize = iconLargeSize;
 const globalStyles = {
   baseContainer: {
     flex: 1,
-    backgroundColor: greyColor
+    //backgroundColor: greyColor
   },
 
   grey: {
     color: greyColor
   },
 
-  lightGreyColor: {
+  greyBG: {
+    backgroundColor: greyColor
+  },
+
+  lightGrey: {
     color: lightGreyColor
   },
 
+  flatLightGrey: {
+    color: flatLightGreyColor
+  },
+
+  flatDarkGrey: {
+    color: flatDarkGreyColor
+  },
+
+  lightGreyBG: {
+    backgroundColor: lightGreyColor
+  },
+
   white: {
-    color: "#fff"
+    color: whiteColor
   },
 
   black: {
-    color: "#000"
+    color: blackColor
   },
 
   yellow: {
@@ -71,8 +93,19 @@ const globalStyles = {
     color: greenColor
   },
 
+  greenBG: {
+    backgroundColor: greenColor
+  },
+
   red: {
     color: redColor
+  },
+
+  padLeft20: {
+    paddingLeft: moderateScale(20),
+  },
+  padRight20: {
+    paddingRight: moderateScale(20),
   },
 
   logoContainer: {
@@ -109,17 +142,8 @@ const globalStyles = {
     flex: 7
   },
 
-  headerText: {
-    fontSize: moderateScale(30),
-    color: "#fff",
-    fontWeight: "bold",
-    paddingLeft: moderateScale(20),
-    marginBottom: moderateScale(20)
-  },
-
   textHeader: {
     fontSize: moderateScale(20),
-    color: greyColor,
     fontWeight: 'bold',
     marginTop: moderateScale(6),
     marginBottom: moderateScale(30)
@@ -127,7 +151,6 @@ const globalStyles = {
 
   text: {
     fontSize: moderateScale(18),
-    color: greyColor,
     marginBottom: moderateScale(10)
   },
 
@@ -145,7 +168,6 @@ const globalStyles = {
   settingsLabel: {
     fontSize: moderateScale(20),
     fontWeight: "bold",
-    color: '#fff',
     paddingLeft: moderateScale(10),
     paddingRight: moderateScale(10)
   },
@@ -153,13 +175,11 @@ const globalStyles = {
   settingsText: {
     fontSize: moderateScale(17),
     marginTop: moderateScale(5),
-    paddingLeft: moderateScale(15),
-    color: '#fff'
+    paddingLeft: moderateScale(15)
   },
 
   settingsValue: {
     fontSize: moderateScale(20),
-    color: '#fff',
     marginLeft: "auto",
     paddingLeft: moderateScale(10),
     paddingRight: moderateScale(10)
@@ -168,12 +188,11 @@ const globalStyles = {
   copyrightText :{
     paddingLeft: moderateScale(10),
     marginTop: moderateScale(10),
-    fontSize: moderateScale(14),
-    color: "#fff"
+    fontSize: moderateScale(14)
   },
   settingsRow: {
     flex: 1,
-    borderTopColor: '#fff',
+    borderTopColor: greyColor,
     borderTopWidth: StyleSheet.hairlineWidth,
     paddingLeft: moderateScale(10),
     paddingTop: moderateScale(10),
@@ -182,14 +201,13 @@ const globalStyles = {
   },
   copyrightRow: {
     flex: 1,
-    borderTopColor: '#fff',
+    borderTopColor: greyColor,
     borderTopWidth: StyleSheet.hairlineWidth,
     paddingLeft: moderateScale(10),
     paddingTop: moderateScale(10),
     paddingBottom: moderateScale(10)
   },
   picker: {
-    color:"#111",
     marginLeft: moderateScale(20),
     height: moderateScale(36),
     width: "80%"
@@ -218,7 +236,6 @@ const globalStyles = {
   },
   switchText: {
     fontSize: moderateScale(16),
-    color: greyColor,
     alignSelf: "center"
   },
 
@@ -226,7 +243,7 @@ const globalStyles = {
     width: "100%",
     height: verticalScale(64),
     borderColor: '#dcdcdc',
-    backgroundColor: "#dcdcdc",
+    backgroundColor: flatLightGreyColor,
     borderWidth: 1,
     borderRadius: 4,
     justifyContent: "center",
@@ -235,7 +252,7 @@ const globalStyles = {
   },
 
   btnLight: {
-    color: '#777',
+    color: flatDarkGreyColor,
     fontWeight: 'bold',
     fontSize: moderateScale(16),
     textAlign:'center'
@@ -270,10 +287,6 @@ const settingsStyles = {
 };
 
 const aboutStyles = {
-  baseContainer: {
-    flex: 1,
-    backgroundColor: greyColor
-  },
 
   versionContainer:{
     flex:3,
@@ -281,7 +294,7 @@ const aboutStyles = {
     paddingRight: moderateScale(10),
     paddingTop: moderateScale(10),
 
-    shadowColor: "#000",
+    shadowColor: greyColor,
     shadowOffset: {
       width: 0,
       height: 3,
@@ -301,8 +314,7 @@ const aboutStyles = {
     alignItems: "center",
     justifyContent: "center",
     fontSize: moderateScale(24),
-    fontWeight: "bold",
-    color: "#fff"
+    fontWeight: "bold"
   },
 
   versionRow: {
@@ -345,8 +357,7 @@ const emailSignInStyles = {
   },
 
   recoverPwLink: {
-    fontSize: moderateScale(16),
-    color: greyColor
+    fontSize: moderateScale(16)
   },
 
   btnContainer: {
@@ -396,7 +407,6 @@ const emailSignUpStyles = {
 
   textLink: {
     fontSize: moderateScale(16),
-    color: greyColor,
     fontWeight: 'bold',
     textDecorationLine: 'underline'
   },
@@ -408,13 +418,6 @@ const emailSignUpStyles = {
   },
 
   termsText: {
-    color: greyColor,
-    fontSize: moderateScale(16),
-    marginLeft: moderateScale(10)
-  },
-
-  termsText: {
-    color: greyColor,
     fontSize: moderateScale(16),
     marginLeft: moderateScale(10)
   }
@@ -434,15 +437,12 @@ const learnMoreStyles = {
   tutoralHeader: {
     fontSize: moderateScale(26),
     fontWeight: 'bold',
-    color: greyColor,
     marginTop: moderateScale(10)
-
   },
 
   tutorialText: {
     marginTop: moderateScale(10),
     fontSize: moderateScale(17),
-    color: greyColor
   },
 
   imageContainer: {
@@ -465,7 +465,7 @@ const notificationsStyles = {
   },
 
   optionRow: {
-    borderTopColor: '#fff',
+    borderTopColor: greyColor,
     borderTopWidth: StyleSheet.hairlineWidth,
     paddingLeft: moderateScale(10),
     paddingTop: moderateScale(10),
@@ -487,56 +487,29 @@ const notificationsStyles = {
 
   optionHeader: {
     fontSize: moderateScale(18),
-    fontWeight: 'bold',
-    color: '#fff'
+    fontWeight: 'bold'
   },
 
   optionSubHeader: {
-    fontSize: moderateScale(15),
     fontWeight: 'bold',
-    color: '#fff',
+    fontSize: moderateScale(15),
     marginTop: moderateScale(10)
   },
 
   optionDescription: {
     fontSize: moderateScale(15),
-    color: '#dcdc',
     marginTop: moderateScale(10)
   }
 };
 
 const prizesStyles = {
-  baseContainer: {
-    flex: 1,
-    backgroundColor: greyColor
-  },
 
   contentContainer: {
     flex: 6
   },
 
-  headerText: {
-    fontSize: moderateScale(30),
-    color: "#fff",
-    fontWeight: "bold",
-    paddingLeft: moderateScale(20),
-    marginBottom: moderateScale(20)
-  },
-  claimedPrizeContainer: {
-    flex: 0.3,
-    backgroundColor: greyColor,
-    marginTop: moderateScale(2),
-    marginBottom: moderateScale(2),
-    flexDirection: "row",
-    alignItems: "stretch",
-    justifyContent: "center",
-    borderColor: "#000",
-    borderBottomWidth: 1,
-    borderTopWidth: 1
-  },
   prizeContainer: {
     flex: 0.3,
-    backgroundColor: "#fff",
     marginTop: moderateScale(2),
     marginBottom: moderateScale(2),
     flexDirection: "row",
@@ -546,9 +519,9 @@ const prizesStyles = {
     borderBottomWidth: 1,
     borderTopWidth: 1
   },
+
   prizeCell: {
     flex: 1,
-    // flexDirection: 'column',
     borderColor: "#000",
     borderRightWidth: 1,
     alignItems: "center",
@@ -556,17 +529,11 @@ const prizesStyles = {
   },
   prizeText: {
     fontSize: moderateScale(18),
-    color: "#777",
     textAlign: "center"
   }
 };
 
 const profileStyles = {
-
-  baseContainer: {
-    flex: 1,
-    backgroundColor: '#666'
-  },
 
   contentContainer: {
     flex: 6
@@ -586,7 +553,6 @@ const profileEditStyles = {
 
   baseContainer: {
     flex: 1,
-    backgroundColor: '#666',
     paddingLeft: moderateScale(20),
     paddingRight: moderateScale(20)
   },
@@ -604,13 +570,11 @@ const profileEditStyles = {
 
   textInput: {
     fontSize: moderateScale(18),
-    color: "#fff",
     width: "100%"
   },
 
   inputLabel: {
-    fontSize: moderateScale(12),
-    color: "#fff"
+    fontSize: moderateScale(12)
   },
 
   btnContainer: {
@@ -710,8 +674,7 @@ const signInStyles = {
   },
 
   learnMoreText: {
-    fontSize: moderateScale(16),
-    color: greyColor
+    fontSize: moderateScale(16)
   },
 
   btnGoogle:{
@@ -736,8 +699,8 @@ const signInStyles = {
 
   btnEmail:{
     flexDirection: "row",
-    backgroundColor: '#777',
-    borderColor: '#777',
+    backgroundColor: flatDarkGreyColor,
+    borderColor: flatDarkGreyColor,
     borderWidth: 1,
     borderRadius: moderateScale(5),
     justifyContent: 'center',
@@ -757,7 +720,7 @@ const signInStyles = {
   },
 
   btnText: {
-      color: '#fff',
+      color: whiteColor,
       fontSize: moderateScale(18),
       textAlign: "center",
       marginLeft: moderateScale(50),
@@ -813,7 +776,7 @@ searchResultsIndicatorContainer: {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "#000"
+    backgroundColor: greyColor
   },
 
   searchResultsIndicatorView: {
@@ -827,7 +790,6 @@ searchResultsIndicatorContainer: {
   },
 
   searchResultsIndicatorText: {
-    color: "#fff"
   },
 
   mapContainer: {
@@ -849,9 +811,9 @@ searchResultsIndicatorContainer: {
   card: {
     padding: moderateScale(10),
     elevation: 2,
-    backgroundColor: "#FFF",
+    backgroundColor: whiteColor,
     marginHorizontal: 10,
-    shadowColor: "#000",
+    shadowColor: blackColor,
     shadowRadius: 5,
     shadowOpacity: 0.3,
     shadowOffset: { x: 2, y: -2 },
@@ -874,8 +836,7 @@ searchResultsIndicatorContainer: {
     fontWeight: "bold",
   },
   cardDescription: {
-    fontSize: moderateScale(12),
-    color: "#444",
+    fontSize: moderateScale(12)
   },
 
   markerWrap: {
@@ -894,20 +855,18 @@ searchResultsIndicatorContainer: {
   },
 
   regularMarker: {
-      backgroundColor: "#ff3030"
+      backgroundColor: redColor
   },
 
   selectedMarker: {
-      backgroundColor: "#6afc71"
+      backgroundColor: greenColor
   },
 
   visitedMarker: {
-      backgroundColor: "#ff5e5e"
+      backgroundColor: lightRedColor
   },
 
-
   markerText: {
-    color: "#fff",
     alignSelf: "center"
   }
 };
@@ -942,13 +901,11 @@ const learnMoreNavStyles = {
     marginRight: moderateScale(5)
   },
   navSkip: {
-    color: '#777',
     padding: moderateScale(10),
     fontSize: moderateScale(18),
     marginRight: moderateScale(20)
   },
   navNext: {
-    color: '#000',
     padding: moderateScale(10),
     fontSize: moderateScale(18),
   },
@@ -978,7 +935,7 @@ const bottomNavStyles = {
   navBtn: {
       flex: 1,
       justifyContent: 'center',
-      backgroundColor: '#fff'
+      backgroundColor: lightGreyColor
   },
 
   navBtnView: {
@@ -987,8 +944,7 @@ const bottomNavStyles = {
   },
 
   navText: {
-    fontSize: moderateScale(14),
-    color: "#777",
+    fontSize: moderateScale(14)
   }
 };
 
@@ -1009,12 +965,12 @@ const passwordStyles = {
   bcPasswordLite: {
     flex:1,
     fontSize: moderateScale(18),
-    color: "#fff"
+    color: whiteColor
   },
 };
 
 const passwordStyleSheet = StyleSheet.create(passwordStyles);
-const learnMoreNavStyleSheet = StyleSheet.create(learnMoreNavStyles);
+const learnMoreNavStyleSheet = StyleSheet.create({ ...globalStyles, ...learnMoreNavStyles});
 const bottomNavStyleSheet = StyleSheet.create(bottomNavStyles);
 
 const aboutStyleSheet = StyleSheet.create({ ...globalStyles, ...aboutStyles });
@@ -1039,6 +995,9 @@ const styles = StyleSheet.create(globalStyles);
 
 export {
   styles,
+
+  greyColor,
+  whiteColor,
 
   // make a global icon size available
   iconMediumSize,
@@ -1075,7 +1034,10 @@ export {
   notificationsStyleSheet,
   prizesStyleSheet,
   profileStyleSheet,
+
   profileEditStyleSheet,
+  birthdayInputSize,
+
   recoverPasswordStyleSheet,
   recoverPasswordConfirmStyleSheet,
   settingsStyleSheet,

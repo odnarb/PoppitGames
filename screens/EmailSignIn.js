@@ -78,7 +78,7 @@ class EmailSignInScreen extends React.Component {
             <TextInput
                 placeholder="Email"
                 keyboardType='email-address'
-                style={styles.textInput}
+                style={[styles.grey,styles.textInput]}
                 selectionColor="#428AF8"
                 underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
                 onChangeText={(text) => this.setState({email: text})}
@@ -89,7 +89,7 @@ class EmailSignInScreen extends React.Component {
           <View style={styles.inputContainerNoMargin}>
             <BCPasswordInputText
                 placeholder="Password"
-                style={styles.textInput}
+                style={[styles.grey,styles.textInput]}
                 selectionColor="#428AF8"
                 underlineColorAndroid={ isFocused? "#428AF8" : "#D3D3D3" }
                 value={password}
@@ -103,12 +103,12 @@ class EmailSignInScreen extends React.Component {
               onValueChange = {this.toggleSwitch}
               value = {keepMeSignedIn}
               style={styles.switch} />
-            <Text style={styles.switchText}>Keep me signed in.</Text>
+            <Text style={[styles.grey,styles.switchText]}>Keep me signed in.</Text>
           </View>
 
           <View style={styles.recoverPwContainer}>
               <TouchableOpacity onPress={() => this._recoverPassword()}>
-                <Text style={styles.recoverPwLink}>Recover password?</Text>
+                <Text style={[styles.grey,styles.recoverPwLink]}>Recover password?</Text>
               </TouchableOpacity>
           </View>
         </View>

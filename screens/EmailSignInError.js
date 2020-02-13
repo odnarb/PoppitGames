@@ -27,8 +27,8 @@ class EmailSignInErrorScreen extends React.Component {
         <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
-          <Text style={styles.textHeader}>Oops! Couldn't sign in..</Text>
-          <Text style={styles.text}>Your username and password don't match.{'\n'}Please try again.</Text>
+          <Text style={[styles.grey,styles.textHeader]}>Oops! Couldn't sign in..</Text>
+          <Text style={[styles.grey,styles.text]}>Your username and password don't match.{'\n'}Please try again.</Text>
 
           <View style={styles.btnContainer}>
             <TouchableOpacity style={styles.buttonDark} onPress={() => this.props.navigation.goBack()}>

@@ -25,7 +25,11 @@ import LogoBanner from '../components/LogoBanner';
 
 import { Icon } from 'react-native-elements';
 
-import { signInStyleSheet as styles, signInIconSize as iconSize } from '../components/globalstyles';
+import {
+  signInStyleSheet as styles,
+  signInIconSize as iconSize,
+  whiteColor
+} from '../components/globalstyles';
 
 class SignInScreen extends React.Component {
   componentDidMount() {
@@ -82,7 +86,7 @@ class SignInScreen extends React.Component {
 
         <View style={styles.contentContainer}>
             <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={() => this._learnMore()}>
-              <Text style={styles.learnMoreText}>New to {appName}? Tap to learn more.</Text>
+              <Text style={[styles.grey,styles.learnMoreText]}>New to {appName}? Tap to learn more.</Text>
             </TouchableOpacity>
 
 
@@ -92,7 +96,7 @@ class SignInScreen extends React.Component {
                   name='facebook'
                   type='material-community'
                   size={iconSize}
-                  color='#fff'
+                  color={whiteColor}
                   style={styles.btnIcon} />
                 <Text style={styles.btnText}>{btnFBWording}</Text>
               </View>
@@ -104,7 +108,7 @@ class SignInScreen extends React.Component {
                   name='google'
                   type='material-community'
                   size={iconSize}
-                  color='#fff'
+                  color={whiteColor}
                   style={styles.btnIcon} />
                 <Text style={styles.btnText}>{btnGoogleWording}</Text>
               </View>
@@ -122,7 +126,7 @@ class SignInScreen extends React.Component {
                   name='email'
                   type='material-community'
                   size={iconSize}
-                  color='#fff'
+                  color={whiteColor}
                   style={styles.btnIcon} />
               <Text style={styles.btnText}>{btnEmailWording}</Text>
               </View>

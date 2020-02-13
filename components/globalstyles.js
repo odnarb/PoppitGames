@@ -16,6 +16,7 @@ const iconMediumSize = moderateScale(32);
 const iconLargeSize = moderateScale(42);
 
 const blueColor = "#5bc0eb";
+const lightblueColor = "#8bdafc";
 const yellowColor = "#fde74c";
 const greenColor = "#9bc53d";
 const redColor = "#c34231";
@@ -41,8 +42,7 @@ const passwordInputIconColor = greyColor;
 
 const birthdayInputSize = moderateScale(40);
 
-//const searchResultsIconColor = greenColor; //green-ish color
-const searchResultsIconColor = redColor; //red-ish color
+const searchResultsIconColor = blueColor;
 const searchResultsIconSize = moderateScale(20);
 
 const signInIconSize = iconLargeSize;
@@ -863,7 +863,7 @@ searchResultsIndicatorContainer: {
   },
 
   regularMarker: {
-      backgroundColor: redColor
+      backgroundColor: blueColor
   },
 
   selectedMarker: {
@@ -871,7 +871,7 @@ searchResultsIndicatorContainer: {
   },
 
   visitedMarker: {
-      backgroundColor: lightRedColor
+      backgroundColor: lightblueColor
   },
 
   markerText: {

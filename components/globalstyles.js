@@ -73,6 +73,10 @@ const globalStyles = {
     color: flatLightGreyColor
   },
 
+  flatLightGreyBG: {
+    backgroundColor: flatLightGreyColor
+  },
+
   flatDarkGrey: {
     color: flatDarkGreyColor
   },

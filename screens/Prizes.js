@@ -43,17 +43,17 @@ class PrizesScreen extends React.Component {
             </View>
 
 
-            <View style={[styles.lightGreyBG,styles.prizeContainer]}>
+            <View style={[styles.flatLightGreyBG,styles.prizeContainer]}>
               <View style={styles.prizeCell}>
-                <Text style={[styles.grey,styles.prizeText]}>FREE{'\n'}2 Liter Pepsi</Text>
+                <Text style={[styles.white,styles.prizeText]}>FREE{'\n'}2 Liter Pepsi</Text>
               </View>
 
               <View style={styles.prizeCell}>
-                <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                <Text style={[styles.white,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
               </View>
 
               <View style={styles.prizeCell}>
-                <Text style={[styles.grey,styles.prizeText]}>CLAIMED</Text>
+                <Text style={[styles.white,styles.prizeText]}>CLAIMED</Text>
               </View>
             </View>
 

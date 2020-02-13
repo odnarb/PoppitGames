@@ -43,18 +43,13 @@ class BCPasswordInputText extends React.Component {
            iconSizeReal = iconSize;
         }
 
-        let passwordStyleUsed = styles.bcPassword;
-        if(textColor && textColor == "#fff"){
-            passwordStyleUsed = styles.bcPasswordLite;
-        }
-
         return (
             <View style={styles.passwordContainer}>
                 <TextInput
                     {...this.props}
                     placeholder={placeholder}
                     placeholderTextColor={textColor}
-                    style={passwordStyleUsed}
+                    style={styles.bcPassword}
                     secureTextEntry={isPassword}
                     underlineColorAndroid={underlineColorAndroid} />
                 <Icon style={styles.icon}

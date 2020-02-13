@@ -968,12 +968,7 @@ const passwordStyles = {
   bcPassword: {
     flex:1,
     fontSize: moderateScale(18)
-  },
-  bcPasswordLite: {
-    flex:1,
-    fontSize: moderateScale(18),
-    color: whiteColor
-  },
+  }
 };
 
 const passwordStyleSheet = StyleSheet.create(passwordStyles);

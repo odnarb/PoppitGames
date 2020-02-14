@@ -7,10 +7,10 @@ import { scale, moderateScale, verticalScale } from 'react-native-size-matters';
 
 const { width, height } = Dimensions.get("window");
 
-const CARD_HEIGHT = height / 4;
-const CARD_WIDTH = CARD_HEIGHT - 50;
+const CARD_HEIGHT = height / 3;
+const CARD_WIDTH = width - 20;
 
-const carouselShownPosition = height-moderateScale(270);
+const carouselShownPosition = height-moderateScale(320);
 
 const iconMediumSize = moderateScale(32);
 const iconLargeSize = moderateScale(42);
@@ -821,7 +821,7 @@ searchResultsIndicatorContainer: {
     // backgroundColor: "red",
     height: CARD_HEIGHT + moderateScale(20),
     position: "absolute",
-    bottom: verticalScale(100),
+    bottom: verticalScale(120),
     left: 0,
     right: 0,
     paddingVertical: verticalScale(10),

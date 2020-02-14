@@ -91,8 +91,8 @@ const MARKER_SEEN_PREPEND = "marker@";
 
 const { width, height } = Dimensions.get("window");
 
-const CARD_HEIGHT = height / 4;
-const CARD_WIDTH = CARD_HEIGHT - 50;
+const CARD_HEIGHT = height / 3;
+const CARD_WIDTH = width - 20;
 
 class MapsScreen extends React.Component {
 
@@ -139,7 +139,7 @@ class MapsScreen extends React.Component {
   };
 
   _onPressMarker = (event,index) => {
-    this._moveCarousel();
+    this._moveCarousel(index);
 
     let newRegion = {
       latitude: this.state.markers[index].coordinate.latitude,
@@ -424,7 +424,7 @@ class MapsScreen extends React.Component {
     return;
   };
 
-  _moveCarousel = () => {
+  _moveCarousel = (index) => {
     //default to hide
     let yValue = height;
     if(this.state.showCarousel){
@@ -438,18 +438,30 @@ class MapsScreen extends React.Component {
       if(e.finished === true && this.state.showCarousel == true) {
         //if we completed showing the carousel, register the backbutton
         BackHandler.addEventListener("hardwareBackPress", this._handleBackCarousel);
+
+
+    // if(index > -1) {
+    //   //try to get the x value based on the index
+    //   let xValue = Math.floor( index * (CARD_WIDTH + 0.3) );
+
+    //   // console.log("--THIS SCROLLVIEW: ", this.scrollView);
+    //   console.log("--THIS xValue", xValue);
+    //   // this.refs.scrollView.scrollTo({x: xValue, y: 0, animated: false});
+    // }
+
       }
     });
   }
 
   _renderCarousel = () => {
+      // ref={scrollView => this.scrollView = scrollView}
       return (
         <Animated.View style={[styles.scrollView,this.carouselShowHideAnimation.getLayout()]}>
         <Animated.ScrollView
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator={false}
-          snapToInterval={CARD_WIDTH}
+          snapToInterval={CARD_WIDTH+20}
           onScroll={Animated.event(
             [
               {
@@ -471,7 +483,7 @@ class MapsScreen extends React.Component {
                 <Image
                   source={marker.image}
                   style={styles.cardImage}
-                  resizeMode="cover" />
+                  resizeMode="contain" />
               </TouchableOpacity>
               <View style={styles.textContent}>
                 <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{marker.title}</Text>
@@ -484,46 +496,6 @@ class MapsScreen extends React.Component {
         </Animated.ScrollView>
         </Animated.View>
       );
-  };
-
-  _animateCarouselToMarker = ({ value }, indexOverride) => {
-    console.log("_animateToMarker() value: ", value);
-
-    let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
-
-    //allow an override if we're trying to force an animation, like when a user selects a marker
-    if(indexOverride > -1){
-      index = indexOverride;
-    }
-
-    if (index >= this.state.markers.length) {
-      index = this.state.markers.length - 1;
-    }
-    if (index <= 0) {
-      index = 0;
-    }
-
-    clearTimeout(this.regionTimeout);
-
-    if (this.state.markers.length > 0) {
-      this.regionTimeout = setTimeout(() => {
-        if (this.index !== index) {
-          this.index = index;
-          const { coordinate } = this.state.markers[index];
-          //also highlight the current selected marker
-          this.setState({ selectedMarkerIndex: index });
-
-          this.map.animateToRegion(
-            {
-              ...coordinate,
-              latitudeDelta: this.state.region.latitudeDelta,
-              longitudeDelta: this.state.region.longitudeDelta,
-            },
-            350
-          );
-        }
-      }, 10);
-    }
   };
 
   watchID: ?number = null;

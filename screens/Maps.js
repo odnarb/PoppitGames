@@ -93,6 +93,7 @@ const { width, height } = Dimensions.get("window");
 
 const CARD_HEIGHT = height / 3;
 const CARD_WIDTH = width - 20;
+const SNAP_TO_CARD = CARD_WIDTH+20;
 
 class MapsScreen extends React.Component {
 
@@ -139,7 +140,19 @@ class MapsScreen extends React.Component {
   };
 
   _onPressMarker = (event,index) => {
-    this._moveCarousel(index);
+    //move the carousel to the current marker
+    if(index > -1) {
+      //try to get the x value based on the index
+      let xValue = Math.floor( index * SNAP_TO_CARD );
+      //WARNING: .getNode() might be deprecated later
+      //However, according to the issue, FB doesn't care or won't fix this..
+      //for now..so..go head and use it.
+      //https://stackoverflow.com/questions/42051368/scrollto-is-undefined-on-animated-scrollview
+      //https://github.com/facebook/react-native/issues/19235
+      this.scrollView.getNode().scrollTo({x: xValue, y: 0, animated: false});
+    }
+
+    this._moveCarousel();
 
     let newRegion = {
       latitude: this.state.markers[index].coordinate.latitude,
@@ -178,7 +191,6 @@ class MapsScreen extends React.Component {
         console.log("_onPressMarker() :: Marker already seen: ", thisMarker.hash);
         this._showCarousel();
       }
-      // this._animateCarouselToMarker({}, this.state.selectedMarkerIndex);
     });
   };
 
@@ -407,7 +419,6 @@ class MapsScreen extends React.Component {
         );
       }));
     } else {
-
       //show "no results"
       return null;
     }
@@ -424,7 +435,7 @@ class MapsScreen extends React.Component {
     return;
   };
 
-  _moveCarousel = (index) => {
+  _moveCarousel = () => {
     //default to hide
     let yValue = height;
     if(this.state.showCarousel){
@@ -438,30 +449,19 @@ class MapsScreen extends React.Component {
       if(e.finished === true && this.state.showCarousel == true) {
         //if we completed showing the carousel, register the backbutton
         BackHandler.addEventListener("hardwareBackPress", this._handleBackCarousel);
-
-
-    // if(index > -1) {
-    //   //try to get the x value based on the index
-    //   let xValue = Math.floor( index * (CARD_WIDTH + 0.3) );
-
-    //   // console.log("--THIS SCROLLVIEW: ", this.scrollView);
-    //   console.log("--THIS xValue", xValue);
-    //   // this.refs.scrollView.scrollTo({x: xValue, y: 0, animated: false});
-    // }
-
       }
     });
   }
 
   _renderCarousel = () => {
-      // ref={scrollView => this.scrollView = scrollView}
       return (
         <Animated.View style={[styles.scrollView,this.carouselShowHideAnimation.getLayout()]}>
         <Animated.ScrollView
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator={false}
-          snapToInterval={CARD_WIDTH+20}
+          snapToInterval={SNAP_TO_CARD}
+          ref={scrollView => this.scrollView = scrollView}
           onScroll={Animated.event(
             [
               {

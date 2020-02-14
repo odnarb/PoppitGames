@@ -141,8 +141,20 @@ class MapsScreen extends React.Component {
   _onPressMarker = (event,index) => {
     this._moveCarousel();
 
+    let newRegion = {
+      latitude: this.state.markers[index].coordinate.latitude,
+      longitude: this.state.markers[index].coordinate.longitude,
+      latitudeDelta: this.state.region.latitudeDelta,
+      longitudeDelta: this.state.region.longitudeDelta
+    };
+
     //set the current marker selected
-    this.setState({ selectedMarkerIndex: index }, () => {
+    this.map.animateToRegion(newRegion,350);
+    this.setState({
+      selectedMarkerIndex: index,
+      previousRegion: this.state.region,
+      region: newRegion
+    }, () => {
       // console.log("_onPressMarker() :: marker pressed: ", this.state.markers[index].hash);
 
       let thisMarker = this.state.markers[index];
@@ -184,10 +196,21 @@ class MapsScreen extends React.Component {
     });
   }
 
+  _deselectMarker = () => {
+    if (this.state.selectedMarkerIndex > -1){
+      this.map.animateToRegion(this.state.previousRegion,500);
+
+      this.setState({
+        selectedMarkerIndex: -1,
+        previousRegion: {},
+        region: this.state.previousRegion
+      });
+    }
+  };
+
   _onPressMap = () => {
       // console.log("_onPressMap() FIRED");
-
-      this.setState({ selectedMarkerIndex: -1 });
+      this._deselectMarker();
       this._hideCarousel();
   };
 
@@ -621,6 +644,7 @@ class MapsScreen extends React.Component {
           onPress={this._onPressMap}
           onRegionChangeComplete={ r => {this._onRegionChange(r)}}
           loadingEnabled={true}
+          moveOnMarkerPress={false}
           showsUserLocation={true}>
 
           {this._renderMarkers()}

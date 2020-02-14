@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
   Alert,
-  AppRegistry,
   Text,
   View,
   ScrollView,
@@ -251,43 +250,43 @@ class MapsScreen extends React.Component {
         searchInProgress: true
       }, () => {
 
-      //render nothing if we've cleared the search
-      if(this.state.search === "" ){
-        this.setState({
-          markers: [],
-          searchInProgress: false
-        }, () => {
-          //render AFTER setting state
-          this._renderMarkers();
-          Keyboard.dismiss();
-        });
-      } else {
-        //simulate a search
-        setTimeout(() => {
-          //loop through results and check if they've been seen
-          let results = [];
-          FAKE_MARKERS.map((marker, index) => {
-            // console.log("BEFORE _seenMarker() :: marker ", marker);
-            this._seenMarker(marker, (newMarker) =>{
-              // console.log("AFTER _seenMarker() :: newMarker ", newMarker);
-              results.push(newMarker);
-
-              if(index == FAKE_MARKERS.length-1){
-                console.log("_search() :: SEARCH COMPLETE: ", results);
-
-                this.setState({
-                  searchInProgress: false,
-                  markers: results
-                }, () => {
-                  //render AFTER setting state
-                  this._renderMarkers();
-                  Keyboard.dismiss();
-                });
-              }
-            })
+        //render nothing if we've cleared the search
+        if(this.state.search === "" ){
+          this.setState({
+            markers: [],
+            searchInProgress: false
+          }, () => {
+            //render AFTER setting state
+            this._renderMarkers();
+            Keyboard.dismiss();
           });
-        }, 2000);
-      } //endif
+        } else {
+          //simulate a search
+          setTimeout(() => {
+            //loop through results and check if they've been seen
+            let results = [];
+            FAKE_MARKERS.map((marker, index) => {
+              // console.log("BEFORE _seenMarker() :: marker ", marker);
+              this._seenMarker(marker, (newMarker) =>{
+                // console.log("AFTER _seenMarker() :: newMarker ", newMarker);
+                results.push(newMarker);
+
+                if(index == FAKE_MARKERS.length-1){
+                  console.log("_search() :: SEARCH COMPLETE: ", results);
+
+                  this.setState({
+                    searchInProgress: false,
+                    markers: results
+                  }, () => {
+                    //render AFTER setting state
+                    this._renderMarkers();
+                    Keyboard.dismiss();
+                  });
+                }
+              })
+            });
+          }, 2000);
+        } //endif
       });
     }
   };

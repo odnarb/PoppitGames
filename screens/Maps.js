@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   Alert,
+  BackHandler,
   Text,
   View,
   ScrollView,
@@ -13,9 +14,7 @@ import {
 
 import { Keyboard } from 'react-native'
 
-import { Icon } from 'react-native-elements';
-
-import {SearchBar} from 'react-native-elements'
+import { Icon, SearchBar } from 'react-native-elements';
 
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
@@ -228,8 +227,15 @@ class MapsScreen extends React.Component {
     }
   };
 
+  _handleBackCarousel = () => {
+    this._hideCarousel();
+    return true;
+  };
+
   _hideCarousel = () => {
     if(this.state.showCarousel === true){
+      BackHandler.removeEventListener("hardwareBackPress", this._handleBackCarousel),
+
       this.setState({
         showCarousel: false
       }, () => {
@@ -405,7 +411,12 @@ class MapsScreen extends React.Component {
     Animated.spring(this.carouselShowHideAnimation, {
       bounciness: 0,
       toValue: {x: 0, y: yValue },
-    }).start()
+    }).start((e) => {
+      if(e.finished === true && this.state.showCarousel == true) {
+        //if we completed showing the carousel, register the backbutton
+        BackHandler.addEventListener("hardwareBackPress", this._handleBackCarousel);
+      }
+    });
   }
 
   _renderCarousel = () => {

@@ -81,7 +81,7 @@ class MapsScreen extends React.Component {
         marker.seen = true;
       }
 
-      console.log("_seenMarker() BEFORE CB() : ", marker);
+      // console.log("_seenMarker() BEFORE CB() : ", marker);
       if(cb !== undefined) cb(marker);
     });
   };
@@ -256,11 +256,11 @@ class MapsScreen extends React.Component {
             FAKE_MARKERS.map((marker, index) => {
               // console.log("BEFORE _seenMarker() :: marker ", marker);
               this._seenMarker(marker, (newMarker) =>{
-                // console.log("AFTER _seenMarker() :: newMarker ", newMarker);
+                // console.log("AFTER _seenMarker() :: marker.image: ", marker.image);
                 results.push(newMarker);
 
                 if(index == FAKE_MARKERS.length-1){
-                  console.log("_search() :: SEARCH COMPLETE: ", results);
+                  // console.log("_search() :: SEARCH COMPLETE: ", results);
 
                   this.setState({
                     searchInProgress: false,

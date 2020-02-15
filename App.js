@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { fromRight } from 'react-navigation-transitions'
 import { createStackNavigator } from 'react-navigation-stack';
 
 //Auth stack screens
@@ -28,6 +29,23 @@ import AboutScreen from './screens/About';
 import TermsScreen from './screens/Terms';
 import PrivacyPolicyScreen from './screens/PrivacyPolicy';
 
+const handleCustomTransition = ({ scenes }) => {
+  // const prevScene = scenes[scenes.length - 2];
+  // const nextScene = scenes[scenes.length - 1];
+
+  // Custom transitions go there
+  // if (prevScene
+  //   && prevScene.route.routeName === 'SignIn'
+  //   && nextScene.route.routeName === 'EmailSignUp') {
+  //   return fromRight();
+  // } else if (prevScene
+  //   && prevScene.route.routeName === 'EmailSignUp'
+  //   && nextScene.route.routeName === 'SignIn') {
+  //   return fromLeft();
+  // }
+  return fromRight();
+}
+
 const AppStack = createStackNavigator({
     Maps: MapsScreen,
     Game: GameScreen,
@@ -39,6 +57,9 @@ const AppStack = createStackNavigator({
     About: AboutScreen,
     Terms: TermsScreen,
     PrivacyPolicy: PrivacyPolicyScreen
+},
+{
+  transitionConfig: (nav) => handleCustomTransition(nav)
 });
 
 const AuthStack = createStackNavigator({
@@ -53,6 +74,9 @@ const AuthStack = createStackNavigator({
     RecoverPassword: RecoverPasswordScreen,
     RecoverPasswordConfirm: RecoverPasswordConfirmScreen,
     TermsPreSignUp: TermsScreen
+},
+{
+  transitionConfig: (nav) => handleCustomTransition(nav)
 });
 
 const MainStack = createSwitchNavigator(

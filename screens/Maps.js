@@ -518,7 +518,6 @@ class MapsScreen extends React.Component {
   };
 
   UNSAFE_componentWillMount() {
-    this.index = 0;
     this.animation = new Animated.Value(0);
     this.carouselShowHideAnimation = new Animated.ValueXY({ x: 0, y: height })
   }
@@ -572,7 +571,7 @@ class MapsScreen extends React.Component {
     // We should just debounce the event listener here
     // this.animation.addListener(this._animateCarouselToMarker);
     this.animation.addListener(({ value }) => {
-      let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+      let index = Math.floor(value / CARD_WIDTH + 0.55); // animate 55% away from landing on the next item
       if (index >= this.state.markers.length) {
         index = this.state.markers.length - 1;
       }
@@ -584,8 +583,7 @@ class MapsScreen extends React.Component {
 
       if (this.state.markers.length > 0) {
         this.regionTimeout = setTimeout(() => {
-          if (this.index !== index) {
-            this.index = index;
+          if (this.state.selectedMarkerIndex !== index) {
             const { coordinate } = this.state.markers[index];
             //also highlight the current selected marker
             this.setState({ selectedMarkerIndex: index });

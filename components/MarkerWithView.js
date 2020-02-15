@@ -1,14 +1,15 @@
-import React, {PureComponent} from 'react'
+import React from 'react'
 
 import MapView from 'react-native-maps'
 import isEqual from 'lodash.isequal'
 
-export default class MarkerWithView extends PureComponent<Props, State> {
+export default class MarkerWithView extends React.Component {
   state = {
     tracksViewChanges: true
   }
 
-  componentWillReceiveProps(nextProps: any) {
+  shouldComponentUpdate(nextProps: any) {
+    console.log("CHECK MARKER PROPS: ", nextProps);
     if (!isEqual(this.props, nextProps)) {
       this.setState({
         tracksViewChanges: true,

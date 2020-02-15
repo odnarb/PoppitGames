@@ -23,71 +23,15 @@ import Geolocation from '@react-native-community/geolocation';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import MarkerWithView from '../components/MarkerWithView';
-
 import LogoBanner from '../components/LogoBanner';
-
 import BottomNavigation from '../components/BottomNavigation';
-
+import { markers as FAKE_MARKERS } from '../components/FakeMarkers';
 import {
   mapsStyleSheet as styles,
   searchResultsIconColor,
   searchResultsIconSize,
   carouselShownPosition
 } from '../components/globalstyles';
-
-//an example of using external/remote assets
-// const Images = [
-//   { uri: "https://i.imgur.com/sNam9iJ.jpg" },
-//   { uri: "https://i.imgur.com/N7rlQYt.jpg" },
-//   { uri: "https://i.imgur.com/UDrH0wm.jpg" },
-//   { uri: "https://i.imgur.com/Ka8kNST.jpg" }
-// ];
-
-const FAKE_MARKERS = [{
-    seen: false,
-    hash: "111111111-12345-11111111111111",
-    title: "Quick Trip #1",
-    description: "Test description #1",
-    coupon: {
-      title: "$.50 OFF",
-      description: ""
-    },
-    coordinate: {
-      latitude: 33.3776538,
-      longitude: -112.0490218,
-    },
-    image: require("../assets/images/brands/quicktrip-logo-small.png")
-  },
-  {
-    seen: false,
-    hash: "222222222-12345-22222222222222",
-    title: "Quick Trip #2",
-    description: "Test description #2",
-    coupon: {
-      title: "-50% OFF",
-      description: ""
-    },
-    coordinate: {
-      latitude: 33.4803774,
-      longitude: -112.0328086,
-    },
-    image: require("../assets/images/brands/quicktrip-logo-small.png")
-  },
-  {
-    seen: false,
-    hash: "333333333-12345-33333333333333",
-    title: "Quick Trip #3",
-    description: "Test description #3",
-    coupon: {
-      title: "FREE COFFEE",
-      description: ""
-    },
-    coordinate: {
-      latitude: 33.4796037,
-      longitude: -112.1171363,
-    },
-    image: require("../assets/images/brands/quicktrip-logo-small.png")
-}];
 
 const MARKER_SEEN = "seen";
 const MARKER_SEEN_PREPEND = "marker@";
@@ -411,6 +355,16 @@ class MapsScreen extends React.Component {
         }
         console.log("_renderMarkers() :: This marker seen? ", this.state.markers[index].seen);
         return (
+          <MapView.Marker key={index} coordinate={marker.coordinate}
+            onPress={e => this._onPressMarker(e, index)}>
+            <View style={styles.markerWrap}>
+              <View style={markerStylesArr}>
+                <Text style={[styles.white,styles.markerText]}>{marker.coupon.title.toUpperCase()}</Text>
+              </View>
+            </View>
+          </MapView.Marker>
+        );
+/*
           <MarkerWithView
             key={index}
             tracksViewChanges={false}
@@ -423,7 +377,8 @@ class MapsScreen extends React.Component {
             </View>
           </MarkerWithView>
 
-        );
+
+*/
       }));
     } else {
       //show "no results"

@@ -22,7 +22,10 @@ import Geolocation from '@react-native-community/geolocation';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
+import MarkerWithView from '../components/MarkerWithView';
+
 import LogoBanner from '../components/LogoBanner';
+
 import BottomNavigation from '../components/BottomNavigation';
 
 import {
@@ -408,14 +411,18 @@ class MapsScreen extends React.Component {
         }
         console.log("_renderMarkers() :: This marker seen? ", this.state.markers[index].seen);
         return (
-          <MapView.Marker key={index} coordinate={marker.coordinate}
+          <MarkerWithView
+            key={index}
+            tracksViewChanges={false}
+            coordinate={this.state.markers[index].coordinate}
             onPress={e => this._onPressMarker(e, index)}>
             <View style={styles.markerWrap}>
               <View style={markerStylesArr}>
                 <Text style={[styles.white,styles.markerText]}>{marker.coupon.title.toUpperCase()}</Text>
               </View>
             </View>
-          </MapView.Marker>
+          </MarkerWithView>
+
         );
       }));
     } else {

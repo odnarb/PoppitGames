@@ -15,7 +15,39 @@ const carouselShownPosition = height-moderateScale(320);
 const iconMediumSize = moderateScale(32);
 const iconLargeSize = moderateScale(42);
 
-const blueColor = "#5bc0eb";
+/*
+https://paletton.com/#uid=70g0u0kuGrmkbyxpwuLxbm9ESh3
+
+//Red-orange
+color-primary-0 { color: #DA4709 } // Main Primary color
+color-primary-1 { color: #FF8E5E } //lightest
+color-primary-2 { color: #F56C32 } //lighter
+color-primary-3 { color: #B13500 } //darker
+color-primary-4 { color: #882900 } //darkest
+
+//Dirty yellow, almost orange
+color-secondary-1-0 { color: #DA8209 } Main Secondary color (1)
+color-secondary-1-1 { color: #FFBB5E } //lightest
+color-secondary-1-2 { color: #F5A332 } //lighter
+color-secondary-1-3 { color: #B16600 } //darker
+color-secondary-1-4 { color: #884F00 } //darkest
+
+//Blue-ish
+color-secondary-2-0 { color: #0F548D } Main Secondary color (2)
+color-secondary-2-1 { color: #477EAC } //lightest
+color-secondary-2-2 { color: #29699E } //lighter
+color-secondary-2-3 { color: #074272 } //darker
+color-secondary-2-4 { color: #043258 } //darkest
+
+//Green-ish
+color-complement-0 { color: #06945B } //Main Complement color
+color-complement-1 { color: #43B486 } //lightest
+color-complement-2 { color: #22A771 } //lighter
+color-complement-3 { color: #007848 } //darker
+color-complement-4 { color: #005C37 } //darkest
+*/
+
+const blueColor = "#DA4709"; //"#5bc0eb";
 const lightblueColor = "#8bdafc";
 const yellowColor = "#fde74c";
 const greenColor = "#9bc53d";

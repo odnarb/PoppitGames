@@ -278,7 +278,7 @@ const markers = [
 {"seen":false,"hash":"0411f328-d9e7-48a4-b791-4d52262db553","title":"Quick Trip #276","description":"Test description #276","coupon":{"title":"Coupon #276","description":""},"coordinate":{"latitude":33.44,"longitude":-112.081},"image":{ uri: "http://poppit.bchambers.io/assets/images/brands/quicktrip-logo-small.png" }},
 {"seen":false,"hash":"193399c0-7905-4db1-a4f8-43517ab2d391","title":"Quick Trip #277","description":"Test description #277","coupon":{"title":"Coupon #277","description":""},"coordinate":{"latitude":33.429,"longitude":-112.046},"image":{ uri: "http://poppit.bchambers.io/assets/images/brands/quicktrip-logo-small.png" }},
 {"seen":false,"hash":"913cb6d4-cd98-4f38-a41d-670e9a3fb66c","title":"Quick Trip #278","description":"Test description #278","coupon":{"title":"Coupon #278","description":""},"coordinate":{"latitude":33.445,"longitude":-112.042},"image":{ uri: "http://poppit.bchambers.io/assets/images/brands/quicktrip-logo-small.png" }},
-{"seen":false,"hash":"8674c9b7-dc2c-46e8-a851-c2a3b7d88015","title":"Quick Trip #279","description":"Test description #279","coupon":{"title":"Coupon #279","description":""},"coordinate":{"latitude":33.439,"longitude":-112.071},"image":{ uri: "http://poppit.bchambers.io/assets/images/brands/quicktrip-logo-small.png" }}]
+{"seen":false,"hash":"8674c9b7-dc2c-46e8-a851-c2a3b7d88015","title":"Quick Trip #279","description":"Test description #279","coupon":{"title":"Coupon #279","description":""},"coordinate":{"latitude":33.439,"longitude":-112.071},"image":{ uri: "http://poppit.bchambers.io/assets/images/brands/quicktrip-logo-small.png" }}
 ];
 */
 

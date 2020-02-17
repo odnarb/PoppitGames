@@ -33,6 +33,11 @@ import {
   carouselShownPosition
 } from '../components/globalstyles';
 
+
+//copy to an object that is mutable
+
+let SEARCH_MARKERS = JSON.parse(JSON.stringify(FAKE_MARKERS))
+
 const MARKER_SEEN = "seen";
 const MARKER_SEEN_PREPEND = "marker@";
 
@@ -50,33 +55,35 @@ class MapsScreen extends React.Component {
     header: null
   };
 
-  // _getBoundingBox = (region) => {
-  //   let boundingBox = {
-  //     westLng: region.longitude - region.longitudeDelta/2, // westLng - min lng
-  //     southLat: region.latitude - region.latitudeDelta/2, // southLat - min lat
-  //     eastLng: region.longitude + region.longitudeDelta/2, // eastLng - max lng
-  //     northLat: region.latitude + region.latitudeDelta/2 // northLat - max lat
-  //   }
-  //   return boundingBox;
-  // }
+  _getBoundingBox = (region) => {
+    // console.log("_getBoundingBox() :: REGION: ", region);
+    let boundingBox = {
+      westLng: region.longitude - region.longitudeDelta/2, // westLng - min lng
+      southLat: region.latitude - region.latitudeDelta/2, // southLat - min lat
+      eastLng: region.longitude + region.longitudeDelta/2, // eastLng - max lng
+      northLat: region.latitude + region.latitudeDelta/2 // northLat - max lat
+    }
+    return boundingBox;
+  }
 
-  // _isInBoudingBox(coordinate) {
-  //   if (coordinate.latitude > this.state.boundingBox.southLat && coordinate.latitude < this.state.boundingBox.northLat &&
-  //       coordinate.longitude > this.state.boundingBox.westLng && coordinate.longitude < this.state.boundingBox.eastLng)
-  //   {
-  //     return true;
-  //   }
-  //   return false;
-  // }
+  _isInBoundingBox(coordinate) {
+    // console.log("_isInBoundingBox() :: this.state.boundingBox: ", this.state.boundingBox);
+    if (coordinate.latitude > this.state.boundingBox.southLat && coordinate.latitude < this.state.boundingBox.northLat &&
+        coordinate.longitude > this.state.boundingBox.westLng && coordinate.longitude < this.state.boundingBox.eastLng)
+    {
+      return true;
+    }
+    return false;
+  }
 
   //if we haven't seen this marker, save it
   _seenMarker = (marker, cb) => {
     let computedMarkerHash = MARKER_SEEN_PREPEND + marker.hash;
-    console.log("_seenMarker() START : checking: " + computedMarkerHash);
+    // console.log("_seenMarker() START : checking: " + computedMarkerHash);
     AsyncStorage.getItem(computedMarkerHash, (err, seenValue) => {
       marker.seen = false;
 
-      console.log("_seenMarker() START : "+ computedMarkerHash + " :: " + seenValue);
+      // console.log("_seenMarker() START : "+ computedMarkerHash + " :: " + seenValue);
       if( seenValue == MARKER_SEEN ){
         marker.seen = true;
       }
@@ -131,11 +138,11 @@ class MapsScreen extends React.Component {
 
           this.setState({ markers: clonedMarkers }, () => {
             this._showCarousel();
-            console.log("_onPressMarker() :: Marker set as seen: ", thisMarker.hash);
+            // console.log("_onPressMarker() :: Marker set as seen: ", thisMarker.hash);
           });
         });
       } else {
-        console.log("_onPressMarker() :: Marker already seen: ", thisMarker.hash);
+        // console.log("_onPressMarker() :: Marker already seen: ", thisMarker.hash);
         this._showCarousel();
       }
     });
@@ -148,9 +155,14 @@ class MapsScreen extends React.Component {
   }
 
   _onRegionChange = (r) => {
-    // console.log("_onRegionChange() FIRED");
+    let boundingBox = this._getBoundingBox(r);
 
-    this.setState({ region: r }, () => {
+    // console.log("_onRegionChange() FIRED, boundingBox: ", boundingBox);
+
+    this.setState({
+        boundingBox: boundingBox,
+        region: r
+    }, () => {
       // console.log("_onRegionChange() :: TODO :: search this area...");
     });
   }
@@ -160,6 +172,7 @@ class MapsScreen extends React.Component {
       this.map.animateToRegion(this.state.previousRegion,500);
 
       this.setState({
+        boundingBox: this._getBoundingBox(this.state.previousRegion),
         selectedMarkerIndex: -1,
         previousRegion: {},
         region: this.state.previousRegion
@@ -253,13 +266,36 @@ class MapsScreen extends React.Component {
           setTimeout(() => {
             //loop through results and check if they've been seen
             let results = [];
-            FAKE_MARKERS.map((marker, index) => {
-              // console.log("BEFORE _seenMarker() :: marker ", marker);
+            let randomCoordsArr = [];
+
+            //generate fake marker coordinates based on current region
+            for(let i=0; i < 10000;i++) {
+              let randomCoords = {
+                //latitude from (32 -> 34)
+                latitude:  parseFloat(((Math.random() * 4) + this.state.region.latitude).toFixed(3)),
+
+                //lognitude from (-111 -> -113)
+                longitude: parseFloat((-(Math.random() * 3) + this.state.region.longitude).toFixed(3))
+              };
+
+              if( this._isInBoundingBox(randomCoords) ) {
+                randomCoordsArr.push(randomCoords);
+
+                SEARCH_MARKERS[randomCoordsArr.length-1].coordinate = randomCoords;
+                if( randomCoordsArr.length == SEARCH_MARKERS.length ){
+                  console.log("Found random coords: ", randomCoords);
+                  break;
+                }
+              }
+            }
+
+            SEARCH_MARKERS.map((marker, index) => {
+              // console.log("BEFORE _seenMarker() :: marker ", marker.coordinate);
               this._seenMarker(marker, (newMarker) =>{
-                // console.log("AFTER _seenMarker() :: marker.image: ", marker.image);
+
                 results.push(newMarker);
 
-                if(index == FAKE_MARKERS.length-1){
+                if(index == SEARCH_MARKERS.length-1){
                   // console.log("_search() :: SEARCH COMPLETE: ", results);
 
                   this.setState({
@@ -273,7 +309,7 @@ class MapsScreen extends React.Component {
                 }
               })
             });
-          }, 2000);
+          }, 1000);
         } //endif
       });
     }
@@ -463,6 +499,7 @@ class MapsScreen extends React.Component {
   watchID: ?number = null;
 
   state = {
+    boundingBox: null,
     mapReady: true,
     showCarousel: false,
     selectedMarkerIndex: -1,
@@ -496,7 +533,10 @@ class MapsScreen extends React.Component {
     this._getCachedItem('lastRegion').then(data => {
       if(data !== null){
         let region = JSON.parse(data);
-        this.setState({ region: region });
+        this.setState({
+          boundingBox: this._getBoundingBox(region),
+          region: region
+        });
 
         //goto the location
         this.map.animateToRegion( region , 350);
@@ -566,7 +606,21 @@ class MapsScreen extends React.Component {
 
   render() {
     const { search } = this.state;
+/*
+  For when I need to draw a polygon..
+          <Polygon
+            coordinates={[
+              {  latitude: 33.8857, longitude: -111.7175 },
+              {  latitude: 33.8857, longitude: -112.3851 },
+              {  latitude: 33.0710, longitude: -112.3851 },
+              {  latitude: 33.0710, longitude: -111.7175 }
+            ]}
+            strokeWidth={1}
+            fillColor={"rgba(220,0,0,0.3)"}
+            strokeColor={"rgba(220,0,0,1)"}
+          />
 
+*/
     return (
       <View style={styles.container}>
         <MapView
@@ -580,6 +634,7 @@ class MapsScreen extends React.Component {
           showsUserLocation={true}>
 
           {this._renderMarkers()}
+
         </MapView>
 
         <LogoBanner container="absolute" size="small" />

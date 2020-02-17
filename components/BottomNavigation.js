@@ -14,15 +14,15 @@ import {
   bottomNavStyleSheet as styles,
   bottomNavIconSize as iconSize,
   bottomNavIconColor as iconColor,
-  blueColor
+  lightblueColor
 } from '../components/globalstyles';
 
 class BottomNavigation extends React.Component {
 
     render() {
-        let textStyles = [styles.blue,styles.navText];
+        let textStyles = [styles.lightblue,styles.navText];
         let navBtnStyles = [styles.greyBG,styles.navBtn];
-        let iconColor = blueColor;
+        let iconColor = lightblueColor;
         return (
           <View style={styles.navContainer}>
             <TouchableOpacity onPress={() => this._navTo('Prizes')} style={navBtnStyles}>

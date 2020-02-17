@@ -48,7 +48,7 @@ color-complement-4 { color: #005C37 } //darkest
 */
 
 const blueColor = "#DA4709"; //"#5bc0eb";
-const lightblueColor = "#8bdafc";
+const lightblueColor = "#F56C32" // "#8bdafc";
 const yellowColor = "#fde74c";
 const greenColor = "#9bc53d";
 const redColor = "#c34231";
@@ -74,7 +74,7 @@ const passwordInputIconColor = greyColor;
 
 const birthdayInputSize = moderateScale(40);
 
-const searchResultsIconColor = blueColor;
+const searchResultsIconColor = lightblueColor;
 const searchResultsIconSize = moderateScale(20);
 
 const signInIconSize = iconLargeSize;
@@ -87,6 +87,10 @@ const globalStyles = {
 
   blue: {
     color: blueColor
+  },
+
+  lightblue: {
+    color: lightblueColor
   },
 
   grey: {
@@ -1046,6 +1050,7 @@ export {
   greyColor,
   whiteColor,
   blueColor,
+  lightblueColor,
 
   // make a global icon size available
   iconMediumSize,

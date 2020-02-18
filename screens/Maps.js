@@ -33,11 +33,6 @@ import {
   carouselShownPosition
 } from '../components/globalstyles';
 
-
-//copy to an object that is mutable
-
-let SEARCH_MARKERS = JSON.parse(JSON.stringify(FAKE_MARKERS))
-
 const MARKER_SEEN = "seen";
 const MARKER_SEEN_PREPEND = "marker@";
 
@@ -149,6 +144,8 @@ class MapsScreen extends React.Component {
   };
 
   _onMapReady = () => {
+    console.log("_onMapReady() FIRED");
+
     this.setState({ mapReady: true}, () => {
       this._updateSearch("");
     })
@@ -157,13 +154,13 @@ class MapsScreen extends React.Component {
   _onRegionChange = (r) => {
     let boundingBox = this._getBoundingBox(r);
 
-    // console.log("_onRegionChange() FIRED, boundingBox: ", boundingBox);
+    console.log("_onRegionChange() FIRED");
 
     this.setState({
         boundingBox: boundingBox,
         region: r
     }, () => {
-      // console.log("_onRegionChange() :: TODO :: search this area...");
+      this._updateSearch("");
     });
   }
 
@@ -191,9 +188,9 @@ class MapsScreen extends React.Component {
   };
 
   _updateSearch = (search) => {
-    // console.log("_updateSearch() FIRED");
+    console.log("_updateSearch() FIRED");
     if(this.state.mapReady){
-      // console.log("_updateSearch() :: updating search");
+      console.log("_updateSearch() :: updating search");
 
       this.setState({
         lastSearch: this.state.search,
@@ -202,14 +199,22 @@ class MapsScreen extends React.Component {
         this._search();
       });
     } else {
-      // console.log("_updateSearch() :: map not ready");
+      console.log("_updateSearch() :: map not ready");
     }
   };
 
   _clearSearch = () => {
-    this._updateSearch("");
-    this.setState({ selectedMarkerIndex: -1 });
+    Keyboard.dismiss();
     this._hideCarousel();
+
+    this.setState({
+        markers: [],
+        selectedMarkerIndex: -1,
+        searchInProgress: false
+      }, () => {
+        //render AFTER setting state
+        this._renderMarkers();
+      });
   };
 
   _showCarousel = () => {
@@ -240,77 +245,69 @@ class MapsScreen extends React.Component {
   };
 
   _search = () => {
-    // console.log("_search() FIRED");
+    console.log("_search() FIRED");
 
     //don't allow others to run if a search is already in progress...?
       //this might lock out the real search someone wants to perform...
       //or launch a miniature screen to just get a user's search
-    if(!this.state.searchInProgress && this.state.search != this.state.lastSearch){
-      // console.log("_search() ALLOWED");
+    if(!this.state.searchInProgress){
+      console.log("_search() ALLOWED");
       this.setState({
         searchInProgress: true
       }, () => {
 
-        //render nothing if we've cleared the search
-        if(this.state.search === "" ){
-          this.setState({
-            markers: [],
-            searchInProgress: false
-          }, () => {
-            //render AFTER setting state
-            this._renderMarkers();
-            Keyboard.dismiss();
-          });
-        } else {
-          //simulate a search
-          setTimeout(() => {
-            //loop through results and check if they've been seen
-            let results = [];
-            let randomCoordsArr = [];
+        //simulate a search
+        setTimeout(() => {
+          //loop through results and check if they've been seen
+          let results = [];
+          // let randomCoordsArr = [];
 
-            //generate fake marker coordinates based on current region
-            for(let i=0; i < 10000;i++) {
-              let randomCoords = {
-                //latitude from (32 -> 34)
-                latitude:  parseFloat(((Math.random() * 4) + this.state.region.latitude).toFixed(3)),
+          // //generate fake marker coordinates based on current region
+          // for(let i=0; i < 10000;i++) {
+          //   let randomCoords = {
+          //     //latitude from (32 -> 34)
+          //     latitude:  parseFloat(((Math.random() * 4) + this.state.region.latitude).toFixed(3)),
 
-                //lognitude from (-111 -> -113)
-                longitude: parseFloat((-(Math.random() * 3) + this.state.region.longitude).toFixed(3))
-              };
+          //     //lognitude from (-111 -> -113)
+          //     longitude: parseFloat((-(Math.random() * 3) + this.state.region.longitude).toFixed(3))
+          //   };
 
-              if( this._isInBoundingBox(randomCoords) ) {
-                randomCoordsArr.push(randomCoords);
+          //   if( this._isInBoundingBox(randomCoords) ) {
+          //     randomCoordsArr.push(randomCoords);
 
-                SEARCH_MARKERS[randomCoordsArr.length-1].coordinate = randomCoords;
-                if( randomCoordsArr.length == SEARCH_MARKERS.length ){
-                  console.log("Found random coords: ", randomCoords);
-                  break;
-                }
-              }
-            }
+          //     SEARCH_MARKERS[randomCoordsArr.length-1].coordinate = randomCoords;
+          //     if( randomCoordsArr.length == SEARCH_MARKERS.length ){
+          //       console.log("Found random coords: ", randomCoords);
+          //       break;
+          //     }
+          //   }
+          // }
 
-            SEARCH_MARKERS.map((marker, index) => {
-              // console.log("BEFORE _seenMarker() :: marker ", marker.coordinate);
-              this._seenMarker(marker, (newMarker) =>{
+          //copy to an object that is mutable
+          let SEARCH_MARKERS = JSON.parse(JSON.stringify(FAKE_MARKERS));
+          let numResults = SEARCH_MARKERS.length;
 
+          SEARCH_MARKERS.map((marker, index) => {
+            // console.log("BEFORE _seenMarker() :: marker ", marker.coordinate);
+            this._seenMarker(marker, (newMarker) =>{
+              if( this._isInBoundingBox(newMarker.coordinate) ){
                 results.push(newMarker);
+              }
+              if(index == numResults-1){
+                console.log("_search() :: SEARCH COMPLETE: ", results);
 
-                if(index == SEARCH_MARKERS.length-1){
-                  // console.log("_search() :: SEARCH COMPLETE: ", results);
-
-                  this.setState({
-                    searchInProgress: false,
-                    markers: results
-                  }, () => {
-                    //render AFTER setting state
-                    this._renderMarkers();
-                    Keyboard.dismiss();
-                  });
-                }
-              })
+                this.setState({
+                  searchInProgress: false,
+                  markers: results
+                }, () => {
+                  //render AFTER setting state
+                  this._renderMarkers();
+                  Keyboard.dismiss();
+                });
+              }
             });
-          }, 1000);
-        } //endif
+          });
+        }, 1000);
       });
     }
   };
@@ -357,6 +354,8 @@ class MapsScreen extends React.Component {
     console.log("_renderMarkers() FIRED");
 
     if (this.state.markers.length > 0) {
+      console.log("_renderMarkers() rendering: " + this.state.markers.length + " markers");
+
       // const interpolations = this.state.markers.map((marker, index) => {
       //   const inputRange = [
       //     (index - 1) * CARD_WIDTH,

@@ -287,16 +287,6 @@ class MapsScreen extends React.Component {
       });
   };
 
-  _showCarousel = () => {
-    if(this.state.showCarousel === false){
-      this.setState({
-        showCarousel: true
-      }, () => {
-        this._moveCarousel();
-      });
-    }
-  };
-
   _handleBackCarousel = () => {
     this._hideCarousel();
     return true;
@@ -313,6 +303,79 @@ class MapsScreen extends React.Component {
         this._moveCarousel();
       });
     }
+  };
+
+  _showCarousel = () => {
+    if(this.state.showCarousel === false){
+      this.setState({
+        showCarousel: true
+      }, () => {
+        this._moveCarousel();
+      });
+    }
+  };
+
+  _moveCarousel = () => {
+    //default to hide
+    let yValue = height;
+    if(this.state.showCarousel){
+      yValue = carouselShownPosition;
+    }
+
+    Animated.spring(this.carouselShowHideAnimation, {
+      bounciness: 0,
+      toValue: {x: 0, y: yValue },
+    }).start((e) => {
+      if(e.finished === true && this.state.showCarousel == true) {
+        //if we completed showing the carousel, register the backbutton
+        BackHandler.addEventListener("hardwareBackPress", this._handleBackCarousel);
+      }
+    });
+  }
+
+  _renderCarousel = () => {
+      return (
+        <Animated.View style={[styles.scrollView,this.carouselShowHideAnimation.getLayout()]}>
+        <Animated.ScrollView
+          horizontal
+          scrollEventThrottle={1}
+          showsHorizontalScrollIndicator={false}
+          snapToInterval={SNAP_TO_CARD}
+          ref={scrollView => this.scrollView = scrollView}
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: {
+                    x: this.animation,
+                  },
+                },
+              },
+            ],
+            { useNativeDriver: true }
+          )}
+          contentContainerStyle={styles.endPadding}>
+
+          {this.state.markers.map((marker, index) => (
+            <View
+              style={styles.card} key={index}>
+              <TouchableOpacity onPress={() => this._onPressCarouselItem(index) } style={styles.cardImage}>
+                <Image
+                  source={marker.image}
+                  style={styles.cardImage}
+                  resizeMode="contain" />
+              </TouchableOpacity>
+              <View style={styles.textContent}>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{marker.title}</Text>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardDescription]}>
+                  {marker.description}
+                </Text>
+              </View>
+            </View>
+          ))}
+        </Animated.ScrollView>
+        </Animated.View>
+      );
   };
 
   _search = () => {
@@ -429,69 +492,6 @@ class MapsScreen extends React.Component {
   _setCachedItem = async (key, val) => {
     await AsyncStorage.setItem(key, val);
     return;
-  };
-
-  _moveCarousel = () => {
-    //default to hide
-    let yValue = height;
-    if(this.state.showCarousel){
-      yValue = carouselShownPosition;
-    }
-
-    Animated.spring(this.carouselShowHideAnimation, {
-      bounciness: 0,
-      toValue: {x: 0, y: yValue },
-    }).start((e) => {
-      if(e.finished === true && this.state.showCarousel == true) {
-        //if we completed showing the carousel, register the backbutton
-        BackHandler.addEventListener("hardwareBackPress", this._handleBackCarousel);
-      }
-    });
-  }
-
-  _renderCarousel = () => {
-      return (
-        <Animated.View style={[styles.scrollView,this.carouselShowHideAnimation.getLayout()]}>
-        <Animated.ScrollView
-          horizontal
-          scrollEventThrottle={1}
-          showsHorizontalScrollIndicator={false}
-          snapToInterval={SNAP_TO_CARD}
-          ref={scrollView => this.scrollView = scrollView}
-          onScroll={Animated.event(
-            [
-              {
-                nativeEvent: {
-                  contentOffset: {
-                    x: this.animation,
-                  },
-                },
-              },
-            ],
-            { useNativeDriver: true }
-          )}
-          contentContainerStyle={styles.endPadding}>
-
-          {this.state.markers.map((marker, index) => (
-            <View
-              style={styles.card} key={index}>
-              <TouchableOpacity onPress={() => this._onPressCarouselItem(index) } style={styles.cardImage}>
-                <Image
-                  source={marker.image}
-                  style={styles.cardImage}
-                  resizeMode="contain" />
-              </TouchableOpacity>
-              <View style={styles.textContent}>
-                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{marker.title}</Text>
-                <Text numberOfLines={1} style={[styles.grey,styles.cardDescription]}>
-                  {marker.description}
-                </Text>
-              </View>
-            </View>
-          ))}
-        </Animated.ScrollView>
-        </Animated.View>
-      );
   };
 
   UNSAFE_componentWillMount() {

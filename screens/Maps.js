@@ -92,6 +92,35 @@ class MapsScreen extends React.Component {
     return false;
   }
 
+  _onMapReady = () => {
+    this.setState({ mapReady: true}, () => {
+      this._updateSearch("");
+    })
+  }
+
+  _onRegionChange = (r) => {
+    let boundingBox = this._getBoundingBox(r);
+
+    if(!this.state.restoringState) {
+      this.setState({
+          boundingBox: boundingBox,
+          region: r
+      }, () => {
+        this._updateSearch("");
+      });
+    } else {
+      //this change was fired as a result of restoring the state, so disable it
+      this.setState({
+        restoringState: false
+      });
+    }
+  }
+
+  _onPressMap = () => {
+      this._deselectMarker();
+      this._hideCarousel();
+  };
+
   //if we haven't seen this marker, save it
   _seenMarker = (marker, cb) => {
     let computedMarkerHash = MARKER_SEEN_PREPEND + marker.hash;
@@ -225,66 +254,8 @@ class MapsScreen extends React.Component {
     }
   };
 
-  _onMapReady = () => {
-    this.setState({ mapReady: true}, () => {
-      this._updateSearch("");
-    })
-  }
-
-  _onRegionChange = (r) => {
-    let boundingBox = this._getBoundingBox(r);
-
-    if(!this.state.restoringState) {
-      this.setState({
-          boundingBox: boundingBox,
-          region: r
-      }, () => {
-        this._updateSearch("");
-      });
-    } else {
-      //this change was fired as a result of restoring the state, so disable it
-      this.setState({
-        restoringState: false
-      });
-    }
-  }
-
-  _onPressMap = () => {
-      this._deselectMarker();
-      this._hideCarousel();
-  };
-
   _onPressCarouselItem = (index) => {
     this.props.navigation.navigate('Game', { current_marker: this.state.markers[index] });
-  };
-
-  _updateSearch = (search) => {
-    if(!this.state.showCarousel && this.state.mapReady){
-      // console.log("_updateSearch() FIRED");
-
-      this.setState({
-        lastSearch: this.state.search,
-        search: search
-      }, () =>{
-        this._search();
-      });
-    } else {
-      // console.log("_updateSearch() :: not allowed");
-    }
-  };
-
-  _clearSearch = () => {
-    Keyboard.dismiss();
-    this._hideCarousel();
-
-    this.setState({
-        markers: [],
-        selectedMarkerIndex: -1,
-        searchInProgress: false
-      }, () => {
-        //render AFTER setting state
-        this._renderMarkers();
-      });
   };
 
   _handleBackCarousel = () => {
@@ -376,6 +347,35 @@ class MapsScreen extends React.Component {
         </Animated.ScrollView>
         </Animated.View>
       );
+  };
+
+  _updateSearch = (search) => {
+    if(!this.state.showCarousel && this.state.mapReady){
+      // console.log("_updateSearch() FIRED");
+
+      this.setState({
+        lastSearch: this.state.search,
+        search: search
+      }, () =>{
+        this._search();
+      });
+    } else {
+      // console.log("_updateSearch() :: not allowed");
+    }
+  };
+
+  _clearSearch = () => {
+    Keyboard.dismiss();
+    this._hideCarousel();
+
+    this.setState({
+        markers: [],
+        selectedMarkerIndex: -1,
+        searchInProgress: false
+      }, () => {
+        //render AFTER setting state
+        this._renderMarkers();
+      });
   };
 
   _search = () => {

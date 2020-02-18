@@ -400,7 +400,7 @@ class MapsScreen extends React.Component {
     }
   };
 
-   _getCachedItem = async (key) => {
+  _getCachedItem = async (key) => {
     let item = await AsyncStorage.getItem(key);
     return item;
   };

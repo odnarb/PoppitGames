@@ -237,6 +237,7 @@ class MapsScreen extends React.Component {
 
   _hideCarousel = () => {
     if(this.state.showCarousel === true){
+      //unbind the hardware event listener since the carousel is not shown anymore
       BackHandler.removeEventListener("hardwareBackPress", this._handleBackCarousel),
 
       this.setState({
@@ -359,29 +360,6 @@ class MapsScreen extends React.Component {
     if (this.state.markers.length > 0) {
       // console.log("_renderMarkers() rendering: " + this.state.markers.length + " markers");
 
-      // const interpolations = this.state.markers.map((marker, index) => {
-      //   const inputRange = [
-      //     (index - 1) * CARD_WIDTH,
-      //     index * CARD_WIDTH,
-      //     ((index + 1) * CARD_WIDTH),
-      //   ];
-
-      //   const scale = this.animation.interpolate({
-      //     inputRange,
-      //     outputRange: [1, 2.5, 1],
-      //     extrapolate: "clamp",
-      //   });
-      //   const opacity = this.animation.interpolate({
-      //     inputRange,
-      //     outputRange: [0.35, 1, 0.35],
-      //     extrapolate: "clamp",
-      //   });
-      //   return { scale, opacity };
-      // });
-
-      //const scaleStyle = { transform: [{scale: interpolations[index].scale}] };
-      //const opacityStyle = { opacity: interpolations[index].opacity };
-
       return ( this.state.markers.map( (marker, index) => {
         let markerStylesArr = [styles.marker];
         if(index === this.state.selectedMarkerIndex) {
@@ -402,7 +380,7 @@ class MapsScreen extends React.Component {
             </View>
           </MapView.Marker>
         );
-/*
+          /*
           <MarkerWithView
             key={index}
             tracksViewChanges={false}
@@ -414,9 +392,7 @@ class MapsScreen extends React.Component {
               </View>
             </View>
           </MarkerWithView>
-
-
-*/
+          */
       }));
     } else {
       //show "no results"
@@ -431,7 +407,6 @@ class MapsScreen extends React.Component {
 
   _setCachedItem = async (key, val) => {
     await AsyncStorage.setItem(key, val);
-
     return;
   };
 
@@ -609,21 +584,20 @@ class MapsScreen extends React.Component {
 
   render() {
     const { search } = this.state;
-/*
-  For when I need to draw a polygon..
-          <Polygon
-            coordinates={[
-              {  latitude: 33.8857, longitude: -111.7175 },
-              {  latitude: 33.8857, longitude: -112.3851 },
-              {  latitude: 33.0710, longitude: -112.3851 },
-              {  latitude: 33.0710, longitude: -111.7175 }
-            ]}
-            strokeWidth={1}
-            fillColor={"rgba(220,0,0,0.3)"}
-            strokeColor={"rgba(220,0,0,1)"}
-          />
-
-*/
+    /*
+    For when I need to draw a polygon..
+            <Polygon
+              coordinates={[
+                {  latitude: 33.8857, longitude: -111.7175 },
+                {  latitude: 33.8857, longitude: -112.3851 },
+                {  latitude: 33.0710, longitude: -112.3851 },
+                {  latitude: 33.0710, longitude: -111.7175 }
+              ]}
+              strokeWidth={1}
+              fillColor={"rgba(220,0,0,0.3)"}
+              strokeColor={"rgba(220,0,0,1)"}
+            />
+    */
     return (
       <View style={styles.container}>
         <MapView

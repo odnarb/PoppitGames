@@ -111,7 +111,7 @@ class MapsScreen extends React.Component {
     };
 
     //set the current marker selected
-    this.map.animateToRegion(newRegion,350);
+    this.map.animateToRegion(newRegion,500);
     this.setState({
       selectedMarkerIndex: index,
       previousRegion: this.state.region,
@@ -144,8 +144,6 @@ class MapsScreen extends React.Component {
   };
 
   _onMapReady = () => {
-    console.log("_onMapReady() FIRED");
-
     this.setState({ mapReady: true}, () => {
       this._updateSearch("");
     })
@@ -154,31 +152,37 @@ class MapsScreen extends React.Component {
   _onRegionChange = (r) => {
     let boundingBox = this._getBoundingBox(r);
 
-    console.log("_onRegionChange() FIRED");
-
-    this.setState({
-        boundingBox: boundingBox,
-        region: r
-    }, () => {
-      this._updateSearch("");
-    });
+    if(!this.state.restoringState) {
+      this.setState({
+          boundingBox: boundingBox,
+          region: r
+      }, () => {
+        this._updateSearch("");
+      });
+    } else {
+      //this change was fired as a result of restoring the state, so disable it
+      this.setState({
+        restoringState: false
+      });
+    }
   }
 
   _deselectMarker = () => {
     if (this.state.selectedMarkerIndex > -1){
-      this.map.animateToRegion(this.state.previousRegion,500);
-
+      //restore the previous state...
       this.setState({
+        restoringState: true,
         boundingBox: this._getBoundingBox(this.state.previousRegion),
         selectedMarkerIndex: -1,
         previousRegion: {},
         region: this.state.previousRegion
+      }, () =>{
+        this.map.animateToRegion(this.state.region,500);
       });
     }
   };
 
   _onPressMap = () => {
-      // console.log("_onPressMap() FIRED");
       this._deselectMarker();
       this._hideCarousel();
   };
@@ -188,9 +192,8 @@ class MapsScreen extends React.Component {
   };
 
   _updateSearch = (search) => {
-    console.log("_updateSearch() FIRED");
-    if(this.state.mapReady){
-      console.log("_updateSearch() :: updating search");
+    if(!this.state.showCarousel && this.state.mapReady){
+      // console.log("_updateSearch() FIRED");
 
       this.setState({
         lastSearch: this.state.search,
@@ -199,7 +202,7 @@ class MapsScreen extends React.Component {
         this._search();
       });
     } else {
-      console.log("_updateSearch() :: map not ready");
+      // console.log("_updateSearch() :: not allowed");
     }
   };
 
@@ -245,13 +248,13 @@ class MapsScreen extends React.Component {
   };
 
   _search = () => {
-    console.log("_search() FIRED");
+    // console.log("_search() FIRED");
 
     //don't allow others to run if a search is already in progress...?
       //this might lock out the real search someone wants to perform...
       //or launch a miniature screen to just get a user's search
     if(!this.state.searchInProgress){
-      console.log("_search() ALLOWED");
+      // console.log("_search() ALLOWED");
       this.setState({
         searchInProgress: true
       }, () => {
@@ -294,7 +297,7 @@ class MapsScreen extends React.Component {
                 results.push(newMarker);
               }
               if(index == numResults-1){
-                console.log("_search() :: SEARCH COMPLETE: ", results);
+                // console.log("_search() :: SEARCH COMPLETE: ", results);
 
                 this.setState({
                   searchInProgress: false,
@@ -351,10 +354,10 @@ class MapsScreen extends React.Component {
   };
 
   _renderMarkers = () => {
-    console.log("_renderMarkers() FIRED");
+    // console.log("_renderMarkers() FIRED");
 
     if (this.state.markers.length > 0) {
-      console.log("_renderMarkers() rendering: " + this.state.markers.length + " markers");
+      // console.log("_renderMarkers() rendering: " + this.state.markers.length + " markers");
 
       // const interpolations = this.state.markers.map((marker, index) => {
       //   const inputRange = [
@@ -388,7 +391,7 @@ class MapsScreen extends React.Component {
         } else {
           markerStylesArr.push(styles.regularMarker);
         }
-        console.log("_renderMarkers() :: This marker seen? ", this.state.markers[index].seen);
+        // console.log("_renderMarkers() :: This marker seen? ", this.state.markers[index].seen);
         return (
           <MapView.Marker key={index} coordinate={marker.coordinate}
             onPress={e => this._onPressMarker(e, index)}>
@@ -498,6 +501,7 @@ class MapsScreen extends React.Component {
   watchID: ?number = null;
 
   state = {
+    restoringState: false,
     boundingBox: null,
     mapReady: true,
     showCarousel: false,

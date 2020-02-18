@@ -50,6 +50,27 @@ class MapsScreen extends React.Component {
     header: null
   };
 
+  watchID: ?number = null;
+
+  state = {
+    restoringState: false,
+    boundingBox: null,
+    mapReady: true,
+    showCarousel: false,
+    selectedMarkerIndex: -1,
+    // initialPosition: 'unknown',
+    // lastPosition: 'unknown',
+    searchInProgress: false,
+    search: '',
+    markers: [],
+    region: {
+      latitude: 33.4486,
+      longitude: -112.077,
+      latitudeDelta: 1,
+      longitudeDelta: 0.0421
+    }
+  };
+
   _getBoundingBox = (region) => {
     // console.log("_getBoundingBox() :: REGION: ", region);
     let boundingBox = {
@@ -471,27 +492,6 @@ class MapsScreen extends React.Component {
         </Animated.ScrollView>
         </Animated.View>
       );
-  };
-
-  watchID: ?number = null;
-
-  state = {
-    restoringState: false,
-    boundingBox: null,
-    mapReady: true,
-    showCarousel: false,
-    selectedMarkerIndex: -1,
-    // initialPosition: 'unknown',
-    // lastPosition: 'unknown',
-    searchInProgress: false,
-    search: '',
-    markers: [],
-    region: {
-      latitude: 33.4486,
-      longitude: -112.077,
-      latitudeDelta: 1,
-      longitudeDelta: 0.0421
-    }
   };
 
   UNSAFE_componentWillMount() {

@@ -164,6 +164,67 @@ class MapsScreen extends React.Component {
     });
   };
 
+  _deselectMarker = () => {
+    if (this.state.selectedMarkerIndex > -1){
+      //restore the previous state...
+      this.setState({
+        restoringState: true,
+        boundingBox: this._getBoundingBox(this.state.previousRegion),
+        selectedMarkerIndex: -1,
+        previousRegion: {},
+        region: this.state.previousRegion
+      }, () =>{
+        this.map.animateToRegion(this.state.region,500);
+      });
+    }
+  };
+
+  _renderMarkers = () => {
+    // console.log("_renderMarkers() FIRED");
+
+    if (this.state.markers.length > 0) {
+      // console.log("_renderMarkers() rendering: " + this.state.markers.length + " markers");
+
+      return ( this.state.markers.map( (marker, index) => {
+        let markerStylesArr = [styles.marker];
+        if(index === this.state.selectedMarkerIndex) {
+          markerStylesArr.push(styles.selectedMarker);
+        } else if(this.state.markers[index].seen === true) {
+          markerStylesArr.push(styles.visitedMarker);
+        } else {
+          markerStylesArr.push(styles.regularMarker);
+        }
+        // console.log("_renderMarkers() :: This marker seen? ", this.state.markers[index].seen);
+        return (
+          <MapView.Marker key={index} coordinate={marker.coordinate}
+            onPress={e => this._onPressMarker(e, index)}>
+            <View style={styles.markerWrap}>
+              <View style={markerStylesArr}>
+                <Text style={[styles.white,styles.markerText]}>{marker.coupon.title.toUpperCase()}</Text>
+              </View>
+            </View>
+          </MapView.Marker>
+        );
+          /*
+          <MarkerWithView
+            key={index}
+            tracksViewChanges={false}
+            coordinate={this.state.markers[index].coordinate}
+            onPress={e => this._onPressMarker(e, index)}>
+            <View style={styles.markerWrap}>
+              <View style={markerStylesArr}>
+                <Text style={[styles.white,styles.markerText]}>{marker.coupon.title.toUpperCase()}</Text>
+              </View>
+            </View>
+          </MarkerWithView>
+          */
+      }));
+    } else {
+      //show "no results"
+      return null;
+    }
+  };
+
   _onMapReady = () => {
     this.setState({ mapReady: true}, () => {
       this._updateSearch("");
@@ -187,21 +248,6 @@ class MapsScreen extends React.Component {
       });
     }
   }
-
-  _deselectMarker = () => {
-    if (this.state.selectedMarkerIndex > -1){
-      //restore the previous state...
-      this.setState({
-        restoringState: true,
-        boundingBox: this._getBoundingBox(this.state.previousRegion),
-        selectedMarkerIndex: -1,
-        previousRegion: {},
-        region: this.state.previousRegion
-      }, () =>{
-        this.map.animateToRegion(this.state.region,500);
-      });
-    }
-  };
 
   _onPressMap = () => {
       this._deselectMarker();
@@ -372,52 +418,6 @@ class MapsScreen extends React.Component {
           </View>
         </View>
       );
-    }
-  };
-
-  _renderMarkers = () => {
-    // console.log("_renderMarkers() FIRED");
-
-    if (this.state.markers.length > 0) {
-      // console.log("_renderMarkers() rendering: " + this.state.markers.length + " markers");
-
-      return ( this.state.markers.map( (marker, index) => {
-        let markerStylesArr = [styles.marker];
-        if(index === this.state.selectedMarkerIndex) {
-          markerStylesArr.push(styles.selectedMarker);
-        } else if(this.state.markers[index].seen === true) {
-          markerStylesArr.push(styles.visitedMarker);
-        } else {
-          markerStylesArr.push(styles.regularMarker);
-        }
-        // console.log("_renderMarkers() :: This marker seen? ", this.state.markers[index].seen);
-        return (
-          <MapView.Marker key={index} coordinate={marker.coordinate}
-            onPress={e => this._onPressMarker(e, index)}>
-            <View style={styles.markerWrap}>
-              <View style={markerStylesArr}>
-                <Text style={[styles.white,styles.markerText]}>{marker.coupon.title.toUpperCase()}</Text>
-              </View>
-            </View>
-          </MapView.Marker>
-        );
-          /*
-          <MarkerWithView
-            key={index}
-            tracksViewChanges={false}
-            coordinate={this.state.markers[index].coordinate}
-            onPress={e => this._onPressMarker(e, index)}>
-            <View style={styles.markerWrap}>
-              <View style={markerStylesArr}>
-                <Text style={[styles.white,styles.markerText]}>{marker.coupon.title.toUpperCase()}</Text>
-              </View>
-            </View>
-          </MarkerWithView>
-          */
-      }));
-    } else {
-      //show "no results"
-      return null;
     }
   };
 

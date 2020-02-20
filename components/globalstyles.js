@@ -47,15 +47,15 @@ color-complement-3 { color: #007848 } //darker
 color-complement-4 { color: #005C37 } //darkest
 */
 
-const blueColor = "#DA4709"; //"#5bc0eb";
-const lightblueColor = "#F56C32" // "#8bdafc";
+const blueColor = "#5bc0eb";
+const lightblueColor = "#8bdafc";
 const yellowColor = "#fde74c";
 const greenColor = "#9bc53d";
 const redColor = "#c34231";
 const lightRedColor  = "#ff5e5e";
 const greyColor = "#404e4d";
 const lightGreyColor = "#def0ef";
-const flatDarkGreyColor = "#777";
+
 const flatLightGreyColor = "#dcdcdc";
 const whiteColor = "#fff";
 const blackColor = "#000";
@@ -111,10 +111,6 @@ const globalStyles = {
 
   flatLightGreyBG: {
     backgroundColor: flatLightGreyColor
-  },
-
-  flatDarkGrey: {
-    color: flatDarkGreyColor
   },
 
   lightGreyBG: {
@@ -300,7 +296,7 @@ const globalStyles = {
   },
 
   btnLight: {
-    color: flatDarkGreyColor,
+    color: greyColor,
     fontWeight: 'bold',
     fontSize: moderateScale(16),
     textAlign:'center'
@@ -756,8 +752,8 @@ const signInStyles = {
 
   btnEmail:{
     flexDirection: "row",
-    backgroundColor: flatDarkGreyColor,
-    borderColor: flatDarkGreyColor,
+    backgroundColor: greyColor,
+    borderColor: greyColor,
     borderWidth: 1,
     borderRadius: moderateScale(5),
     justifyContent: 'center',

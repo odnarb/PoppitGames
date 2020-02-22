@@ -24,6 +24,7 @@ class BottomNavigation extends React.Component {
         let navBtnStyles = [styles.greyBG,styles.navBtn];
         let iconColor = lightblueColor;
         return (
+        <View style={styles.navOuterContainer}>
           <View style={styles.navContainer}>
             <TouchableOpacity onPress={() => this._navTo('Prizes')} style={navBtnStyles}>
               <View style={styles.navBtnView}>
@@ -58,6 +59,7 @@ class BottomNavigation extends React.Component {
                 </View>
             </TouchableOpacity>
           </View>
+        </View>
         );
     }
 

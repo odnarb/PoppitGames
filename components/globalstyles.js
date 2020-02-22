@@ -10,7 +10,7 @@ const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = height / 3;
 const CARD_WIDTH = width - 20;
 
-const carouselShownPosition = height-moderateScale(320);
+const carouselShownPosition = height-verticalScale(350);
 
 const iconMediumSize = moderateScale(32);
 const iconLargeSize = moderateScale(42);
@@ -78,6 +78,16 @@ const searchResultsIconColor = lightblueColor;
 const searchResultsIconSize = moderateScale(20);
 
 const signInIconSize = iconLargeSize;
+
+const searchBarHeight = verticalScale(60);
+const searchBarIndicatorHeight = verticalScale(30);
+const navHeight = verticalScale(90);
+const bottomNavHeight = verticalScale(80);
+const bottomNavOffset = 0;
+const mapHeight = height - searchBarHeight - searchBarIndicatorHeight - bottomNavHeight - verticalScale(18);
+const mapOffset = searchBarHeight + searchBarIndicatorHeight - verticalScale(3);
+
+const carouselOffset = navHeight + verticalScale(20);
 
 const globalStyles = {
   baseContainer: {
@@ -822,7 +832,7 @@ const mapsStyles = {
   searchBarContainer: {
     position: 'absolute',
     top: 0,
-    height: verticalScale(60),
+    height: searchBarHeight,
     left: 0,
     right: 0,
     bottom: 0,
@@ -848,7 +858,7 @@ const mapsStyles = {
   },
 
   searchResultsIndicatorContainer: {
-    height: verticalScale(30),
+    height: searchBarIndicatorHeight,
     backgroundColor: greyColor
   },
 
@@ -866,14 +876,20 @@ const mapsStyles = {
   },
 
   mapContainer: {
-    flex: 8,
+    // flex: 8,
+    // position: "absolute",
+    top: mapOffset,
+    height: mapHeight,
+    left: 0,
+    right: 0,
+    bottom: 0
   },
 
   scrollView: {
     // backgroundColor: "red",
     height: CARD_HEIGHT + moderateScale(20),
     position: "absolute",
-    bottom: verticalScale(120),
+    bottom: carouselOffset,
     left: 0,
     right: 0,
     paddingVertical: verticalScale(10),
@@ -999,6 +1015,15 @@ const learnMoreNavStyles = {
 };
 
 const bottomNavStyles = {
+  navOuterContainer: {
+    position: "absolute",
+//    top: bottomNavOffset,
+    left: 0,
+    right: 0,
+    bottom: bottomNavOffset,
+    height: bottomNavHeight
+  },
+
   navContainer: {
     flex: 1,
     flexDirection: 'row',

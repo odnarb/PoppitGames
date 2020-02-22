@@ -182,6 +182,11 @@ const globalStyles = {
     height: verticalScale(50)
   },
 
+  smallSquareLogo:{
+    height: verticalScale(50),
+    width: verticalScale(50)
+  },
+
   contentContainer: {
     flex: 7
   },
@@ -816,19 +821,34 @@ const mapsStyles = {
 
   searchBarContainer: {
     position: 'absolute',
-    top: verticalScale(70),
+    top: 0,
+    height: verticalScale(60),
     left: 0,
     right: 0,
     bottom: 0,
+    backgroundColor: "#fff",
+    borderWidth: 0
   },
 
-searchResultsIndicatorContainer: {
-    position: 'absolute',
-    height: moderateScale(30),
-    top: verticalScale(140),
-    left: 0,
-    right: 0,
-    bottom: 0,
+  searchBarInnerContainer: {
+    flexDirection: "row",
+    backgroundColor: "#ccc",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  searchBar: {
+    flex: 1,
+    backgroundColor: "#ccc",
+    borderWidth: 0,
+    shadowColor: '#fff',
+    borderColor: '#fff',
+    borderBottomColor: 'transparent',
+    borderTopColor: 'transparent'
+  },
+
+  searchResultsIndicatorContainer: {
+    height: verticalScale(30),
     backgroundColor: greyColor
   },
 

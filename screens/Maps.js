@@ -614,23 +614,27 @@ class MapsScreen extends React.Component {
 
         </MapView>
 
-        <LogoBanner container="absolute" size="small" />
-
         {this._renderCarousel()}
 
         <View style={styles.searchBarContainer}>
-          <SearchBar
-            showLoading={this.state.searchInProgress}
-            placeholder="Search for coupons near you..."
-            onChangeText={this._updateSearch}
-            onClear={this._clearSearch}
-            value={search}
-            inputStyle={{backgroundColor: 'white'}}
-            inputContainerStyle={{backgroundColor: 'white'}}
-            containerStyle={{backgroundColor: 'white', borderWidth: 1}} />
-        </View>
+          <View style={styles.searchBarInnerContainer}>
+            <Image
+              style={styles.smallSquareLogo}
+              source={require("../assets/images/poppit-logo-square.png")}
+              resizeMode="contain" />
 
-        {this._renderSearchResultsIndicator()}
+            <SearchBar
+              showLoading={this.state.searchInProgress}
+              placeholder="Search for coupons near you..."
+              onChangeText={this._updateSearch}
+              onClear={this._clearSearch}
+              value={search}
+              inputStyle={{backgroundColor: 'white'}}
+              inputContainerStyle={{backgroundColor: 'white'}}
+              containerStyle={styles.searchBar} />
+          </View>
+          {this._renderSearchResultsIndicator()}
+        </View>
 
         <BottomNavigation />
 

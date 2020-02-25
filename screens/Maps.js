@@ -518,15 +518,6 @@ class MapsScreen extends React.Component {
   }
 
   componentDidMount() {
-
-//check if we're coming back from an activity
-let activity_data = this.props.navigation.getParam("activity_data");
-console.log("MAPS :: componentDidMount() activity_data? : ", activity_data);
-    if( activity_data && activity_data.campaign_id && activity_data.campaign_id > 0){
-      //mark campaign as complete
-      this._completeCampaign(activity_data);
-    }
-
     //restore the last region, if one..
     //what if the region was null, default region to user's location
     this._getCachedItem('lastRegion').then(data => {
@@ -604,6 +595,15 @@ console.log("MAPS :: componentDidMount() activity_data? : ", activity_data);
   }
 
   render() {
+    //can we check for activity data?
+//check if we're coming back from an activity
+let activity_data = this.props.navigation.getParam("activity_data");
+console.log("MAPS :: render() activity_data? : ", activity_data);
+    if( activity_data && activity_data.campaign_id && activity_data.campaign_id > 0){
+      //mark campaign as complete
+      this._completeCampaign(activity_data);
+    }
+
     const { search } = this.state;
     /*
     For when I need to draw a polygon..

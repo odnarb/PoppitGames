@@ -5,6 +5,7 @@ const markers = [{
 	title: "Quick Trip #1",
 	description: "Test description #1",
 	content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+	required_score: 800,
 	coupon: {
 	  title: "$.50 OFF",
 	  description: "",
@@ -22,6 +23,7 @@ const markers = [{
 	title: "Quick Trip #2",
 	description: "Test description #2",
 	content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+	required_score: 800,
 	coupon: {
 	  title: "-50% OFF",
 	  description: ""
@@ -39,6 +41,7 @@ const markers = [{
     title: "Quick Trip #3",
     description: "Test description #3",
     content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+    required_score: 800,
     coupon: {
       title: "FREE COFFEE",
       description: ""
@@ -56,6 +59,7 @@ const markers = [{
 	title: "Quick Trip #4",
 	description: "Test description #4",
 	content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+	required_score: 800,
 	coupon: {
 		title: "Coupon #4",
 		description:""
@@ -73,6 +77,7 @@ const markers = [{
 	title:"Quick Trip #5",
 	description:"Test description #5",
 	content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+	required_score: 800,
 	coupon:{
 		title:"Coupon #5",
 		description:""
@@ -90,6 +95,7 @@ const markers = [{
 	title:"Quick Trip #8",
 	description:"Test description #8",
 	content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+	required_score: 800,
 	coupon:{
 		title:"Coupon #8",
 		description:""
@@ -107,6 +113,7 @@ const markers = [{
 	title:"Quick Trip #9",
 	description:"Test description #9",
 	content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+	required_score: 800,
 	coupon: {
 		title:"Coupon #9",
 		description:""
@@ -124,6 +131,7 @@ const markers = [{
 	title:"Quick Trip #10",
 	description:"Test description #10",
 	content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+	required_score: 800,
 	coupon: {
 		title:"Coupon #10",
 		description:""},

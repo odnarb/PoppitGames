@@ -503,6 +503,10 @@ class MapsScreen extends React.Component {
     return;
   };
 
+  _completeCampaign = (activity_data) => {
+    console.log("_completeCampaign() : mark campaign_id COMPLETE:"+activity_data.campaign_id);
+  }
+
   UNSAFE_componentWillMount() {
     this.animation = new Animated.Value(0);
     this.carouselShowHideAnimation = new Animated.ValueXY({ x: 0, y: height })
@@ -514,6 +518,14 @@ class MapsScreen extends React.Component {
   }
 
   componentDidMount() {
+
+//check if we're coming back from an activity
+let activity_data = this.props.navigation.getParam("activity_data");
+console.log("MAPS :: componentDidMount() activity_data? : ", activity_data);
+    if( activity_data && activity_data.campaign_id && activity_data.campaign_id > 0){
+      //mark campaign as complete
+      this._completeCampaign(activity_data);
+    }
 
     //restore the last region, if one..
     //what if the region was null, default region to user's location

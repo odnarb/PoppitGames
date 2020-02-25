@@ -258,7 +258,7 @@ class MapsScreen extends React.Component {
     //could be a game, raffle or some other website
     let info = {
       completed: false,
-      result: false
+      result: false,
       user_id: 123,
       company_id: 1,
       current_marker: this.state.markers[index]

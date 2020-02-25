@@ -255,7 +255,16 @@ class MapsScreen extends React.Component {
   };
 
   _onPressCarouselItem = (index) => {
-    this.props.navigation.navigate('Game', { current_marker: this.state.markers[index] });
+    //could be a game, raffle or some other website
+    let info = {
+      completed: false,
+      result: false
+      user_id: 123,
+      company_id: 1,
+      current_marker: this.state.markers[index]
+    };
+    //this will need to change to someting more generic wording..
+    this.props.navigation.navigate('Game', info);
   };
 
   _handleBackCarousel = () => {

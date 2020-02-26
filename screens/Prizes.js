@@ -30,7 +30,58 @@ class PrizesScreen extends React.Component {
             <Text style={[styles.grey,styles.padLeft20,styles.textHeader]}>My Prizes</Text>
 
             <ScrollView style={{}}>
+              <View style={[styles.greenBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>-25% OFF{'\n'}2 Liter Pepsi</Text>
+                </View>
 
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>CLAIM</Text>
+                </View>
+              </View>
+              <View style={[styles.greenBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>-25% OFF{'\n'}2 Liter Pepsi</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>CLAIM</Text>
+                </View>
+              </View>
+              <View style={[styles.greenBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>-25% OFF{'\n'}2 Liter Pepsi</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>CLAIM</Text>
+                </View>
+              </View>
+              <View style={[styles.greenBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>-25% OFF{'\n'}2 Liter Pepsi</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>CLAIM</Text>
+                </View>
+              </View>
               <View style={[styles.greenBG,styles.prizeContainer]}>
                 <View style={styles.prizeCell}>
                   <Text style={[styles.grey,styles.prizeText]}>-25% OFF{'\n'}2 Liter Pepsi</Text>

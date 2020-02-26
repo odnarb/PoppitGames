@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
     Text,
-    TouchableOpacity,
+    TouchableHighlight,
     View
 } from 'react-native';
 
@@ -14,7 +14,8 @@ import {
   bottomNavStyleSheet as styles,
   bottomNavIconSize as iconSize,
   bottomNavIconColor as iconColor,
-  lightblueColor
+  lightblueColor,
+  lightGreyColor
 } from '../components/globalstyles';
 
 class BottomNavigation extends React.Component {
@@ -26,7 +27,7 @@ class BottomNavigation extends React.Component {
         return (
         <View style={styles.navOuterContainer}>
           <View style={styles.navContainer}>
-            <TouchableOpacity onPress={() => this._navTo('Prizes')} style={navBtnStyles}>
+            <TouchableHighlight underlayColor={lightGreyColor} onPress={() => this._navTo('Prizes')} style={navBtnStyles}>
               <View style={styles.navBtnView}>
               <Icon
                 name="trophy"
@@ -35,9 +36,9 @@ class BottomNavigation extends React.Component {
                 color={iconColor} />
                 <Text style={textStyles}>Prizes</Text>
                 </View>
-            </TouchableOpacity>
+            </TouchableHighlight>
 
-            <TouchableOpacity onPress={() => this._navTo('Maps')} style={navBtnStyles}>
+            <TouchableHighlight underlayColor={lightGreyColor} onPress={() => this._navTo('Maps')} style={navBtnStyles}>
               <View style={styles.navBtnView}>
               <Icon
                 name="magnify"
@@ -46,9 +47,9 @@ class BottomNavigation extends React.Component {
                 color={iconColor} />
                 <Text style={textStyles}>Search</Text>
               </View>
-            </TouchableOpacity>
+            </TouchableHighlight>
 
-            <TouchableOpacity onPress={() => this._navTo('Settings')} style={navBtnStyles}>
+            <TouchableHighlight underlayColor={lightGreyColor} onPress={() => this._navTo('Settings')} style={navBtnStyles}>
               <View style={styles.navBtnView}>
               <Icon
                 name="settings"
@@ -57,7 +58,7 @@ class BottomNavigation extends React.Component {
                 color={iconColor} />
                 <Text style={textStyles}>Settings</Text>
                 </View>
-            </TouchableOpacity>
+            </TouchableHighlight>
           </View>
         </View>
         );

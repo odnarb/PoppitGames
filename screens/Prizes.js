@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  ScrollView,
   Text,
   View,
 } from 'react-native';
@@ -28,37 +29,136 @@ class PrizesScreen extends React.Component {
 
             <Text style={[styles.grey,styles.padLeft20,styles.textHeader]}>My Prizes</Text>
 
-            <View style={[styles.greenBG,styles.prizeContainer]}>
-              <View style={styles.prizeCell}>
-                <Text style={[styles.grey,styles.prizeText]}>-25% OFF{'\n'}2 Liter Pepsi</Text>
+            <ScrollView style={{}}>
+
+              <View style={[styles.greenBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>-25% OFF{'\n'}2 Liter Pepsi</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>CLAIM</Text>
+                </View>
               </View>
 
-              <View style={styles.prizeCell}>
-                <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+              <View style={[styles.greenBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>-25% OFF{'\n'}2 Liter Pepsi</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>CLAIM</Text>
+                </View>
               </View>
 
-              <View style={styles.prizeCell}>
-                <Text style={[styles.grey,styles.prizeText]}>CLAIM</Text>
+              <View style={[styles.greenBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>-25% OFF{'\n'}2 Liter Pepsi</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.grey,styles.prizeText]}>CLAIM</Text>
+                </View>
               </View>
-            </View>
 
 
-            <View style={[styles.flatLightGreyBG,styles.prizeContainer]}>
-              <View style={styles.prizeCell}>
-                <Text style={[styles.white,styles.prizeText]}>FREE{'\n'}2 Liter Pepsi</Text>
+              <View style={[styles.flatLightGreyBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>FREE{'\n'}2 Liter Pepsi</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>CLAIMED</Text>
+                </View>
               </View>
 
-              <View style={styles.prizeCell}>
-                <Text style={[styles.white,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+              <View style={[styles.flatLightGreyBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>FREE{'\n'}2 Liter Pepsi</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>CLAIMED</Text>
+                </View>
               </View>
 
-              <View style={styles.prizeCell}>
-                <Text style={[styles.white,styles.prizeText]}>CLAIMED</Text>
-              </View>
-            </View>
+              <View style={[styles.flatLightGreyBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>FREE{'\n'}2 Liter Pepsi</Text>
+                </View>
 
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>CLAIMED</Text>
+                </View>
+              </View>
+
+              <View style={[styles.flatLightGreyBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>FREE{'\n'}2 Liter Pepsi</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>CLAIMED</Text>
+                </View>
+              </View>
+
+              <View style={[styles.flatLightGreyBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>FREE{'\n'}2 Liter Pepsi</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>CLAIMED</Text>
+                </View>
+              </View>
+
+              <View style={[styles.flatLightGreyBG,styles.prizeContainer]}>
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>FREE{'\n'}2 Liter Pepsi</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+                </View>
+
+                <View style={styles.prizeCell}>
+                  <Text style={[styles.white,styles.prizeText]}>CLAIMED</Text>
+                </View>
+              </View>
+            </ScrollView>
           </View>
-
           <BottomNavigation />
       </View>
     );

@@ -1017,7 +1017,6 @@ const learnMoreNavStyles = {
 const bottomNavStyles = {
   navOuterContainer: {
     position: "absolute",
-//    top: bottomNavOffset,
     left: 0,
     right: 0,
     bottom: bottomNavOffset,
@@ -1089,6 +1088,7 @@ export {
   styles,
 
   greyColor,
+  lightGreyColor,
   whiteColor,
   blueColor,
   lightblueColor,

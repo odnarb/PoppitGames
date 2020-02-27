@@ -268,6 +268,7 @@ class MapsScreen extends React.Component {
   };
 
   _handleBackCarousel = () => {
+    this._deselectMarker();
     this._hideCarousel();
     return true;
   };

@@ -76,11 +76,17 @@ class GameScreen extends React.Component {
   }
 
   render() {
-    let queryString = '?v=321&company_id=' + this.marker.company_id + '&campaign_id=' + this.marker.campaign_id;
+    let queryString = '?v=787'
+        + '&company_id=' + this.marker.company_id
+        + '&campaign_id=' + this.marker.campaign_id
+        + '&required_score=' + this.marker.activity_options.required_score
+        + '&min_tries=' + this.marker.activity_options.min_tries
+        + '&max_tries=' + this.marker.activity_options.max_tries
+        + '&max_sessions=' + this.marker.activity_options.max_sessions;
     return (
       <WebView
         onMessage={(e) => {this._onMessage(e)}}
-        source={{uri: this.marker.content_url + queryString }} />
+        source={{uri: this.marker.activity_options.content_url + queryString }} />
     );
   }
 }

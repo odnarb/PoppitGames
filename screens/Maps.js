@@ -642,7 +642,7 @@ console.log("MAPS :: render() activity_data? : ", activity_data);
           <View style={styles.searchBarInnerContainer}>
             <Image
               style={styles.smallSquareLogo}
-              source={require("../assets/images/poppit-logo-square.png")}
+              source={{uri: "poppit_logo_square"}}
               resizeMode="contain" />
 
             <SearchBar

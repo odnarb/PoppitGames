@@ -30,7 +30,7 @@ class LogoBanner extends React.Component {
         return (
         <View style={containerStyle}>
             <Image
-              source={require("../assets/images/poppit-logo-blue.png")}
+              source={{uri: "poppit_logo_blue"}}
               style={logoStyle}
               resizeMode="contain" />
         </View>

@@ -33,7 +33,7 @@ class LearnMoreScreen extends React.Component {
           <View style={styles.imageContainer}>
             <Image
               style={styles.tutorialImage}
-              source={require('../assets/images/stock-photos/photo-game-2.jpg')}
+              source={{uri:"photo_game_2"}}
               resizeMode='contain' />
           </View>
         </View>

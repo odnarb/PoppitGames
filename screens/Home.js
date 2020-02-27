@@ -23,7 +23,7 @@ class HomeScreen extends React.Component {
       <View style={styles.baseContainer}>
         <View style={styles.logoContainer}>
             <Image
-              source={require("../assets/images/poppit-logo.png")}
+              source={{uri: "poppit-logo"}}
               style={styles.logo}
               resizeMode="contain" />
         </View>

@@ -64,6 +64,7 @@ class GameScreen extends React.Component {
 
   _handleBackButton = () => {
     console.log("_handleBackButton() FIRED", this.activityData);
+    BackHandler.removeEventListener("hardwareBackPress", this._handleBackButton);
 
     this.props.navigation.navigate('Maps', { activity_data: this.activityData });
 

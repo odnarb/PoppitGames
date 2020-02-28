@@ -31,20 +31,9 @@ class GameScreen extends React.Component {
   //get Pepsi Brand
   //get Coca-Cola brand
 
-
-  //handle messages from activity
-  _onMessage = (e) => {
-    //disable the back button?
+  _onEndActivity = () => {
+    //disable the back button listener
     BackHandler.removeEventListener("hardwareBackPress", this._handleBackButton);
-
-    let data = {};
-    try {
-      data = JSON.parse(e.nativeEvent.data);
-    } catch(e) {
-      //could not save callback data for campaign activity
-    }
-
-    console.log("_onMessage() :: GOT MESSAGE FROM CAMPAIGN ACTIVITY: ", data);
 
     //merge the data from the activity into our default
     let res = Object.assign({}, this.activityData, data);
@@ -89,11 +78,36 @@ console.log("_onMessage() :: res: ", res);
         break;
       default:
         res.state = "none";
-    }
+    } //end switch
 
     console.log("_onMessage() :: before navigate : ", res);
 
     this.props.navigation.navigate('Maps', { activity_data: res });
+  }
+
+  _onUpdateState = () => {
+    //TODO: when we get new info
+  }
+
+  //handle messages from activity
+  _onMessage = (e) => {
+
+    console.log("_onMessage() :: got activity msg: ", e.nativeEvent.data);
+
+    let data = {};
+    try {
+      data = JSON.parse(e.nativeEvent.data);
+      switch(data.action){
+        case "update":
+          this._onUpdateState(data);
+          break;
+        case "end":
+          this._onEndActivity(data);
+          break;
+      }
+    } catch(e) {
+      //could not save callback data for campaign activity
+    }
   }
 
   _handleBackButton = () => {

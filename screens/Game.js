@@ -5,26 +5,32 @@ import { BackHandler } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 class GameScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    marker = this.props.navigation.getParam('current_marker');
+
+    activityData = {
+      campaign_id: this.marker.campaign_id,
+      state: "lose"
+    };
+
+    this.state = {
+
+    };
+  }
+
   static navigationOptions = {
     //in newer versions this is the correct way to hide the title
     // headerShown: false
     header: null
   };
 
-  //send this screen company_id, campaign_id and coupon id
-  //coupon id has the campaign information regarding branding
-
   //get QuickTrip brand
   //get Subway Brand
   //get Pepsi Brand
   //get Coca-Cola brand
 
-  marker = this.props.navigation.getParam('current_marker');
-
-  activityData = {
-    campaign_id: this.marker.campaign_id,
-    state: "none"
-  };
 
   //handle messages from activity
   _onMessage = (e) => {
@@ -54,24 +60,33 @@ class GameScreen extends React.Component {
             level: _iLevel
         };
 */
+console.log("_onMessage() :: marker: ", this.marker);
+console.log("_onMessage() :: res: ", res);
 
     switch(this.marker.type){
       case "game":
-        if( res.score >= this.marker.options.required_score){
-          res.state = "win";
-        } else if ( res.tries < this.marker.options.min_tries ){
+        if ( res.tries < this.marker.options.min_tries && res.sessions == 1 ){
           res.state = "none";
-        } else if ( res.quit ) {
+        } else if ( res.quit && res.tries >= this.marker.options.min_tries ){
           res.state = "lose";
+        } else if ( res.quit && res.sessions > 1 ){
+          res.state = "lose";
+        } else if ( res.score < this.marker.options.required_score ){
+          res.state = "lose";
+        } else if( res.score >= this.marker.options.required_score ){
+          res.state = "win";
         }
+        break;
       case "raffle":
         if( res.completed ){
           res.state = "entered";
         }
+        break;
       case "survey":
         if( res.completed ){
           res.state = "completed";
         }
+        break;
       default:
         res.state = "none";
     }

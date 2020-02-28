@@ -43,6 +43,31 @@ const CARD_WIDTH = width - 20;
 const SNAP_TO_CARD = CARD_WIDTH+20;
 
 class MapsScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      restoringState: false,
+      boundingBox: null,
+      mapReady: true,
+      showCarousel: false,
+      selectedMarkerIndex: -1,
+      // initialPosition: 'unknown',
+      // lastPosition: 'unknown',
+      searchInProgress: false,
+      search: '',
+      markers: [],
+      region: {
+        latitude: 33.4486,
+        longitude: -112.077,
+        latitudeDelta: 1,
+        longitudeDelta: 0.0421
+      }
+    };
+
+    this.animation = new Animated.Value(0);
+    this.carouselShowHideAnimation = new Animated.ValueXY({ x: 0, y: height })
+  }
 
   static navigationOptions = {
     //in newer versions this is the correct way to hide the title
@@ -53,25 +78,6 @@ class MapsScreen extends React.Component {
   user_id = 123;
 
   watchID: ?number = null;
-
-  state = {
-    restoringState: false,
-    boundingBox: null,
-    mapReady: true,
-    showCarousel: false,
-    selectedMarkerIndex: -1,
-    // initialPosition: 'unknown',
-    // lastPosition: 'unknown',
-    searchInProgress: false,
-    search: '',
-    markers: [],
-    region: {
-      latitude: 33.4486,
-      longitude: -112.077,
-      latitudeDelta: 1,
-      longitudeDelta: 0.0421
-    }
-  };
 
   _getBoundingBox = (region) => {
     // console.log("_getBoundingBox() :: REGION: ", region);
@@ -514,6 +520,8 @@ class MapsScreen extends React.Component {
         //replace the old item
         markersCopy[index] = marker;
 
+        marker.state = activity_data.state;
+
         if(index == numMarkers-1){
           this.setState({
             markers: markersCopy
@@ -529,17 +537,29 @@ class MapsScreen extends React.Component {
     });
   }
 
-  UNSAFE_componentWillMount() {
-    this.animation = new Animated.Value(0);
-    this.carouselShowHideAnimation = new Animated.ValueXY({ x: 0, y: height })
-  }
-
   componentWillUnmount() {
+    this.focusSubscription.remove();
+
     this.watchID != null && Geolocation.clearWatch(this.watchID);
     this._setCachedItem('lastRegion', JSON.stringify(this.state.region));
   }
 
   componentDidMount() {
+    this.focusSubscription = this.props.navigation.addListener('willFocus', () => {
+      console.log("MAPS :: componentDidMount() :: willFocus FIRED");
+
+      let activity_data = this.props.navigation.getParam("activity_data");
+      console.log("MAPS :: componentDidMount() :: willFocus :: activity_data? : ", activity_data);
+      if( activity_data && activity_data.campaign_id && activity_data.campaign_id > 0){
+        //mark campaign as complete
+        this._completeCampaign(activity_data, () => {
+          //unset route params so this doesn't get fired again by mistake
+          this.props.navigation.setParams({ activity_data: {}});
+        });
+      }
+
+    });
+
     //restore the last region, if one..
     //what if the region was null, default region to user's location
     this._getCachedItem('lastRegion').then(data => {
@@ -617,20 +637,6 @@ class MapsScreen extends React.Component {
   }
 
   render() {
-    console.log("--render() FIRED");
-    //can we check for activity data?
-    //check if we're coming back from an activity
-
-    let activity_data = this.props.navigation.getParam("activity_data");
-    console.log("MAPS :: render() activity_data? : ", activity_data);
-    if( activity_data && activity_data.campaign_id && activity_data.campaign_id > 0){
-      //mark campaign as complete
-      this._completeCampaign(activity_data, () => {
-        //unset route params so this doesn't get fired again by mistake
-        this.props.navigation.setParams({ activity_data: {}});
-      });
-    }
-
     const { search } = this.state;
     /*
     For when I need to draw a polygon..

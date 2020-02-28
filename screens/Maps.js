@@ -50,6 +50,8 @@ class MapsScreen extends React.Component {
     header: null
   };
 
+  user_id = 123;
+
   watchID: ?number = null;
 
   state = {
@@ -256,15 +258,12 @@ class MapsScreen extends React.Component {
 
   _onPressCarouselItem = (index) => {
     //could be a game, raffle or some other website
-    let info = {
-      completed: false,
-      result: false,
-      user_id: 123,
-      company_id: 1,
-      current_marker: this.state.markers[index]
-    };
+
     //this will need to change to someting more generic wording..
-    this.props.navigation.navigate('Game', info);
+    this.props.navigation.navigate('Game', {
+      user_id: this.user_id,
+      current_marker: this.state.markers[index]
+    });
   };
 
   _handleBackCarousel = () => {
@@ -348,9 +347,7 @@ class MapsScreen extends React.Component {
               </TouchableOpacity>
               <View style={styles.textContent}>
                 <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{marker.title}</Text>
-                <Text numberOfLines={1} style={[styles.grey,styles.cardDescription]}>
-                  {marker.description}
-                </Text>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardDescription]}>{marker.description}{" => state: "}{marker.state}</Text>
               </View>
             </View>
           ))}
@@ -504,8 +501,32 @@ class MapsScreen extends React.Component {
     return;
   };
 
-  _completeCampaign = (activity_data) => {
-    console.log("_completeCampaign() : mark campaign_id COMPLETE:"+activity_data.campaign_id);
+  _completeCampaign = (activity_data, cb) => {
+    console.log("_completeCampaign() :: mark campaign_id COMPLETE:"+activity_data.campaign_id);
+
+    //loop through and find the marker that should be updated...
+    let markersCopy = JSON.parse(JSON.stringify(this.state.markers));
+    let numMarkers = this.state.markers.length;
+
+    this.state.markers.map((marker, index) => {
+      if( marker.campaign_id == activity_data.campaign_id ){
+
+        //replace the old item
+        markersCopy[index] = marker;
+
+        if(index == numMarkers-1){
+          this.setState({
+            markers: markersCopy
+          }, () => {
+            this._renderMarkers();
+            cb();
+          });
+        }
+      } else {
+        console.log("_completeCampaign() :: No matching campaign_id found: " +  activity_data.campaign_id);
+        cb();
+      } //end if campaign activity found
+    });
   }
 
   UNSAFE_componentWillMount() {
@@ -596,13 +617,18 @@ class MapsScreen extends React.Component {
   }
 
   render() {
+    console.log("--render() FIRED");
     //can we check for activity data?
-//check if we're coming back from an activity
-let activity_data = this.props.navigation.getParam("activity_data");
-console.log("MAPS :: render() activity_data? : ", activity_data);
+    //check if we're coming back from an activity
+
+    let activity_data = this.props.navigation.getParam("activity_data");
+    console.log("MAPS :: render() activity_data? : ", activity_data);
     if( activity_data && activity_data.campaign_id && activity_data.campaign_id > 0){
       //mark campaign as complete
-      this._completeCampaign(activity_data);
+      this._completeCampaign(activity_data, () => {
+        //unset route params so this doesn't get fired again by mistake
+        this.props.navigation.setParams({ activity_data: {}});
+      });
     }
 
     const { search } = this.state;

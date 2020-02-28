@@ -23,12 +23,7 @@ class GameScreen extends React.Component {
 
   activityData = {
     campaign_id: this.marker.campaign_id,
-    user_id: this.props.navigation.getParam('user_id'),
-    company_id: this.props.navigation.getParam('company_id'),
-    score: 0,
-    level: 1,
-    completed: false,
-    result: false
+    state: "none"
   };
 
   //handle messages from activity
@@ -48,13 +43,37 @@ class GameScreen extends React.Component {
     //merge the data from the activity into our default
     let res = Object.assign({}, this.activityData, data);
 
-    res.completed = true;
-    res.result = false;
+    res.state = "none";
 
-    //did user "win"?
-    if(data.score >= this.marker.required_score){
-      //win!
-      res.result = true;
+/*
+       let endObj = {
+            quit: quitting,
+            score: parseInt(_iScore),
+            sessions: _iSessions,
+            tries: _iLaunch,
+            level: _iLevel
+        };
+*/
+
+    switch(this.marker.type){
+      case "game":
+        if( res.score >= this.marker.options.required_score){
+          res.state = "win";
+        } else if ( res.tries < this.marker.options.min_tries ){
+          res.state = "none";
+        } else if ( res.quit ) {
+          res.state = "lose";
+        }
+      case "raffle":
+        if( res.completed ){
+          res.state = "entered";
+        }
+      case "survey":
+        if( res.completed ){
+          res.state = "completed";
+        }
+      default:
+        res.state = "none";
     }
 
     console.log("_onMessage() :: before navigate : ", res);
@@ -79,14 +98,14 @@ class GameScreen extends React.Component {
     let queryString = '?v=787'
         + '&company_id=' + this.marker.company_id
         + '&campaign_id=' + this.marker.campaign_id
-        + '&required_score=' + this.marker.activity_options.required_score
-        + '&min_tries=' + this.marker.activity_options.min_tries
-        + '&max_tries=' + this.marker.activity_options.max_tries
-        + '&max_sessions=' + this.marker.activity_options.max_sessions;
+        + '&required_score=' + this.marker.options.required_score
+        + '&min_tries=' + this.marker.options.min_tries
+        + '&max_tries=' + this.marker.options.max_tries
+        + '&max_sessions=' + this.marker.options.max_sessions;
     return (
       <WebView
         onMessage={(e) => {this._onMessage(e)}}
-        source={{uri: this.marker.activity_options.content_url + queryString }} />
+        source={{uri: this.marker.options.content_url + queryString }} />
     );
   }
 }

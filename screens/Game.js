@@ -8,7 +8,7 @@ class GameScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    marker = this.props.navigation.getParam('current_marker');
+    this.marker = this.props.navigation.getParam('current_marker');
 
     activityData = {
       campaign_id: this.marker.campaign_id,
@@ -31,7 +31,7 @@ class GameScreen extends React.Component {
   //get Pepsi Brand
   //get Coca-Cola brand
 
-  _onEndActivity = () => {
+  _onEndActivity = (data) => {
     //disable the back button listener
     BackHandler.removeEventListener("hardwareBackPress", this._handleBackButton);
 
@@ -85,28 +85,27 @@ console.log("_onMessage() :: res: ", res);
     this.props.navigation.navigate('Maps', { activity_data: res });
   }
 
-  _onUpdateState = () => {
+  _onUpdateActivity = (data) => {
     //TODO: when we get new info
+    console.log("_onUpdateActivity() :: got update: ", data);
   }
 
   //handle messages from activity
   _onMessage = (e) => {
-
-    console.log("_onMessage() :: got activity msg: ", e.nativeEvent.data);
-
     let data = {};
     try {
       data = JSON.parse(e.nativeEvent.data);
+
       switch(data.action){
         case "update":
-          this._onUpdateState(data);
+          this._onUpdateActivity(data);
           break;
         case "end":
           this._onEndActivity(data);
           break;
       }
     } catch(e) {
-      //could not save callback data for campaign activity
+      //could not parse message
     }
   }
 
@@ -124,7 +123,7 @@ console.log("_onMessage() :: res: ", res);
   }
 
   render() {
-    let queryString = '?v=787'
+    let queryString = '?v=789'
         + '&company_id=' + this.marker.company_id
         + '&campaign_id=' + this.marker.campaign_id
         + '&required_score=' + this.marker.options.required_score

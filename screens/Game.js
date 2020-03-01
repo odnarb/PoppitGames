@@ -32,25 +32,16 @@ class GameScreen extends React.Component {
   //get Coca-Cola brand
 
   _onEndActivity = (data) => {
-    //disable the back button listener
-    BackHandler.removeEventListener("hardwareBackPress", this._handleBackButton);
+    //disable the back button listener before anything
+    BackHandler.removeEventListener("hardwareBackPress", this._goBack);
 
     //merge the data from the activity into our default
-    let res = Object.assign({}, this.activityData, data);
+    let res = data;
 
     res.state = "none";
 
-/*
-       let endObj = {
-            quit: quitting,
-            score: parseInt(_iScore),
-            sessions: _iSessions,
-            tries: _iLaunch,
-            level: _iLevel
-        };
-*/
-console.log("_onMessage() :: marker: ", this.marker);
-console.log("_onMessage() :: res: ", res);
+    // console.log("_onEndActivity() :: marker: ", this.marker);
+    // console.log("_onEndActivity() :: res: ", res);
 
     switch(this.marker.type){
       case "game":
@@ -80,9 +71,15 @@ console.log("_onMessage() :: res: ", res);
         res.state = "none";
     } //end switch
 
-    console.log("_onMessage() :: before navigate : ", res);
+    console.log("_onEndActivity() :: before navigate : ", res);
 
-    this.props.navigation.navigate('Maps', { activity_data: res });
+    //this might be a bit of a waste of a cycle.. but update the state and then go back
+    this.setState({
+      activity_data: { ...this.state.activity_data, ...res}
+    }, () => {
+      this._goBack();
+    });
+
   }
 
   _onUpdateActivity = (data) => {
@@ -105,31 +102,41 @@ console.log("_onMessage() :: res: ", res);
           break;
       }
     } catch(e) {
-      //could not parse message
+      //could not parse message.. might want to capture this..
     }
   }
 
-  _handleBackButton = () => {
-    console.log("_handleBackButton() FIRED", this.activityData);
-    BackHandler.removeEventListener("hardwareBackPress", this._handleBackButton);
+  _goBack = () => {
+    console.log("_goBack() FIRED");
 
-    this.props.navigation.navigate('Maps', { activity_data: this.activityData });
+    BackHandler.removeEventListener("hardwareBackPress", this._goBack);
+
+    console.log("_goBack() :: Before navigating to MAPS", this.state.activity_data);
+
+    this.props.navigation.navigate('Maps', { activity_data: this.state.activity_data });
 
     return true;
   };
 
   componentDidMount(){
-    BackHandler.addEventListener("hardwareBackPress", this._handleBackButton);
+    BackHandler.addEventListener("hardwareBackPress", this._goBack);
   }
 
   render() {
-    let queryString = '?v=789'
-        + '&company_id=' + this.marker.company_id
+    let queryString = '?v=789';
+
+    if( this.marker.type == "game" ) {
+        queryString += '&company_id=' + this.marker.company_id
         + '&campaign_id=' + this.marker.campaign_id
         + '&required_score=' + this.marker.options.required_score
         + '&min_tries=' + this.marker.options.min_tries
         + '&max_tries=' + this.marker.options.max_tries
         + '&max_sessions=' + this.marker.options.max_sessions;
+    } else if( this.marker.type == "survey" ) {
+        //todo
+    } else if( this.marker.type == "raffle" ) {
+        //todo
+    }
     return (
       <WebView
         onMessage={(e) => {this._onMessage(e)}}

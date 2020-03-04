@@ -10,13 +10,11 @@ class GameScreen extends React.Component {
 
     this.marker = this.props.navigation.getParam('current_marker');
 
-    activityData = {
-      campaign_id: this.marker.campaign_id,
-      state: "lose"
-    };
-
     this.state = {
-
+      campaign_id: this.marker.campaign_id,
+      state: "none",
+      score: 0,
+      sessions: 1
     };
   }
 
@@ -30,61 +28,64 @@ class GameScreen extends React.Component {
   //get Subway Brand
   //get Pepsi Brand
   //get Coca-Cola brand
+  _updateFate(cb){
 
-  _onEndActivity = (data) => {
-    //disable the back button listener before anything
-    BackHandler.removeEventListener("hardwareBackPress", this._goBack);
-
-    //merge the data from the activity into our default
-    let res = data;
-
-    res.state = "none";
-
-    // console.log("_onEndActivity() :: marker: ", this.marker);
-    // console.log("_onEndActivity() :: res: ", res);
+    let thisState = this.state.state;
 
     switch(this.marker.type){
       case "game":
-        if ( res.tries < this.marker.options.min_tries && res.sessions == 1 ){
-          res.state = "none";
-        } else if ( res.quit && res.tries >= this.marker.options.min_tries ){
-          res.state = "lose";
-        } else if ( res.quit && res.sessions > 1 ){
-          res.state = "lose";
-        } else if ( res.score < this.marker.options.required_score ){
-          res.state = "lose";
-        } else if( res.score >= this.marker.options.required_score ){
-          res.state = "win";
+        if ( this.state.tries < this.marker.options.min_tries && this.state.sessions == 1 ){
+          thisState = "none";
+        } else if ( this.state.quit && this.state.tries >= this.marker.options.min_tries ){
+          thisState = "lose";
+        } else if ( this.state.quit && this.state.sessions > 1 ){
+          thisState = "lose";
+        } else if ( this.state.tries && this.state.sessions > 1 ){
+          thisState = "lose";
+        } else if ( this.state.score < this.marker.options.required_score ){
+          thisState = "lose";
+        } else if( this.state.score >= this.marker.options.required_score ){
+          thisState = "win";
         }
         break;
       case "raffle":
-        if( res.completed ){
-          res.state = "entered";
+        if( this.state.completed ){
+          thisState = "entered";
         }
         break;
       case "survey":
-        if( res.completed ){
-          res.state = "completed";
+        if(  this.state.completed ){
+          thisState = "completed";
         }
         break;
       default:
-        res.state = "none";
+        thisState = "none";
     } //end switch
 
-    console.log("_onEndActivity() :: before navigate : ", res);
+    this.setState({ state: thisState }, () => {
+      if( cb ){ cb(); }
+    });
+  }
+
+  _onEndActivity = (data) => {
+    console.log("_onEndActivity() :: end with DATA: ", data);
+    console.log("_onEndActivity() :: current STATE (before update): ", this.state );
 
     //this might be a bit of a waste of a cycle.. but update the state and then go back
-    this.setState({
-      activity_data: { ...this.state.activity_data, ...res}
-    }, () => {
-      this._goBack();
+    this.setState(data, () => {
+      this._updateFate(() => {
+        this._goBack();
+      });
     });
-
   }
 
   _onUpdateActivity = (data) => {
-    //TODO: when we get new info
     console.log("_onUpdateActivity() :: got update: ", data);
+    console.log("_onUpdateActivity() :: current STATE (before update): ", this.state );
+
+    this.setState(data, () => {
+      this._updateFate();
+    });
   }
 
   //handle messages from activity
@@ -111,9 +112,9 @@ class GameScreen extends React.Component {
 
     BackHandler.removeEventListener("hardwareBackPress", this._goBack);
 
-    console.log("_goBack() :: Before navigating to MAPS", this.state.activity_data);
+    console.log("_goBack() :: Before navigating to MAPS", this.state);
 
-    this.props.navigation.navigate('Maps', { activity_data: this.state.activity_data });
+    this.props.navigation.navigate('Maps', { activity_data: this.state });
 
     return true;
   };

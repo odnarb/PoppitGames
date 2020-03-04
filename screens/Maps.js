@@ -546,16 +546,18 @@ class MapsScreen extends React.Component {
 
   componentDidMount() {
     this.focusSubscription = this.props.navigation.addListener('willFocus', () => {
-      console.log("MAPS :: componentDidMount() :: willFocus FIRED");
-
       let activity_data = this.props.navigation.getParam("activity_data");
-      console.log("MAPS :: componentDidMount() :: willFocus :: activity_data? : ", activity_data);
-      if( activity_data && activity_data.campaign_id && activity_data.campaign_id > 0){
+      let updateMarker = (activity_data && activity_data.campaign_id && activity_data.campaign_id > 0 && activity_data.state != "none" );
+      if( updateMarker ){
+        console.log("MAPS :: componentDidMount() :: willFocus :: update marker : ", activity_data);
+
         //mark campaign as complete
         this._completeCampaign(activity_data, () => {
           //unset route params so this doesn't get fired again by mistake
           this.props.navigation.setParams({ activity_data: {}});
         });
+      } else {
+        console.log("MAPS :: componentDidMount() :: SKIPPING MARKER UPDATE");
       }
 
     });

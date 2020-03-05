@@ -34,7 +34,9 @@ class GameScreen extends React.Component {
 
     switch(this.marker.type){
       case "game":
-        if ( this.state.tries < this.marker.options.min_tries && this.state.sessions == 1 ){
+        if( this.state.score >= this.marker.options.required_score ){
+          thisState = "win";
+        } else if ( this.state.tries < this.marker.options.min_tries && this.state.sessions == 1 ){
           thisState = "none";
         } else if ( this.state.quit && this.state.tries >= this.marker.options.min_tries ){
           thisState = "lose";
@@ -44,8 +46,6 @@ class GameScreen extends React.Component {
           thisState = "lose";
         } else if ( this.state.score < this.marker.options.required_score ){
           thisState = "lose";
-        } else if( this.state.score >= this.marker.options.required_score ){
-          thisState = "win";
         }
         break;
       case "raffle":
@@ -124,7 +124,7 @@ class GameScreen extends React.Component {
   }
 
   render() {
-    let queryString = '?v=789';
+    let queryString = '?v=791';
 
     if( this.marker.type == "game" ) {
         queryString += '&company_id=' + this.marker.company_id

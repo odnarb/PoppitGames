@@ -9,8 +9,6 @@ import React from 'react';
 //   onPress={this._signIn}
 //   disabled={this.state.isSigninInProgress} />
 
-const appName = "PoppitGames";
-
 import {
   Button,
   Text,
@@ -30,6 +28,8 @@ import {
   signInIconSize as iconSize,
   whiteColor
 } from '../components/globalstyles';
+
+import { app } from '../components/globalconstants';
 
 class SignInScreen extends React.Component {
   componentDidMount() {
@@ -86,7 +86,7 @@ class SignInScreen extends React.Component {
 
         <View style={styles.contentContainer}>
             <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={() => this._learnMore()}>
-              <Text style={[styles.grey,styles.learnMoreText]}>New to {appName}? Tap to learn more.</Text>
+              <Text style={[styles.grey,styles.learnMoreText]}>New to {app.name}? Tap to learn more.</Text>
             </TouchableOpacity>
 
 

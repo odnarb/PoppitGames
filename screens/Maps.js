@@ -33,6 +33,8 @@ import {
   carouselShownPosition
 } from '../components/globalstyles';
 
+import { marker_states, marker_state_detail } from '../components/globalconstants';
+
 const MARKER_SEEN = "seen";
 const MARKER_SEEN_PREPEND = "marker@";
 
@@ -226,12 +228,20 @@ class MapsScreen extends React.Component {
         let markerStylesArr = [styles.marker];
         if(index === this.state.selectedMarkerIndex) {
           markerStylesArr.push(styles.selectedMarker);
+        } else if(this.state.markers[index].activity_state === marker_states.completed) {
+            if(this.state.markers[index].activity_state_detail === marker_state_detail.win) {
+                markerStylesArr.push(styles.winMarker);
+            } else if(this.state.markers[index].activity_state_detail === marker_state_detail.lose) {
+                markerStylesArr.push(styles.loseMarker);
+            } else {
+                markerStylesArr.push(styles.visitedMarker);
+            }
         } else if(this.state.markers[index].seen === true) {
           markerStylesArr.push(styles.visitedMarker);
         } else {
           markerStylesArr.push(styles.regularMarker);
         }
-        // console.log("_renderMarkers() :: This marker seen? ", this.state.markers[index].seen);
+
         return (
           <MapView.Marker key={index} coordinate={marker.coordinate}
             onPress={e => this._onPressMarker(e, index)}>
@@ -353,7 +363,7 @@ class MapsScreen extends React.Component {
               </TouchableOpacity>
               <View style={styles.textContent}>
                 <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{marker.title}</Text>
-                <Text numberOfLines={1} style={[styles.grey,styles.cardDescription]}>{marker.description}{" => state: "}{marker.state}</Text>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardDescription]}>{marker.description}{" => state: "}{marker.activity_state}{" :: "}{marker.activity_state_detail}</Text>
               </View>
             </View>
           ))}
@@ -520,7 +530,8 @@ class MapsScreen extends React.Component {
         //replace the old item
         markersCopy[index] = marker;
 
-        marker.state = activity_data.state;
+        marker.activity_state = activity_data.activity_state;
+        marker.activity_state_detail = activity_data.activity_state_detail;
 
         if(index == numMarkers-1){
           this.setState({
@@ -547,7 +558,7 @@ class MapsScreen extends React.Component {
   componentDidMount() {
     this.focusSubscription = this.props.navigation.addListener('willFocus', () => {
       let activity_data = this.props.navigation.getParam("activity_data");
-      let updateMarker = (activity_data && activity_data.campaign_id && activity_data.campaign_id > 0 && activity_data.state != "none" );
+      let updateMarker = (activity_data && activity_data.campaign_id && activity_data.campaign_id > 0 && activity_data.activity_state != marker_states.none );
       if( updateMarker ){
         console.log("MAPS :: componentDidMount() :: willFocus :: update marker : ", activity_data);
 

@@ -4,6 +4,8 @@ import { BackHandler } from 'react-native';
 
 import { WebView } from 'react-native-webview';
 
+import { marker_states, marker_state_detail } from '../components/globalconstants';
+
 class GameScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +14,8 @@ class GameScreen extends React.Component {
 
     this.state = {
       campaign_id: this.marker.campaign_id,
-      state: "none",
+      activity_state: marker_states.none,
+      activity_state_detail: marker_state_detail.none,
       score: 0,
       sessions: 1
     };
@@ -30,39 +33,48 @@ class GameScreen extends React.Component {
   //get Coca-Cola brand
   _updateFate(cb){
 
-    let thisState = this.state.state;
+    let thisState = marker_states.none;
+    let thisStateDetail = marker_state_detail.none;
 
     switch(this.marker.type){
       case "game":
         if( this.state.score >= this.marker.options.required_score ){
-          thisState = "win";
+          thisState = marker_states.completed;
+          thisStateDetail = marker_state_detail.win;
         } else if ( this.state.tries < this.marker.options.min_tries && this.state.sessions == 1 ){
-          thisState = "none";
+          //no change to state
         } else if ( this.state.quit && this.state.tries >= this.marker.options.min_tries ){
-          thisState = "lose";
+          thisState = marker_states.completed;
+          thisStateDetail = marker_state_detail.lose;
         } else if ( this.state.quit && this.state.sessions > 1 ){
-          thisState = "lose";
+          thisState = marker_states.completed;
+          thisStateDetail = marker_state_detail.lose;
         } else if ( this.state.tries && this.state.sessions > 1 ){
-          thisState = "lose";
+          thisState = marker_states.completed;
+          thisStateDetail = marker_state_detail.lose;
         } else if ( this.state.score < this.marker.options.required_score ){
-          thisState = "lose";
+          thisState = marker_states.completed;
+          thisStateDetail = marker_state_detail.lose;
         }
         break;
       case "raffle":
-        if( this.state.completed ){
-          thisState = "entered";
+        if( this.state.completed == true ){
+          thisState = marker_states.completed;
         }
         break;
       case "survey":
-        if(  this.state.completed ){
-          thisState = "completed";
+        if(  this.state.completed == true ){
+          thisState = marker_states.completed;
         }
         break;
       default:
-        thisState = "none";
+        //no change to state
     } //end switch
 
-    this.setState({ state: thisState }, () => {
+    this.setState({
+        activity_state: thisState,
+        activity_state_detail: thisStateDetail
+    }, () => {
       if( cb ){ cb(); }
     });
   }

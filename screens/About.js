@@ -9,6 +9,8 @@ import {
 
 import { aboutStyleSheet as styles } from '../components/globalstyles';
 
+import { app } from '../components/globalconstants';
+
 import LogoBanner from '../components/LogoBanner';
 
 class AboutScreen extends React.Component {
@@ -30,7 +32,7 @@ class AboutScreen extends React.Component {
         <LogoBanner size="scaled" />
 
         <View style={styles.versionRow}>
-          <Text style={[styles.grey,styles.versionText]}>version 1.3.2 (0bdd85b1)</Text>
+          <Text style={[styles.grey,styles.versionText]}>version {app.version} ({app.version_hash})</Text>
         </View>
       </View>
 
@@ -52,7 +54,7 @@ class AboutScreen extends React.Component {
             </View>
 
             <View style={styles.copyrightRow}>
-              <Text style={[styles.grey,styles.copyrightText]}>© Copyright Poppit Games LLC</Text>
+              <Text style={[styles.grey,styles.copyrightText]}>© {app.copyright_year} {app.company_name} All rights reserved</Text>
             </View>
           </View>
       </View>

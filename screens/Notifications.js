@@ -8,6 +8,8 @@ import {
 
 import { notificationsStyleSheet as styles } from '../components/globalstyles';
 
+import { app } from '../components/globalconstants';
+
 class NotificationsScreen extends React.Component {
   static navigationOptions = {
     title: 'Notifications',
@@ -60,7 +62,7 @@ class NotificationsScreen extends React.Component {
             <Text style={[styles.grey,styles.optionHeader]}>Email Subscriptions</Text>
           </View>
           <Text style={[styles.grey,styles.optionSubHeader]}>Need help unsubcribing to email?</Text>
-          <Text style={[styles.grey,styles.optionDescription]}>Every email sent by Poppit has an unsubscribe link at the bottom of the email. You can also unsubscribe on our website. Find out how by visiting our <Text style={{ textDecorationLine: 'underline' }}>Help Center.</Text></Text>
+          <Text style={[styles.grey,styles.optionDescription]}>Every email sent by {app.name} has an unsubscribe link at the bottom of the email. You can also unsubscribe on our website. Find out how by visiting our <Text style={{ textDecorationLine: 'underline' }}>Help Center.</Text></Text>
         </View>
       </View>
     );

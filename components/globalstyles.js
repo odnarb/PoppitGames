@@ -947,8 +947,18 @@ const mapsStyles = {
       backgroundColor: blueColor
   },
 
-  selectedMarker: {
+  winMarker: {
       backgroundColor: greenColor
+  },
+
+  loseMarker: {
+      backgroundColor: lightRedColor
+  },
+
+  selectedMarker: {
+      backgroundColor: blueColor,
+      borderColor: greyColor,
+      borderWidth: StyleSheet.hairlineWidth
   },
 
   visitedMarker: {

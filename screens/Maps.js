@@ -276,10 +276,12 @@ class MapsScreen extends React.Component {
     //could be a game, raffle or some other website
 
     //this will need to change to someting more generic wording..
-    this.props.navigation.navigate('Game', {
-      user_id: this.user_id,
-      current_marker: this.state.markers[index]
-    });
+    if( this.state.markers[index].activity_state != marker_states.completed ){
+      this.props.navigation.navigate('Game', {
+        user_id: this.user_id,
+        current_marker: this.state.markers[index]
+      });
+    }
   };
 
   _handleBackCarousel = () => {

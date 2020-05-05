@@ -226,9 +226,7 @@ class MapsScreen extends React.Component {
 
       return ( this.state.markers.map( (marker, index) => {
         let markerStylesArr = [styles.marker];
-        if(index === this.state.selectedMarkerIndex) {
-          markerStylesArr.push(styles.selectedMarker);
-        } else if(this.state.markers[index].activity_state === marker_states.completed) {
+        if(this.state.markers[index].activity_state === marker_states.completed) {
             if(this.state.markers[index].activity_state_detail === marker_state_detail.win) {
                 markerStylesArr.push(styles.winMarker);
             } else if(this.state.markers[index].activity_state_detail === marker_state_detail.lose) {
@@ -236,6 +234,8 @@ class MapsScreen extends React.Component {
             } else {
                 markerStylesArr.push(styles.visitedMarker);
             }
+        } else if(index === this.state.selectedMarkerIndex) {
+          markerStylesArr.push(styles.selectedMarker);
         } else if(this.state.markers[index].seen === true) {
           markerStylesArr.push(styles.visitedMarker);
         } else {
@@ -331,6 +331,53 @@ class MapsScreen extends React.Component {
     });
   }
 
+  _renderCarouselElement = (index) => {
+    if(this.state.markers[index].activity_state === marker_states.completed) {
+        if(this.state.markers[index].activity_state_detail === marker_state_detail.win) {
+          return (
+            <View style={styles.card} key={index}>
+                <Image
+                  source={this.state.markers[index].image}
+                  style={styles.cardImage}
+                  resizeMode="contain" />
+              <View style={styles.textContent}>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{this.state.markers[index].title}</Text>
+                <Text numberOfLines={1}>WINNER: TAP TO CLAIM!</Text>
+              </View>
+            </View>
+          );
+        } else if(this.state.markers[index].activity_state_detail === marker_state_detail.lose) {
+          return (
+            <View style={styles.card} key={index}>
+                <Image
+                  source={this.state.markers[index].image}
+                  style={styles.cardImage}
+                  resizeMode="contain" />
+              <View style={styles.textContent}>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{this.state.markers[index].title}</Text>
+                <Text numberOfLines={1}>Sorry, try again tomorrow!</Text>
+              </View>
+            </View>
+          );
+        }
+    } else {
+      return (
+        <View style={styles.card} key={index}>
+          <TouchableOpacity onPress={() => this._onPressCarouselItem(index) } style={styles.cardImage}>
+            <Image
+              source={this.state.markers[index].image}
+              style={styles.cardImage}
+              resizeMode="contain" />
+          </TouchableOpacity>
+          <View style={styles.textContent}>
+            <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{this.state.markers[index].title}</Text>
+            <Text numberOfLines={1} style={[styles.grey,styles.cardDescription]}>TAP TO PLAY!</Text>
+          </View>
+        </View>
+      );
+    }
+  };
+
   _renderCarousel = () => {
       return (
         <Animated.View style={[styles.scrollView,this.carouselShowHideAnimation.getLayout()]}>
@@ -354,21 +401,7 @@ class MapsScreen extends React.Component {
           )}
           contentContainerStyle={styles.endPadding}>
 
-          {this.state.markers.map((marker, index) => (
-            <View
-              style={styles.card} key={index}>
-              <TouchableOpacity onPress={() => this._onPressCarouselItem(index) } style={styles.cardImage}>
-                <Image
-                  source={marker.image}
-                  style={styles.cardImage}
-                  resizeMode="contain" />
-              </TouchableOpacity>
-              <View style={styles.textContent}>
-                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{marker.title}</Text>
-                <Text numberOfLines={1} style={[styles.grey,styles.cardDescription]}>{marker.description}{" => state: "}{marker.activity_state}{" :: "}{marker.activity_state_detail}</Text>
-              </View>
-            </View>
-          ))}
+          {this.state.markers.map((marker, index) => ( this._renderCarouselElement(index) ) )}
         </Animated.ScrollView>
         </Animated.View>
       );

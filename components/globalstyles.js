@@ -51,6 +51,7 @@ const blueColor = "#5bc0eb";
 const lightblueColor = "#8bdafc";
 const yellowColor = "#fde74c";
 const greenColor = "#9bc53d";
+const lightGreenColor = "#c0eb70";
 const redColor = "#c34231";
 const lightRedColor  = "#ff5e5e";
 const greyColor = "#404e4d";
@@ -951,8 +952,16 @@ const mapsStyles = {
       backgroundColor: greenColor
   },
 
+  selectedWinMarker: {
+    backgroundColor: lightGreenColor
+  },
+
+  selectedLoseMarker: {
+    backgroundColor: lightRedColor
+  },
+
   loseMarker: {
-      backgroundColor: lightRedColor
+      backgroundColor: redColor
   },
 
   selectedMarker: {

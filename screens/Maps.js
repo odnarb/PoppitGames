@@ -660,12 +660,13 @@ class MapsScreen extends React.Component {
       if(data !== null){
         let region = JSON.parse(data);
         this.setState({
+          restoringState: true,
           boundingBox: this._getBoundingBox(region),
           region: region
+        }, () => {
+          //goto the location
+          this.map.animateToRegion( region , 350);
         });
-
-        //goto the location
-        this.map.animateToRegion( region , 350);
       } else {
         Geolocation.getCurrentPosition(
           position => {
@@ -678,10 +679,13 @@ class MapsScreen extends React.Component {
             };
 
             //update state
-            this.setState({ region: region });
-
-            //goto the location
-            this.map.animateToRegion(region, 350);
+            this.setState({
+              boundingBox: this._getBoundingBox(region),
+              region: region
+            }, () => {
+              //goto the location
+              this.map.animateToRegion( region , 350);
+            });
           },
           error => Alert.alert('Error', JSON.stringify(error)),
           {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
@@ -714,16 +718,19 @@ class MapsScreen extends React.Component {
           if (this.state.selectedMarkerIndex !== index) {
             const { coordinate } = this.state.markers[index];
             //also highlight the current selected marker
-            this.setState({ selectedMarkerIndex: index });
-
-            this.map.animateToRegion(
-              {
-                ...coordinate,
-                latitudeDelta: this.state.region.latitudeDelta,
-                longitudeDelta: this.state.region.longitudeDelta,
-              },
-              350
-            );
+            this.setState({
+              selectedMarkerIndex: index,
+              selectingMarker: true
+            }, () => {
+              this.map.animateToRegion(
+                {
+                  ...coordinate,
+                  latitudeDelta: this.state.region.latitudeDelta,
+                  longitudeDelta: this.state.region.longitudeDelta,
+                },
+                350
+              );
+            });
           }
         }, 10);
       }

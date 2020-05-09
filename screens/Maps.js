@@ -51,6 +51,7 @@ class MapsScreen extends React.Component {
 
     this.state = {
       restoringState: false,
+      selectingMarker: false,
       boundingBox: null,
       mapReady: true,
       showCarousel: false,
@@ -110,9 +111,17 @@ class MapsScreen extends React.Component {
   }
 
   _onRegionChange = (r) => {
+    if(!this.state.restoringState && !this.state.selectingMarker) {
+      this._deselectMarker();
+      this._hideCarousel();
+    }
+  }
+
+  _onRegionChangeComplete = (r) => {
     let boundingBox = this._getBoundingBox(r);
 
-    if(!this.state.restoringState) {
+    if(!this.state.restoringState && !this.state.selectingMarker) {
+
       this.setState({
           boundingBox: boundingBox,
           region: r
@@ -120,15 +129,18 @@ class MapsScreen extends React.Component {
         this._updateSearch("");
       });
     } else {
-      //this change was fired as a result of restoring the state, so disable it
+      //this change was fired as a result of
+        //restoring the state or selecting a marker so disable the flags
       this.setState({
-        restoringState: false
+        restoringState: false,
+        selectingMarker: false
       });
     }
   }
 
   _onPressMap = () => {
-      this._deselectMarker();
+      //deselect and restore region
+      this._deselectMarker(true);
       this._hideCarousel();
   };
 
@@ -171,13 +183,15 @@ class MapsScreen extends React.Component {
       longitudeDelta: this.state.region.longitudeDelta
     };
 
-    //set the current marker selected
-    this.map.animateToRegion(newRegion,500);
     this.setState({
+      selectingMarker: true,
       selectedMarkerIndex: index,
       previousRegion: this.state.region,
       region: newRegion
     }, () => {
+      //set the current marker selected
+      this.map.animateToRegion(newRegion,500);
+
       // console.log("_onPressMarker() :: marker pressed: ", this.state.markers[index].hash);
 
       let thisMarker = this.state.markers[index];
@@ -204,18 +218,27 @@ class MapsScreen extends React.Component {
     });
   };
 
-  _deselectMarker = () => {
+  _deselectMarker = (restoreRegion) => {
     if (this.state.selectedMarkerIndex > -1){
-      //restore the previous state...
-      this.setState({
-        restoringState: true,
-        boundingBox: this._getBoundingBox(this.state.previousRegion),
-        selectedMarkerIndex: -1,
-        previousRegion: {},
-        region: this.state.previousRegion
-      }, () =>{
-        this.map.animateToRegion(this.state.region,500);
-      });
+      if (restoreRegion) {
+        //restore the previous state...
+        this.setState({
+          restoringState: true,
+          boundingBox: this._getBoundingBox(this.state.previousRegion),
+          selectedMarkerIndex: -1,
+          previousRegion: {},
+          region: this.state.previousRegion
+        }, () =>{
+          this.map.animateToRegion(this.state.region,500);
+        });
+      } else {
+        //restore the previous state...
+        this.setState({
+          restoringState: false,
+          selectedMarkerIndex: -1,
+          previousRegion: {}
+        });
+      }
     }
   };
 
@@ -285,12 +308,14 @@ class MapsScreen extends React.Component {
     }
   };
 
+  /* TODO*/
   _onPressClaim = () => {
     return;
   };
 
   _handleBackCarousel = () => {
-    this._deselectMarker();
+    //deselect and restore region
+    this._deselectMarker(true);
     this._hideCarousel();
     return true;
   };
@@ -728,7 +753,8 @@ class MapsScreen extends React.Component {
           initialRegion={this.state.region}
           style={styles.mapContainer}
           onPress={this._onPressMap}
-          onRegionChangeComplete={ r => {this._onRegionChange(r)}}
+          onRegionChangeComplete={this._onRegionChangeComplete}
+          onRegionChange={this._onRegionChange}
           loadingEnabled={true}
           moveOnMarkerPress={false}
           showsUserLocation={true}>

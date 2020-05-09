@@ -1,4 +1,5 @@
-const markers = [{
+const markers = [
+{
     company_id: 1,
     campaign_id: 123,
     seen: false,
@@ -18,7 +19,7 @@ const markers = [{
     },
     coupon: {
       title: "$.50 OFF",
-      description: "",
+      description: "This is the coupon description."
     },
     coordinate: {
       latitude: 33.3776538,
@@ -46,7 +47,7 @@ const markers = [{
     },
     coupon: {
       title: "-50% OFF",
-      description: ""
+      description: "This is the coupon description."
     },
     coordinate: {
       latitude: 33.4803774,
@@ -74,7 +75,7 @@ const markers = [{
     },
     coupon: {
       title: "FREE COFFEE",
-      description: ""
+      description: "This is the coupon description."
     },
     coordinate: {
       latitude: 33.4796037,
@@ -102,7 +103,7 @@ const markers = [{
     },
     coupon: {
         title: "Coupon #4",
-        description:""
+        description: "This is the coupon description."
     },
     coordinate:{
         latitude: 33.461,
@@ -130,7 +131,7 @@ const markers = [{
     },
     coupon:{
         title:"Coupon #5",
-        description:""
+        description: "This is the coupon description."
     },
     coordinate:{
         latitude:33.397,
@@ -158,7 +159,7 @@ const markers = [{
     },
     coupon:{
         title:"Coupon #8",
-        description:""
+        description: "This is the coupon description."
     },
     coordinate:{
         latitude:33.57,
@@ -186,7 +187,7 @@ const markers = [{
     },
     coupon: {
         title:"Coupon #9",
-        description:""
+        description: "This is the coupon description."
     },
     coordinate:{
         latitude:33.323,
@@ -214,7 +215,7 @@ const markers = [{
     },
     coupon: {
         title:"Coupon #10",
-        description:""
+        description: "This is the coupon description."
     },
     coordinate: {latitude:33.295,longitude:-112.076},
     image: { uri: "http://poppit.bchambers.io/assets/images/brands/quicktrip-logo-small.png" }

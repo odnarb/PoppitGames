@@ -27,6 +27,7 @@ import LogoBanner from '../components/LogoBanner';
 import BottomNavigation from '../components/BottomNavigation';
 import { markers as FAKE_MARKERS } from '../components/FakeMarkers';
 import {
+  iconMediumSize,
   mapsStyleSheet as styles,
   searchResultsIconColor,
   searchResultsIconSize,
@@ -284,6 +285,10 @@ class MapsScreen extends React.Component {
     }
   };
 
+  _onPressClaim = () => {
+    return;
+  };
+
   _handleBackCarousel = () => {
     this._deselectMarker();
     this._hideCarousel();
@@ -332,30 +337,39 @@ class MapsScreen extends React.Component {
   }
 
   _renderCarouselElement = (index) => {
-    if(this.state.markers[index].activity_state === marker_states.completed) {
-        if(this.state.markers[index].activity_state_detail === marker_state_detail.win) {
+    let thisMarker = this.state.markers[index];
+    if(thisMarker.activity_state === marker_states.completed) {
+        if(thisMarker.activity_state_detail === marker_state_detail.win) {
           return (
             <View style={styles.card} key={index}>
+              <View style={styles.textContent}>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{thisMarker.title.toUpperCase()}</Text>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{thisMarker.coupon.title.toUpperCase()}</Text>
+              </View>
                 <Image
-                  source={this.state.markers[index].image}
+                  source={thisMarker.image}
                   style={styles.cardImage}
                   resizeMode="contain" />
-              <View style={styles.textContent}>
-                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{this.state.markers[index].title}</Text>
-                <Text numberOfLines={1}>WINNER: TAP TO CLAIM!</Text>
-              </View>
+              <TouchableOpacity style={styles.buttonBlue} onPress={() => this._onPressClaim(index) }>
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                  <Text style={styles.btnBlue}>{'Winner: Tap to claim!'.toUpperCase()}</Text>
+                </View>
+              </TouchableOpacity>
             </View>
           );
-        } else if(this.state.markers[index].activity_state_detail === marker_state_detail.lose) {
+        } else if(thisMarker.activity_state_detail === marker_state_detail.lose) {
           return (
             <View style={styles.card} key={index}>
-                <Image
-                  source={this.state.markers[index].image}
-                  style={styles.cardImage}
-                  resizeMode="contain" />
               <View style={styles.textContent}>
-                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{this.state.markers[index].title}</Text>
-                <Text numberOfLines={1}>Sorry, try again tomorrow!</Text>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{thisMarker.title.toUpperCase()}</Text>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{thisMarker.coupon.title.toUpperCase()}</Text>
+              </View>
+              <Image
+                source={thisMarker.image}
+                style={styles.cardImage}
+                resizeMode="contain" />
+              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                <Text numberOfLines={1}>{'Sorry, try again tomorrow!'.toUpperCase()}</Text>
               </View>
             </View>
           );
@@ -363,16 +377,23 @@ class MapsScreen extends React.Component {
     } else {
       return (
         <View style={styles.card} key={index}>
-          <TouchableOpacity onPress={() => this._onPressCarouselItem(index) } style={styles.cardImage}>
+          <View style={styles.textContent}>
+            <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{thisMarker.title.toUpperCase()}</Text>
+          </View>
             <Image
-              source={this.state.markers[index].image}
+              source={thisMarker.image}
               style={styles.cardImage}
               resizeMode="contain" />
+          <TouchableOpacity style={styles.buttonBlue} onPress={() => this._onPressCarouselItem(index) }>
+            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+              <Text style={styles.btnBlue}>{'Tap to play!'.toUpperCase()}</Text>
+              <Icon
+                name='play'
+                type='material-community'
+                size={iconMediumSize}
+                color="#fff" />
+            </View>
           </TouchableOpacity>
-          <View style={styles.textContent}>
-            <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{this.state.markers[index].title}</Text>
-            <Text numberOfLines={1} style={[styles.grey,styles.cardDescription]}>TAP TO PLAY!</Text>
-          </View>
         </View>
       );
     }

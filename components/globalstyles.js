@@ -337,6 +337,25 @@ const globalStyles = {
     textAlign:'center'
   },
 
+  buttonBlue: {
+    width: "100%",
+    height: verticalScale(44),
+    borderColor: blueColor,
+    backgroundColor: blueColor,
+    borderWidth: 1,
+    borderRadius: 4,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: moderateScale(10)
+  },
+
+  btnBlue: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: moderateScale(16),
+    textAlign:'center'
+  },
+
   marginLeft10: {
     marginLeft: moderateScale(10)
   },

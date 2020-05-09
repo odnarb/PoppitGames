@@ -12,9 +12,9 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
-        required_score: 800,
+        required_score: 400,
         min_tries: 1, // min # of tries in FIRST session to set game as "tried" if user backs out
-        max_tries: 3, //max # of tries per session
+        max_tries: 6, //max # of tries per session
         max_sessions: 1  // max # of sessions to allow
     },
     coupon: {
@@ -40,9 +40,9 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
-        required_score: 800,
+        required_score: 400,
         min_tries: 1, // min # of tries in FIRST session to set game as "tried" if user backs out
-        max_tries: 3, //max # of tries per session
+        max_tries: 6, //max # of tries per session
         max_sessions: 1  // max # of sessions to allow
     },
     coupon: {
@@ -68,9 +68,9 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
-        required_score: 800,
+        required_score: 400,
         min_tries: 1, // min # of tries in FIRST session to set game as "tried" if user backs out
-        max_tries: 3, //max # of tries per session
+        max_tries: 6, //max # of tries per session
         max_sessions: 1  // max # of sessions to allow
     },
     coupon: {
@@ -96,9 +96,9 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
-        required_score: 800,
+        required_score: 400,
         min_tries: 1, // min # of tries in FIRST session to set game as "tried" if user backs out
-        max_tries: 3, //max # of tries per session
+        max_tries: 6, //max # of tries per session
         max_sessions: 1  // max # of sessions to allow
     },
     coupon: {
@@ -124,9 +124,9 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
-        required_score: 800,
+        required_score: 400,
         min_tries: 1, // min # of tries in FIRST session to set game as "tried" if user backs out
-        max_tries: 3, //max # of tries per session
+        max_tries: 6, //max # of tries per session
         max_sessions: 1  // max # of sessions to allow
     },
     coupon:{
@@ -154,7 +154,7 @@ const markers = [
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
         required_score: 100,
         min_tries: 1, // min # of tries in FIRST session to set game as "tried" if user backs out
-        max_tries: 3, //max # of tries per session
+        max_tries: 6, //max # of tries per session
         max_sessions: 2  // max # of sessions to allow
     },
     coupon:{
@@ -180,9 +180,9 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
-        required_score: 800,
+        required_score: 400,
         min_tries: 1, // min # of tries in FIRST session to set game as "tried" if user backs out
-        max_tries: 3, //max # of tries per session
+        max_tries: 6, //max # of tries per session
         max_sessions: 1  // max # of sessions to allow
     },
     coupon: {
@@ -208,9 +208,9 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
-        required_score: 800,
+        required_score: 400,
         min_tries: 1, // min # of tries in FIRST session to set game as "tried" if user backs out
-        max_tries: 3, //max # of tries per session
+        max_tries: 6, //max # of tries per session
         max_sessions: 1  // max # of sessions to allow
     },
     coupon: {

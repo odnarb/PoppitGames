@@ -323,9 +323,23 @@ class MapsScreen extends React.Component {
     }
   };
 
-  /* TODO*/
-  _onPressClaim = () => {
-    return;
+  _onPressClaim = (index, toClaimState) => {
+
+    console.log("_onPressClaim() :: set marker QR code:"+index);
+
+    let markersCopy = JSON.parse(JSON.stringify(this.state.markers));
+    let marker = this.state.markers[index];
+
+    marker.activity_state_detail = toClaimState;
+
+    //replace the old item
+    markersCopy[index] = marker;
+
+    this.setState({
+      markers: markersCopy
+    }, () => {
+      console.log("_onPressClaim() :: Done updating state.");
+    });
   };
 
   _handleBackCarousel = () => {
@@ -381,7 +395,45 @@ class MapsScreen extends React.Component {
   _renderCarouselElement = (index) => {
     let thisMarker = this.state.markers[index];
     if(thisMarker.activity_state === MARKER_STATES.completed) {
-        if(thisMarker.activity_state_detail === MARKER_STATE_DETAIL.win) {
+        if(thisMarker.activity_state_detail === MARKER_STATE_DETAIL.scanned){
+          return (
+            <View style={styles.card} key={index}>
+              <View style={styles.textContent}>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{thisMarker.title.toUpperCase()}</Text>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>{thisMarker.coupon.title.toUpperCase()}</Text>
+              </View>
+              <Image
+                source={thisMarker.image}
+                style={styles.cardImage}
+                resizeMode="contain" />
+              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                <Text numberOfLines={1}>{'Prize claimed!'.toUpperCase()}</Text>
+              </View>
+            </View>
+          );
+        } else if(thisMarker.activity_state_detail === MARKER_STATE_DETAIL.claimed){
+          return (
+            <View style={styles.card} key={index}>
+              <View style={styles.textContent}>
+                <Text numberOfLines={1} style={[styles.grey,styles.cardtitle]}>Have an employee scan your QR code to claim!</Text>
+              </View>
+              <Image
+                source={{uri:"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example"}}
+                style={styles.cardImage}
+                resizeMode="contain" />
+              <TouchableOpacity style={styles.buttonBlue} onPress={() => this._onPressClaim(index, MARKER_STATE_DETAIL.scanned)}>
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                  <Text style={styles.btnBlue}>{'Tap to confirm claim!'.toUpperCase()}</Text>
+                  <Icon
+                    name='play'
+                    type='material-community'
+                    size={iconMediumSize}
+                    color="#fff" />
+                </View>
+              </TouchableOpacity>
+            </View>
+          );
+        } else if(thisMarker.activity_state_detail === MARKER_STATE_DETAIL.win) {
           return (
             <View style={styles.card} key={index}>
               <View style={styles.textContent}>
@@ -392,7 +444,7 @@ class MapsScreen extends React.Component {
                   source={thisMarker.image}
                   style={styles.cardImage}
                   resizeMode="contain" />
-              <TouchableOpacity style={styles.buttonBlue} onPress={() => this._onPressClaim(index) }>
+              <TouchableOpacity style={styles.buttonBlue} onPress={() => this._onPressClaim(index, MARKER_STATE_DETAIL.claimed)}>
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                   <Text style={styles.btnBlue}>{'Winner: Tap to claim!'.toUpperCase()}</Text>
                 </View>
@@ -618,11 +670,11 @@ class MapsScreen extends React.Component {
     this.state.markers.map((marker, index) => {
       if( marker.campaign_id == activity_data.campaign_id ){
 
-        //replace the old item
-        markersCopy[index] = marker;
-
         marker.activity_state = activity_data.activity_state;
         marker.activity_state_detail = activity_data.activity_state_detail;
+
+        //replace the old item
+        markersCopy[index] = marker;
 
         if(index == numMarkers-1){
           console.log("_completeCampaign() :: CAMPAIGN ACTIVITY COMPLETE, updating state ");

@@ -17,7 +17,9 @@ const MARKER_STATES = {
 const MARKER_STATE_DETAIL = {
     none: 0,
     lose: 1,
-    win: 2
+    win: 2,
+    claimed: 3,
+    scanned: 4,
 };
 
 export {

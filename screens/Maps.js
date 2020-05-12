@@ -471,14 +471,13 @@ class MapsScreen extends React.Component {
   };
 
   _updateSearch = (search) => {
+    console.log("_updateSearch() FIRED");
 
     this.setState({
       search: search
     });
 
     if(this.state.mapReady){
-      // console.log("_updateSearch() FIRED");
-
       console.log("_updateSearch() :: ALLOWED: " + search);
 
       this._search(search);
@@ -630,6 +629,7 @@ class MapsScreen extends React.Component {
           this.setState({
             markers: markersCopy
           }, () => {
+            console.log("_completeCampaign() :: Done updating state.");
             cb();
           });
         }
@@ -660,15 +660,20 @@ class MapsScreen extends React.Component {
           this.props.navigation.setParams({ activity_data: {}});
         });
       } else {
-        console.log("MAPS :: componentDidMount() :: SKIPPING MARKER UPDATE");
+        console.log("componentDidMount() :: SKIPPING MARKER UPDATE");
       }
     });
 
     //restore the last region, if one..
     //what if the region was null, default region to user's location
+    console.log("componentDidMount() :: ");
+
     this._getCachedItem('lastRegion').then(data => {
+      console.log("componentDidMount() :: Restoring last region");
+
       this._clearSearch();
       this._updateSearch("");
+
       if(data !== null){
         let region = JSON.parse(data);
         this.setState({
@@ -676,10 +681,14 @@ class MapsScreen extends React.Component {
           boundingBox: this._getBoundingBox(region),
           region: region
         }, () => {
+          console.log("componentDidMount() :: Animating to region 1");
+
           //goto the location
           this.map.animateToRegion( region , 350);
         });
       } else {
+        console.log("componentDidMount() :: Getting current location");
+
         Geolocation.getCurrentPosition(
           position => {
 
@@ -695,6 +704,8 @@ class MapsScreen extends React.Component {
               boundingBox: this._getBoundingBox(region),
               region: region
             }, () => {
+              console.log("componentDidMount() :: Animating to region 2");
+
               //goto the location
               this.map.animateToRegion( region , 350);
             });

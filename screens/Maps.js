@@ -34,7 +34,7 @@ import {
   carouselShownPosition
 } from '../components/globalstyles';
 
-import { marker_states, marker_state_detail } from '../components/globalconstants';
+import { MARKER_STATES, MARKER_STATE_DETAIL } from '../components/globalconstants';
 
 const MARKER_SEEN = "seen";
 const MARKER_SEEN_PREPEND = "marker@";
@@ -266,10 +266,13 @@ class MapsScreen extends React.Component {
 
     return ( this.state.markers.map( (marker, index) => {
       let markerStylesArr = [styles.marker];
-      if(marker.activity_state === marker_states.completed) {
-          if(marker.activity_state_detail === marker_state_detail.win) {
+
+      console.log("_renderMarkers() :: marker[" + index + "]: " + marker.activity_state_detail);
+
+      if(marker.activity_state === MARKER_STATES.completed) {
+          if(marker.activity_state_detail === MARKER_STATE_DETAIL.win) {
               markerStylesArr.push(styles.winMarker);
-          } else if(marker.activity_state_detail === marker_state_detail.lose) {
+          } else if(marker.activity_state_detail === MARKER_STATE_DETAIL.lose) {
               markerStylesArr.push(styles.loseMarker);
           } else {
               markerStylesArr.push(styles.visitedMarker);
@@ -312,7 +315,7 @@ class MapsScreen extends React.Component {
     //could be a game, raffle or some other website
 
     //this will need to change to someting more generic wording..
-    if( this.state.markers[index].activity_state != marker_states.completed ){
+    if( this.state.markers[index].activity_state != MARKER_STATES.completed ){
       this.props.navigation.navigate('Game', {
         user_id: this.user_id,
         current_marker: this.state.markers[index]
@@ -377,8 +380,8 @@ class MapsScreen extends React.Component {
 
   _renderCarouselElement = (index) => {
     let thisMarker = this.state.markers[index];
-    if(thisMarker.activity_state === marker_states.completed) {
-        if(thisMarker.activity_state_detail === marker_state_detail.win) {
+    if(thisMarker.activity_state === MARKER_STATES.completed) {
+        if(thisMarker.activity_state_detail === MARKER_STATE_DETAIL.win) {
           return (
             <View style={styles.card} key={index}>
               <View style={styles.textContent}>
@@ -396,7 +399,7 @@ class MapsScreen extends React.Component {
               </TouchableOpacity>
             </View>
           );
-        } else if(thisMarker.activity_state_detail === marker_state_detail.lose) {
+        } else if(thisMarker.activity_state_detail === MARKER_STATE_DETAIL.lose) {
           return (
             <View style={styles.card} key={index}>
               <View style={styles.textContent}>
@@ -647,7 +650,7 @@ class MapsScreen extends React.Component {
   componentDidMount() {
     this.focusSubscription = this.props.navigation.addListener('willFocus', () => {
       let activity_data = this.props.navigation.getParam("activity_data");
-      let updateMarker = (activity_data && activity_data.campaign_id && activity_data.campaign_id > 0 && activity_data.activity_state != marker_states.none );
+      let updateMarker = (activity_data && activity_data.campaign_id && activity_data.campaign_id > 0 && activity_data.activity_state != MARKER_STATES.none );
       if( updateMarker ){
         console.log("MAPS :: componentDidMount() :: willFocus :: update marker : ", activity_data);
 

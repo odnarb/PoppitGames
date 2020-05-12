@@ -6,7 +6,7 @@ const app = {
     version_hash: "0bdd85b1"
 }
 
-const marker_states = {
+const MARKER_STATES = {
     //none / not attempted
     none: 0,
 
@@ -14,7 +14,7 @@ const marker_states = {
     completed: 1
 };
 
-const marker_state_detail = {
+const MARKER_STATE_DETAIL = {
     none: 0,
     lose: 1,
     win: 2
@@ -22,6 +22,6 @@ const marker_state_detail = {
 
 export {
     app,
-    marker_states,
-    marker_state_detail
+    MARKER_STATES,
+    MARKER_STATE_DETAIL
 }

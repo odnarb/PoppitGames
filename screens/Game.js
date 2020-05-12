@@ -4,7 +4,7 @@ import { BackHandler } from 'react-native';
 
 import { WebView } from 'react-native-webview';
 
-import { marker_states, marker_state_detail } from '../components/globalconstants';
+import { MARKER_STATES, MARKER_STATE_DETAIL } from '../components/globalconstants';
 
 class GameScreen extends React.Component {
   constructor(props) {
@@ -14,8 +14,8 @@ class GameScreen extends React.Component {
 
     this.state = {
       campaign_id: this.marker.campaign_id,
-      activity_state: marker_states.none,
-      activity_state_detail: marker_state_detail.none,
+      activity_state: MARKER_STATES.none,
+      activity_state_detail: MARKER_STATE_DETAIL.none,
       score: 0,
       sessions: 1
     };
@@ -33,38 +33,38 @@ class GameScreen extends React.Component {
   //get Coca-Cola brand
   _updateFate(cb){
 
-    let thisState = marker_states.none;
-    let thisStateDetail = marker_state_detail.none;
+    let thisState = MARKER_STATES.none;
+    let thisStateDetail = MARKER_STATE_DETAIL.none;
 
     switch(this.marker.type){
       case "game":
         if( this.state.score >= this.marker.options.required_score ){
-          thisState = marker_states.completed;
-          thisStateDetail = marker_state_detail.win;
+          thisState = MARKER_STATES.completed;
+          thisStateDetail = MARKER_STATE_DETAIL.win;
         } else if ( this.state.tries < this.marker.options.min_tries && this.state.sessions == 1 ){
           //no change to state
         } else if ( this.state.quit && this.state.tries >= this.marker.options.min_tries ){
-          thisState = marker_states.completed;
-          thisStateDetail = marker_state_detail.lose;
+          thisState = MARKER_STATES.completed;
+          thisStateDetail = MARKER_STATE_DETAIL.lose;
         } else if ( this.state.quit && this.state.sessions > 1 ){
-          thisState = marker_states.completed;
-          thisStateDetail = marker_state_detail.lose;
+          thisState = MARKER_STATES.completed;
+          thisStateDetail = MARKER_STATE_DETAIL.lose;
         } else if ( this.state.tries && this.state.sessions > 1 ){
-          thisState = marker_states.completed;
-          thisStateDetail = marker_state_detail.lose;
+          thisState = MARKER_STATES.completed;
+          thisStateDetail = MARKER_STATE_DETAIL.lose;
         } else if ( this.state.score < this.marker.options.required_score ){
-          thisState = marker_states.completed;
-          thisStateDetail = marker_state_detail.lose;
+          thisState = MARKER_STATES.completed;
+          thisStateDetail = MARKER_STATE_DETAIL.lose;
         }
         break;
       case "raffle":
         if( this.state.completed == true ){
-          thisState = marker_states.completed;
+          thisState = MARKER_STATES.completed;
         }
         break;
       case "survey":
         if(  this.state.completed == true ){
-          thisState = marker_states.completed;
+          thisState = MARKER_STATES.completed;
         }
         break;
       default:

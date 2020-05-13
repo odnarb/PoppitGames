@@ -690,9 +690,11 @@ class MapsScreen extends React.Component {
         cb();
       } //end if campaign activity found
     });
-  }
+  };
 
   componentWillUnmount() {
+    console.log("componentWillUnmount() :: FIRED");
+
     this.focusSubscription.remove();
 
     this.watchID != null && Geolocation.clearWatch(this.watchID);
@@ -704,7 +706,7 @@ class MapsScreen extends React.Component {
       let activity_data = this.props.navigation.getParam("activity_data");
       let updateMarker = (activity_data && activity_data.campaign_id && activity_data.campaign_id > 0 && activity_data.activity_state != MARKER_STATES.none );
       if( updateMarker ){
-        console.log("MAPS :: componentDidMount() :: willFocus :: update marker : ", activity_data);
+        console.log("componentDidMount() :: willFocus :: update marker : ", activity_data);
 
         //mark campaign as complete
         this._completeCampaign(activity_data, () => {
@@ -714,7 +716,6 @@ class MapsScreen extends React.Component {
       } else {
         console.log("componentDidMount() :: SKIPPING MARKER UPDATE");
       }
-    });
 
     //restore the last region, if one..
     //what if the region was null, default region to user's location
@@ -722,25 +723,28 @@ class MapsScreen extends React.Component {
 
     this._getCachedItem('lastRegion').then(data => {
       console.log("componentDidMount() :: Restoring last region");
+        if(data !== null){
 
-      this._clearSearch();
-      this._updateSearch("");
+        let lastRegionObj = {};
+        try {
+          lastRegionObj = JSON.parse( data );
+        } catch (err){
+          return;
+        }
 
-      if(data !== null){
-        let region = JSON.parse(data);
-        this.setState({
-          restoringState: true,
-          boundingBox: this._getBoundingBox(region),
-          region: region
-        }, () => {
-          console.log("componentDidMount() :: Animating to region 1");
+        if( lastRegionObj.latitude == this.state.region.latitude &&
+          lastRegionObj.longitude == this.state.region.longitude &&
+          lastRegionObj.latitudeDelta == this.state.region.latitudeDelta &&
+          lastRegionObj.longitudeDelta == this.state.region.longitudeDelta
+        )
+        {
+            return;
+        }
 
-          //goto the location
-          this.map.animateToRegion( region , 350);
-        });
+        //goto the location
+        //onRegionChangeComplete updates the region, boundary and search for us
+        this.map.animateToRegion( lastRegionObj , 350);
       } else {
-        console.log("componentDidMount() :: Getting current location");
-
         Geolocation.getCurrentPosition(
           position => {
 
@@ -751,31 +755,27 @@ class MapsScreen extends React.Component {
               longitudeDelta: 0.05
             };
 
-            //update state
-            this.setState({
-              boundingBox: this._getBoundingBox(region),
-              region: region
-            }, () => {
-              console.log("componentDidMount() :: Animating to region 2");
-
-              //goto the location
-              this.map.animateToRegion( region , 350);
-            });
+            //goto the location
+            //onRegionChangeComplete updates the region, boundary and search for us
+            this.map.animateToRegion( region , 350);
           },
           error => Alert.alert('Error', JSON.stringify(error)),
           {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
         );
       }
+      });
     });
+
+    //restore the last region, if one..
+    //what if the region was null, default region to user's location
+    // this._getCachedItem('lastRegion').then(data => this._restoreLocation(data));
 
     this.watchID = Geolocation.watchPosition(position => {
       // const lastPosition = JSON.stringify(position);
       // this.setState({lastPosition});
     });
 
-    // We should detect when scrolling has stopped then animate
-    // We should just debounce the event listener here
-    // this.animation.addListener(this._animateCarouselToMarker);
+    //this is the carousel slider handler, doesn't need to be called when coming back from a screen
     this.animation.addListener(({ value }) => {
       let index = Math.floor(value / CARD_WIDTH + 0.55); // animate 55% away from landing on the next item
       if (index >= this.state.markers.length) {

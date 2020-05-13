@@ -692,6 +692,18 @@ class MapsScreen extends React.Component {
     });
   };
 
+  shouldComponentUpdate(nextProps, nextState){
+      //only render when state differs
+      let oldState = JSON.stringify(this.state.markers);
+      let newState = JSON.stringify(nextState.markers);
+      if ( oldState === newState ){
+          console.log("shouldComponentUpdate() :: SKIPPING RENDER");
+          return false
+      }
+      console.log("shouldComponentUpdate() :: ALLOW RENDER");
+      return true;
+  }
+
   componentWillUnmount() {
     console.log("componentWillUnmount() :: FIRED");
 

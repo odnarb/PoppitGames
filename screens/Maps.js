@@ -194,7 +194,7 @@ class MapsScreen extends React.Component {
       region: newRegion
     }, () => {
       //set the current marker selected
-      this.map.animateToRegion(newRegion,500);
+      this.map.animateToRegion(newRegion,350);
 
       // console.log("_onPressMarker() :: marker pressed: ", this.state.markers[index].hash);
 
@@ -236,7 +236,7 @@ class MapsScreen extends React.Component {
           region: this.state.previousRegion
         }, () =>{
           this._hideCarousel();
-          this.map.animateToRegion(this.state.region,500);
+          this.map.animateToRegion(this.state.region,350);
         });
       } else {
         this.setState({

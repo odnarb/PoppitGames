@@ -56,8 +56,6 @@ class MapsScreen extends React.Component {
       mapReady: true,
       showCarousel: false,
       selectedMarkerIndex: -1,
-      // initialPosition: 'unknown',
-      // lastPosition: 'unknown',
       searchInProgress: false,
       search: '',
       markers: [],
@@ -692,6 +690,18 @@ class MapsScreen extends React.Component {
     });
   };
 
+  // shouldComponentUpdate(nextProps, nextState){
+  //     //only render when state differs
+  //     let oldState = JSON.stringify(this.state.markers) + this.state.search + this.state.searchInProgress;
+  //     let newState = JSON.stringify(nextState.markers) + nextState.search + nextState.searchInProgress;
+  //     if ( oldState === newState ){
+  //         console.log("shouldComponentUpdate() :: SKIPPING RENDER");
+  //         return false;
+  //     }
+  //     console.log("shouldComponentUpdate() :: ALLOW RENDER");
+  //     return true;
+  // }
+
   componentWillUnmount() {
     console.log("componentWillUnmount() :: FIRED");
 
@@ -699,6 +709,7 @@ class MapsScreen extends React.Component {
 
     this.watchID != null && Geolocation.clearWatch(this.watchID);
     this._setCachedItem('lastRegion', JSON.stringify(this.state.region));
+    this._setCachedItem('mapState', JSON.stringify(this.state));
   }
 
   componentDidMount() {
@@ -777,7 +788,7 @@ class MapsScreen extends React.Component {
 
     //this is the carousel slider handler, doesn't need to be called when coming back from a screen
     this.animation.addListener(({ value }) => {
-      let index = Math.floor(value / CARD_WIDTH + 0.55); // animate 55% away from landing on the next item
+      let index = Math.floor(value / CARD_WIDTH + 0.45); // animate 45% away from landing on the next item
       if (index >= this.state.markers.length) {
         index = this.state.markers.length - 1;
       }

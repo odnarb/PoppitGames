@@ -112,7 +112,6 @@ class MapsScreen extends React.Component {
     //hide the carousel and deselect any markers if the user drags the map
     if(!this.state.restoringState && !this.state.selectingMarker) {
       this._deselectMarker();
-      this._hideCarousel();
     }
   }
 
@@ -147,7 +146,6 @@ class MapsScreen extends React.Component {
     Keyboard.dismiss();
     //deselect and restore region (if needed)
     this._deselectMarker(true);
-    this._hideCarousel();
   };
 
   //if we haven't seen this marker, save it
@@ -225,24 +223,29 @@ class MapsScreen extends React.Component {
   };
 
   _deselectMarker = (restoreRegion) => {
+    //if something is selected
     if (this.state.selectedMarkerIndex > -1){
+      //restore the previous state if need be...
       if (restoreRegion) {
-        //restore the previous state...
         this.setState({
           restoringState: true,
+          showCarousel: false,
           boundingBox: this._getBoundingBox(this.state.previousRegion),
           selectedMarkerIndex: -1,
           previousRegion: {},
           region: this.state.previousRegion
         }, () =>{
+          this._hideCarousel();
           this.map.animateToRegion(this.state.region,500);
         });
       } else {
-        //restore the previous state...
         this.setState({
           restoringState: false,
+          showCarousel: false,
           selectedMarkerIndex: -1,
           previousRegion: {}
+        }, () =>{
+          this._hideCarousel();
         });
       }
     }
@@ -343,21 +346,14 @@ class MapsScreen extends React.Component {
   _handleBackCarousel = () => {
     //deselect and restore region
     this._deselectMarker(true);
-    this._hideCarousel();
     return true;
   };
 
   _hideCarousel = () => {
-    if(this.state.showCarousel === true){
-      //unbind the hardware event listener since the carousel is not shown anymore
-      BackHandler.removeEventListener("hardwareBackPress", this._handleBackCarousel),
+    //unbind the hardware event listener since the carousel is not shown anymore
+    BackHandler.removeEventListener("hardwareBackPress", this._handleBackCarousel),
 
-      this.setState({
-        showCarousel: false
-      }, () => {
-        this._moveCarousel();
-      });
-    }
+    this._moveCarousel();
   };
 
   _showCarousel = () => {
@@ -538,7 +534,6 @@ class MapsScreen extends React.Component {
 
   _clearSearch = () => {
     Keyboard.dismiss();
-    this._hideCarousel();
 
     console.log("_clearSearch() :: search cleared, updating state ");
 

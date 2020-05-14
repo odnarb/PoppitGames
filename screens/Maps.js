@@ -543,7 +543,7 @@ class MapsScreen extends React.Component {
     this.setState({
         markers: [],
         selectedMarkerIndex: -1,
-        searchInProgress: false
+        searchInProgress: true
     });
   };
 

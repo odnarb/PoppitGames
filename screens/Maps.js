@@ -178,8 +178,7 @@ class MapsScreen extends React.Component {
       this.scrollView.getNode().scrollTo({x: xValue, y: 0, animated: false});
     }
 
-    this._moveCarousel();
-
+    //create a new region based on the marker's coords
     let newRegion = {
       latitude: this.state.markers[index].coordinate.latitude,
       longitude: this.state.markers[index].coordinate.longitude,
@@ -210,14 +209,19 @@ class MapsScreen extends React.Component {
 
           clonedMarkers[index].seen = true;
 
-          this.setState({ markers: clonedMarkers }, () => {
+          this.setState({
+            markers: clonedMarkers,
+            showCarousel: true
+          }, () => {
             this._showCarousel();
-            // console.log("_onPressMarker() :: Marker set as seen: ", thisMarker.hash);
           });
         });
       } else {
-        // console.log("_onPressMarker() :: Marker already seen: ", thisMarker.hash);
-        this._showCarousel();
+        this.setState({
+          showCarousel: true
+        }, () => {
+          this._showCarousel();
+        });
       }
     });
   };
@@ -350,8 +354,7 @@ class MapsScreen extends React.Component {
   };
 
   _hideCarousel = () => {
-    //unbind the hardware event listener since the carousel is not shown anymore
-    BackHandler.removeEventListener("hardwareBackPress", this._handleBackCarousel),
+    Keyboard.dismiss();
 
     this._moveCarousel();
   };
@@ -359,13 +362,7 @@ class MapsScreen extends React.Component {
   _showCarousel = () => {
     Keyboard.dismiss();
 
-    if(this.state.showCarousel === false){
-      this.setState({
-        showCarousel: true
-      }, () => {
-        this._moveCarousel();
-      });
-    }
+    this._moveCarousel();
   };
 
   _moveCarousel = () => {
@@ -379,9 +376,15 @@ class MapsScreen extends React.Component {
       bounciness: 0,
       toValue: {x: 0, y: yValue },
     }).start((e) => {
-      if(e.finished === true && this.state.showCarousel == true) {
-        //if we completed showing the carousel, register the backbutton
-        BackHandler.addEventListener("hardwareBackPress", this._handleBackCarousel);
+      // add/remove the back button handler as needed
+      if (e.finished === true ) {
+        if (this.state.showCarousel == true) {
+          //if we completed showing the carousel, register the backbutton
+          BackHandler.addEventListener("hardwareBackPress", this._handleBackCarousel);
+        } else {
+          //unbind the hardware event listener since the carousel is not shown anymore
+          BackHandler.removeEventListener("hardwareBackPress", this._handleBackCarousel);
+        }
       }
     });
   }

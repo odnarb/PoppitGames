@@ -9,6 +9,8 @@ import {
 
 import { notificationsStyleSheet as styles } from '../components/globalstyles';
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 import PushNotification from 'react-native-push-notification'
 
 import { app } from '../components/globalconstants';
@@ -59,18 +61,58 @@ class NotificationsScreen extends React.Component {
           * - Specified if permissions (ios) and token (android and ios) will requested or not,
           * - if not, you must call PushNotificationsHandler.requestPermissions() later
           */
-        requestPermissions: Platform.OS === 'ios'
+        // requestPermissions: Platform.OS === 'ios'
+        requestPermissions: true
+    });
+
+    this.state = {
+      notify_app_feature_update:false,
+      notify_nearby:false,
+      notify_deals:false
+    };
+
+    let keys = ["notify_app_feature_update", "notify_nearby", "notify_deals"];
+    this._getNotification(keys, (stateObj) => {
+      this.setState(stateObj);
     });
   }
 
   static navigationOptions = {
-    title: 'Notifications',
+    title: 'Notifications'
   };
 
-  state = {
-    switchValue1:false,
-    switchValue2:false,
-    switchValue3:false
+  _setNotification = (notification, cb) => {
+    let stateObj = {};
+
+    stateObj[ Object.keys(notification)[0] ] = Object.values(notification)[0];
+
+    this.setState(stateObj);
+
+    let stateBool = Object.values(notification)[0];
+    let stateStr = "false";
+    if( stateBool === true ){
+      stateStr = "true";
+    }
+
+    AsyncStorage.setItem(Object.keys(notification)[0], stateStr);
+  };
+
+  _getNotification = (keys,cb) => {
+    AsyncStorage.multiGet(keys).then(res => {
+      let stateObj = {};
+      //loop through what we have on this page, and get their values
+      for(let i=0; i < keys.length;i++){
+        if( res[i][0] !== undefined ){
+          let stateStr = res[i][1];
+          let stateBool = false;
+          if( stateStr === "true" ){
+            stateBool = true;
+          }
+          stateObj[ res[i][0] ] = stateBool;
+        }
+      }
+      cb(stateObj);
+    });
   };
 
   LocalNotification = () => {
@@ -122,8 +164,8 @@ class NotificationsScreen extends React.Component {
           <View style={styles.optionSwitchContainer}>
             <Text style={[styles.grey,styles.optionHeader]}>App Features & Updates</Text>
             <Switch style={styles.switchWithMargin}
-              onValueChange = {(value) => this.setState({switchValue1: value})}
-              value = {this.state.switchValue1} />
+              onValueChange = {(value) => this._setNotification({notify_app_feature_update: value})}
+              value = {this.state.notify_app_feature_update} />
           </View>
           <Text style={[styles.grey,styles.optionDescription]}>Get notified whenever new features are available.</Text>
         </View>
@@ -132,8 +174,8 @@ class NotificationsScreen extends React.Component {
           <View style={styles.optionSwitchContainer}>
             <Text style={[styles.grey,styles.optionHeader]}>Nearby Deals</Text>
             <Switch style={styles.switchWithMargin}
-              onValueChange = {(value) => this.setState({switchValue2: value})}
-              value = {this.state.switchValue2} />
+              onValueChange = {(value) => this._setNotification({notify_nearby: value})}
+              value = {this.state.notify_nearby} />
           </View>
           <Text style={[styles.grey,styles.optionDescription]}>Get notified whenever you are near participating locations.</Text>
         </View>
@@ -142,8 +184,8 @@ class NotificationsScreen extends React.Component {
           <View style={styles.optionSwitchContainer}>
             <Text style={[styles.grey,styles.optionHeader]}>Recommended Deals</Text>
             <Switch style={styles.switchWithMargin}
-              onValueChange = {(value) => this.setState({switchValue3: value})}
-              value = {this.state.switchValue3} />
+              onValueChange = {(value) => this._setNotification({notify_deals: value})}
+              value = {this.state.notify_deals} />
           </View>
           <Text style={[styles.grey,styles.optionDescription]}>Get notified whenever we have a new recommended deal for you.</Text>
         </View>

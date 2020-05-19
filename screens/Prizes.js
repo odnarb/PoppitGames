@@ -53,17 +53,17 @@ class PrizesScreen extends React.Component {
     }
     return ( this.state.prizes.map( (prize, index) => {
       return (
-        <View style={[styles.greenBG,styles.prizeContainer]} key={index}>
+        <View style={[styles.lightGreyBG,styles.prizeContainer]} key={index}>
           <View style={styles.prizeCell}>
-            <Text style={[styles.grey,styles.prizeText]}>-25% OFF{'\n'}2 Liter Pepsi</Text>
+            <Text style={[styles.grey,styles.prizeText]}>{prize.coupon.line_1}{'\n'}{prize.coupon.line_2}</Text>
           </View>
 
           <View style={styles.prizeCell}>
-            <Text style={[styles.grey,styles.prizeText]}>Hooters{'\n'}Scottsdale</Text>
+            <Text style={[styles.grey,styles.prizeText]}>{prize.location.name}{'\n'}{prize.location.city}</Text>
           </View>
 
           <View style={styles.prizeCell}>
-            <Text style={[styles.grey,styles.prizeText]}>CLAIM</Text>
+            <Text style={[styles.grey,styles.prizeText]}>Claimed {prize.date_claimed}</Text>
           </View>
         </View>
       )
@@ -76,7 +76,7 @@ class PrizesScreen extends React.Component {
       this.setState({
         prizes: FAKE_PRIZES
       });
-    }, 1500 );
+    }, 1000 );
   }
 
   render() {

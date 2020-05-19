@@ -25,9 +25,9 @@ import {
 class SettingsScreen extends React.Component {
     constructor(props) {
     super(props);
-    this.state = {
-      language: 'english'
-    };
+    // this.state = {
+    //   language: 'english'
+    // };
   }
 
   static navigationOptions = {
@@ -37,6 +37,29 @@ class SettingsScreen extends React.Component {
   };
 
   render() {
+/* This used to be placed right above the "About" section
+              <View style={styles.settingsRow}>
+                  <View style={styles.optionView}>
+                    <Icon
+                      name='earth'
+                      type='material-community'
+                      size={settingsIconSize}
+                      color={greyColor} />
+                    <Text style={[styles.grey,styles.settingsText]}>Language:</Text>
+
+                    <Picker
+                      selectedValue={this.state.language}
+                      style={[styles.grey,styles.picker]}
+                      onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})
+                      }>
+                      <Picker.Item label="English" value="english" />
+                      <Picker.Item label="Spanish" value="spanish" />
+                      <Picker.Item label="French" value="french" />
+                      <Picker.Item label="Dutch" value="dutch" />
+                    </Picker>
+                  </View>
+              </View>
+*/
     return (
       <View style={styles.baseContainer}>
           <LogoBanner container="flex1" size="small" />
@@ -70,28 +93,6 @@ class SettingsScreen extends React.Component {
                     <Text style={[styles.grey,styles.settingsText]}>Notifications</Text>
                   </View>
                 </TouchableOpacity>
-              </View>
-
-              <View style={styles.settingsRow}>
-                  <View style={styles.optionView}>
-                    <Icon
-                      name='earth'
-                      type='material-community'
-                      size={settingsIconSize}
-                      color={greyColor} />
-                    <Text style={[styles.grey,styles.settingsText]}>Language:</Text>
-
-                    <Picker
-                      selectedValue={this.state.language}
-                      style={[styles.grey,styles.picker]}
-                      onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})
-                      }>
-                      <Picker.Item label="English" value="english" />
-                      <Picker.Item label="Spanish" value="spanish" />
-                      <Picker.Item label="French" value="french" />
-                      <Picker.Item label="Dutch" value="dutch" />
-                    </Picker>
-                  </View>
               </View>
 
               <View style={styles.settingsRow}>

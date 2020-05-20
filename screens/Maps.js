@@ -22,6 +22,9 @@ import Geolocation from '@react-native-community/geolocation';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
+import PushNotification from 'react-native-push-notification'
+import PushNotificationIOS from "@react-native-community/push-notification-ios";
+
 import MarkerWithView from '../components/MarkerWithView';
 import LogoBanner from '../components/LogoBanner';
 import BottomNavigation from '../components/BottomNavigation';
@@ -48,6 +51,69 @@ const SNAP_TO_CARD = CARD_WIDTH+20;
 class MapsScreen extends React.Component {
   constructor(props) {
     super(props);
+
+    PushNotification.configure({
+
+        // (optional) Called when Token is generated (iOS and Android)
+        onRegister: function(token) {
+            console.log( 'com.poppitGames::App.js::onRegister():: FB Notifications TOKEN:', token );
+        },
+
+        // (required) Called when a remote or local notification is opened or received
+        onNotification: function(notification) {
+            console.log( 'com.poppitGames::App.js::onNotification():: FB Notification received:', notification );
+
+          // (required) Called when a remote is received or opened, or local notification is opened
+          notification.finish(PushNotificationIOS.FetchResult.NoData);
+
+          //need to update to react navigation 5.x
+          if (notification.action == 'View Updates') {
+            props.navigation.navigate('Updates');
+          }
+
+        },
+
+        // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
+        senderID: "455311600291",
+
+        // IOS ONLY (optional): default: all - Permissions to register.
+        permissions: {
+            alert: true,
+            badge: true,
+            sound: true
+        },
+
+        // Should the initial notification be popped automatically
+        // default: true
+        popInitialNotification: true,
+
+        /**
+          * (optional) default: true
+          * - Specified if permissions (ios) and token (android and ios) will requested or not,
+          * - if not, you must call PushNotificationsHandler.requestPermissions() later
+          */
+        // requestPermissions: Platform.OS === 'ios'
+        requestPermissions: true
+    });
+
+    //get current settings, if any
+    AsyncStorage.getItem('notify_app_feature_update').then(res => {
+      if(res == undefined) return;
+
+      //schedule if we have app updates ON.. this will later be a remote notification
+      PushNotification.localNotificationSchedule({
+        //... You can use all the options from localNotifications
+        message: "Tap to see the latest features & updates for the app.", // (required)
+        date: new Date(Date.now() + 10 * 1000), // in 60 secs
+
+        /* iOS and Android properties */
+        title: "App Features & Updates", // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
+        playSound: true, // (optional) default: true
+        soundName: 'poppit_sound',
+        number: '10', // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
+        actions: '["View Updates", "Cancel"]' // (Android only) See the doc for notification actions to know more
+      });
+    });
 
     this.state = {
       restoringState: false,

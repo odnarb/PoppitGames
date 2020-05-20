@@ -28,25 +28,9 @@ import ProfileEditScreen from './screens/ProfileEdit';
 import SettingsScreen from './screens/Settings';
 import NotificationsScreen from './screens/Notifications';
 import AboutScreen from './screens/About';
+import UpdatesScreen from './screens/Updates';
 import TermsScreen from './screens/Terms';
 import PrivacyPolicyScreen from './screens/PrivacyPolicy';
-
-const handleCustomTransition = ({ scenes }) => {
-  // const prevScene = scenes[scenes.length - 2];
-  // const nextScene = scenes[scenes.length - 1];
-
-  // Custom transitions go there
-  // if (prevScene
-  //   && prevScene.route.routeName === 'SignIn'
-  //   && nextScene.route.routeName === 'EmailSignUp') {
-  //   return fromRight();
-  // } else if (prevScene
-  //   && prevScene.route.routeName === 'EmailSignUp'
-  //   && nextScene.route.routeName === 'SignIn') {
-  //   return fromLeft();
-  // }
-  return fromRight();
-}
 
 const AppStack = createStackNavigator({
     Maps: MapsScreen,
@@ -56,12 +40,10 @@ const AppStack = createStackNavigator({
     ProfileEdit: ProfileEditScreen,
     Settings: SettingsScreen,
     Notifications: NotificationsScreen,
+    Updates: UpdatesScreen,
     About: AboutScreen,
     Terms: TermsScreen,
     PrivacyPolicy: PrivacyPolicyScreen
-},
-{
-  transitionConfig: (nav) => handleCustomTransition(nav)
 });
 
 const AuthStack = createStackNavigator({
@@ -76,9 +58,6 @@ const AuthStack = createStackNavigator({
     RecoverPassword: RecoverPasswordScreen,
     RecoverPasswordConfirm: RecoverPasswordConfirmScreen,
     TermsPreSignUp: TermsScreen
-},
-{
-  transitionConfig: (nav) => handleCustomTransition(nav)
 });
 
 const MainStack = createSwitchNavigator(

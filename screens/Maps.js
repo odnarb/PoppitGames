@@ -103,6 +103,7 @@ class MapsScreen extends React.Component {
       //schedule if we have app updates ON.. this will later be a remote notification
       PushNotification.localNotificationSchedule({
         //... You can use all the options from localNotifications
+        id: '123',
         message: "Tap to see the latest features & updates for the app.", // (required)
         date: new Date(Date.now() + 10 * 1000), // in 60 secs
 
@@ -147,6 +148,13 @@ class MapsScreen extends React.Component {
 
   watchID: ?number = null;
 
+  _isWin = (win_state) => {
+      return (
+        win_state == MARKER_STATE_DETAIL.win_bonus_score ||
+        win_state == MARKER_STATE_DETAIL.win_perfect_score ||
+        win_state == MARKER_STATE_DETAIL.win_set_score
+      );
+  };
   _getBoundingBox = (region) => {
     // console.log("_getBoundingBox() :: REGION: ", region);
     let boundingBox = {
@@ -341,7 +349,7 @@ class MapsScreen extends React.Component {
       console.log("_renderMarkers() :: marker[" + index + "]: " + marker.activity_state_detail);
 
       if(marker.activity_state === MARKER_STATES.completed) {
-          if(marker.activity_state_detail === MARKER_STATE_DETAIL.win) {
+          if( this._isWin( marker.activity_state_detail) ) {
               markerStylesArr.push(styles.winMarker);
           } else if(marker.activity_state_detail === MARKER_STATE_DETAIL.lose) {
               markerStylesArr.push(styles.loseMarker);
@@ -496,7 +504,7 @@ class MapsScreen extends React.Component {
               </TouchableOpacity>
             </View>
           );
-        } else if(thisMarker.activity_state_detail === MARKER_STATE_DETAIL.win) {
+        } else if( this._isWin( thisMarker.activity_state_detail ) ) {
           return (
             <View style={styles.card} key={index}>
               <View style={styles.textContent}>

@@ -38,9 +38,15 @@ class GameScreen extends React.Component {
 
     switch(this.marker.type){
       case "game":
-        if( this.state.score >= this.marker.options.required_score ){
+        if( this.state.score >= this.marker.options.bonus_score ){
           thisState = MARKER_STATES.completed;
-          thisStateDetail = MARKER_STATE_DETAIL.win;
+          thisStateDetail = MARKER_STATE_DETAIL.win_bonus_score;
+        } else if( this.state.score >= this.marker.options.perfect_score ){
+          thisState = MARKER_STATES.completed;
+          thisStateDetail = MARKER_STATE_DETAIL.win_perfect_score;
+        } else if( this.state.score >= this.marker.options.set_score ){
+          thisState = MARKER_STATES.completed;
+          thisStateDetail = MARKER_STATE_DETAIL.win_set_score;
         } else if ( this.state.tries < this.marker.options.min_tries && this.state.sessions == 1 ){
           //no change to state
         } else if ( this.state.quit && this.state.tries >= this.marker.options.min_tries ){
@@ -141,7 +147,7 @@ class GameScreen extends React.Component {
     if( this.marker.type == "game" ) {
         queryString += '&company_id=' + this.marker.company_id
         + '&campaign_id=' + this.marker.campaign_id
-        + '&required_score=' + this.marker.options.required_score
+        + '&perfect_score=' + this.marker.options.perfect_score
         + '&min_tries=' + this.marker.options.min_tries
         + '&max_tries=' + this.marker.options.max_tries
         + '&max_sessions=' + this.marker.options.max_sessions;

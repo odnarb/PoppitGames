@@ -17,9 +17,11 @@ const MARKER_STATES = {
 const MARKER_STATE_DETAIL = {
     none: 0,
     lose: 1,
-    win: 2,
-    claimed: 3,
-    scanned: 4,
+    win_set_score: 2,
+    win_perfect_score: 3,
+    win_bonus_score: 4,
+    claimed: 5,
+    scanned: 6
 };
 
 export {

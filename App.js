@@ -23,6 +23,7 @@ import LearnMore3Screen from './screens/LearnMore3';
 import MapsScreen from './screens/Maps';
 import GameScreen from './screens/Game';
 import PrizesScreen from './screens/Prizes';
+import SecondChanceScreen from './screens/SecondChance';
 import ProfileScreen from './screens/Profile';
 import ProfileEditScreen from './screens/ProfileEdit';
 import SettingsScreen from './screens/Settings';
@@ -36,6 +37,7 @@ const AppStack = createStackNavigator({
     Maps: MapsScreen,
     Game: GameScreen,
     Prizes: PrizesScreen,
+    SecondChance: SecondChanceScreen,
     Profile: ProfileScreen,
     ProfileEdit: ProfileEditScreen,
     Settings: SettingsScreen,

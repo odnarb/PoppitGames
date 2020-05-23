@@ -70,6 +70,19 @@ class SettingsScreen extends React.Component {
 
             <ScrollView>
               <View style={styles.settingsRow}>
+                <TouchableOpacity onPress={() => this._navTo('SecondChance')} style={styles.optionBtn}>
+                  <View style={styles.optionBtnView}>
+                      <Icon
+                        name='numeric-2-circle'
+                        type='material-community'
+                        size={settingsIconSize}
+                        color={greyColor} />
+                      <Text style={[styles.grey,styles.settingsText]}>2nd Chance</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.settingsRow}>
                 <TouchableOpacity onPress={() => this._navTo('Profile')} style={styles.optionBtn}>
                   <View style={styles.optionBtnView}>
                       <Icon

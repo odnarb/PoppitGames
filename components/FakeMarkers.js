@@ -12,6 +12,7 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+        branding: "cocacola",
         perfect_score: 400,
         set_score: 500,
         bonus_score: 600,
@@ -42,6 +43,7 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+        branding: "cocacola",
         perfect_score: 400,
         set_score: 500,
         bonus_score: 600,
@@ -72,6 +74,7 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+        branding: "pepsi",
         perfect_score: 400,
         set_score: 500,
         bonus_score: 600,
@@ -102,6 +105,7 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+        branding: "pepsi",
         perfect_score: 400,
         set_score: 500,
         bonus_score: 600,
@@ -132,6 +136,7 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+        branding: "cheetos",
         perfect_score: 400,
         set_score: 500,
         bonus_score: 600,
@@ -162,6 +167,7 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+        branding: "cheetos",
         perfect_score: 400,
         set_score: 500,
         bonus_score: 600,
@@ -192,6 +198,7 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+        branding: "subway",
         perfect_score: 400,
         set_score: 500,
         bonus_score: 600,
@@ -222,6 +229,7 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
+        branding: "subway",
         perfect_score: 400,
         set_score: 500,
         bonus_score: 600,

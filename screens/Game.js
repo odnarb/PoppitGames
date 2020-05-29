@@ -147,6 +147,7 @@ class GameScreen extends React.Component {
     if( this.marker.type == "game" ) {
         queryString += '&company_id=' + this.marker.company_id
         + '&campaign_id=' + this.marker.campaign_id
+        + '&branding=' + this.marker.options.branding
         + '&perfect_score=' + this.marker.options.perfect_score
         + '&min_tries=' + this.marker.options.min_tries
         + '&max_tries=' + this.marker.options.max_tries

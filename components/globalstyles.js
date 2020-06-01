@@ -56,6 +56,10 @@ const redColor = "#c34231";
 const lightRedColor  = "#ff5e5e";
 const greyColor = "#404e4d";
 const lightGreyColor = "#def0ef";
+const lightGreyColor2 = "#eff1f1";
+
+const mediumGreyColor = "#a4a4a4";
+
 
 const flatLightGreyColor = "#dcdcdc";
 const whiteColor = "#fff";
@@ -1098,10 +1102,76 @@ const passwordStyles = {
   }
 };
 
+const contactStyles = {
+
+  contentContainer: {
+    flex: 6
+  },
+
+  headerTextContainer: {
+    flex: 0.25
+  },
+
+  contactButtonsContainer: {
+    flex: 0.15,
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: "center",
+    borderColor: lightGreyColor2,
+    borderBottomWidth: 3,
+    borderTopWidth: 3
+  },
+
+  contactsContainer: {
+    flex: 5.5
+  },
+
+  contactCell: {
+    flex: 1,
+    backgroundColor: "white"
+  },
+
+  contactCellBorder: {
+    borderColor: lightGreyColor2,
+    borderRightWidth: 3
+  },
+
+  contactBtnWrapper: {
+    flex: 1,
+    alignSelf: 'stretch'
+  },
+
+  contactBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  numberCell: {
+    flex: 0.1,
+    flexDirection: "row",
+    alignItems: "flex-start",
+    backgroundColor: lightGreyColor2,
+    paddingBottom: 4
+  },
+
+  numberText: {
+    fontSize: moderateScale(16),
+    fontWeight: 'bold',
+    color: mediumGreyColor
+  },
+
+  contactTypeSelected: {
+    backgroundColor: greyColor
+  }
+};
+
 const passwordStyleSheet = StyleSheet.create(passwordStyles);
 const learnMoreNavStyleSheet = StyleSheet.create({ ...globalStyles, ...learnMoreNavStyles});
 const bottomNavStyleSheet = StyleSheet.create({ ...globalStyles, ...bottomNavStyles});
 
+const contactStyleSheet = StyleSheet.create({ ...globalStyles, ...contactStyles});
 const aboutStyleSheet = StyleSheet.create({ ...globalStyles, ...aboutStyles });
 const authLoadingStyleSheet = StyleSheet.create({ ...globalStyles, ...authLoadingStyles });
 const emailSignInErrorStyleSheet = StyleSheet.create({ ...globalStyles, ...emailSignInErrorStyles });
@@ -1133,6 +1203,8 @@ export {
 
   // make a global icon size available
   iconMediumSize,
+
+  contactStyleSheet,
 
   passwordStyleSheet,
   passwordInputIconSize,

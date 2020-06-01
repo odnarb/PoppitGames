@@ -18,6 +18,7 @@
     "prop-types": "^15.7.2",
     "react": "16.8.6",
     "react-native": "0.60.5",
+    "react-native-contacts": "^5.2.0",
     "react-native-date-picker": "^2.7.5",
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.6.1",

@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   ActivityIndicator,
+  RefreshControl,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -26,6 +27,7 @@ class SecondChanceScreen extends React.Component {
     super(props);
 
     this.state = {
+      refreshing: false,
       contact_type: 'sms',
       contacts_fetched: false,
       contacts: []
@@ -34,6 +36,60 @@ class SecondChanceScreen extends React.Component {
 
   static navigationOptions = {
     title: '2nd Chance'
+  };
+
+  _fetchData = (contact_type) => {
+    if (contact_type == 'fb') {
+      this.setState({
+        refreshing: false,
+        contacts: [],
+        contacts_fetched: true
+      });
+    } else if (contact_type == 'twitter') {
+      this.setState({
+        refreshing: false,
+        contacts: [],
+        contacts_fetched: true
+      });
+    } else if (contact_type == 'sms') {
+      // if(this.state.contacts_fetched == false){
+        PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+          // {
+          //   'title': 'Second Chance: Address book permissions',
+          //   'message': 'In order to get a second chance for coupons please enable your address book.',
+          //   'buttonPositive': 'OK'
+          // }
+        ).then(() => {
+          Contacts.getAll((err, contacts) => {
+            if (err === 'denied'){
+              // error
+              console.log("---SECONDCHANCE: Contacts list access DENIED");
+            } else {
+              // contacts returned in Array
+              // console.log("---SECONDCHANCE: Contacts list access GRANTED");
+              // console.log("---SECONDCHANCE: Contacts:", contacts);
+              this.setState({
+                refreshing: false,
+                contacts: contacts,
+                contacts_fetched: true
+              });
+            }
+          })
+        });
+      // } //endif
+    } else if (contact_type == 'email') {
+      this.setState({
+        refreshing: false,
+        contacts: [],
+        contacts_fetched: true
+      });
+    }
+  };
+
+  _onRefresh = () => {
+    this.setState({ refreshing: true });
+    this._fetchData(this.state.contact_type);
   };
 
   _renderContacts = () => {
@@ -52,47 +108,30 @@ class SecondChanceScreen extends React.Component {
     }));
   };
 
-  _onPressContactType = (type) => {
+  _onPressContactType = (contact_type) => {
     this.setState({
-      contact_type: type
+      refreshing: true,
+      contact_type: contact_type,
     });
+
+    this._fetchData(contact_type);
   };
 
   componentDidMount() {
     //call to get the prizes from the server
+    this.setState({
+      refreshing: true,
+      contact_type: 'sms',
+    });
 
-    // if(this.state.contacts_fetched == false){
-      PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
-        // {
-        //   'title': 'Second Chance: Address book permissions',
-        //   'message': 'In order to get a second chance for coupons please enable your address book.',
-        //   'buttonPositive': 'OK'
-        // }
-      ).then(() => {
-        Contacts.getAll((err, contacts) => {
-          if (err === 'denied'){
-            // error
-            console.log("---SECONDCHANCE: Contacts list access DENIED");
-          } else {
-            // contacts returned in Array
-            console.log("---SECONDCHANCE: Contacts list access GRANTED");
-            console.log("---SECONDCHANCE: Contacts:", contacts);
-            this.setState({
-              contacts: contacts,
-              contacts_fetched: true
-            });
-          }
-        })
-      });
-    // } //endif
+    this._fetchData('sms');
   }
 
   render() {
 
     let messengerStyles = [styles.contactCell,styles.contactCellBorder];
     let twitterStyles   = [styles.contactCell,styles.contactCellBorder];
-    let smsStyles     = [styles.contactCell,styles.contactCellBorder];
+    let smsStyles       = [styles.contactCell,styles.contactCellBorder];
     let emailStyles     = [styles.contactCell];
 
     let messengerIconColor = greyColor;
@@ -177,7 +216,14 @@ class SecondChanceScreen extends React.Component {
               <Text style={[styles.padLeft20,styles.numberText]}>{this.state.contacts.length} {this.state.contact_type} friends to choose from.</Text>
             </View>
 
-            <ScrollView style={[styles.contactsContainer]}>
+            <ScrollView
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
+              />
+            }
+            style={[styles.contactsContainer]}>
               {this._renderContacts()}
             </ScrollView>
 

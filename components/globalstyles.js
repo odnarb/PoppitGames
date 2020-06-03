@@ -1122,13 +1122,31 @@ const contactStyles = {
     borderTopWidth: 3
   },
 
+  contactBotButtonContainer: {
+    flex: 0.15,
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: "center",
+  },
+
   contactsContainer: {
-    flex: 5.5
+    flex: 5.5,
+    paddingLeft: moderateScale(20),
+    paddingRight: moderateScale(20)
+  },
+
+  contactLine: {
+    backgroundColor: whiteColor,
+  },
+
+  contactText: {
+    fontSize: moderateScale(18),
+    color: greyColor
   },
 
   contactCell: {
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: whiteColor
   },
 
   contactCellBorder: {
@@ -1148,18 +1166,46 @@ const contactStyles = {
     justifyContent: 'center',
   },
 
+  contactLineBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: moderateScale(8)
+  },
+
+  contactLineBtnIcon: {
+    justifyContent: 'flex-end',
+  },
+
+  btnText: {
+    fontSize: moderateScale(18),
+    color: whiteColor
+  },
+
   numberCell: {
     flex: 0.1,
     flexDirection: "row",
-    alignItems: "flex-start",
-    backgroundColor: lightGreyColor2,
-    paddingBottom: 4
+    alignItems: "center",
+    backgroundColor: lightGreyColor2
+  },
+
+  selectLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 
   numberText: {
     fontSize: moderateScale(16),
     fontWeight: 'bold',
     color: mediumGreyColor
+  },
+
+  selectText: {
+    fontSize: moderateScale(16),
+    color: mediumGreyColor,
+    paddingRight: moderateScale(20)
   },
 
   contactTypeSelected: {

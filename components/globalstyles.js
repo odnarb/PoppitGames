@@ -1174,6 +1174,15 @@ const contactStyles = {
     marginTop: moderateScale(8)
   },
 
+  iconButton: {
+    backgroundColor:greyColor,
+    borderRadius:5,
+    borderWidth: 1,
+    borderColor: greyColor,
+    paddingLeft: moderateScale(6),
+    paddingRight: moderateScale(6)
+  },
+
   contactLineBtnIcon: {
     justifyContent: 'flex-end',
   },
@@ -1194,6 +1203,11 @@ const contactStyles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+
+  sendIvite: {
+    color: lightblueColor,
+    padding: moderateScale(6)
   },
 
   numberText: {
@@ -1243,6 +1257,7 @@ export {
 
   greyColor,
   lightGreyColor,
+  lightGreyColor2,
   whiteColor,
   blueColor,
   lightblueColor,

@@ -18,8 +18,10 @@ import { Icon } from 'react-native-elements';
 
 import {
   contactStyleSheet as styles,
-  whiteColor,
-  greyColor
+  greyColor,
+  lightblueColor,
+  lightGreyColor,
+  whiteColor
 } from '../components/globalstyles';
 
 class SecondChanceScreen extends React.Component {
@@ -27,7 +29,7 @@ class SecondChanceScreen extends React.Component {
     super(props);
 
     this.state = {
-      selectAll: false,
+      //selectAll: false,
       checkedNames: {},
       refreshing: false,
       contact_type: 'sms',
@@ -93,7 +95,12 @@ class SecondChanceScreen extends React.Component {
     }
   };
 
-  _onPressContact = (index) => {
+  _onPressSendInvite = (index) => {
+    //now fire off an intent to send an sms with an invite
+  };
+
+/*
+  _onPressSelectContact = (index) => {
     let thisContactName = this.state.contacts[index].displayName;
     let checkedNames = this.state.checkedNames;
     if ( !checkedNames[ thisContactName ]){
@@ -113,11 +120,11 @@ class SecondChanceScreen extends React.Component {
     }
 
     this.setState({
-      selectAll: selectAll,
+      // selectAll: selectAll,
       checkedNames: checkedNames
     });
   };
-
+*/
   _onRefresh = () => {
     this.setState({ refreshing: true });
     this._fetchData(this.state.contact_type);
@@ -129,20 +136,19 @@ class SecondChanceScreen extends React.Component {
       return (<ActivityIndicator size="large" />);
     }
     return (this.state.contacts.map( (contact, index) => {
-      let iconName = 'account-check-outline';
+      let iconName = 'account';
+      let iconColor = whiteColor;
 
-      if( this.state.checkedNames[ contact.displayName ] == 1) {
-        iconName = 'account-check';
-      }
+      // if( this.state.checkedNames[ contact.displayName ] == 1) {
+      //   iconName = 'account-check';
+      //   iconColor = lightblueColor;
+      // }
       return (
-        <TouchableOpacity style={styles.contactLineBtn} key={index} onPress={() => this._onPressContact(index)}>
+        <TouchableOpacity style={styles.contactLineBtn} key={index} onPress={() => this._onPressSendInvite(index)}>
           <Text style={styles.contactText}>{contact.displayName}</Text>
-          <Icon
-            style={styles.icon}
-            name={iconName}
-            type='material-community'
-            color={greyColor}
-            size={40} />
+          <View style={styles.iconButton}>
+            <Text style={styles.sendIvite}>SEND</Text>
+            </View>
         </TouchableOpacity>
     )}));
   };
@@ -156,6 +162,7 @@ class SecondChanceScreen extends React.Component {
     this._fetchData(contact_type);
   };
 
+/*
   _onPressSelectAll = () => {
     let checkedNames = this.state.checkedNames;
 
@@ -173,6 +180,7 @@ class SecondChanceScreen extends React.Component {
       selectAll: !this.state.selectAll
     });
   }
+*/
 
   componentDidMount() {
     //call to get the prizes from the server
@@ -198,22 +206,22 @@ class SecondChanceScreen extends React.Component {
 
     if (this.state.contact_type == 'fb') {
       messengerStyles.push(styles.contactTypeSelected);
-      messengerIconColor = whiteColor;
+      messengerIconColor = lightblueColor;
     } else if (this.state.contact_type == 'twitter') {
       twitterStyles.push(styles.contactTypeSelected);
-      twitterIconColor = whiteColor;
+      twitterIconColor = lightblueColor;
     } else if (this.state.contact_type == 'sms') {
       smsStyles.push(styles.contactTypeSelected);
-      smsIconColor = whiteColor;
+      smsIconColor = lightblueColor;
     } else if (this.state.contact_type == 'email') {
       emailStyles.push(styles.contactTypeSelected);
-      emailIconColor = whiteColor;
+      emailIconColor = lightblueColor;
     }
 
-    let selectAllText = "Select";
-    if( this.state.selectAll == true ){
-      selectAllText = "Deselect";
-    }
+    // let selectAllText = "Select";
+    // if( this.state.selectAll == true ){
+    //   selectAllText = "Deselect";
+    // }
 
     return (
       <View style={styles.baseContainer}>
@@ -276,7 +284,6 @@ class SecondChanceScreen extends React.Component {
 
             <View style={[styles.numberCell, styles.selectLine]}>
               <Text style={[styles.padLeft20,styles.numberText]}>{this.state.contacts.length} friends with {this.state.contact_type}</Text>
-              <Text style={styles.selectText} onPress={() => this._onPressSelectAll()}>{selectAllText} all</Text>
             </View>
 
             <ScrollView
@@ -289,17 +296,24 @@ class SecondChanceScreen extends React.Component {
             style={[styles.contactsContainer]}>
               {this._renderContacts()}
             </ScrollView>
-
-            <View style={styles.contactBotButtonContainer}>
-              <TouchableOpacity style={[styles.contactBtnWrapper, styles.greyBG]}>
-                <View style={styles.contactBtn}>
-                  <Text style={styles.btnText}>{'Send Invites'.toUpperCase()}</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
           </View>
       </View>
     );
+/*
+    //this used to contain the selectall/deselectall component:
+            <View style={[styles.numberCell, styles.selectLine]}>
+              <Text style={[styles.padLeft20,styles.numberText]}>{this.state.contacts.length} friends with {this.state.contact_type}</Text>
+              <Text style={styles.selectText} onPress={() => this._onPressSelectAll()}>{selectAllText} all</Text>
+            </View>
+*/
+
+            //<View style={styles.contactBotButtonContainer}>
+            //  <TouchableOpacity style={[styles.contactBtnWrapper, styles.greyBG]}>
+            //    <View style={styles.contactBtn}>
+            //      <Text style={styles.btnText}>{'Send Invites'.toUpperCase()}</Text>
+            //    </View>
+            //  </TouchableOpacity>
+            //</View>
   }
 }
 

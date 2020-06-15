@@ -6,8 +6,8 @@ const markers = [
     hash: "111111111-12345-11111111111111",
     title: "Quick Trip #1",
     description: "Test description #1",
-    activity_state: "none", // none|completed|win|lose|entered
-    activity_state_detail: "none",
+    activity_state: 1,
+    activity_state_detail: 2,
     type: "game", // game | raffle | survey
     options: {
         activity_type: "game",
@@ -37,8 +37,8 @@ const markers = [
     hash: "222222222-12345-22222222222222",
     title: "Quick Trip #2",
     description: "Test description #2",
-    activity_state: "none", // none|completed|win|lose|entered
-    activity_state_detail: "none",
+    activity_state: 1,
+    activity_state_detail: 1,
     type: "game", // game | raffle | survey
     options: {
         activity_type: "game",
@@ -74,7 +74,7 @@ const markers = [
     options: {
         activity_type: "game",
         content_url: "http://bchambers.io/games/penalty-kicks/index.html",
-        branding: "pepsi",
+        branding: "cocacola",
         perfect_score: 400,
         set_score: 500,
         bonus_score: 600,

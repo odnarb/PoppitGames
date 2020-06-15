@@ -169,8 +169,7 @@ const globalStyles = {
 
   logoContainer: {
     flex: 1,
-    paddingTop: moderateScale(10),
-    alignItems: 'center'
+    paddingTop: moderateScale(10)
   },
 
   logoContainer2: {

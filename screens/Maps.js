@@ -22,8 +22,8 @@ import Geolocation from '@react-native-community/geolocation';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-import PushNotification from 'react-native-push-notification'
-import PushNotificationIOS from "@react-native-community/push-notification-ios";
+// import PushNotification from 'react-native-push-notification'
+// import PushNotificationIOS from "@react-native-community/push-notification-ios";
 
 import MarkerWithView from '../components/MarkerWithView';
 import LogoBanner from '../components/LogoBanner';
@@ -52,49 +52,57 @@ class MapsScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    PushNotification.configure({
+    // PushNotification.configure({
 
-        // (optional) Called when Token is generated (iOS and Android)
-        onRegister: function(token) {
-            console.log( 'com.poppitGames::App.js::onRegister():: FB Notifications TOKEN:', token );
-        },
+    //     // (optional) Called when Token is generated (iOS and Android)
+    //     onRegister: function(token) {
+    //         console.log( 'com.poppitGames::App.js::onRegister():: FB Notifications TOKEN:', token );
+    //     },
 
-        // (required) Called when a remote or local notification is opened or received
-        onNotification: function(notification) {
-            console.log( 'com.poppitGames::App.js::onNotification():: FB Notification received:', notification );
+    //     // (required) Called when a remote or local notification is opened or received
+    //     onNotification: function(notification) {
+    //         console.log( 'com.poppitGames::App.js::onNotification():: FB Notification received:', notification );
 
-          // (required) Called when a remote is received or opened, or local notification is opened
-          notification.finish(PushNotificationIOS.FetchResult.NoData);
+    //       // (required) Called when a remote is received or opened, or local notification is opened
+    //       notification.finish(PushNotificationIOS.FetchResult.NoData);
 
-          //need to update to react navigation 5.x
-          if (notification.action == 'View Updates') {
-            props.navigation.navigate('Updates');
-          }
+    //       //need to update to react navigation 5.x
+    //       if (notification.action == 'View Updates') {
+    //         console.log( 'com.poppitGames::App.js::onNotification():: FB Notification received:', notification );
 
-        },
+    //         let obj = {id: notification.id};
 
-        // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
-        senderID: "455311600291",
+    //         console.log( 'com.poppitGames::App.js::onNotification():: cancelLocalNotifications:', obj );
 
-        // IOS ONLY (optional): default: all - Permissions to register.
-        permissions: {
-            alert: true,
-            badge: true,
-            sound: true
-        },
+    //         // PushNotification.cancelLocalNotifications(obj);
+    //         //use this for scheduled
+    //         // PushNotification.cancelAllLocalNotifications();
+    //         // props.navigation.navigate('Updates');
+    //       }
 
-        // Should the initial notification be popped automatically
-        // default: true
-        popInitialNotification: true,
+    //     },
+    //     // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
+    //     senderID: "455311600291",
 
-        /**
-          * (optional) default: true
-          * - Specified if permissions (ios) and token (android and ios) will requested or not,
-          * - if not, you must call PushNotificationsHandler.requestPermissions() later
-          */
-        // requestPermissions: Platform.OS === 'ios'
-        requestPermissions: true
-    });
+    //     // IOS ONLY (optional): default: all - Permissions to register.
+    //     permissions: {
+    //         alert: true,
+    //         badge: true,
+    //         sound: true
+    //     },
+
+    //     // Should the initial notification be popped automatically
+    //     // default: true
+    //     popInitialNotification: true,
+
+    //     /**
+    //       * (optional) default: true
+    //       * - Specified if permissions (ios) and token (android and ios) will requested or not,
+    //       * - if not, you must call PushNotificationsHandler.requestPermissions() later
+    //       */
+    //     // requestPermissions: Platform.OS === 'ios'
+    //     requestPermissions: true
+    // });
 
     //get current settings, if any
     AsyncStorage.getItem('notify_app_feature_update').then(res => {
@@ -166,7 +174,7 @@ class MapsScreen extends React.Component {
     return boundingBox;
   }
 
-  _isInBoundingBox(coordinate) {
+  _isInBoundingBox = (coordinate) => {
     // console.log("_isInBoundingBox() :: this.state.boundingBox: ", this.state.boundingBox);
     if (coordinate.latitude > this.state.boundingBox.southLat && coordinate.latitude < this.state.boundingBox.northLat &&
         coordinate.longitude > this.state.boundingBox.westLng && coordinate.longitude < this.state.boundingBox.eastLng)

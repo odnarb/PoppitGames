@@ -11,7 +11,7 @@ import { notificationsStyleSheet as styles } from '../components/globalstyles';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-import PushNotification from 'react-native-push-notification'
+// import PushNotification from 'react-native-push-notification'
 
 import { app } from '../components/globalconstants';
 
@@ -72,17 +72,17 @@ class NotificationsScreen extends React.Component {
   LocalNotification = () => {
     console.log("Poppit Notifications: Send local notification");
 
-    PushNotification.localNotification({
-        //... You can use all the options from localNotifications
-        id: '123',
-        message: "This is a local notification. Only fired within the app.", // (required)
+    // PushNotification.localNotification({
+    //     //... You can use all the options from localNotifications
+    //     id: '123',
+    //     message: "This is a local notification. Only fired within the app.", // (required)
 
-        /* iOS and Android properties */
-        title: "My Notification Ticker", // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
-        playSound: true, // (optional) default: true
-        soundName: 'poppit_sound',
-        number: '10' // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
-    });
+    //     /* iOS and Android properties */
+    //     title: "My Notification Ticker", // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
+    //     playSound: true, // (optional) default: true
+    //     soundName: 'poppit_sound',
+    //     number: '10' // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
+    // });
 
     // PushNotification.localNotification({
     //   /* Android Only Properties */

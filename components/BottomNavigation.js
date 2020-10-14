@@ -52,7 +52,7 @@ class BottomNavigation extends React.Component {
             <TouchableHighlight underlayColor={lightGreyColor} onPress={() => this._navTo('Settings')} style={navBtnStyles}>
               <View style={styles.navBtnView}>
               <Icon
-                name="settings"
+                name="cog"
                 type="material-community"
                 size={iconSize}
                 color={iconColor} />

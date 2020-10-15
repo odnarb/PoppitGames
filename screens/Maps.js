@@ -18,7 +18,7 @@ import { Icon, SearchBar } from 'react-native-elements';
 
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
-import Geolocation from '@react-native-community/geolocation';
+import RNLocation from 'react-native-location';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -38,6 +38,10 @@ import {
 } from '../components/globalstyles';
 
 import { MARKER_STATES, MARKER_STATE_DETAIL } from '../components/globalconstants';
+
+RNLocation.configure({
+  distanceFilter: 5.0
+});
 
 const MARKER_SEEN = "seen";
 const MARKER_SEEN_PREPEND = "marker@";
@@ -154,7 +158,7 @@ class MapsScreen extends React.Component {
 
   user_id = 123;
 
-  watchID: ?number = null;
+  unsubGPSUpdates = null;
 
   _isWin = (win_state) => {
       return (
@@ -787,7 +791,7 @@ class MapsScreen extends React.Component {
 
     this.focusSubscription.remove();
 
-    this.watchID != null && Geolocation.clearWatch(this.watchID);
+    this.unsubGPSUpdates != null && this.unsubGPSUpdates();
     this._setCachedItem('lastRegion', JSON.stringify(this.state.region));
     this._setCachedItem('mapState', JSON.stringify(this.state));
   }
@@ -823,47 +827,62 @@ class MapsScreen extends React.Component {
           return;
         }
 
-        if( lastRegionObj.latitude == this.state.region.latitude &&
+        //if the regions are the same, don't bother with the update
+        let regionObjSame = ( lastRegionObj.latitude == this.state.region.latitude &&
           lastRegionObj.longitude == this.state.region.longitude &&
           lastRegionObj.latitudeDelta == this.state.region.latitudeDelta &&
-          lastRegionObj.longitudeDelta == this.state.region.longitudeDelta
-        )
-        {
-            return;
+          lastRegionObj.longitudeDelta == this.state.region.longitudeDelta);
+
+        if( regionObjSame ) {
+          return;
         }
 
         //goto the location
         //onRegionChangeComplete updates the region, boundary and search for us
         this.map.animateToRegion( lastRegionObj , 350);
       } else {
-        Geolocation.getCurrentPosition(
-          position => {
+        RNLocation.requestPermission({
+          ios: "whenInUse",
+          android: {
+            detail: "fine",
+            rationale: {
+              title: "Access Location",
+              message: "GPS location is critical for this app's experience",
+              buttonPositive: "OK",
+              buttonNegative: "Cancel"
+            }
+          }
+        }).then(granted => {
+            if (granted) {
+              this.unsubGPSUpdates = RNLocation.subscribeToLocationUpdates(locations => {
+                /* Example location returned
+                {
+                  speed: -1,
+                  longitude: -0.1337,
+                  latitude: 51.50998,
+                  accuracy: 5,
+                  heading: -1,
+                  altitude: 0,
+                  altitudeAccuracy: -1
+                  floor: 0
+                  timestamp: 1446007304457.029,
+                  fromMockProvider: false
+                }
+                */
 
-            let region = {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              latitudeDelta: 0.05,
-              longitudeDelta: 0.05
-            };
-
-            //goto the location
-            //onRegionChangeComplete updates the region, boundary and search for us
-            this.map.animateToRegion( region , 350);
-          },
-          error => Alert.alert('Error', JSON.stringify(error)),
-          {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-        );
+                //goto the location
+                //onRegionChangeComplete updates the region, boundary and search for us
+                this.map.animateToRegion({
+                  latitude: locations[0].latitude,
+                  longitude: locations[0].longitude,
+                  latitudeDelta: 0.05,
+                  longitudeDelta: 0.05
+                } , 350);
+              })
+            }
+          })
       }
       });
-    });
-
-    //restore the last region, if one..
-    //what if the region was null, default region to user's location
-    // this._getCachedItem('lastRegion').then(data => this._restoreLocation(data));
-
-    this.watchID = Geolocation.watchPosition(position => {
-      // const lastPosition = JSON.stringify(position);
-      // this.setState({lastPosition});
     });
 
     //this is the carousel slider handler, doesn't need to be called when coming back from a screen

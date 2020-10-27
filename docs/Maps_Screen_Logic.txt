@@ -1,0 +1,141 @@
+Maps Screen Lifecycle Logic
+---------------------------
+constructor() -> render() -> componentDidMount()
+                     ^          |
+                     |          |
+                     |          |
+                     <----------
+
+
+Primary interface listeners:
+
+componentDidMount()
+-----------------------
+Listener for coming back from a Game/Coupon activity
+  --updates marker if condition passes
+    this._completeCampaign()
+
+Listener for Carousel horizontal animation
+
+Get last region and restore
+    if cached region
+        restore
+    else
+        get location from GPS
+
+componentWillUnmount()
+----------------------------
+remove listener for coming back from game/coupon
+
+remove gps updates listener
+
+save lastRegion to cache
+
+save entire state object to cache (includes markers)
+  --so, coming back from an activity should allow us to load the state from cache and not cause a search
+
+----------------------------
+show carousel causes a double rendering
+    plus a region change, then rendering after the region change
+    only a single thing should have changed: selected marker index
+        and should only cause a re-rendering of markers when their content changed
+hide carousel causes a rendering
+    plus a region change, then rendering after the region change
+    only a single thing should have changed: selected marker index
+        and should only cause a re-rendering of markers when their content changed
+
+onRegionChangeComplete
+    causes a triple rendering
+
+
+-----------------------------------------------------------
+
+_completeCampaign
+---------------------------------------
+  Makes copy of entire set of markers
+  updates single marker
+  update state with new marker information
+
+_getCachedItem / _setCachedItem
+---------------------------------------
+  set/restore information to the device
+
+
+onPressClaim
+---------------------------------------
+  Makes copy of entire set of markers
+  update a marker, set new state of markers
+  --we know in conventional programming this is not efficient..
+    is there a way around this? can we just update one piece of the state??
+
+Carousel Item
+---------------------------------------
+  _onPressCarouselItem
+    if not completed
+      launch coupon activity (not just a game..should be more generic)
+
+
+Search
+---------------------------------------
+  sets state that it is currently searching
+  _seenMarker
+    gets marker information from device cache whether marker has been seen or not
+
+  _isInBoundingBox
+    checks whether a marker is in the current bounding box of the screen area
+
+
+Map Container
+---------------------------------------
+  onMapReady={this._onMapReady}
+    set state to map ready, so searches can be ran
+
+  onPress={this._onPressMap}
+    just deselect markers if they're selected
+
+  onRegionChangeComplete={this._onRegionChangeComplete}
+    if !restoring && !selecting marker
+      search current area for coupons
+    else
+      finish deselecting markers and restoring state
+
+  onRegionChange={this._onRegionChange}
+    hide the carousel and deselect any markers if the user drags the map
+
+    _renderMarkers
+      render markers of the map (if any)
+
+Carousel Container
+---------------------------------------
+_renderCarousel
+  onScroll--handle scroll left/right
+  --render carousel elements
+
+  Render carousel elements -- _renderCarouselElement
+    if marker completed
+      if scanned
+      else if claimed
+      else if _isWin()
+      else if lose
+    else
+      show uncompleted state (available)
+
+      --rendering could be simplified.. lots of replicated code
+
+Search Bar Container
+---------------------------------------
+  onChangeText={this._updateSearch}
+      _updateSearch triggers the search for markers
+        fires _search
+
+    --need to add a 1second delay between calls to _updateSearch
+      use lodash debounce for limiting function call frequency
+      import _ from 'lodash'
+
+  onClear={this._clearSearch}
+    --clears any filter currently applied to the search area
+  --render search results indicator
+
+  _renderSearchResultsIndicator
+    render the content as appropriate
+      --could be a component? repetitive...

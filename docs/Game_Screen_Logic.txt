@@ -1,0 +1,31 @@
+Game Screen Logic
+----------------------------
+
+componentDidMount()
+--------------------
+    _goBack
+        hardware back press button
+        cancels the game, goes back to the map screen
+
+
+_onMessage
+---------------------
+handle updates from the webview
+    either _onUpdateActivity()
+        calls _updateFate()
+    or _onEndActivity()
+        calls _updateFate()
+    --need to handle errors in the catch(e){} block
+
+_updateFate
+----------------------
+will want to expand on this to make it more flexible for later versions of campaigns
+
+
+render
+-----------------------
+handle game marker type
+
+TODO: handle surveys
+TODO: handle raffles
+TODO: other campaign types

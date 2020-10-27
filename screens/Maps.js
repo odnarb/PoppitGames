@@ -109,24 +109,24 @@ class MapsScreen extends React.Component {
     // });
 
     //get current settings, if any
-    AsyncStorage.getItem('notify_app_feature_update').then(res => {
-      if(res == undefined) return;
+    // AsyncStorage.getItem('notify_app_feature_update').then(res => {
+    //   if(res == undefined) return;
 
-      //schedule if we have app updates ON.. this will later be a remote notification
-      PushNotification.localNotificationSchedule({
-        //... You can use all the options from localNotifications
-        id: '123',
-        message: "Tap to see the latest features & updates for the app.", // (required)
-        date: new Date(Date.now() + 10 * 1000), // in 60 secs
+    //   //schedule if we have app updates ON.. this will later be a remote notification
+    //   PushNotification.localNotificationSchedule({
+    //     //... You can use all the options from localNotifications
+    //     id: '123',
+    //     message: "Tap to see the latest features & updates for the app.", // (required)
+    //     date: new Date(Date.now() + 10 * 1000), // in 60 secs
 
-        /* iOS and Android properties */
-        title: "App Features & Updates", // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
-        playSound: true, // (optional) default: true
-        soundName: 'poppit_sound',
-        number: '10', // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
-        actions: '["View Updates", "Cancel"]' // (Android only) See the doc for notification actions to know more
-      });
-    });
+    //      iOS and Android properties 
+    //     title: "App Features & Updates", // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
+    //     playSound: true, // (optional) default: true
+    //     soundName: 'poppit_sound',
+    //     number: '10', // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
+    //     actions: '["View Updates", "Cancel"]' // (Android only) See the doc for notification actions to know more
+    //   });
+    // });
 
     this.state = {
       restoringState: false,
@@ -166,7 +166,8 @@ class MapsScreen extends React.Component {
         win_state == MARKER_STATE_DETAIL.win_perfect_score ||
         win_state == MARKER_STATE_DETAIL.win_set_score
       );
-  };
+  }
+
   _getBoundingBox = (region) => {
     // console.log("_getBoundingBox() :: REGION: ", region);
     let boundingBox = {
@@ -199,7 +200,7 @@ class MapsScreen extends React.Component {
     if(!this.state.restoringState && !this.state.selectingMarker) {
       this._deselectMarker();
     }
-  }
+  };
 
   _onRegionChangeComplete = (r) => {
 
@@ -226,7 +227,7 @@ class MapsScreen extends React.Component {
         selectingMarker: false
       });
     }
-  }
+  };
 
   _onPressMap = () => {
     Keyboard.dismiss();
@@ -473,7 +474,7 @@ class MapsScreen extends React.Component {
         }
       }
     });
-  }
+  };
 
   _renderCarouselElement = (index) => {
     let thisMarker = this.state.markers[index];
@@ -646,7 +647,7 @@ class MapsScreen extends React.Component {
         let results = [];
         // let randomCoordsArr = [];
 
-        // //generate fake marker coordinates based on current region
+        //generate fake marker coordinates based on current region
         // for(let i=0; i < 10000;i++) {
         //   let randomCoords = {
         //     //latitude from (32 -> 34)
@@ -743,7 +744,7 @@ class MapsScreen extends React.Component {
   };
 
   _completeCampaign = (activity_data, cb) => {
-    console.log("_completeCampaign() :: mark campaign_id COMPLETE:"+activity_data.campaign_id);
+    console.log(`_completeCampaign() :: mark campaign_id COMPLETE: ${activity_data.campaign_id}`);
 
     //loop through and find the marker that should be updated...
     let markersCopy = JSON.parse(JSON.stringify(this.state.markers));
@@ -814,13 +815,12 @@ class MapsScreen extends React.Component {
 
     //restore the last region, if one..
     //what if the region was null, default region to user's location
-    console.log("componentDidMount() :: ");
-
     this._getCachedItem('lastRegion').then(data => {
       console.log("componentDidMount() :: Restoring last region");
-        if(data !== null){
 
+      if(data !== null){
         let lastRegionObj = {};
+
         try {
           lastRegionObj = JSON.parse( data );
         } catch (err){
@@ -841,7 +841,7 @@ class MapsScreen extends React.Component {
         //onRegionChangeComplete updates the region, boundary and search for us
         this.map.animateToRegion( lastRegionObj , 350);
       } else {
-        RNLocation.requestPermission({
+        let gpsPermission = {
           ios: "whenInUse",
           android: {
             detail: "fine",
@@ -852,37 +852,38 @@ class MapsScreen extends React.Component {
               buttonNegative: "Cancel"
             }
           }
-        }).then(granted => {
-            if (granted) {
-              this.unsubGPSUpdates = RNLocation.subscribeToLocationUpdates(locations => {
-                /* Example location returned
-                {
-                  speed: -1,
-                  longitude: -0.1337,
-                  latitude: 51.50998,
-                  accuracy: 5,
-                  heading: -1,
-                  altitude: 0,
-                  altitudeAccuracy: -1
-                  floor: 0
-                  timestamp: 1446007304457.029,
-                  fromMockProvider: false
-                }
-                */
+        };
 
-                //goto the location
-                //onRegionChangeComplete updates the region, boundary and search for us
-                this.map.animateToRegion({
-                  latitude: locations[0].latitude,
-                  longitude: locations[0].longitude,
-                  latitudeDelta: 0.05,
-                  longitudeDelta: 0.05
-                } , 350);
-              })
-            }
-          })
+        RNLocation.requestPermission(gpsPermission).then(granted => {
+          if (granted) {
+            this.unsubGPSUpdates = RNLocation.subscribeToLocationUpdates(locations => {
+              /* Example location returned
+              {
+                speed: -1,
+                longitude: -0.1337,
+                latitude: 51.50998,
+                accuracy: 5,
+                heading: -1,
+                altitude: 0,
+                altitudeAccuracy: -1
+                floor: 0
+                timestamp: 1446007304457.029,
+                fromMockProvider: false
+              }
+              */
+
+              //goto the location
+              //onRegionChangeComplete updates the region, boundary and search for us
+              this.map.animateToRegion({
+                latitude: locations[0].latitude,
+                longitude: locations[0].longitude,
+                latitudeDelta: 0.05,
+                longitudeDelta: 0.05
+              } , 350);
+            })
+          }
+        })
       }
-      });
     });
 
     //this is the carousel slider handler, doesn't need to be called when coming back from a screen
@@ -942,6 +943,7 @@ class MapsScreen extends React.Component {
           ref={map => this.map = map}
           initialRegion={this.state.region}
           style={styles.mapContainer}
+          onMapReady={this._onMapReady}
           onPress={this._onPressMap}
           onRegionChangeComplete={this._onRegionChangeComplete}
           onRegionChange={this._onRegionChange}

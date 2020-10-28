@@ -27,10 +27,6 @@ class GameScreen extends React.Component {
     header: null
   };
 
-  //get QuickTrip brand
-  //get Subway Brand
-  //get Pepsi Brand
-  //get Coca-Cola brand
   _updateFate(cb){
 
     let thisState = MARKER_STATES.none;

@@ -23,7 +23,7 @@ class PrivacyScreen extends React.Component {
   render() {
     return (
      <View style={styles.baseContainer}>
-          <WebView source={{uri: 'http://poppit.bchambers.io/privacy-policy.html'}} />
+          <WebView source={{uri: 'http://poppitgames.mynetgear.com/privacy-policy.html'}} />
       </View>
     );
   }

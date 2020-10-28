@@ -23,7 +23,7 @@ class TermsScreen extends React.Component {
   render() {
     return (
       <View style={styles.baseContainer}>
-          <WebView source={{uri: 'http://poppit.bchambers.io/terms.html'}} />
+          <WebView source={{uri: 'http://poppitgames.mynetgear.com/terms.html'}} />
       </View>
     );
   }

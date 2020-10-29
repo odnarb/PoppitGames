@@ -13,6 +13,11 @@ import LogoBanner from '../components/LogoBanner';
 import { emailSignInErrorStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
 
 class EmailSignInErrorScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.signin_error = this.props.navigation.getParam('signin_error');
+  }
 
   static navigationOptions = {
     //in newer versions this is the correct way to hide the title
@@ -28,7 +33,7 @@ class EmailSignInErrorScreen extends React.Component {
 
         <View style={styles.contentContainer}>
           <Text style={[styles.grey,styles.textHeader]}>Oops! Couldn't sign in..</Text>
-          <Text style={[styles.grey,styles.text]}>Your username and password don't match.{'\n'}Please try again.</Text>
+          <Text style={[styles.grey,styles.text]}>{this.signin_error}{'\n\n'}Please try again.</Text>
 
           <View style={styles.btnContainer}>
             <TouchableOpacity style={styles.buttonDark} onPress={() => this.props.navigation.goBack()}>

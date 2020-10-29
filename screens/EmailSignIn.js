@@ -139,24 +139,63 @@ class EmailSignInScreen extends React.Component {
     //get values from email and password fields
     const email = this.state.email;
     const password = this.state.password;
-    console.log("EMAIL FIELD:", email);
-    console.log("PASSWORD FIELD:", password);
 
-    if( email == ""){
-      console.log("ERROR: email is empty")
+    let ev = require("email-validator");
+
+    if( !ev.validate(email) ){
+      this.props.navigation.navigate('EmailSignInError', {
+        signin_error: "ERROR: Invalid email address"
+      });
     } else if( password == ""){
-      console.log("ERROR: password is empty")
-    } else if (email == HARD_CODED_EMAIL && password == HARD_CODED_PW){
-      await AsyncStorage.setItem('userToken', 'abc');
-      await AsyncStorage.setItem('userSeen', "true");
-
-      this.props.navigation.navigate('App');
-
-      console.log("SUCCESS: Sign in successful!");
+      this.props.navigation.navigate('EmailSignInError', {
+        signin_error: "ERROR: Invalid password"
+      });
     } else {
-      console.log("ERROR, EMAIL / PW DO NOT MATCH");
-      this.props.navigation.navigate('EmailSignInError');
+
+      let formData = {
+        email: email,
+        password: password
+      };
+
+      if( this.state.keepMeSignedIn ){
+        formData.remember = "on"
+      }
+
+      let loginReqOpts = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      };
+
+      console.log("POPPIT LOGIN :: loginReqOpts: ", loginReqOpts)
+
+      fetch("http://poppitgames.mynetgear.com:7777/appuser/login", loginReqOpts)
+        .then(loginRes => {
+            console.log( "POPPIT LOGIN :: COOKIE: ", loginRes.headers.get("set-cookie") )
+            return loginRes.json()
+        })
+        .then(loginResJson => {
+          console.log("POPPIT LOGIN :: loginResJson: ", loginResJson);
+          if( loginResJson.success == true ){
+            console.log("SUCCESS: Sign in successful!");
+            this.props.navigation.navigate('App');
+          } else {
+            this.props.navigation.navigate('EmailSignInError', {
+              signin_error: "ERROR: Your username and password don't match."
+            });
+          }
+        })
+        .catch(error => {
+          console.log("POPPIT LOGIN :: error: ", error);
+        })
     }
+
+      // await AsyncStorage.setItem('userToken', 'abc');
+      // await AsyncStorage.setItem('userSeen', "true");
+
   };
 
   _navTo = (screen) => {

@@ -119,7 +119,7 @@ class MapsScreen extends React.Component {
     //     message: "Tap to see the latest features & updates for the app.", // (required)
     //     date: new Date(Date.now() + 10 * 1000), // in 60 secs
 
-    //      iOS and Android properties 
+    //      iOS and Android properties
     //     title: "App Features & Updates", // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
     //     playSound: true, // (optional) default: true
     //     soundName: 'poppit_sound',
@@ -800,7 +800,12 @@ class MapsScreen extends React.Component {
   componentDidMount() {
     this.focusSubscription = this.props.navigation.addListener('willFocus', () => {
       let activity_data = this.props.navigation.getParam("activity_data");
-      let updateMarker = (activity_data && activity_data.campaign_id && activity_data.campaign_id > 0 && activity_data.activity_state != MARKER_STATES.none );
+      let updateMarker = (activity_data &&
+                activity_data.campaign_id &&
+                activity_data.campaign_id > 0 &&
+                activity_data.activity_state != MARKER_STATES.none
+      );
+
       if( updateMarker ){
         console.log("componentDidMount() :: willFocus :: update marker : ", activity_data);
 
@@ -812,6 +817,7 @@ class MapsScreen extends React.Component {
       } else {
         console.log("componentDidMount() :: SKIPPING MARKER UPDATE");
       }
+    });
 
     //restore the last region, if one..
     //what if the region was null, default region to user's location
@@ -879,7 +885,7 @@ class MapsScreen extends React.Component {
                 longitude: locations[0].longitude,
                 latitudeDelta: 0.05,
                 longitudeDelta: 0.05
-              } , 350);
+              }, 350);
             })
           }
         })

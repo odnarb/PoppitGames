@@ -32,28 +32,29 @@ import {
 import { app } from '../components/globalconstants';
 
 class SignInScreen extends React.Component {
+
   componentDidMount() {
-    this._bootstrapAsync();
+    this._startSignInScreenAsync();
   }
 
   // Fetch the token from storage then navigate to our appropriate place
-  _bootstrapAsync = async () => {
-    const userSeen = await AsyncStorage.getItem('userSeen');
+  _startSignInScreenAsync = async () => {
+    let signup = this.props.navigation.getParam('signup')
 
-    if(userSeen) {
+    if( signup ) {
       this.setState({
-        btnFBWording : "Signin with Facebook",
-        btnGoogleWording: "Signin with Google",
-        btnEmailWording: "Signin with Email"
+        btnFBWording: "Signup with Facebook",
+        btnGoogleWording:  "Signup with Google",
+        btnEmailWording: "Signup with Email"
       })
     }
   }
 
   state = {
     isFocused: false,
-    btnFBWording: "Signup with Facebook",
-    btnGoogleWording:  "Signup with Google",
-    btnEmailWording: "Signup with Email"
+    btnFBWording : "Signin with Facebook",
+    btnGoogleWording: "Signin with Google",
+    btnEmailWording: "Signin with Email"
   };
 
   handleFocus = event => {
@@ -85,12 +86,14 @@ class SignInScreen extends React.Component {
         <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
+            <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={() => this._signUp()}>
+              <Text style={[styles.grey,styles.learnMoreText]}>New to {app.name}? Sign up.</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={() => this._learnMore()}>
-              <Text style={[styles.grey,styles.learnMoreText]}>New to {app.name}? Tap to learn more.</Text>
+              <Text style={[styles.grey,styles.learnMoreText]}>Tap to learn more.</Text>
             </TouchableOpacity>
 
-
-            <TouchableOpacity style={styles.btnFB} onPress={() => this._ssoFB()}>
+            <TouchableOpacity style={styles.btnFB} onPress={() => this._ssoSignIn('fb')}>
               <View style={styles.btnView}>
                 <Icon
                   name='facebook'
@@ -102,7 +105,7 @@ class SignInScreen extends React.Component {
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.btnGoogle} onPress={() => this._ssoGoogle()}>
+            <TouchableOpacity style={styles.btnGoogle} onPress={() => this._ssoSignIn('google')}>
               <View style={styles.btnView}>
                 <Icon
                   name='google'
@@ -120,7 +123,7 @@ class SignInScreen extends React.Component {
               <View style={styles.hr} />
             </View>
 
-            <TouchableOpacity style={styles.btnEmail} onPress={() => this._signInOrSignUp()}>
+            <TouchableOpacity style={styles.btnEmail} onPress={() => this._signIn()}>
               <View style={styles.btnView}>
                 <Icon
                   name='email'
@@ -141,30 +144,22 @@ class SignInScreen extends React.Component {
     this.props.navigation.navigate('LearnMore');
   };
 
-  _ssoFB = async() => {
+  _ssoSignIn = async(provider) => {
+    //provider is either fb or google
     this._signInAsync();
   }
 
-  _ssoGoogle = () => {
-    this._signInAsync();
+  _signUp = async () => {
+    this.props.navigation.navigate('EmailSignUp');
   }
 
-  _signInOrSignUp = async () => {
-    const userSeen = await AsyncStorage.getItem('userSeen');
+  _signIn = async () => {
+    //get cookie from storage
 
-    console.log("_signInOrSignUp: userSeen :: ", userSeen);
-
-    if( userSeen == "true" ){
-      this.props.navigation.navigate('EmailSignIn');
-    } else {
-      this.props.navigation.navigate('EmailSignUp');
-    }
+    this.props.navigation.navigate('EmailSignIn');
   }
 
   _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    await AsyncStorage.setItem('userSeen', "true");
-
     this.props.navigation.navigate('App');
   };
 }

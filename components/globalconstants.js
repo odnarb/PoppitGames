@@ -4,7 +4,7 @@ const app = {
     copyright_year: "2020",
     version: "1.3.2",
     version_hash: "0bdd85b1"
-}
+};
 
 const MARKER_STATES = {
     //none / not attempted
@@ -24,8 +24,11 @@ const MARKER_STATE_DETAIL = {
     scanned: 6
 };
 
+const POPPIT_KEYCHAIN = "poppitGames4472382892Keychain";
+
 export {
     app,
     MARKER_STATES,
-    MARKER_STATE_DETAIL
+    MARKER_STATE_DETAIL,
+    POPPIT_KEYCHAIN
 }

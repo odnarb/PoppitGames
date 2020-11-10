@@ -1,7 +1,3 @@
-
-const HARD_CODED_EMAIL = "john.smith@gmail.com";
-const HARD_CODED_PW = "john123";
-
 import React from 'react';
 
 import {
@@ -12,8 +8,6 @@ import {
   View
 } from 'react-native';
 
-import AsyncStorage from '@react-native-community/async-storage';
-
 import { Icon } from 'react-native-elements';
 
 import LogoBanner from '../components/LogoBanner';
@@ -21,6 +15,8 @@ import LogoBanner from '../components/LogoBanner';
 import BCPasswordInputText from '../components/BCPasswordInputText';
 
 import { emailSignInStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
+
+import { _sendLoginReq } from '../components/globallib';
 
 class EmailSignInScreen extends React.Component {
   constructor(props) {
@@ -135,6 +131,7 @@ class EmailSignInScreen extends React.Component {
     this.props.navigation.navigate('RecoverPassword');
   }
 
+
   _signInAsync = async () => {
     //get values from email and password fields
     const email = this.state.email;
@@ -142,60 +139,37 @@ class EmailSignInScreen extends React.Component {
 
     let ev = require("email-validator");
 
-    if( !ev.validate(email) ){
+    if( !ev.validate(email) ) {
       this.props.navigation.navigate('EmailSignInError', {
         signin_error: "ERROR: Invalid email address"
       });
-    } else if( password == ""){
+    } else if( password == "") {
       this.props.navigation.navigate('EmailSignInError', {
         signin_error: "ERROR: Invalid password"
       });
     } else {
-
       let formData = {
         email: email,
-        password: password
+        password: password,
+        keepMeSignedIn: this.state.keepMeSignedIn
       };
 
       if( this.state.keepMeSignedIn ){
-        formData.remember = "on"
+          formData.remember = "on"
       }
 
-      let loginReqOpts = {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      };
+      let signInRes = await _sendLoginReq(formData)
 
-      console.log("POPPIT LOGIN :: loginReqOpts: ", loginReqOpts)
+      console.log("_signInAsync() :: signInRes :", signInRes)
 
-      fetch("http://poppitgames.mynetgear.com:7777/appuser/login", loginReqOpts)
-        .then(loginRes => {
-            console.log( "POPPIT LOGIN :: COOKIE: ", loginRes.headers.get("set-cookie") )
-            return loginRes.json()
-        })
-        .then(loginResJson => {
-          console.log("POPPIT LOGIN :: loginResJson: ", loginResJson);
-          if( loginResJson.success == true ){
-            console.log("SUCCESS: Sign in successful!");
-            this.props.navigation.navigate('App');
-          } else {
-            this.props.navigation.navigate('EmailSignInError', {
-              signin_error: "ERROR: Your username and password don't match."
-            });
-          }
-        })
-        .catch(error => {
-          console.log("POPPIT LOGIN :: error: ", error);
-        })
+      if ( signInRes.success == true ) {
+        this.props.navigation.navigate('App');
+      } else {
+        this.props.navigation.navigate('EmailSignInError', {
+          signin_error: signInRes.signin_error
+        });
+      }
     }
-
-      // await AsyncStorage.setItem('userToken', 'abc');
-      // await AsyncStorage.setItem('userSeen', "true");
-
   };
 
   _navTo = (screen) => {

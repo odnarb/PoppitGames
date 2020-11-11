@@ -26,23 +26,29 @@ class AuthLoadingScreen extends React.Component {
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
 
+    console.log("---------------------_bootstrapAsync()------------------------------");
+
     //if secure storage has a cookie, attempt a login
     let poppitCookie = await SInfo.getItem('poppit_cookie', {
         keychainService: POPPIT_KEYCHAIN
     });
 
-    // poppitCookie = "myfakeCookie123"
-
-    console.log("POPPITGAMES :: SIGN IN SCREEN :: cookie from storage: ", poppitCookie);
+    console.log("POPPITGAMES :: AuthLoading :: cookie from storage: ", poppitCookie);
 
     if( poppitCookie ){
-      let cookieValidated = await _checkCookie(poppitCookie);
-      if( cookieValidated ){
+      let cookieValidated = await _checkCookie({ cookie: poppitCookie });
+
+      console.log("POPPITGAMES :: AuthLoading :: cookieValidated:", cookieValidated );
+
+      if( cookieValidated.success === true ){
+        console.log("POPPITGAMES :: AuthLoading :: COOKIE AUTHENTICATED" );
+
         this.props.navigation.navigate('App');
         return;
       }
     }
-      this.props.navigation.navigate('Auth');
+    this.props.navigation.navigate('Auth');
+    console.log("---------------------_bootstrapAsync() DONE------------------------------");
   };
 
   // Render any loading content that you like here

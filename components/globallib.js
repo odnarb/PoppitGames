@@ -3,12 +3,16 @@ import { POPPIT_KEYCHAIN } from '../components/globalconstants';
 import SInfo from 'react-native-sensitive-info';
 
 let _checkCookie = async (opts) => {
+    console.log("---------------------_checkCookie()------------------------------");
+
     console.log("POPPITGAMES :: _checkCookie() :: START :")
 
-    let url = "http://poppitgames.mynetgear.com:7777/appuser/check";
+    let url = "http://poppitgames.mynetgear.com:7777/appuser/checkcookie";
+
+    console.log("POPPITGAMES :: _checkCookie() :: Cookie content: ", opts.cookie)
 
     let loginReqOpts = {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -16,22 +20,26 @@ let _checkCookie = async (opts) => {
         }
     };
 
-    console.log("POPPITGAMES :: _checkCookie() :: BEFORE _sendrequest()")
+    console.log("POPPITGAMES :: _checkCookie() :: BEFORE _sendRequest()")
 
-    let res = await _sendrequest(url, loginReqOpts);
+    let res = await _sendRequest(url, loginReqOpts);
 
-    console.log("POPPITGAMES :: _checkCookie() :: ATER _sendrequest() :: res:", res)
+    console.log("POPPITGAMES :: _checkCookie() :: ATER _sendRequest() :: res:", res)
 
-    console.log("POPPITGAMES :: _checkCookie() :: DONE")
+    console.log("---------------------_checkCookie() DONE------------------------------");
     return res;
 }
 
 let _sendLoginReq = async (opts) => {
+    console.log("---------------------_sendLoginReq()------------------------------");
 
     console.log("POPPITGAMES :: _sendLoginReq() :: START :")
 
-    let url = "http://poppitgames.mynetgear.com:7777/appuser/login";
+    //clear cookies first
+    await CookieManager.clearAll();
 
+    // prep the login request options
+    let url = "http://poppitgames.mynetgear.com:7777/appuser/login";
     let loginReqOpts = {
         method: 'POST',
         headers: {
@@ -45,46 +53,87 @@ let _sendLoginReq = async (opts) => {
         })
     };
 
-    console.log("POPPITGAMES :: _sendLoginReq() :: BEFORE _sendrequest()")
+    console.log(`POPPITGAMES :: _sendLoginReq() :: BEFORE _sendRequest() :: url: ${url}`, opts)
 
-    let res = await _sendrequest(url, loginReqOpts);
+    let res = await _sendRequest(url, loginReqOpts);
 
-    console.log("POPPITGAMES :: _sendLoginReq() :: ATER _sendrequest() :: res:", res)
+    console.log("POPPITGAMES :: _sendLoginReq() :: ATER _sendRequest() :: res:", res)
 
-    console.log("POPPITGAMES :: _sendLoginReq() :: DONE")
+    console.log("---------------------_sendLoginReq() DONE------------------------------");
 
     return res;
 };
 
-let _sendrequest = async (url, loginReqOpts) => {
+let _sendLogoutReq = async (opts) => {
+    console.log("---------------------_sendLogoutReq()------------------------------");
+
+    const CookieManager = require("react-native-cookies")
+
+    try {
+        await SInfo.deleteItem('poppit_cookie', {
+            keychainService: POPPIT_KEYCHAIN
+        });
+
+        let url = "http://poppitgames.mynetgear.com:7777/appuser/logout";
+
+        console.log("POPPITGAMES :: _sendLogoutReq() :: Cookie content: ", opts.cookie)
+
+        let logoutReqOpts = {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Cookie': opts.cookie
+            }
+        };
+
+        console.log("POPPITGAMES :: _sendLogoutReq() :: BEFORE _sendRequest()")
+
+        let res = await _sendRequest(url, logoutReqOpts);
+
+        console.log("---------------------_sendLogoutReq() DONE------------------------------");
+
+        return { success: true }
+    } catch (e) {
+        console.log("POPPITGAMES :: _sendLogoutReq() :: error: ", error);
+        return {
+            success: false,
+            signin_error: "ERROR: Service unavailable, please contact support."
+        }
+    }
+};
+
+let _sendRequest = async (url, opts) => {
+    console.log("---------------------_sendRequest()------------------------------");
+
     const CookieManager = require("react-native-cookies")
 
     let cookieHeader = "";
 
-    console.log("POPPITGAMES :: _sendLoginReq() :: loginReqOpts: ", loginReqOpts)
+    console.log("POPPITGAMES :: _sendRequest() :: opts: ", opts)
 
     try {
-        await CookieManager.clearAll();
+        console.log("POPPITGAMES :: _sendRequest() :: CookieManager CLEARED")
 
-        console.log("POPPITGAMES :: _sendLoginReq() :: CookieManager CLEARED")
+        let res = await fetch(url, opts)
 
-        let loginRes = await fetch(url, loginReqOpts)
-
-        console.log( `POPPITGAMES :: _sendLoginReq() :: loginRes.headers.get("set-cookie") :: `, loginRes.headers.get("set-cookie") )
+        console.log( `POPPITGAMES :: _sendRequest() :: res.headers.get("set-cookie") :: `, res.headers.get("set-cookie") )
 
         //set the cookie in the secure storage
-        cookieHeader = loginRes.headers.get("set-cookie")
+        cookieHeader = res.headers.get("set-cookie")
+
+        console.log("POPPITGAMES :: _sendRequest() :: THIS cookieHeader: ", cookieHeader);
 
         //set the cookie and return
         SInfo.setItem( 'poppit_cookie', cookieHeader, { keychainService: POPPIT_KEYCHAIN } );
 
-        let loginResJson = await loginRes.json()
+        let resJson = await res.json()
 
-        console.log("POPPITGAMES :: _sendLoginReq() :: loginResJson: ", loginResJson);
+        console.log("---------------------_sendRequest() DONE------------------------------");
 
-        return loginResJson
+        return resJson
     } catch (error) {
-        console.log("POPPITGAMES :: _sendLoginReq() :: error: ", error);
+        console.log("POPPITGAMES :: _sendRequest() :: error: ", error);
         return {
             success: false,
             signin_error: "ERROR: Login service unavailable, please contact support."
@@ -113,25 +162,6 @@ let _sendrequest = async (url, loginReqOpts) => {
     //   // fail,retry
     // }
 }
-
-let _sendLogoutReq = async (opts) => {
-    const CookieManager = require("react-native-cookies")
-
-    try {
-        await CookieManager.clearAll();
-
-        return SInfo.deleteItem('key1', {
-            sharedPreferencesName: 'mySharedPrefs',
-            keychainService: 'myKeychain'
-        });
-    } catch (e) {
-        console.log("POPPITGAMES :: _sendLogoutReq() :: error: ", error);
-        return {
-            success: false,
-            signin_error: "ERROR: Login service unavailable, please contact support."
-        }
-    }
-};
 
 export {
     _sendLoginReq,

@@ -6,6 +6,8 @@ const app = {
     version_hash: "0bdd85b1"
 };
 
+const HOSTNAME = "http://poppitgames.mynetgear.com:7777"
+
 const MARKER_STATES = {
     //none / not attempted
     none: 0,
@@ -28,6 +30,7 @@ const POPPIT_KEYCHAIN = "poppitGames4472382892Keychain";
 
 export {
     app,
+    HOSTNAME,
     MARKER_STATES,
     MARKER_STATE_DETAIL,
     POPPIT_KEYCHAIN

@@ -1,13 +1,15 @@
-import { POPPIT_KEYCHAIN } from '../components/globalconstants';
+import { HOSTNAME, POPPIT_KEYCHAIN } from '../components/globalconstants';
 
 import SInfo from 'react-native-sensitive-info';
+
+const CookieManager = require("react-native-cookies")
 
 let _checkCookie = async (opts) => {
     console.log("---------------------_checkCookie()------------------------------");
 
     console.log("POPPITGAMES :: _checkCookie() :: START :")
 
-    let url = "http://poppitgames.mynetgear.com:7777/appuser/checkcookie";
+    let url = `${HOSTNAME}/appuser/checkcookie`;
 
     console.log("POPPITGAMES :: _checkCookie() :: Cookie content: ", opts.cookie)
 
@@ -39,7 +41,7 @@ let _sendLoginReq = async (opts) => {
     await CookieManager.clearAll();
 
     // prep the login request options
-    let url = "http://poppitgames.mynetgear.com:7777/appuser/login";
+    let url = `${HOSTNAME}/appuser/login`;
     let loginReqOpts = {
         method: 'POST',
         headers: {
@@ -64,26 +66,28 @@ let _sendLoginReq = async (opts) => {
     return res;
 };
 
-let _sendLogoutReq = async (opts) => {
+let _sendLogoutReq = async () => {
     console.log("---------------------_sendLogoutReq()------------------------------");
 
-    const CookieManager = require("react-native-cookies")
-
     try {
+        //if secure storage has a cookie, attempt a login
+        let poppitCookie = await SInfo.getItem('poppit_cookie', {
+            keychainService: POPPIT_KEYCHAIN
+        });
+
         await SInfo.deleteItem('poppit_cookie', {
             keychainService: POPPIT_KEYCHAIN
         });
 
-        let url = "http://poppitgames.mynetgear.com:7777/appuser/logout";
+        console.log("POPPITGAMES :: _sendLogoutReq() :: Cookie content: ", poppitCookie)
 
-        console.log("POPPITGAMES :: _sendLogoutReq() :: Cookie content: ", opts.cookie)
-
+        let url = `${HOSTNAME}/appuser/logout`;
         let logoutReqOpts = {
-            method: 'POST',
+            method: 'GET',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
-              'Cookie': opts.cookie
+              'Cookie': poppitCookie
             }
         };
 
@@ -94,7 +98,7 @@ let _sendLogoutReq = async (opts) => {
         console.log("---------------------_sendLogoutReq() DONE------------------------------");
 
         return { success: true }
-    } catch (e) {
+    } catch (error) {
         console.log("POPPITGAMES :: _sendLogoutReq() :: error: ", error);
         return {
             success: false,
@@ -105,8 +109,6 @@ let _sendLogoutReq = async (opts) => {
 
 let _sendRequest = async (url, opts) => {
     console.log("---------------------_sendRequest()------------------------------");
-
-    const CookieManager = require("react-native-cookies")
 
     let cookieHeader = "";
 

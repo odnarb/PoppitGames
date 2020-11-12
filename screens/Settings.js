@@ -8,13 +8,13 @@ import {
   View
 } from 'react-native';
 
-import AsyncStorage from '@react-native-community/async-storage';
-
 import { Icon } from 'react-native-elements';
 
 import LogoBanner from '../components/LogoBanner';
 
 import BottomNavigation from '../components/BottomNavigation';
+
+import { _sendLogoutReq } from '../components/globallib';
 
 import {
   settingsStyleSheet as styles,
@@ -149,8 +149,7 @@ class SettingsScreen extends React.Component {
   };
 
   _signOutAsync = async () => {
-    AsyncStorage.removeItem('userToken');
-    await AsyncStorage.clear();
+    await _sendLogoutReq();
 
     this.props.navigation.navigate('Auth');
   };

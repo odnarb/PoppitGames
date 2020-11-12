@@ -154,8 +154,6 @@ class SignInScreen extends React.Component {
   }
 
   _signIn = async () => {
-    //get cookie from storage
-
     this.props.navigation.navigate('EmailSignIn');
   }
 

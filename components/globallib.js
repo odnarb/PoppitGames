@@ -107,6 +107,36 @@ let _sendLogoutReq = async () => {
     }
 };
 
+let _sendSignupReq = async (payload) => {
+    console.log("---------------------_sendSignupReq()------------------------------");
+
+    console.log("POPPITGAMES :: _sendSignupReq() :: START :")
+
+    //clear cookies first
+    await CookieManager.clearAll();
+
+    // prep the signup request options
+    let url = `${HOSTNAME}/appuser/signup`;
+    let signupReqOpts = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    };
+
+    console.log(`POPPITGAMES :: _sendSignupReq() :: BEFORE _sendRequest() :: url: ${url}`, payload)
+
+    let res = await _sendRequest(url, signupReqOpts);
+
+    console.log("POPPITGAMES :: _sendSignupReq() :: ATER _sendRequest() :: res:", res)
+
+    console.log("---------------------_sendSignupReq() DONE------------------------------");
+
+    return res;
+};
+
 let _sendRequest = async (url, opts) => {
     console.log("---------------------_sendRequest()------------------------------");
 
@@ -166,6 +196,7 @@ let _sendRequest = async (url, opts) => {
 }
 
 export {
+    _sendSignupReq,
     _sendLoginReq,
     _sendLogoutReq,
     _checkCookie

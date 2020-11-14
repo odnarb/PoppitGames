@@ -795,7 +795,8 @@ const signInStyles = {
     borderWidth: 1,
     borderRadius: moderateScale(5),
     justifyContent: 'center',
-    marginTop: moderateScale(10)
+    marginTop: moderateScale(10),
+    marginBottom: moderateScale(10)
   },
 
   btnView:{

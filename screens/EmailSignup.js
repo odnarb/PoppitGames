@@ -8,13 +8,13 @@ import {
   View
 } from 'react-native';
 
-import AsyncStorage from '@react-native-community/async-storage';
-
 import { Icon } from 'react-native-elements';
 
 import LogoBanner from '../components/LogoBanner';
 
 import BCPasswordInputText from '../components/BCPasswordInputText';
+
+import { _sendSignupReq } from '../components/globallib';
 
 import { emailSignUpStyleSheet as styles, iconMediumSize } from '../components/globalstyles';
 
@@ -22,6 +22,7 @@ class EmailSignUpScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: '',
       isNameFocused: false,
       isEmailFocused: false,
       isPassword1Focused: false,
@@ -32,24 +33,23 @@ class EmailSignUpScreen extends React.Component {
       confirm_password: '',
       agreeToTerms:false
     };
+
+    this.errors = {
+      fullname: 'Please enter your name',
+      email: 'Please enter a valid email address.',
+      password: 'Please enter a password.',
+      confirm_password: 'Please confirm your password.',
+      agreeToTerms: 'Please review and agree to the terms and conditions.',
+      passwords_mismatch: 'Passwords must match.',
+      email_taken: 'That email has already been registered.',
+      email_invalid: 'Pleas enter a valid email address.'
+    }
   }
 
   static navigationOptions = {
     //in newer versions this is the correct way to hide the title
     // headerShown: false
     header: null
-  };
-
-  state = {
-      isNameFocused: false,
-      isEmailFocused: false,
-      isPassword1Focused: false,
-      isPassword2Focused: false,
-      fullname: '',
-      email: '',
-      password: '',
-      confirm_password: '',
-      agreeToTerms:false
   };
 
   toggleSwitch = (value) => {
@@ -70,8 +70,22 @@ class EmailSignUpScreen extends React.Component {
       }
   };
 
+  _renderError = () => {
+    if( this.state.error !== '' ) {
+      console.log("POPPIT GAMES :: signup : this.state.error: ", this.state.error)
+      let errorText = "ERROR: Please fill out all fields and agree to the terms."
+      if (this.state.error_text !== '') {
+        errorText = `ERROR: ${this.state.error_text}`
+      }
+      return (<Text style={{ color: "#ff0000" }}>{errorText}</Text>);
+    } else {
+      return null
+    }
+  };
+
   render() {
     const {
+        error,
         isNameFocused,
         isEmailFocused,
         isPassword1Focused,
@@ -90,10 +104,11 @@ class EmailSignUpScreen extends React.Component {
         <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
+          {this._renderError()}
           <TextInput
               placeholder="Full Name"
               style={[styles.grey,styles.textInput]}
-              selectionColor="#428AF8"
+              selectionColor={ (error === 'fullname')? "#ff0000" : "#428AF8" }
               underlineColorAndroid={ isNameFocused? "#428AF8" : "#D3D3D3" }
               onChangeText={(text) => this.setState({fullname: text})}
               onFocus={(e) => {this.handleFocus(e, 'isNameFocused')}}
@@ -103,7 +118,7 @@ class EmailSignUpScreen extends React.Component {
               placeholder="Email"
               keyboardType='email-address'
               style={[styles.grey,styles.textInput]}
-              selectionColor="#428AF8"
+              selectionColor={ (error === 'email')? "#ff0000" : "#428AF8" }
               underlineColorAndroid={ isEmailFocused? "#428AF8" : "#D3D3D3" }
               onChangeText={(text) => this.setState({email: text})}
               onFocus={(e) => {this.handleFocus(e, 'isEmailFocused')}}
@@ -112,7 +127,7 @@ class EmailSignUpScreen extends React.Component {
           <BCPasswordInputText
               placeholder="Password"
               style={[styles.grey,styles.textInput]}
-              selectionColor="#428AF8"
+              selectionColor={ (error === 'password')? "#ff0000" : "#428AF8" }
               underlineColorAndroid={ isPassword1Focused? "#428AF8" : "#D3D3D3" }
               value={password}
               onChangeText={(text) => this.setState({ password: text })}
@@ -122,7 +137,7 @@ class EmailSignUpScreen extends React.Component {
           <BCPasswordInputText
               placeholder="Confirm Password"
               style={[styles.grey,styles.textInput]}
-              selectionColor="#428AF8"
+              selectionColor={ (error === 'confirm_password')? "#ff0000" : "#428AF8" }
               underlineColorAndroid={ isPassword2Focused? "#428AF8" : "#D3D3D3" }
               value={confirm_password}
               onChangeText={(text) => this.setState({ confirm_password: text })}
@@ -148,7 +163,7 @@ class EmailSignUpScreen extends React.Component {
               <Text style={styles.btnLight}>{'Cancel'.toUpperCase()}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.buttonDark} onPress={() => this._signUp()}>
+            <TouchableOpacity style={styles.buttonDark} onPress={() => this._validateForm()}>
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <Text style={styles.btnDark}>{'Sign Up'.toUpperCase()}</Text>
                 <Icon
@@ -164,9 +179,61 @@ class EmailSignUpScreen extends React.Component {
     );
   }
 
+  _validateForm = async () => {
+    let error = false
+    let newstate = {
+      isNameFocused: false,
+      isEmailFocused: false,
+      isPassword1Focused: false,
+      isPassword2Focused: false,
+      error: '',
+      error_text: ''
+    }
+
+    if( this.state.fullname === '' ){
+      error = true;
+      newstate.isNameFocused = true;
+      newstate.error = 'fullname';
+      newstate.error_text = this.errors.fullname;
+    } else if( this.state.email === '' ){
+      error = true;
+      newstate.isEmailFocused = true;
+      newstate.error = 'email';
+      newstate.error_text = this.errors.email;
+    } else if( this.state.password === '' ){
+      error = true;
+      newstate.isPassword2Focused = false;
+      newstate.error = 'password';
+      newstate.error_text = this.errors.password;
+    } else if( this.state.confirm_password === '' ){
+      error = true;
+      newstate.isPassword2Focused = true;
+      newstate.error = 'confirm_password';
+      newstate.error_text = this.errors.confirm_password;
+    } else if( this.state.password !== this.state.confirm_password ){
+      error = true;
+      newstate.isPassword2Focused = true;
+      newstate.error = 'confirm_password';
+      newstate.error_text = this.errors.passwords_mismatch;
+    } else if( this.state.agreeToTerms !== true ){
+      error = true;
+      newstate.error = 'agreeToTerms';
+      newstate.error_text = this.errors.agreeToTerms;
+    }
+
+    if( error === true ){
+      //show errors
+      console.log("POPPITGAMES :: Errors detected", this.state)
+      this.setState(newstate)
+      return;
+    } else {
+      console.log("POPPITGAMES :: Signup auth'd -- send request!", this.state)
+      this._signUp()
+    }
+  };
+
   _signUp = async () => {
     //get values from email and password fields
-
     const signUpPayload = {
       fullname: this.state.fullname,
       email: this.state.email,
@@ -177,11 +244,68 @@ class EmailSignUpScreen extends React.Component {
 
     console.log("Email signup payload:", signUpPayload);
 
-    await AsyncStorage.setItem('userSeen', "true");
+    let res = await _sendSignupReq(signUpPayload)
 
-    this.props.navigation.navigate('EmailSignUpConfirm');
+    console.log("POPPITGAMES :: _sendSignupReq :: res: ", res)
+
+    let opts = {
+        error: false,
+        errors: []
+      }
+
+    if( res.success !== true ){
+      opts.error = true;
+
+      //show fields with errors
+      if( res.errors.fullname ){
+        opts.errors.push({
+          id: 'fullname',
+          error: this.errors.fullname
+        })
+      }
+      if( res.errors.email_taken ){
+        opts.errors.push({
+          error: this.errors.email_taken
+        })
+      }
+      if( res.errors.email_invalid ){
+        opts.errors.push({
+          error: this.errors.email_invalid
+        })
+      }
+      if( res.errors.email ){
+        opts.errors.push({
+          error: this.errors.email
+        })
+      }
+      if( res.errors.password ){
+        opts.errors.push({
+          error: this.errors.password
+        })
+      }
+      if( res.errors.confirm_password ){
+        opts.errors.push({
+          error: this.errors.confirm_password
+        })
+      }
+      if( res.errors.agreeToTerms ){
+        opts.errors.push({
+          error: this.errors.agreeToTerms
+        })
+      }
+      if( res.errors.passwords_mismatch ){
+        opts.errors.push({
+          error: this.errors.passwords_mismatch
+        })
+      }
+    }
+
+    console.log("POPPITGAMES :: calling EmailSignUpConfirm with:", opts)
+
+    this.props.navigation.navigate('EmailSignUpConfirm', {
+      errors: opts.errors,
+      error: opts.error});
   };
-
 }
 
 export default EmailSignUpScreen

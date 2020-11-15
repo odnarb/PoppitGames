@@ -30,6 +30,7 @@
     "react-native-screens": "^2.7.0",
     "react-native-sensitive-info": "^5.5.8",
     "react-native-size-matters": "^0.3.0",
+    "react-native-unordered-list": "^1.0.4",
     "react-native-vector-icons": "^7.1.0",
     "react-native-webview": "^7.0.4",
     "react-navigation": "^4.3.9",

@@ -17,8 +17,6 @@ import {
   View
 } from 'react-native';
 
-import AsyncStorage from '@react-native-community/async-storage';
-
 import LogoBanner from '../components/LogoBanner';
 
 import { Icon } from 'react-native-elements';
@@ -86,13 +84,6 @@ class SignInScreen extends React.Component {
         <LogoBanner size="scaled" />
 
         <View style={styles.contentContainer}>
-            <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={() => this._signUp()}>
-              <Text style={[styles.grey,styles.learnMoreText]}>New to {app.name}? Sign up.</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={() => this._learnMore()}>
-              <Text style={[styles.grey,styles.learnMoreText]}>Tap to learn more.</Text>
-            </TouchableOpacity>
-
             <TouchableOpacity style={styles.btnFB} onPress={() => this._ssoSignIn('fb')}>
               <View style={styles.btnView}>
                 <Icon
@@ -133,6 +124,13 @@ class SignInScreen extends React.Component {
                   style={styles.btnIcon} />
               <Text style={styles.btnText}>{btnEmailWording}</Text>
               </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={() => this._signUp()}>
+              <Text style={[styles.grey,styles.learnMoreText]}>New to {app.name}? Sign up.</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: 35, width: "100%", alignItems: "center", justifyContent: "center" }} onPress={() => this._learnMore()}>
+              <Text style={[styles.grey,styles.learnMoreText]}>Tap to learn more.</Text>
             </TouchableOpacity>
         </View>
       </View>

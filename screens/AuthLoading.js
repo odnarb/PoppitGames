@@ -6,8 +6,6 @@ import {
   View
 } from 'react-native';
 
-import AsyncStorage from '@react-native-community/async-storage';
-
 import LogoBanner from '../components/LogoBanner';
 
 import SInfo from 'react-native-sensitive-info';

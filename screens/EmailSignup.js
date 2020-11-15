@@ -33,6 +33,17 @@ class EmailSignUpScreen extends React.Component {
       confirm_password: '',
       agreeToTerms:false
     };
+
+    this.errors = {
+      fullname: 'Please enter your name',
+      email: 'Please enter a valid email address.',
+      password: 'Please enter a password.',
+      confirm_password: 'Please confirm your password.',
+      agreeToTerms: 'Please review and agree to the terms and conditions.',
+      passwords_mismatch: 'Passwords must match.',
+      email_taken: 'That email has already been registered.',
+      email_invalid: 'Pleas enter a valid email address.'
+    }
   }
 
   static navigationOptions = {
@@ -183,31 +194,31 @@ class EmailSignUpScreen extends React.Component {
       error = true;
       newstate.isNameFocused = true;
       newstate.error = 'fullname';
-      newstate.error_text = 'Please enter your name';
+      newstate.error_text = this.errors.fullname;
     } else if( this.state.email === '' ){
       error = true;
       newstate.isEmailFocused = true;
       newstate.error = 'email';
-      newstate.error_text = 'Please enter a valid email address.';
+      newstate.error_text = this.errors.email;
     } else if( this.state.password === '' ){
       error = true;
       newstate.isPassword2Focused = false;
       newstate.error = 'password';
-      newstate.error_text = 'Please enter a password.';
+      newstate.error_text = this.errors.password;
     } else if( this.state.confirm_password === '' ){
       error = true;
       newstate.isPassword2Focused = true;
       newstate.error = 'confirm_password';
-      newstate.error_text = 'Please confirm your password.';
+      newstate.error_text = this.errors.confirm_password;
     } else if( this.state.password !== this.state.confirm_password ){
       error = true;
       newstate.isPassword2Focused = true;
       newstate.error = 'confirm_password';
-      newstate.error_text = 'Passwords must match.';
+      newstate.error_text = this.errors.passwords_mismatch;
     } else if( this.state.agreeToTerms !== true ){
       error = true;
       newstate.error = 'agreeToTerms';
-      newstate.error_text = 'Please review and agree to the terms and conditions.';
+      newstate.error_text = this.errors.agreeToTerms;
     }
 
     if( error === true ){
@@ -235,11 +246,66 @@ class EmailSignUpScreen extends React.Component {
 
     let res = await _sendSignupReq(signUpPayload)
 
-    console.log("POPPITGAMES :: _sendSignupReq :: res", res)
+    console.log("POPPITGAMES :: _sendSignupReq :: res: ", res)
 
-    this.props.navigation.navigate('EmailSignUpConfirm');
+    let opts = {
+        error: false,
+        errors: []
+      }
+
+    if( res.success !== true ){
+      opts.error = true;
+
+      //show fields with errors
+      if( res.errors.fullname ){
+        opts.errors.push({
+          id: 'fullname',
+          error: this.errors.fullname
+        })
+      }
+      if( res.errors.email_taken ){
+        opts.errors.push({
+          error: this.errors.email_taken
+        })
+      }
+      if( res.errors.email_invalid ){
+        opts.errors.push({
+          error: this.errors.email_invalid
+        })
+      }
+      if( res.errors.email ){
+        opts.errors.push({
+          error: this.errors.email
+        })
+      }
+      if( res.errors.password ){
+        opts.errors.push({
+          error: this.errors.password
+        })
+      }
+      if( res.errors.confirm_password ){
+        opts.errors.push({
+          error: this.errors.confirm_password
+        })
+      }
+      if( res.errors.agreeToTerms ){
+        opts.errors.push({
+          error: this.errors.agreeToTerms
+        })
+      }
+      if( res.errors.passwords_mismatch ){
+        opts.errors.push({
+          error: this.errors.passwords_mismatch
+        })
+      }
+    }
+
+    console.log("POPPITGAMES :: calling EmailSignUpConfirm with:", opts)
+
+    this.props.navigation.navigate('EmailSignUpConfirm', {
+      errors: opts.errors,
+      error: opts.error});
   };
-
 }
 
 export default EmailSignUpScreen
